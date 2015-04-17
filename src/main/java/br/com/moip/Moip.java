@@ -51,23 +51,4 @@ public class Moip {
 		return refund;
 	}
 
-	public static void main(String[] args) {
-		String token = "0ERVDN386WE3RZRI4YYG6QCDLMJ57LBR";
-		String key = "SRZGHRXYOT0PVDLRB3YE8XQWLNLA0JRXTKOIDVDQ";
-		Authentication moipBasic = new BasicAuth(token, key);
-		Authentication moipOAuth;
-
-		moipOAuth = new OAuth("m9mq5lni241ngslgpl910ew45bxnnez");
-
-		Moip moip = new Moip(moipBasic, "private-31ec8-moip.apiary-mock.com");
-
-		Customer customer = moip.customers().setOwnId("sandbox_v2_1401147277")
-				.setFullname("Nome do Portador").setTaxDocument("33333333333");
-
-		Refund refund = moip
-				.orders()
-				.get("ORD-VULX1EWDKXHF")
-				.refund().get("REF-Q6LLDNEBXL52");
-
-	}
 }
