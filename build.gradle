@@ -14,5 +14,9 @@ repositories {
 }
 
 dependencies {
-    compile group: 'com.google.code.gson', name: 'gson', version:'2.3.1'
+    compile group: "org.slf4j", name: "slf4j-api", version: "1.7.12"
+    compile group: "com.google.code.gson", name: "gson", version: "2.3.1"
+
+    testCompile group: "org.slf4j", name: "slf4j-simple", version: "1.7.12"
+    testCompile group: "com.github.rodrigosaito", name: "mockwebserver-player", version: "1.0.0"
 }
