@@ -3,3 +3,8 @@
 .settings
 bin
 target
+*.iml
+.idea/
+*.swp
+.gradle
+build/
