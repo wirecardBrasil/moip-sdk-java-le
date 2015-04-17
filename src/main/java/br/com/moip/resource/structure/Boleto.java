@@ -40,40 +40,50 @@ public class Boleto {
 		return linecode;
 	}
 
-	public void setLinecode(String linecode) {
+	public Boleto setLinecode(String linecode) {
 		this.linecode = linecode;
+
+		return this;
 	}
 
 	public String getExpirationDate() {
 		return expirationDate;
 	}
 
-	public void setExpirationDate(String expirationDate) {
+	public Boleto setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
+
+		return this;
 	}
 
-	public void setFirstInstructionLine(String first) {
+	public Boleto setFirstInstructionLine(String first) {
 		if (instrucionLines == null) {
 			instrucionLines = new InstructionLines();
 		}
 
 		instrucionLines.setFirst(first);
+
+		return this;
 	}
 
-	public void setSecondInstructionLine(String second) {
+	public Boleto setSecondInstructionLine(String second) {
 		if (instrucionLines == null) {
 			instrucionLines = new InstructionLines();
 		}
 
 		instrucionLines.setSecond(second);
+
+		return this;
 	}
 
-	public void setThirdInstructionLine(String third) {
+	public Boleto setThirdInstructionLine(String third) {
 		if (instrucionLines == null) {
 			instrucionLines = new InstructionLines();
 		}
 
 		instrucionLines.setThird(third);
+
+		return this;
 	}
 
 	public InstructionLines getInstructionLines() {
@@ -84,7 +94,9 @@ public class Boleto {
 		return logoUri;
 	}
 
-	public void setLogoUri(String logoUri) {
+	public Boleto setLogoUri(String logoUri) {
 		this.logoUri = logoUri;
+
+		return this;
 	}
 }

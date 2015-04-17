@@ -14,32 +14,10 @@ public class FundingInstrument {
 		this.creditCard = creditCard;
 	}
 
-	public void setBoleto(String expirationDate, String logoUri,
-			String[] instructionLines) {
-
+	public void setBoleto(final Boleto boleto) {
 		method = "BOLETO";
 
-		boleto = new Boleto();
-		boleto.setExpirationDate(expirationDate);
-		boleto.setLogoUri(logoUri);
-
-		if (instructionLines != null) {
-			for (int i = 0; i < instructionLines.length; ++i) {
-				switch (i) {
-				case 0:
-					boleto.setFirstInstructionLine(instructionLines[i]);
-					break;
-				case 1:
-					boleto.setSecondInstructionLine(instructionLines[i]);
-					break;
-				case 2:
-					boleto.setThirdInstructionLine(instructionLines[i]);
-					break;
-				default:
-					break;
-				}
-			}
-		}
+		this.boleto = boleto;
 	}
 
 	public void setOnlineBankDebit(String bankNumber, String expirationDate,

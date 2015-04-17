@@ -2,6 +2,7 @@ package br.com.moip.resource;
 
 import br.com.moip.MoipHttp;
 import br.com.moip.resource.structure.Amount;
+import br.com.moip.resource.structure.Boleto;
 import br.com.moip.resource.structure.CreditCard;
 import br.com.moip.resource.structure.Event;
 import br.com.moip.resource.structure.Fee;
@@ -95,21 +96,9 @@ public class Payment extends MoipResource {
 		return this;
 	}
 
-	public Payment setBoleto(String expirationDate, String logoUri,
-			String[] instructionLines) {
-
+	public Payment setBoleto(final Boleto boleto) {
 		fundingInstrument = new FundingInstrument();
-		fundingInstrument.setBoleto(expirationDate, logoUri, instructionLines);
-
-		return this;
-	}
-
-	public Payment setOnlineBankDebit(String bankNumber, String expirationDate,
-			String returnUri) {
-
-		fundingInstrument = new FundingInstrument();
-		fundingInstrument.setOnlineBankDebit(bankNumber, expirationDate,
-				returnUri);
+		fundingInstrument.setBoleto(boleto);
 
 		return this;
 	}
