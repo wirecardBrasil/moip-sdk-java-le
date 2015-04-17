@@ -14,63 +14,79 @@ public class CreditCard {
 		return expirationMonth;
 	}
 
-	public void setExpirationMonth(String expirationMonth) {
+	public CreditCard setExpirationMonth(String expirationMonth) {
 		this.expirationMonth = expirationMonth;
+
+		return this;
 	}
 
 	public String getExpirationYear() {
 		return expirationYear;
 	}
 
-	public void setExpirationYear(String expirationYear) {
+	public CreditCard setExpirationYear(String expirationYear) {
 		this.expirationYear = expirationYear;
+
+		return this;
 	}
 
 	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public CreditCard setNumber(String number) {
 		this.number = number;
+
+		return this;
 	}
 
 	public String getCvc() {
 		return cvc;
 	}
 
-	public void setCvc(String cvc) {
+	public CreditCard setCvc(String cvc) {
 		this.cvc = cvc;
+
+		return this;
 	}
 
 	public Holder getHolder() {
 		return holder;
 	}
 
-	public void setHolder(Holder holder) {
+	public CreditCard setHolder(Holder holder) {
 		this.holder = holder;
+
+		return this;
 	}
 
 	public String getBrand() {
 		return brand;
 	}
 
-	public void setBrand(String brand) {
+	public CreditCard setBrand(String brand) {
 		this.brand = brand;
+
+		return this;
 	}
 
 	public String getFirst6() {
 		return first6;
 	}
 
-	public void setFirst6(String first6) {
+	public CreditCard setFirst6(String first6) {
 		this.first6 = first6;
+
+		return this;
 	}
 
 	public String getLast4() {
 		return last4;
 	}
 
-	public void setLast4(String last4) {
+	public CreditCard setLast4(String last4) {
 		this.last4 = last4;
+
+		return this;
 	}
 }

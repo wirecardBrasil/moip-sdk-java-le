@@ -1,16 +1,16 @@
 package br.com.moip.resource;
 
+import br.com.moip.MoipHttp;
+import br.com.moip.resource.structure.Amount;
+import br.com.moip.resource.structure.CreditCard;
+import br.com.moip.resource.structure.Event;
+import br.com.moip.resource.structure.Fee;
+import br.com.moip.resource.structure.FundingInstrument;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import br.com.moip.resource.structure.Amount;
-import br.com.moip.resource.structure.Fee;
-import com.google.gson.Gson;
-import br.com.moip.MoipHttp;
-import br.com.moip.resource.structure.Event;
-import br.com.moip.resource.structure.FundingInstrument;
-import br.com.moip.resource.structure.Holder;
 
 public class Payment extends MoipResource {
 	private String id;
@@ -88,18 +88,9 @@ public class Payment extends MoipResource {
 		return this;
 	}
 
-	public Payment setCreditCard(String expirationMonth, String expirationYear,
-			String number, String cvc, Customer customer) {
-
-		Holder holder = new Holder();
-		holder.setFullname(customer.getFullname());
-		holder.setBirthDate(customer.getBirthDate());
-		holder.setTaxDocument(customer.getTaxDocument());
-		holder.setPhone(customer.getPhone());
-
+	public Payment setCreditCard(final CreditCard creditCard) {
 		fundingInstrument = new FundingInstrument();
-		fundingInstrument.setCreditCard(expirationMonth, expirationYear,
-				number, cvc, holder);
+		fundingInstrument.setCreditCard(creditCard);
 
 		return this;
 	}

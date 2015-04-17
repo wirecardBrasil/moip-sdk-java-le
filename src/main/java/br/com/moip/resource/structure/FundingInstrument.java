@@ -8,23 +8,10 @@ public class FundingInstrument {
 	private BankAccount onlineBankDebit;
 	private BankAccount bankAccount;
 
-	public void setCreditCard(String expirationMonth, String expirationYear,
-			String number, String cvc, Holder holder) {
-		setCreditCard(expirationMonth, expirationYear, number, cvc, holder,
-				null);
-	}
-
-	public void setCreditCard(String expirationMonth, String expirationYear,
-			String number, String cvc, Holder holder, String brand) {
-
+	public void setCreditCard(final CreditCard creditCard) {
 		method = "CREDIT_CARD";
-		creditCard = new CreditCard();
-		creditCard.setBrand(brand);
-		creditCard.setExpirationMonth(expirationMonth);
-		creditCard.setExpirationYear(expirationYear);
-		creditCard.setNumber(number);
-		creditCard.setCvc(cvc);
-		creditCard.setHolder(holder);
+
+		this.creditCard = creditCard;
 	}
 
 	public void setBoleto(String expirationDate, String logoUri,

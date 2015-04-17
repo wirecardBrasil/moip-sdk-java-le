@@ -3,7 +3,6 @@ package br.com.moip.resource;
 import br.com.moip.MoipHttp;
 import br.com.moip.resource.structure.Address;
 import br.com.moip.resource.structure.FundingInstrument;
-import br.com.moip.resource.structure.Holder;
 import br.com.moip.resource.structure.Phone;
 import br.com.moip.resource.structure.TaxDocument;
 import com.google.gson.Gson;
@@ -42,30 +41,6 @@ public class Customer extends MoipResource {
 		customer.setMoip(moip);
 
 		return customer;
-	}
-
-	public Customer setCreditCard(String expirationMonth,
-			String expirationYear, String number, String cvc) {
-
-		Holder holder = new Holder();
-
-		holder.setBirthDate(getBirthDate());
-		holder.setFullname(getFullname());
-		holder.setPhone(getPhone());
-		holder.setTaxDocument(getTaxDocument());
-
-		return setCreditCard(expirationMonth, expirationYear, number, cvc,
-				holder);
-	}
-
-	public Customer setCreditCard(String expirationMonth,
-			String expirationYear, String number, String cvc,
-			Holder holder) {
-
-		fundingInstrument = new FundingInstrument();
-		fundingInstrument.setCreditCard(expirationMonth, expirationYear, number, cvc, holder);
-
-		return this;
 	}
 
 	public String getId() {

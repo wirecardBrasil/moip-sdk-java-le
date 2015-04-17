@@ -22,19 +22,27 @@ public class Holder {
 		return phone;
 	}
 
-	public void setFullname(String fullname) {
+	public Holder setFullname(String fullname) {
 		this.fullname = fullname;
+
+		return this;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public Holder setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
+
+		return this;
 	}
 
-	public void setTaxDocument(TaxDocument taxDocument) {
+	public Holder setTaxDocument(TaxDocument taxDocument) {
 		this.taxDocument = taxDocument;
+
+		return this;
 	}
 
-	public void setPhone(Phone phone) {
+	public Holder setPhone(Phone phone) {
 		this.phone = phone;
+
+		return this;
 	}
 }

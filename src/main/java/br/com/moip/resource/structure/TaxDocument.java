@@ -19,4 +19,13 @@ public class TaxDocument {
 	public void setNumber(String number) {
 		this.number = number;
 	}
+
+	public static TaxDocument cpf(final String number) {
+		TaxDocument taxDocument = new TaxDocument();
+
+		taxDocument.setType("CPF");
+		taxDocument.setNumber(number);
+
+		return taxDocument;
+	}
 }
