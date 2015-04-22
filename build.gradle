@@ -1,13 +1,14 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'signing'
 
-group = 'com.moip.sdk'
+group = 'br.com.moip'
+archivesBaseName = "example-application"
 version = '0.0.1-SNAPSHOT'
 
-description = """Moip Java SDK"""
+description = "Moip v2 SDK"
 
 sourceCompatibility = 1.6
-targetCompatibility = 1.6
 
 repositories {
     mavenCentral()
@@ -19,4 +20,59 @@ dependencies {
 
     testCompile group: "org.slf4j", name: "slf4j-simple", version: "1.7.12"
     testCompile group: "com.github.rodrigosaito", name: "mockwebserver-player", version: "1.0.0"
+}
+
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar, sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Moip v2 SDK'
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description 'Java SDK for Moip v2 APIs'
+                url 'https://github.com/moip/java-sdk'
+
+                scm {
+                    connection 'scm:git:ssh://git@github.com:moip/java-sdk.git'
+                    developerConnection 'scm:git:ssh://git@github.com:moip/java-sdk.git'
+                    url 'https://github.com/moip/java-sdk'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'http://opensource.org/licenses/MIT'
+                    }
+                }
+            }
+        }
+    }
 }
