@@ -1,7 +1,6 @@
 package br.com.moip;
 
 import java.net.HttpURLConnection;
-import java.util.Base64;
 
 public class BasicAuth implements Authentication {
 	private final String token;
@@ -13,10 +12,8 @@ public class BasicAuth implements Authentication {
 	}
 
 	public void authenticate(HttpURLConnection connection) {
-		String authorization = Base64.getEncoder().encodeToString(
-				(token + ":" + key).getBytes());
+		String authorization = Base64.encode((token + ":" + key).getBytes());
 
-		connection
-				.addRequestProperty("Authorization", "Basic " + authorization);
+		connection.addRequestProperty("Authorization", "Basic " + authorization);
 	}
 }
