@@ -3,7 +3,7 @@ apply plugin: 'maven'
 apply plugin: 'signing'
 
 group = 'br.com.moip'
-archivesBaseName = "example-application"
+archivesBaseName = "java-sdk"
 version = '0.0.1-SNAPSHOT'
 
 description = "Moip v2 SDK"
