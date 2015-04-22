@@ -56,6 +56,8 @@ Order createdOrder = moip.orders()
 
 ## Criando um pagamento
 
+### Cartão de crédito
+
 ```java
 Payment createdPayment = order.payments()
     .setInstallmentCount(1)
@@ -76,6 +78,21 @@ Payment createdPayment = order.payments()
                     )
                     .setTaxDocument(TaxDocument.cpf("22222222222"))
             )
+    )
+    .execute();
+```
+
+### Boleto
+
+```java
+Payment createdPayment = order.payments()
+    .setBoleto(
+        new Boleto()
+            .setExpirationDate("2015-09-30")
+            .setLogoUri("https://")
+            .setFirstInstructionLine("Primeira linha do boleto")
+            .setSecondInstructionLine("Segunda linha do boleto")
+            .setThirdInstructionLine("Terceira linha do boleto")
     )
     .execute();
 ```
