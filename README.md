@@ -14,6 +14,17 @@ Adicionar no seu pom.xml:
 </dependency>
 ```
 
+## Configurando sua autenticação
+
+```java
+String token = "0ERVDN386WE3RZRI4YYG6QCDLMJ57LBR";
+String key = "SRZGHRXYOT0PVDLRB3YE8XQWLNLA0JRXTKOIDVDQ";
+Authentication basicAuth = new BasicAuth(token, key);
+
+moip = new Moip(basicAuth, Moip.SANDBOX_ENDPOINT); // Sandbox
+moip = new Moip(basicAuth); // Production
+```
+
 ## Criando um Pedido
 
 ```java
@@ -46,8 +57,6 @@ Order createdOrder = moip.orders()
 ## Criando um pagamento
 
 ```java
-Order order = moip.orders().get("ORD-JY95N80TXHXV");
-
 Payment createdPayment = order.payments()
     .setInstallmentCount(1)
     .setCreditCard(
