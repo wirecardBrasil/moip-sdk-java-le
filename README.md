@@ -2,7 +2,7 @@
 
 O jeito mais simples e rápido de integrar o moip a sua aplicação Java
 
-# Instalação
+## Instalação
 
 Adicionar no seu pom.xml:
 
@@ -14,7 +14,7 @@ Adicionar no seu pom.xml:
 </dependency>
 ```
 
-# Criando um Pedido
+## Criando um Pedido
 
 ```java
 Order createdOrder = moip.orders()
@@ -41,4 +41,32 @@ Order createdOrder = moip.orders()
             )
     )
     .create();
+```
+
+## Criando um pagamento
+
+```java
+Order order = moip.orders().get("ORD-JY95N80TXHXV");
+
+Payment createdPayment = order.payments()
+    .setInstallmentCount(1)
+    .setCreditCard(
+        new CreditCard()
+            .setNumber("4012001038443335")
+            .setCvc("123")
+            .setExpirationMonth("04")
+            .setExpirationYear("18")
+            .setHolder(
+                new Holder()
+                    .setFullname("Jose Portador da Silva")
+                    .setBirthDate("1988-10-10")
+                    .setPhone(
+                            new Phone()
+                                    .setAreaCode("11")
+                                    .setNumber("55667788")
+                    )
+                    .setTaxDocument(TaxDocument.cpf("22222222222"))
+            )
+    )
+    .execute();
 ```
