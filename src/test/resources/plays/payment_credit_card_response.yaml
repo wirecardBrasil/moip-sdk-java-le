@@ -1,0 +1,8 @@
+!play
+name: PaymentResponse
+interactions:
+- response:
+    status: 200
+    headers:
+    body: |
+        {"id":"PAY-4YRCCQEGGQ05","status":"IN_ANALYSIS","amount":{"fees":120,"refunds":0,"liquid":980,"currency":"BRL","total":1100},"installmentCount":1,"fundingInstrument":{"creditCard":{"id":"CRC-G98RQW009GGI","brand":"VISA","first6":"401200","last4":"3335","holder":{"birthdate":"30/12/1988","taxDocument":{"type":"CPF","number":"22222222222"},"fullname":"Jose Portador da Silva"}},"method":"CREDIT_CARD"},"fees":[{"type":"TRANSACTION","amount":120}],"events":[{"createdAt":"2015-04-17T17:12:07-0300","type":"PAYMENT.IN_ANALYSIS"},{"createdAt":"2015-04-17T17:12:04-0300","type":"PAYMENT.CREATED"}],"_links":{"order":{"title":"ORD-JY95N80TXHXV","href":"https://test.moip.com.br/v2/orders/ORD-JY95N80TXHXV"},"self":{"href":"https://test.moip.com.br/v2/payments/PAY-4YRCCQEGGQ05"}},"createdAt":"2015-04-17T17:12:04-0300","updatedAt":"2015-04-17T17:12:07-0300"}
