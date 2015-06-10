@@ -1,6 +1,7 @@
 # Moip v2 Java client SDK
 
 [![Build Status](https://travis-ci.org/moip/moip-sdk-java.svg?branch=master)](https://travis-ci.org/moip/moip-sdk-java)
+
 O jeito mais simples e rápido de integrar o moip a sua aplicação Java
 
 ## Instalação
