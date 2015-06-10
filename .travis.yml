@@ -5,5 +5,5 @@ jdk:
   - openjdk8
   - openjdk7
   - openjdk6
-install: ./gradle dependencies -PossrhUsername=username -PossrhPassword=password
-script: ./gradle test -PossrhUsername=username -PossrhPassword=password
+install: ./gradlew dependencies -PossrhUsername=username -PossrhPassword=password
+script: ./gradlew test -PossrhUsername=username -PossrhPassword=password
