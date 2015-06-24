@@ -72,6 +72,14 @@ uploadArchives {
                         url 'http://opensource.org/licenses/MIT'
                     }
                 }
+
+                developers {
+                    developer {
+                        id 'rodrigo.saito'
+                        name 'Rodrigo Saito'
+                        email 'rodrigo.saito@moip.com.br'
+                    }
+                }
             }
         }
     }
