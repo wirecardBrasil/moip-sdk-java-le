@@ -2,7 +2,7 @@ package br.com.moip.resource.structure;
 
 public class Holder {
 	private String fullname;
-	private String birthDate;
+	private String birthdate;
 	private TaxDocument taxDocument = new TaxDocument();
 	private Phone phone = new Phone();
 
@@ -10,8 +10,8 @@ public class Holder {
 		return fullname;
 	}
 
-	public String getBirthDate() {
-		return birthDate;
+	public String getBirthdate() {
+		return birthdate;
 	}
 
 	public TaxDocument getTaxDocument() {
@@ -28,8 +28,8 @@ public class Holder {
 		return this;
 	}
 
-	public Holder setBirthDate(String birthDate) {
-		this.birthDate = birthDate;
+	public Holder setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
 
 		return this;
 	}

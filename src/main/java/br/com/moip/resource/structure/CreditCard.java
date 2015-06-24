@@ -9,8 +9,9 @@ public class CreditCard {
 	private String brand;
 	private String first6;
 	private String last4;
+    private String hash;
 
-	public String getExpirationMonth() {
+    public String getExpirationMonth() {
 		return expirationMonth;
 	}
 
@@ -89,4 +90,14 @@ public class CreditCard {
 
 		return this;
 	}
+
+    public CreditCard setHash(final String hash) {
+        this.hash = hash;
+
+        return this;
+    }
+
+    public String getHash() {
+        return hash;
+    }
 }

@@ -6,14 +6,28 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Properties;
 
 public class MoipHttp {
-
 	private static final Logger LOGGER = LoggerFactory.getLogger(MoipHttp.class);
+    private static String USER_AGENT;
+
+    static {
+        try {
+            InputStream inputStream = MoipHttp.class.getResourceAsStream("/moipJavaSDK.properties");
+            Properties properties = new Properties();
+            properties.load(inputStream);
+
+            USER_AGENT = properties.getProperty("userAgent");
+        } catch (Exception e) {
+            USER_AGENT = "MoipJavaSDK/UnknownVersion";
+        }
+    }
 
 	private Authentication authentication;
 	private String endpoint;
@@ -61,6 +75,7 @@ public class MoipHttp {
 
 		connection.setRequestProperty("Accept", "application/json");
 		connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestProperty("User-Agent", USER_AGENT);
 
 		if (body != null && !body.isEmpty()) {
 			LOGGER.debug("Request: {}", body);
@@ -75,23 +90,30 @@ public class MoipHttp {
 				jsonRequest.close();
 
 			} catch (IOException e) {
-				// TODO Bloco catch gerado automaticamente
-				e.printStackTrace();
+                throw new MoipException("Error trying to write json request to Moip: " + e.getMessage(), e);
 			}
 		}
 
 		try {
-			bufferedReader = new BufferedReader(new InputStreamReader(
-					connection.getInputStream()));
+            int responseCode = connection.getResponseCode();
+            LOGGER.debug("Response code: {}", responseCode);
 
-			String responseLine;
-			StringBuffer jsonResponse = new StringBuffer();
+            StringBuilder jsonResponse = new StringBuilder();
 
-			while ((responseLine = bufferedReader.readLine()) != null) {
-				jsonResponse.append(responseLine);
-			}
+            if (responseCode >= 200 && responseCode < 300) {
+                bufferedReader = new BufferedReader(new InputStreamReader(
+                        connection.getInputStream()));
+            } else {
+                bufferedReader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+            }
 
-			bufferedReader.close();
+            String responseLine;
+
+            while ((responseLine = bufferedReader.readLine()) != null) {
+                jsonResponse.append(responseLine);
+            }
+
+            bufferedReader.close();
 
 			connection.disconnect();
 

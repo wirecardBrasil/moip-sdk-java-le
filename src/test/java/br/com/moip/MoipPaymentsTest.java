@@ -32,7 +32,7 @@ public class MoipPaymentsTest extends AbstractMoipTest {
                                 .setHolder(
                                         new Holder()
                                                 .setFullname("Jose Portador da Silva")
-                                                .setBirthDate("1988-10-10")
+                                                .setBirthdate("1988-10-10")
                                                 .setPhone(
                                                         new Phone()
                                                                 .setAreaCode("11")
@@ -48,12 +48,38 @@ public class MoipPaymentsTest extends AbstractMoipTest {
     }
 
     @Test
+    @Play( { "order_response", "payment_credit_card_response" })
+    public void testCreatePaymentCreditCardHash() {
+        Order order = moip.orders().get("ORD-XDH04PIVWOVR");
+
+        Payment createdPayment = order.payments()
+                .setInstallmentCount(1)
+                .setCreditCard(
+                        new CreditCard()
+                                .setHash("JARQtjm/AJN4s6W00V2IZ+xHTW8zFNu1mWyW3RR21Z05h0LFSFLRH8yumqaktPXU49Ku/InBPCM+l85NYsNJiPD7BjybOW1g6HPZEjpz7krUtvHh4gqXRlLxL66D7Uf5CQ5dFeeyb6OgSoDpYBDlbhtpuSBTqYKHdHSK7xMebnPZvLamKiLFa/TVbUno9qAkLTB4NXdfcSzlq0YbgpEaUHA9oRaiH/n0Vt/NJDVQsb+SxeiJnO9WFzzC5adcSPn5p821uRFcyvykA3LloqbKhQemDghuP51bb0vuRQtmq6YKqT8eYc3DTlrlB8J2tX4PBplFCu1FyWSpeaiWB33zUg==")
+                                .setHolder(
+                                        new Holder()
+                                                .setFullname("Jose Portador da Silva")
+                                                .setBirthdate("1988-10-10")
+                                                .setPhone(
+                                                        new Phone()
+                                                                .setAreaCode("11")
+                                                                .setNumber("55667788")
+                                                )
+                                                .setTaxDocument(TaxDocument.cpf("22222222222"))
+                                )
+                )
+                .execute();
+
+
+    }
+
+    @Test
     @Play( { "order_response", "payment_boleto_response" })
     public void testCreatePaymentBoleto() {
         Order order = moip.orders().get("ORD-FWR7V5ZC0414");
 
         Payment createdPayment = order.payments()
-                .setInstallmentCount(1)
                 .setBoleto(
                         new Boleto()
                                 .setExpirationDate("2015-09-30")
