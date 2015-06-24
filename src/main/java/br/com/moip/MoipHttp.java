@@ -19,7 +19,7 @@ public class MoipHttp {
 
     static {
         try {
-            InputStream inputStream = MoipHttp.class.getResourceAsStream("/properties.properties");
+            InputStream inputStream = MoipHttp.class.getResourceAsStream("/moipJavaSDK.properties");
             Properties properties = new Properties();
             properties.load(inputStream);
 

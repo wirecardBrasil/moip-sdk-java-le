@@ -1,7 +1,12 @@
 package br.com.moip;
 
 import br.com.moip.resource.Order;
+import br.com.moip.resource.Payment;
 import br.com.moip.resource.structure.Address;
+import br.com.moip.resource.structure.CreditCard;
+import br.com.moip.resource.structure.Holder;
+import br.com.moip.resource.structure.Phone;
+import br.com.moip.resource.structure.TaxDocument;
 import com.rodrigosaito.mockwebserver.player.Play;
 import org.junit.Test;
 
@@ -41,6 +46,44 @@ public class MoipOrdersTest extends AbstractMoipTest {
 
         assertThat(createdOrder.getId(), startsWith("ORD-"));
         assertThat(createdOrder.getStatus(), equalTo("CREATED"));
+    }
+
+    // TODO FIXME
+    public void testCreateOrderMinimun() {
+        Order createdOrder = moip.orders()
+                .setOwnId("cooking_store-12345")
+                .addItem("Methylamine - 1 Barrel", 1, "The best ingredient for Blue Sky", 1000)
+                .setShippingAmount(100)
+                .setCustomer(
+                        moip.customers()
+                                .setOwnId("walter-123")
+                                .setFullname("Walter White")
+                                .setEmail("walter@white.com")
+                )
+                .create();
+
+        Payment createdPayment = createdOrder.payments()
+                .setInstallmentCount(1)
+                .setCreditCard(
+                        new CreditCard()
+                                .setNumber("4024007199037499")
+                                .setCvc("123")
+                                .setExpirationMonth("12")
+                                .setExpirationYear("20")
+                                .setHolder(
+                                        new Holder()
+                                                .setFullname("Walter White")
+                                                .setBirthdate("1959-08-07")
+                                                .setPhone(
+                                                        new Phone()
+                                                                .setAreaCode("11")
+                                                                .setNumber("66778899")
+                                                )
+                                                .setTaxDocument(TaxDocument.cpf("22222222222"))
+                                )
+                )
+                .execute();
+
     }
 
     @Test

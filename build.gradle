@@ -78,7 +78,7 @@ uploadArchives {
 }
 
 processResources {
-    filesMatching("**/properties.properties") {
+    filesMatching("**/moipJavaSDK.properties") {
         expand([
             version: version
         ])

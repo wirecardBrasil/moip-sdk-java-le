@@ -48,6 +48,7 @@ public class MoipPaymentsTest extends AbstractMoipTest {
     }
 
     @Test
+    @Play( { "order_response", "payment_credit_card_response" })
     public void testCreatePaymentCreditCardHash() {
         Order order = moip.orders().get("ORD-XDH04PIVWOVR");
 
