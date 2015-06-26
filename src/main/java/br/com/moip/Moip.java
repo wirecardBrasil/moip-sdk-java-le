@@ -6,8 +6,8 @@ import br.com.moip.resource.Order;
 import br.com.moip.resource.Refund;
 
 public class Moip {
-	public static final String PRODUCTION_ENDPOINT = "https://moip.com.br";
-	public static final String SANDBOX_ENDPOINT = "https://test.moip.com.br";
+	public static final String PRODUCTION_ENDPOINT = "https://api.moip.com.br";
+	public static final String SANDBOX_ENDPOINT = "https://sandbox.moip.com.br";
 
 	private final MoipHttp moipHttp;
 

@@ -1,7 +1,7 @@
 package br.com.moip;
 
-import java.net.HttpURLConnection;
+import java.net.URLConnection;
 
 public interface Authentication {
-	void authenticate(HttpURLConnection connection);
+	void authenticate(URLConnection connection);
 }
