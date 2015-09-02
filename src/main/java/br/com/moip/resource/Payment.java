@@ -1,6 +1,7 @@
 package br.com.moip.resource;
 
 import br.com.moip.MoipHttp;
+import br.com.moip.resource.links.Links;
 import br.com.moip.resource.structure.Amount;
 import br.com.moip.resource.structure.Boleto;
 import br.com.moip.resource.structure.CreditCard;
@@ -23,9 +24,58 @@ public class Payment extends MoipResource {
 	private List<Event> events;
 	private String updatedAt;
 	private String createdAt;
+	private Links _links;
 
 	private transient Order order;
 	private transient Multiorder multiorder;
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public FundingInstrument getFundingInstrument() {
+		return fundingInstrument;
+	}
+
+	public void setFundingInstrument(FundingInstrument fundingInstrument) {
+		this.fundingInstrument = fundingInstrument;
+	}
+
+	public List<Fee> getFees() {
+		return fees;
+	}
+
+	public void setFees(List<Fee> fees) {
+		this.fees = fees;
+	}
+
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public Multiorder getMultiorder() {
+		return multiorder;
+	}
 
 	public Payment get(String id) {
 		if (order != null || multiorder != null) {
@@ -153,5 +203,13 @@ public class Payment extends MoipResource {
 		refund.setPayment(this);
 
 		return refund;
+	}
+
+	public Links get_links() {
+		return _links;
+	}
+
+	public void set_links(Links _links) {
+		this._links = _links;
 	}
 }
