@@ -92,6 +92,8 @@ public class MoipPaymentsTest extends AbstractMoipTest {
 
         assertThat(createdPayment.getId(), startsWith("PAY-"));
         assertThat(createdPayment.getStatus(), equalTo("WAITING"));
+        assertThat(createdPayment.get_links().getOrder().getTitle(), equalTo("ORD-FWR7V5ZC0414"));
+        assertThat(createdPayment.get_links().getOrder().getHref(), equalTo("https://test.moip.com.br/v2/orders/ORD-FWR7V5ZC0414"));
         assertThat(createdPayment.get_links().getPayBoleto().getRedirectHref(), equalTo("https://checkout-sandbox.moip.com.br/boleto/PAY-1I98L665B5U8"));
     }
 }
