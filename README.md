@@ -14,7 +14,7 @@ Adicionar no seu pom.xml:
 <dependency>
     <groupId>br.com.moip</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
 </dependency>
 ```
 
@@ -100,3 +100,8 @@ Payment createdPayment = order.payments()
     )
     .execute();
 ```
+
+## Tratamento de erros na API
+
+Quando ocorre algum erro na API, você deve utilizar o método hasUnexpectedError() para tratar erros inesperados e
+para erros de validação,deverá utilizar o método hasValidationError().

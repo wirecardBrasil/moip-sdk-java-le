@@ -17,6 +17,7 @@ public abstract class AbstractMoipTest {
         String key = "SRZGHRXYOT0PVDLRB3YE8XQWLNLA0JRXTKOIDVDQ";
         Authentication moipBasic = new BasicAuth(token, key);
 
+//        moip = new Moip(moipBasic, Moip.SANDBOX_ENDPOINT);
         moip = new Moip(moipBasic, apiMock.getURL("/").toString());
     }
 }
