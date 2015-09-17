@@ -1,9 +1,12 @@
 package br.com.moip.resource;
 
+import br.com.moip.MoipException;
 import br.com.moip.MoipHttp;
+import br.com.moip.ValidationException;
 import br.com.moip.resource.structure.Address;
 import br.com.moip.resource.structure.Amount;
 import br.com.moip.resource.structure.Entry;
+import br.com.moip.resource.structure.Errors;
 import br.com.moip.resource.structure.Event;
 import br.com.moip.resource.structure.Item;
 import br.com.moip.resource.structure.Receiver;
@@ -28,6 +31,8 @@ public class Order extends MoipResource {
 	private List<Event> events;
 	private List<Receiver> receivers;
 	private String updatedAt;
+	private String ERROR;
+	private List<Errors> errors;
 
 	public Order addAddress(String type, String street, String number,
 			String district, String city, String state, String zip,
@@ -93,6 +98,14 @@ public class Order extends MoipResource {
 
 		Order order = gson.fromJson(json, Order.class);
 		order.setMoip(moip);
+
+		if (order.hasUnexpectedError()) {
+			throw new MoipException();
+		}
+
+		if (order.hasValidationError()){
+			throw new ValidationException(order.getErrors());
+		}
 
 		return order;
 	}
@@ -235,5 +248,29 @@ public class Order extends MoipResource {
 		refund.setOrder(this);
 
 		return refund;
+	}
+
+	public String getERROR() {
+		return ERROR;
+	}
+
+	public void setERROR(String ERROR) {
+		this.ERROR = ERROR;
+	}
+
+	public boolean hasUnexpectedError(){
+		return getERROR() != null;
+	}
+
+	public List<Errors> getErrors() {
+		return errors;
+	}
+
+	public void setErrors(List<Errors> errors) {
+		this.errors = errors;
+	}
+
+	public boolean hasValidationError(){
+		return getErrors() != null;
 	}
 }
