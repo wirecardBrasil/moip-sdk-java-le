@@ -14,6 +14,7 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.fail;
 
 public class MoipOrdersTest extends AbstractMoipTest {
 
@@ -152,38 +153,10 @@ public class MoipOrdersTest extends AbstractMoipTest {
                                     )
                     )
                     .create();
+            fail("Deveria lançar uma exception");
         }catch (ValidationException v){
             Assert.assertEquals("deve estar entre 1 e 9999" ,v.getErrors().get(0).getDescription());
             Assert.assertEquals("items[0].quantity", v.getErrors().get(0).getPath());
         }
-    }
-
-    @Test(expected = ValidationException.class)
-    @Play("order_response_validation_error")
-    public void deveLancarExceptionCasoOcorraErroValidao(){
-        Order createdOrder = moip.orders()
-                .setOwnId("java_sdk_1")
-                .addItem("Nome do produto", 0, "Mais info...", 1000)
-                .setShippingAmount(100)
-                .setCustomer(
-                        moip.customers()
-                                .setOwnId("java_sdk_customer_1")
-                                .setFullname("Jose da Silva")
-                                .setEmail("sandbox_v2_1401147277@email.com")
-                                .setBirthDate("1988-12-30")
-                                .setTaxDocument("33333333333")
-                                .setPhone("11", "66778899", "55")
-                                .setShippingAddress(
-                                        new Address()
-                                                .setStreet("Avenida Faria Lima")
-                                                .setStreetNumber("2927")
-                                                .setComplement("8")
-                                                .setDistrict("Itaim")
-                                                .setCity("São Paulo")
-                                                .setState("SP")
-                                                .setZipCode("01234000")
-                                )
-                )
-                .create();
     }
 }
