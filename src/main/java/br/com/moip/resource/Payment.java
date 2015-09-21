@@ -1,10 +1,13 @@
 package br.com.moip.resource;
 
+import br.com.moip.MoipException;
 import br.com.moip.MoipHttp;
+import br.com.moip.ValidationException;
 import br.com.moip.resource.links.Links;
 import br.com.moip.resource.structure.Amount;
 import br.com.moip.resource.structure.Boleto;
 import br.com.moip.resource.structure.CreditCard;
+import br.com.moip.resource.structure.Errors;
 import br.com.moip.resource.structure.Event;
 import br.com.moip.resource.structure.Fee;
 import br.com.moip.resource.structure.FundingInstrument;
@@ -25,6 +28,8 @@ public class Payment extends MoipResource {
 	private String updatedAt;
 	private String createdAt;
 	private Links _links;
+	private String ERROR;
+	private List<Errors> errors;
 
 	private transient Order order;
 	private transient Multiorder multiorder;
@@ -114,6 +119,15 @@ public class Payment extends MoipResource {
 		String json = moipHttp.sendRequest(path, "POST", gson.toJson(this));
 
 		Payment payment = gson.fromJson(json, Payment.class);
+
+		if (payment.hasUnexpectedError()) {
+			throw new MoipException();
+		}
+
+		if (payment.hasValidationError()){
+			throw new ValidationException(payment.getErrors());
+		}
+
 		payment.setMoip(moip);
 
 		return payment;
@@ -211,5 +225,30 @@ public class Payment extends MoipResource {
 
 	public void set_links(Links _links) {
 		this._links = _links;
+	}
+
+	public boolean hasValidationError() {
+		return this.getErrors() != null && !this.getErrors().isEmpty();
+	}
+
+	public boolean hasUnexpectedError(){
+		return getERROR() != null;
+	}
+
+
+	public String getERROR() {
+		return ERROR;
+	}
+
+	public void setERROR(String ERROR) {
+		this.ERROR = ERROR;
+	}
+
+	public List<Errors> getErrors() {
+		return errors;
+	}
+
+	public void setErrors(List<Errors> errors) {
+		this.errors = errors;
 	}
 }

@@ -1,0 +1,8 @@
+!play
+name: Create Payment Error Play
+interactions:
+- response:
+    status: 400
+    headers:
+    body: |
+     {"errors": [{ "code": "PAY-999", "path": "fundingInstrument.boleto.validExpirationDate", "description": "A data de expiração do boleto bancário é anterior a atual"}]}

@@ -8,6 +8,7 @@ import br.com.moip.resource.structure.Holder;
 import br.com.moip.resource.structure.Phone;
 import br.com.moip.resource.structure.TaxDocument;
 import com.rodrigosaito.mockwebserver.player.Play;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -95,5 +96,27 @@ public class MoipPaymentsTest extends AbstractMoipTest {
         assertThat(createdPayment.get_links().getOrder().getTitle(), equalTo("ORD-FWR7V5ZC0414"));
         assertThat(createdPayment.get_links().getOrder().getHref(), equalTo("https://test.moip.com.br/v2/orders/ORD-FWR7V5ZC0414"));
         assertThat(createdPayment.get_links().getPayBoleto().getRedirectHref(), equalTo("https://checkout-sandbox.moip.com.br/boleto/PAY-1I98L665B5U8"));
+    }
+
+    @Test
+    @Play( { "order_response", "payment_response_validation_error" })
+    public void testCreatePaymentBoletoWithValidationErrors() {
+        Order order = moip.orders().get("ORD-FWR7V5ZC0414");
+
+        try {
+            Payment createdPayment = order.payments()
+                    .setBoleto(
+                            new Boleto()
+                                    .setExpirationDate("2015-08-30")
+                                    .setLogoUri("https://")
+                                    .setFirstInstructionLine("Primeira linha do boleto")
+                                    .setSecondInstructionLine("Segunda linha do boleto")
+                                    .setThirdInstructionLine("Terceira linha do boleto")
+                    )
+                    .execute();
+        } catch (ValidationException ve) {
+            Assert.assertEquals("A data de expiração do boleto bancário é anterior a atual", ve.getErrors().get(0).getDescription());
+            Assert.assertEquals("fundingInstrument.boleto.validExpirationDate", ve.getErrors().get(0).getPath());
+        }
     }
 }
