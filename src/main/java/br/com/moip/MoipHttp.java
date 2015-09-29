@@ -55,6 +55,8 @@ public class MoipHttp {
         try {
             url = new URL(endpoint + path);
 
+            LOGGER.debug("Requesting to URL [{}]", url.toString());
+
             SSLSupport sslSupport = new SSLSupport();
             URLConnection urlConnection = url.openConnection();
 
