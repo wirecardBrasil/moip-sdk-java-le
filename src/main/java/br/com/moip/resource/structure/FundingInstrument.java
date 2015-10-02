@@ -61,4 +61,16 @@ public class FundingInstrument {
 
 		return boleto;
 	}
+
+	@Override
+	public String toString() {
+		return "FundingInstrument{" +
+				"id='" + id + '\'' +
+				", method='" + method + '\'' +
+				", creditCard=" + creditCard +
+				", boleto=" + boleto +
+				", onlineBankDebit=" + onlineBankDebit +
+				", bankAccount=" + bankAccount +
+				'}';
+	}
 }

@@ -1,48 +1,58 @@
 package br.com.moip.resource.structure;
 
 public class Holder {
-	private String fullname;
-	private String birthdate;
-	private TaxDocument taxDocument = new TaxDocument();
-	private Phone phone = new Phone();
+    private String fullname;
+    private String birthdate;
+    private TaxDocument taxDocument = new TaxDocument();
+    private Phone phone = new Phone();
 
-	public String getFullname() {
-		return fullname;
-	}
+    public String getFullname() {
+        return fullname;
+    }
 
-	public String getBirthdate() {
-		return birthdate;
-	}
+    public String getBirthdate() {
+        return birthdate;
+    }
 
-	public TaxDocument getTaxDocument() {
-		return taxDocument;
-	}
+    public TaxDocument getTaxDocument() {
+        return taxDocument;
+    }
 
-	public Phone getPhone() {
-		return phone;
-	}
+    public Phone getPhone() {
+        return phone;
+    }
 
-	public Holder setFullname(String fullname) {
-		this.fullname = fullname;
+    public Holder setFullname(String fullname) {
+        this.fullname = fullname;
 
-		return this;
-	}
+        return this;
+    }
 
-	public Holder setBirthdate(String birthdate) {
-		this.birthdate = birthdate;
+    public Holder setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
 
-		return this;
-	}
+        return this;
+    }
 
-	public Holder setTaxDocument(TaxDocument taxDocument) {
-		this.taxDocument = taxDocument;
+    public Holder setTaxDocument(TaxDocument taxDocument) {
+        this.taxDocument = taxDocument;
 
-		return this;
-	}
+        return this;
+    }
 
-	public Holder setPhone(Phone phone) {
-		this.phone = phone;
+    public Holder setPhone(Phone phone) {
+        this.phone = phone;
 
-		return this;
-	}
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "Holder{" +
+                "fullname='" + fullname + '\'' +
+                ", birthdate='" + birthdate + '\'' +
+                ", taxDocument=" + taxDocument +
+                ", phone=" + phone +
+                '}';
+    }
 }

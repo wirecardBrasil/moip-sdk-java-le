@@ -28,4 +28,12 @@ public class TaxDocument {
 
 		return taxDocument;
 	}
+
+	@Override
+	public String toString() {
+		return "TaxDocument{" +
+				"type='" + type + '\'' +
+				", number='" + number + '\'' +
+				'}';
+	}
 }

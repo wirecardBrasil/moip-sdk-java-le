@@ -1,102 +1,83 @@
 package br.com.moip.resource.structure;
 
 public class Boleto {
-	class InstructionLines {
-		private String first;
-		private String second;
-		private String third;
 
-		public String getFirst() {
-			return first;
-		}
+    private String linecode;
+    private String expirationDate;
+    private InstructionLines instrucionLines;
+    private String logoUri;
 
-		public void setFirst(String first) {
-			this.first = first;
-		}
+    public String getLinecode() {
+        return linecode;
+    }
 
-		public String getSecond() {
-			return second;
-		}
+    public Boleto setLinecode(String linecode) {
+        this.linecode = linecode;
 
-		public void setSecond(String second) {
-			this.second = second;
-		}
+        return this;
+    }
 
-		public String getThird() {
-			return third;
-		}
+    public String getExpirationDate() {
+        return expirationDate;
+    }
 
-		public void setThird(String third) {
-			this.third = third;
-		}
-	}
+    public Boleto setExpirationDate(String expirationDate) {
+        this.expirationDate = expirationDate;
 
-	private String linecode;
-	private String expirationDate;
-	private InstructionLines instrucionLines;
-	private String logoUri;
+        return this;
+    }
 
-	public String getLinecode() {
-		return linecode;
-	}
+    public Boleto setFirstInstructionLine(String first) {
+        if (instrucionLines == null) {
+            instrucionLines = new InstructionLines();
+        }
 
-	public Boleto setLinecode(String linecode) {
-		this.linecode = linecode;
+        instrucionLines.setFirst(first);
 
-		return this;
-	}
+        return this;
+    }
 
-	public String getExpirationDate() {
-		return expirationDate;
-	}
+    public Boleto setSecondInstructionLine(String second) {
+        if (instrucionLines == null) {
+            instrucionLines = new InstructionLines();
+        }
 
-	public Boleto setExpirationDate(String expirationDate) {
-		this.expirationDate = expirationDate;
+        instrucionLines.setSecond(second);
 
-		return this;
-	}
+        return this;
+    }
 
-	public Boleto setFirstInstructionLine(String first) {
-		if (instrucionLines == null) {
-			instrucionLines = new InstructionLines();
-		}
+    public Boleto setThirdInstructionLine(String third) {
+        if (instrucionLines == null) {
+            instrucionLines = new InstructionLines();
+        }
 
-		instrucionLines.setFirst(first);
+        instrucionLines.setThird(third);
 
-		return this;
-	}
+        return this;
+    }
 
-	public Boleto setSecondInstructionLine(String second) {
-		if (instrucionLines == null) {
-			instrucionLines = new InstructionLines();
-		}
+    public InstructionLines getInstructionLines() {
+        return instrucionLines;
+    }
 
-		instrucionLines.setSecond(second);
+    public String getLogoUri() {
+        return logoUri;
+    }
 
-		return this;
-	}
+    public Boleto setLogoUri(String logoUri) {
+        this.logoUri = logoUri;
 
-	public Boleto setThirdInstructionLine(String third) {
-		if (instrucionLines == null) {
-			instrucionLines = new InstructionLines();
-		}
+        return this;
+    }
 
-		instrucionLines.setThird(third);
-
-		return this;
-	}
-
-	public InstructionLines getInstructionLines() {
-		return instrucionLines;
-	}
-
-	public String getLogoUri() {
-		return logoUri;
-	}
-
-	public Boleto setLogoUri(String logoUri) {
-		this.logoUri = logoUri;
-
-		return this;
-	}
+    @Override
+    public String toString() {
+        return "Boleto{" +
+                "linecode='" + linecode + '\'' +
+                ", expirationDate='" + expirationDate + '\'' +
+                ", instrucionLines=" + instrucionLines +
+                ", logoUri='" + logoUri + '\'' +
+                '}';
+    }
 }
