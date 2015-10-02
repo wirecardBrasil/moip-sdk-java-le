@@ -251,4 +251,23 @@ public class Payment extends MoipResource {
 	public void setErrors(List<Errors> errors) {
 		this.errors = errors;
 	}
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "id='" + id + '\'' +
+                ", status='" + status + '\'' +
+                ", amount=" + amount +
+                ", installmentCount=" + installmentCount +
+                ", fundingInstrument=" + fundingInstrument +
+                ", fees=" + fees +
+                ", events=" + events +
+                ", updatedAt='" + updatedAt + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", _links=" + _links +
+                ", errors=" + errors +
+                ", order=" + order +
+                ", multiorder=" + multiorder +
+                '}';
+    }
 }

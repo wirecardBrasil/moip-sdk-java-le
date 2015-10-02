@@ -1,95 +1,95 @@
 package br.com.moip.resource.structure;
 
 public class CreditCard {
-	private String expirationMonth;
-	private String expirationYear;
-	private String number;
-	private String cvc;
-	private Holder holder;
-	private String brand;
-	private String first6;
-	private String last4;
+    private String expirationMonth;
+    private String expirationYear;
+    private String number;
+    private String cvc;
+    private Holder holder;
+    private String brand;
+    private String first6;
+    private String last4;
     private String hash;
 
     public String getExpirationMonth() {
-		return expirationMonth;
-	}
+        return expirationMonth;
+    }
 
-	public CreditCard setExpirationMonth(String expirationMonth) {
-		this.expirationMonth = expirationMonth;
+    public CreditCard setExpirationMonth(String expirationMonth) {
+        this.expirationMonth = expirationMonth;
 
-		return this;
-	}
+        return this;
+    }
 
-	public String getExpirationYear() {
-		return expirationYear;
-	}
+    public String getExpirationYear() {
+        return expirationYear;
+    }
 
-	public CreditCard setExpirationYear(String expirationYear) {
-		this.expirationYear = expirationYear;
+    public CreditCard setExpirationYear(String expirationYear) {
+        this.expirationYear = expirationYear;
 
-		return this;
-	}
+        return this;
+    }
 
-	public String getNumber() {
-		return number;
-	}
+    public String getNumber() {
+        return number;
+    }
 
-	public CreditCard setNumber(String number) {
-		this.number = number;
+    public CreditCard setNumber(String number) {
+        this.number = number;
 
-		return this;
-	}
+        return this;
+    }
 
-	public String getCvc() {
-		return cvc;
-	}
+    public String getCvc() {
+        return cvc;
+    }
 
-	public CreditCard setCvc(String cvc) {
-		this.cvc = cvc;
+    public CreditCard setCvc(String cvc) {
+        this.cvc = cvc;
 
-		return this;
-	}
+        return this;
+    }
 
-	public Holder getHolder() {
-		return holder;
-	}
+    public Holder getHolder() {
+        return holder;
+    }
 
-	public CreditCard setHolder(Holder holder) {
-		this.holder = holder;
+    public CreditCard setHolder(Holder holder) {
+        this.holder = holder;
 
-		return this;
-	}
+        return this;
+    }
 
-	public String getBrand() {
-		return brand;
-	}
+    public String getBrand() {
+        return brand;
+    }
 
-	public CreditCard setBrand(String brand) {
-		this.brand = brand;
+    public CreditCard setBrand(String brand) {
+        this.brand = brand;
 
-		return this;
-	}
+        return this;
+    }
 
-	public String getFirst6() {
-		return first6;
-	}
+    public String getFirst6() {
+        return first6;
+    }
 
-	public CreditCard setFirst6(String first6) {
-		this.first6 = first6;
+    public CreditCard setFirst6(String first6) {
+        this.first6 = first6;
 
-		return this;
-	}
+        return this;
+    }
 
-	public String getLast4() {
-		return last4;
-	}
+    public String getLast4() {
+        return last4;
+    }
 
-	public CreditCard setLast4(String last4) {
-		this.last4 = last4;
+    public CreditCard setLast4(String last4) {
+        this.last4 = last4;
 
-		return this;
-	}
+        return this;
+    }
 
     public CreditCard setHash(final String hash) {
         this.hash = hash;
@@ -99,5 +99,20 @@ public class CreditCard {
 
     public String getHash() {
         return hash;
+    }
+
+    @Override
+    public String toString() {
+        return "CreditCard{" +
+                "expirationMonth='" + expirationMonth + '\'' +
+                ", expirationYear='" + expirationYear + '\'' +
+                ", number='" + number + '\'' +
+                ", cvc='" + cvc + '\'' +
+                ", holder=" + holder +
+                ", brand='" + brand + '\'' +
+                ", first6='" + first6 + '\'' +
+                ", last4='" + last4 + '\'' +
+                ", hash='" + hash + '\'' +
+                '}';
     }
 }

@@ -10,4 +10,11 @@ public class PayBoleto {
     public void setRedirectHref(String redirectHref) {
         this.redirectHref = redirectHref;
     }
+
+    @Override
+    public String toString() {
+        return "PayBoleto{" +
+                "redirectHref='" + redirectHref + '\'' +
+                '}';
+    }
 }

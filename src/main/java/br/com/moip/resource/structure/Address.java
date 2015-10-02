@@ -100,4 +100,19 @@ public class Address {
 
 		return this;
 	}
+
+	@Override
+	public String toString() {
+		return "Address{" +
+				"type='" + type + '\'' +
+				", street='" + street + '\'' +
+				", streetNumber='" + streetNumber + '\'' +
+				", complement='" + complement + '\'' +
+				", district='" + district + '\'' +
+				", city='" + city + '\'' +
+				", state='" + state + '\'' +
+				", country='" + country + '\'' +
+				", zipCode='" + zipCode + '\'' +
+				'}';
+	}
 }

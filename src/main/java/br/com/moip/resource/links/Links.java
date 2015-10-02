@@ -19,4 +19,12 @@ public class Links {
     public void setPayBoleto(PayBoleto payBoleto) {
         this.payBoleto = payBoleto;
     }
+
+    @Override
+    public String toString() {
+        return "Links{" +
+                "order=" + order +
+                ", payBoleto=" + payBoleto +
+                '}';
+    }
 }

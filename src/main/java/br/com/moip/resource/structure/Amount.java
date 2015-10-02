@@ -77,4 +77,18 @@ public class Amount {
 	public void setSubtotals(Subtotals subtotals) {
 		this.subtotals = subtotals;
 	}
+
+	@Override
+	public String toString() {
+		return "Amount{" +
+				"fixed=" + fixed +
+				", total=" + total +
+				", fees=" + fees +
+				", refunds=" + refunds +
+				", liquid=" + liquid +
+				", otherReceivers=" + otherReceivers +
+				", currency='" + currency + '\'' +
+				", subtotals=" + subtotals +
+				'}';
+	}
 }

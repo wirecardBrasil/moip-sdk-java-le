@@ -4,7 +4,7 @@ public class Errors {
     private String path;
     private String description;
 
-    public Errors(String path, String description){
+    public Errors(String path, String description) {
         this.path = path;
         this.description = description;
     }
@@ -23,5 +23,13 @@ public class Errors {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    @Override
+    public String toString() {
+        return "Errors{" +
+                "path='" + path + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
