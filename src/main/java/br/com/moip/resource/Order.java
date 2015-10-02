@@ -274,6 +274,34 @@ public class Order extends MoipResource {
         return getErrors() != null;
     }
 
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public List<Refund> getRefunds() {
+        return refunds;
+    }
+
+    public List<Entry> getEntries() {
+        return entries;
+    }
+
+    public List<Event> getEvents() {
+        return events;
+    }
+
+    public List<Receiver> getReceivers() {
+        return receivers;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
