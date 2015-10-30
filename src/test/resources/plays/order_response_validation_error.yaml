@@ -1,8 +1,0 @@
-!play
-name: Create Order Play
-interactions:
-- response:
-    status: 400
-    headers:
-    body: |
-     {"errors":[{"path":"items[0].quantity","description":"deve estar entre 1 e 9999"}]}
