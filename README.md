@@ -47,7 +47,7 @@ Order createdOrder = api.order().create(new Order()
     .addItem("Nome do produto", 1, "Mais info...", 1000)
     .setShippingAmount(100)
     .setCustomer(
-        moip.customers()
+        new Customer()
             .setOwnId("java_sdk_customer_1")
             .setFullname("Jose da Silva")
             .setEmail("sandbox_v2_1401147277@email.com")
