@@ -1,5 +1,6 @@
 package br.com.moip;
 
+import br.com.moip.api.InvoiceAPI;
 import br.com.moip.api.OrderAPI;
 
 public class API {
@@ -13,5 +14,10 @@ public class API {
     public OrderAPI order() {
         return new OrderAPI(client);
     }
+
+    public InvoiceAPI invoice() {
+        return new InvoiceAPI(client);
+    }
+
 
 }

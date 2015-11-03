@@ -38,7 +38,7 @@ public class CheckoutPreferences {
 
     public CheckoutPreferences addInstallment(final Installment installment) {
         if (installments == null)
-            installments = new ArrayList<>();
+            installments = new ArrayList<Installment>();
 
         installments.add(installment);
         return this;
@@ -46,7 +46,7 @@ public class CheckoutPreferences {
 
     public CheckoutPreferences addInstallment(final int[] quantity) {
         if (installments == null)
-            installments = new ArrayList<>();
+            installments = new ArrayList<Installment>();
 
         installments.add(new Installment().setQuantity(quantity));
         return this;
