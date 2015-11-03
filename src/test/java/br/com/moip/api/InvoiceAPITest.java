@@ -28,22 +28,23 @@ public class InvoiceAPITest {
     @Play("invoices/create")
     @Test
     public void testCreate() {
+
         Invoice invoiceCreated = api.create(
                 new Invoice()
-                .setInvoiceAmount(12610).setDescription("teste")
-                .setCustomer(
-                        new Customer()
-                                .setEmail("vagner.vieira@moip.com.br"))
-                .setCheckoutPreferences(
-                        new CheckoutPreferences()
-                                .setFundingInstruments(
-                                        new FundingInstrument()
-                                                .setSupressBoleto(true))
-                                .addInstallment(
-                                        new int[]{1, 2})
-                                .addInstallment(
-                                        new int[]{6, 9}).
-                                setSupressShippingAddress(true)));
+                        .setInvoiceAmount(12610).setDescription("teste")
+                        .setCustomer(
+                                new Customer()
+                                        .setEmail("vagner.vieira@moip.com.br"))
+                        .setCheckoutPreferences(
+                                new CheckoutPreferences()
+                                        .setFundingInstruments(
+                                                new FundingInstrument()
+                                                        .setSupressBoleto(true))
+                                        .addInstallment(
+                                                new int[]{1, 2})
+                                        .addInstallment(
+                                                new int[]{6, 9}).
+                                        setSupressShippingAddress(true)));
 
         assertEquals("INV-7761BDB06412", invoiceCreated.getId());
     }
