@@ -5,6 +5,7 @@ interactions:
     uri: /v2/orders
     headers:
       "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
     method: POST
   response:
     status: 200
