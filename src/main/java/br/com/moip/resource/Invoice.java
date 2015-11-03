@@ -3,14 +3,14 @@ package br.com.moip.resource;
 import java.util.Date;
 
 public class Invoice {
-    private String id;
+    private String id, description;
     private int invoiceAmount;
     private Date createdAt, updatedAt;
 
     private Customer customer;
     private CheckoutPreferences checkoutPreferences;
     private InvoiceStatus status;
-
+    
     public String getId() {
         return id;
     }
@@ -74,10 +74,20 @@ public class Invoice {
         return this;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public Invoice setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Invoice{" +
                 "id='" + id + '\'' +
+                ", description='" + description + '\'' +
                 ", invoiceAmount=" + invoiceAmount +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +

@@ -5,8 +5,9 @@ import br.com.moip.exception.MoipException;
 import br.com.moip.exception.UnexpectecException;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.resource.Errors;
-import br.com.moip.util.GsonFactory;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.internal.bind.DateTypeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,10 +18,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 public class Client {
 
@@ -48,7 +46,7 @@ public class Client {
     public Client(final String endpoint, final Authentication authentication) {
         this.endpoint = endpoint;
         this.authentication = authentication;
-        this.gson = GsonFactory.gson();
+        this.gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type) {
@@ -128,5 +126,4 @@ public class Client {
 
         return body;
     }
-
 }

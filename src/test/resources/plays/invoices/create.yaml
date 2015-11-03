@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/invoices
+    headers:
+      "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: POST
+  response:
+    status: 200
+    headers:
+      "Content-Type": application/json
+    body: |
+      { "id": "INV-7761BDB06412", "invoiceAmount": 12610, "customer": { "email": "vagner.vieira@moip.com.br" }, "checkoutPreferences": { "fundingInstruments": { "suppressBoleto": true }, "installments": [ { "quantity": [ 1, 2 ] }, { "quantity": [ 6, 9 ] } ], "suppressShippingAddress": true }, "status": "SENT", "createdAt": "2015-11-03T13:05:00.962Z", "updatedAt": "2015-11-03T13:05:00.962Z", "_links": { "self": { "href": "/invoice/INV-7761BDB06412" }, "checkout": "/invoice/INV-7761BDB06412" } }
