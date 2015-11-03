@@ -1,5 +1,6 @@
 package br.com.moip.resource;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CheckoutPreferences {
@@ -8,37 +9,47 @@ public class CheckoutPreferences {
     private List<Installment> installments;
     private boolean supressShippingAddress;
 
-    public CheckoutPreferences() {
-    }
-
-    public CheckoutPreferences(FundingInstrument fundingInstruments, List<Installment> installments, boolean supressShippingAddress) {
-        this.fundingInstruments = fundingInstruments;
-        this.installments = installments;
-        this.supressShippingAddress = supressShippingAddress;
-    }
-
     public FundingInstrument getFundingInstruments() {
         return fundingInstruments;
     }
 
-    public void setFundingInstruments(FundingInstrument fundingInstruments) {
+    public CheckoutPreferences setFundingInstruments(FundingInstrument fundingInstruments) {
         this.fundingInstruments = fundingInstruments;
+        return this;
     }
 
     public List<Installment> getInstallments() {
         return installments;
     }
 
-    public void setInstallments(List<Installment> installments) {
+    public CheckoutPreferences setInstallments(List<Installment> installments) {
         this.installments = installments;
+        return this;
     }
 
     public boolean isSupressShippingAddress() {
         return supressShippingAddress;
     }
 
-    public void setSupressShippingAddress(boolean supressShippingAddress) {
+    public CheckoutPreferences setSupressShippingAddress(boolean supressShippingAddress) {
         this.supressShippingAddress = supressShippingAddress;
+        return this;
+    }
+
+    public CheckoutPreferences addInstallment(final Installment installment) {
+        if (installments == null)
+            installments = new ArrayList<>();
+
+        installments.add(installment);
+        return this;
+    }
+
+    public CheckoutPreferences addInstallment(final int[] quantity) {
+        if (installments == null)
+            installments = new ArrayList<>();
+
+        installments.add(new Installment().setQuantity(quantity));
+        return this;
     }
 
     @Override

@@ -4,28 +4,22 @@ public class FundingInstrument {
     private boolean supressCreditCard;
     private boolean supressBoleto;
 
-    public FundingInstrument() {
-    }
-
-    public FundingInstrument(boolean supressCreditCard, boolean supressBoleto) {
-        this.supressCreditCard = supressCreditCard;
-        this.supressBoleto = supressBoleto;
-    }
-
     public boolean isSupressCreditCard() {
         return supressCreditCard;
     }
 
-    public void setSupressCreditCard(boolean supressCreditCard) {
+    public FundingInstrument setSupressCreditCard(boolean supressCreditCard) {
         this.supressCreditCard = supressCreditCard;
+        return this;
     }
 
     public boolean isSupressBoleto() {
         return supressBoleto;
     }
 
-    public void setSupressBoleto(boolean supressBoleto) {
+    public FundingInstrument setSupressBoleto(boolean supressBoleto) {
         this.supressBoleto = supressBoleto;
+        return this;
     }
 
     @Override

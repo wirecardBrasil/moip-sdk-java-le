@@ -1,24 +1,19 @@
 package br.com.moip.resource;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class Installment {
 
     private int[] quantity;
 
-    public Installment() {
-    }
-
-    public Installment(int[] quantity) {
-        this.quantity = quantity;
-    }
-
     public int[] getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int[] quantity) {
+    public Installment setQuantity(int[] quantity) {
         this.quantity = quantity;
+        return this;
     }
 
     @Override

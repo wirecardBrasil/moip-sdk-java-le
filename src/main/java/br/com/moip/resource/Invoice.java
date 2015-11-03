@@ -11,73 +11,67 @@ public class Invoice {
     private CheckoutPreferences checkoutPreferences;
     private InvoiceStatus status;
 
-    public Invoice() {
-    }
-
-    public Invoice(String id, int invoiceAmount, Date createdAt, Date updatedAt, Customer customer, CheckoutPreferences checkoutPreferences, InvoiceStatus status) {
-        this.id = id;
-        this.invoiceAmount = invoiceAmount;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.customer = customer;
-        this.checkoutPreferences = checkoutPreferences;
-        this.status = status;
-    }
-
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public Invoice setId(String id) {
         this.id = id;
+        return this;
     }
 
     public int getInvoiceAmount() {
         return invoiceAmount;
     }
 
-    public void setInvoiceAmount(int invoiceAmount) {
+    public Invoice setInvoiceAmount(int invoiceAmount) {
         this.invoiceAmount = invoiceAmount;
+        return this;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public Invoice setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
+        return this;
     }
 
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public Invoice setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+        return this;
     }
 
     public Customer getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public Invoice setCustomer(Customer customer) {
         this.customer = customer;
+        return this;
     }
 
     public CheckoutPreferences getCheckoutPreferences() {
         return checkoutPreferences;
     }
 
-    public void setCheckoutPreferences(CheckoutPreferences checkoutPreferences) {
+    public Invoice setCheckoutPreferences(CheckoutPreferences checkoutPreferences) {
         this.checkoutPreferences = checkoutPreferences;
+        return this;
     }
 
     public InvoiceStatus getStatus() {
         return status;
     }
 
-    public void setStatus(InvoiceStatus status) {
+    public Invoice setStatus(InvoiceStatus status) {
         this.status = status;
+        return this;
     }
 
     @Override
