@@ -14,25 +14,35 @@ Adicionar no seu pom.xml:
 <dependency>
     <groupId>br.com.moip</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>1.2.4</version>
+    <version>2.0.0</version>
 </dependency>
 ```
 
 ## Configurando sua autenticação
 
+- Autenticando por BasicAuth
 ```java
-String token = "0ERVDN386WE3RZRI4YYG6QCDLMJ57LBR";
-String key = "SRZGHRXYOT0PVDLRB3YE8XQWLNLA0JRXTKOIDVDQ";
-Authentication basicAuth = new BasicAuth(token, key);
+Authentication auth = new BasicAuth("TOKEN", "SECRET");
+```
+- Autenticando por OAuth
+```java
+Authentication auth = new OAuth("TOKEN_OAUTH");
+```
 
-moip = new Moip(basicAuth, Moip.SANDBOX_ENDPOINT); // Sandbox
-moip = new Moip(basicAuth); // Production
+Após deifinir o tipo de autenticação, é necessário gerar o client, informando em qual environment você quer executar suas ações:
+```java
+Client client = new Client(Client.SANDBOX, auth);
+```
+
+Agora você pode instanciar a Api:
+```java
+API api = new API(client);
 ```
 
 ## Criando um Pedido
 
 ```java
-Order createdOrder = moip.orders()
+Order createdOrder = api.order().create(new Order()
     .setOwnId("java_sdk_1")
     .addItem("Nome do produto", 1, "Mais info...", 1000)
     .setShippingAmount(100)
@@ -55,7 +65,7 @@ Order createdOrder = moip.orders()
                     .setZipCode("01234000")
             )
     )
-    .create();
+);
 ```
 
 ## Criando um pagamento
