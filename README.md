@@ -42,7 +42,7 @@ API api = new API(client);
 ## Criando um Pedido
 
 ```java
-Order createdOrder = api.create(new Order()
+Order createdOrder = api.order().create(new Order()
     .setOwnId("order_own_id")
     .addItem("Nome do produto", 1, "Mais info...", 100)
     .setCustomer(new Customer()
