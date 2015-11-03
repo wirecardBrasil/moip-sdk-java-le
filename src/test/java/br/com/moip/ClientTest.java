@@ -1,5 +1,7 @@
 package br.com.moip;
 
+import br.com.moip.authentication.Authentication;
+import br.com.moip.authentication.BasicAuth;
 import br.com.moip.exception.UnexpectecException;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.resource.Order;
@@ -21,7 +23,8 @@ public class ClientTest {
 
     @Before
     public void setup() {
-        this.client = new Client(player.getURL("").toString(), null);
+        Authentication basicAuth = new BasicAuth("01010101010101010101010101010101", "ABABABABABABABABABABABABABABABABABABABAB");
+        this.client = new Client(player.getURL("").toString(), basicAuth);
     }
 
     @Play("client/post")
