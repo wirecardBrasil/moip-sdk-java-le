@@ -10,7 +10,7 @@ public class Invoice {
     private Customer customer;
     private CheckoutPreferences checkoutPreferences;
     private InvoiceStatus status;
-    
+
     public String getId() {
         return id;
     }

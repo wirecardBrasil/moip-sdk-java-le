@@ -5,12 +5,13 @@ import br.com.moip.exception.MoipException;
 import br.com.moip.exception.UnexpectecException;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.resource.Errors;
+import br.com.moip.ssl.SSLSupport;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.internal.bind.DateTypeAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -18,7 +19,12 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.*;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 public class Client {
 
@@ -57,6 +63,12 @@ public class Client {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("User-Agent", USER_AGENT);
             conn.setRequestProperty("Content-type", "application/json");
+
+            // Disable TLS 1.0
+            // TODO find a way to create a Test for this
+            if (conn instanceof HttpsURLConnection) {
+                ((HttpsURLConnection) conn).setSSLSocketFactory(new SSLSupport());
+            }
 
             if (authentication != null) {
                 authentication.authenticate(conn);
@@ -102,6 +114,10 @@ public class Client {
 
             return gson.fromJson(responseBody.toString(), type);
         } catch (java.io.IOException e) {
+            throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
+        } catch (NoSuchAlgorithmException e) {
+            throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
+        } catch (KeyManagementException e) {
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
         }
     }

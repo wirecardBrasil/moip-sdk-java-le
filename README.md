@@ -43,27 +43,12 @@ API api = new API(client);
 
 ```java
 Order createdOrder = api.order().create(new Order()
-    .setOwnId("java_sdk_1")
-    .addItem("Nome do produto", 1, "Mais info...", 1000)
-    .setShippingAmount(100)
-    .setCustomer(
-        new Customer()
-            .setOwnId("java_sdk_customer_1")
-            .setFullname("Jose da Silva")
-            .setEmail("sandbox_v2_1401147277@email.com")
-            .setBirthDate("1988-12-30")
-            .setTaxDocument("33333333333")
-            .setPhone("11", "66778899", "55")
-            .setShippingAddress(
-                new Address()
-                    .setStreet("Avenida Faria Lima")
-                    .setStreetNumber("2927")
-                    .setComplement("8")
-                    .setDistrict("Itaim")
-                    .setCity("São Paulo")
-                    .setState("SP")
-                    .setZipCode("01234000")
-            )
+    .setOwnId("order_own_id")
+    .addItem("Nome do produto", 1, "Mais info...", 100)
+    .setCustomer(new Customer()
+                    .setOwnId("customer_own_id")
+                    .setFullname("Jose da Silva")
+                    .setEmail("sandbox_v2_1401147277@email.com")
     )
 );
 ```
