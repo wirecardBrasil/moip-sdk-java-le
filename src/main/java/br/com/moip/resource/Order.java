@@ -9,6 +9,7 @@ public class Order {
     private final List<Item> items = new ArrayList<Item>();
     private Customer customer;
     private String id;
+    private Amount amount;
 
     public String getOwnId() {
         return ownId;

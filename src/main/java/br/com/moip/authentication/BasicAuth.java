@@ -11,6 +11,14 @@ public class BasicAuth implements Authentication {
 		this.key = key;
 	}
 
+	public String getToken() {
+		return token;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
 	public void authenticate(HttpURLConnection connection) {
 		String authorization = Base64.encode((token + ":" + key).getBytes());
 

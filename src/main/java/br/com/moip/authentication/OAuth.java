@@ -9,6 +9,10 @@ public class OAuth implements Authentication {
 		this.accessToken = accessToken;
 	}
 
+	public String getAccessToken() {
+		return accessToken;
+	}
+
 	public void authenticate(HttpURLConnection connection) {
 		connection.addRequestProperty("Authorization", "OAuth " + accessToken);
 	}
