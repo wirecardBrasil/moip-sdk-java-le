@@ -45,8 +45,8 @@ public class Order {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Amount getAmount() {
+        return amount;
     }
 
     public static final class Item {
