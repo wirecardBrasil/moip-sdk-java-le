@@ -6,8 +6,8 @@ import br.com.moip.exception.UnexpectecException;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.resource.Errors;
 import br.com.moip.ssl.SSLSupport;
+import br.com.moip.util.GsonFactory;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,7 +52,7 @@ public class Client {
     public Client(final String endpoint, final Authentication authentication) {
         this.endpoint = endpoint;
         this.authentication = authentication;
-        this.gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
+        this.gson = GsonFactory.gson();
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type) {

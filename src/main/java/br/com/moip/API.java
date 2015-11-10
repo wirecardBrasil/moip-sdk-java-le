@@ -19,5 +19,4 @@ public class API {
         return new InvoiceAPI(client);
     }
 
-
 }

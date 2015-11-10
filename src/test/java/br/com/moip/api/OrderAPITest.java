@@ -1,7 +1,5 @@
 package br.com.moip.api;
 
-import br.com.moip.Client;
-import br.com.moip.authentication.BasicAuth;
 import br.com.moip.resource.Customer;
 import br.com.moip.resource.Order;
 import com.rodrigosaito.mockwebserver.player.Play;
@@ -21,8 +19,10 @@ public class OrderAPITest {
 
     @Before
     public void setup() {
-        api = new OrderAPI(new Client(player.getURL("").toString(), new BasicAuth("01010101010101010101010101010101", "ABABABABABABABABABABABABABABABABABABABAB")));
-//        api = new OrderAPI(new Client(Client.SANDBOX, new BasicAuth("01010101010101010101010101010101", "ABABABABABABABABABABABABABABABABABABABAB")));
+        ClientFactory clientFactory = new ClientFactory();
+
+        api = new OrderAPI(clientFactory.client(player.getURL("").toString()));
+//        api = new OrderAPI(clientFactory.client(Client.SANDBOX));
     }
 
     @Play("orders/create")
