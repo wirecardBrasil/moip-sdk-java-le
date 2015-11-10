@@ -39,6 +39,7 @@ public class PaymentAPITest {
         Payment createdPayment = api.create(
                 "ORD-HPMZSOM611M2",
                 new Payment()
+                        .setInstallmentCount(1)
                         .setFundingInstrument(
                                 new FundingInstrument()
                                         .setCreditCard(
