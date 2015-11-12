@@ -13,6 +13,12 @@ import java.util.List;
 
 // http://stackoverflow.com/questions/1037590/which-cipher-suites-to-enable-for-ssl-socket/23365536#23365536
 public class SSLSupport extends SSLSocketFactory {
+
+    private SSLContext m_ctx;
+
+    private String[] m_ciphers;
+    private String[] m_protocols;
+
     public SSLSupport() throws NoSuchAlgorithmException, KeyManagementException, IOException {
         initSSLSocketFactoryEx(null,null,null);
     }
@@ -105,19 +111,19 @@ public class SSLSupport extends SSLSocketFactory {
         m_ctx = SSLContext.getInstance("TLS");
         m_ctx.init(km, tm, random);
 
-        m_protocols = GetProtocolList();
-        m_ciphers = GetCipherList();
+        m_protocols = getProtocolList();
+        m_ciphers = getCipherList();
     }
 
     private void initSSLSocketFactoryEx(SSLContext ctx)
             throws NoSuchAlgorithmException, KeyManagementException, IOException {
         m_ctx = ctx;
 
-        m_protocols = GetProtocolList();
-        m_ciphers = GetCipherList();
+        m_protocols = getProtocolList();
+        m_ciphers = getCipherList();
     }
 
-    protected String[] GetProtocolList() throws IOException {
+    protected String[] getProtocolList() throws IOException {
         String[] preferredProtocols = { "TLSv1", "TLSv1.1", "TLSv1.2", "TLSv1.3" };
         String[] availableProtocols = null;
 
@@ -152,7 +158,7 @@ public class SSLSupport extends SSLSocketFactory {
         return aa.toArray(new String[0]);
     }
 
-    protected String[] GetCipherList()
+    protected String[] getCipherList()
     {
         String[] preferredCiphers = {
 
@@ -240,9 +246,4 @@ public class SSLSupport extends SSLSocketFactory {
 
         return aa.toArray(new String[0]);
     }
-
-    private SSLContext m_ctx;
-
-    private String[] m_ciphers;
-    private String[] m_protocols;
 }

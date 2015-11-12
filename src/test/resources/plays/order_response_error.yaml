@@ -1,8 +1,0 @@
-!play
-name: Create Order Play
-interactions:
-- response:
-    status: 500
-    headers:
-    body: |
-     { "ERROR" : "Ops... We were not waiting for it" }

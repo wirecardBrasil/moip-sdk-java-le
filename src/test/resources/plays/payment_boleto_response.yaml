@@ -1,8 +1,0 @@
-!play
-name: PaymentResponse
-interactions:
-- response:
-    status: 200
-    headers:
-    body: |
-         {"id":"PAY-1I98L665B5U8","status":"WAITING","amount":{"fees":53,"refunds":0,"liquid":447,"currency":"BRL","total":500},"installmentCount":1,"fundingInstrument":{"boleto":{"lineCode":"23793.39126 60000.037188 38001.747906 1 65670000000500","expirationDate":"2015-09-30"},"method":"BOLETO"},"fees":[{"type":"TRANSACTION","amount":53}],"events":[{"createdAt":"2015-04-17T17:31:52-0300","type":"PAYMENT.CREATED"}],"_links":{"order":{"title":"ORD-FWR7V5ZC0414","href":"https://test.moip.com.br/v2/orders/ORD-FWR7V5ZC0414"},"payBoleto":{"redirectHref":"https://checkout-sandbox.moip.com.br/boleto/PAY-1I98L665B5U8"},"self":{"href":"https://test.moip.com.br/v2/payments/PAY-1I98L665B5U8"}},"createdAt":"2015-04-17T17:31:52-0300","updatedAt":"2015-04-17T17:31:52-0300"}
