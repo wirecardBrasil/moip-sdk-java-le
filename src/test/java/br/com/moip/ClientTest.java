@@ -22,7 +22,7 @@ public class ClientTest {
     private Client client;
 
     @Before
-    public void setup() {
+    public void setUp() {
         Authentication basicAuth = new BasicAuth("01010101010101010101010101010101", "ABABABABABABABABABABABABABABABABABABABAB");
         this.client = new Client(player.getURL("").toString(), basicAuth);
     }

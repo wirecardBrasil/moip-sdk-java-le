@@ -18,7 +18,7 @@ public class OrderAPITest {
     private OrderAPI api;
 
     @Before
-    public void setup() {
+    public void setUp() {
         ClientFactory clientFactory = new ClientFactory();
 
         api = new OrderAPI(clientFactory.client(player.getURL("").toString()));

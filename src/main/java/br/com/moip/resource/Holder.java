@@ -7,18 +7,12 @@ public class Holder {
     private Phone phone;
     private TaxDocument taxDocument;
 
-    public Holder setFullname(final String fullname) {
-        this.fullname = fullname;
-
-        return this;
-    }
-
     public String getFullname() {
         return fullname;
     }
 
-    public Holder setBirthdate(final String birthdate) {
-        this.birthdate = birthdate;
+    public Holder setFullname(final String fullname) {
+        this.fullname = fullname;
 
         return this;
     }
@@ -27,19 +21,29 @@ public class Holder {
         return birthdate;
     }
 
+    public Holder setBirthdate(final String birthdate) {
+        this.birthdate = birthdate;
+
+        return this;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
     public Holder setPhone(final Phone phone) {
         this.phone = phone;
 
         return this;
     }
 
+    public TaxDocument getTaxDocument() {
+        return taxDocument;
+    }
+
     public Holder setTaxDocument(final TaxDocument taxDocument) {
         this.taxDocument = taxDocument;
 
         return this;
-    }
-
-    public TaxDocument getTaxDocument() {
-        return taxDocument;
     }
 }

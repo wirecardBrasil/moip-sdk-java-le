@@ -113,7 +113,7 @@ public class Client {
             LOGGER.debug("<-- END HTTP ({}-byte body)", conn.getContentLength());
 
             return gson.fromJson(responseBody.toString(), type);
-        } catch (java.io.IOException e) {
+        } catch (IOException e) {
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
         } catch (NoSuchAlgorithmException e) {
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);

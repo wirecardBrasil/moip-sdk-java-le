@@ -2,14 +2,15 @@ package br.com.moip.api;
 
 import br.com.moip.Client;
 import br.com.moip.authentication.BasicAuth;
-import br.com.moip.resource.*;
+import br.com.moip.resource.CheckoutPreferences;
+import br.com.moip.resource.Customer;
+import br.com.moip.resource.FundingInstrument;
+import br.com.moip.resource.Invoice;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -21,7 +22,7 @@ public class InvoiceAPITest {
     private InvoiceAPI api;
 
     @Before
-    public void setup() {
+    public void setUp() {
         api = new InvoiceAPI(new Client(player.getURL("").toString(), new BasicAuth("01010101010101010101010101010101", "ABABABABABABABABABABABABABABABABABABABAB")));
     }
 

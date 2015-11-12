@@ -27,7 +27,7 @@ public class PaymentAPITest {
     public Player player = new Player();
 
     @Before
-    public void setup() {
+    public void setUp() {
         Client client = clientFactory.client(player.getURL("").toString());
 
         api = new PaymentAPI(client);

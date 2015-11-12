@@ -24,6 +24,10 @@ public class FundingInstrument {
         return this;
     }
 
+    public Method getMethod() {
+        return method;
+    }
+
     public CreditCard getCreditCard() {
         return creditCard;
     }
