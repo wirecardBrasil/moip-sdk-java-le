@@ -12,6 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 public class ClientTest {
@@ -30,7 +31,8 @@ public class ClientTest {
     @Play("client/post")
     @Test
     public void testPostWhen200() {
-        client.post("/200", new Order(), Order.class);
+        Order order = client.post("/200", new Order(), Order.class);
+        assertNotNull(order);
     }
 
     @Play("client/post")
