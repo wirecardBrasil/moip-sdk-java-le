@@ -49,6 +49,18 @@ public class Order {
         return amount;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Order{");
+        sb.append("ownId='").append(ownId).append('\'');
+        sb.append(", id='").append(id).append('\'');
+        sb.append(", amount=").append(amount);
+        sb.append(", customer=").append(customer);
+        sb.append(", items=").append(items);
+        sb.append('}');
+        return sb.toString();
+    }
+
     public static final class Item {
         private final String product;
         private final Integer quantity;
@@ -76,6 +88,17 @@ public class Order {
 
         public Integer getPrice() {
             return price;
+        }
+
+        @Override
+        public String toString() {
+            final StringBuilder sb = new StringBuilder("Item{");
+            sb.append("product='").append(product).append('\'');
+            sb.append(", quantity=").append(quantity);
+            sb.append(", detail='").append(detail).append('\'');
+            sb.append(", price=").append(price);
+            sb.append('}');
+            return sb.toString();
         }
     }
 }

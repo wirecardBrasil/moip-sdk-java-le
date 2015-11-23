@@ -7,4 +7,12 @@ public class Amount {
     public Integer getTotal() {
         return total;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Amount{");
+        sb.append("total=").append(total);
+        sb.append('}');
+        return sb.toString();
+    }
 }
