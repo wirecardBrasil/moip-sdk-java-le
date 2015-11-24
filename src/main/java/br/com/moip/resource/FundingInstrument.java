@@ -10,18 +10,8 @@ public class FundingInstrument {
         return supressCreditCard;
     }
 
-    public FundingInstrument setSupressCreditCard(boolean supressCreditCard) {
-        this.supressCreditCard = supressCreditCard;
-        return this;
-    }
-
     public boolean isSupressBoleto() {
         return supressBoleto;
-    }
-
-    public FundingInstrument setSupressBoleto(boolean supressBoleto) {
-        this.supressBoleto = supressBoleto;
-        return this;
     }
 
     public Method getMethod() {
@@ -32,19 +22,15 @@ public class FundingInstrument {
         return creditCard;
     }
 
-    public FundingInstrument setCreditCard(final CreditCard creditCard) {
-        this.creditCard = creditCard;
-        this.method = Method.CREDIT_CARD;
-
-        return this;
-    }
-
     @Override
     public String toString() {
-        return "FundingInstrument{" +
-                "supressCreditCard=" + supressCreditCard +
-                ", supressBoleto=" + supressBoleto +
-                '}';
+        final StringBuilder sb = new StringBuilder("FundingInstrument{");
+        sb.append("supressCreditCard=").append(supressCreditCard);
+        sb.append(", supressBoleto=").append(supressBoleto);
+        sb.append(", method=").append(method);
+        sb.append(", creditCard=").append(creditCard);
+        sb.append('}');
+        return sb.toString();
     }
 
     private enum Method {

@@ -10,11 +10,6 @@ public class Installment {
         return quantity;
     }
 
-    public Installment setQuantity(int[] quantity) {
-        this.quantity = quantity;
-        return this;
-    }
-
     @Override
     public String toString() {
         return "Installment{" +

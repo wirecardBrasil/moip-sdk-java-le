@@ -1,6 +1,6 @@
-package br.com.moip.resource;
+package br.com.moip.request;
 
-public class CaptureMethod {
+public class CaptureMethodRequest {
 
     private Type type;
     private String voucher;
@@ -10,12 +10,30 @@ public class CaptureMethod {
         return type;
     }
 
+    public CaptureMethodRequest mpos() {
+        this.type = Type.MPOS;
+
+        return this;
+    }
+
     public String getVoucher() {
         return voucher;
     }
 
+    public CaptureMethodRequest voucher(final String voucher) {
+        this.voucher = voucher;
+
+        return this;
+    }
+
     public String getStoneId() {
         return stoneId;
+    }
+
+    public CaptureMethodRequest stoneId(final String stoneId) {
+        this.stoneId = stoneId;
+
+        return this;
     }
 
     private enum Type {
@@ -24,7 +42,7 @@ public class CaptureMethod {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CaptureMethod{");
+        final StringBuilder sb = new StringBuilder("CaptureMethodRequest{");
         sb.append("type=").append(type);
         sb.append(", voucher='").append(voucher).append('\'');
         sb.append(", stoneId='").append(stoneId).append('\'');

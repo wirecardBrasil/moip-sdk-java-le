@@ -1,12 +1,13 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
-import br.com.moip.resource.CreditCard;
-import br.com.moip.resource.FundingInstrument;
-import br.com.moip.resource.Holder;
+import br.com.moip.request.CreditCardRequest;
+import br.com.moip.request.FundingInstrumentRequest;
+import br.com.moip.request.HolderRequest;
+import br.com.moip.request.PaymentRequest;
+import br.com.moip.request.PhoneRequest;
+import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.resource.Payment;
-import br.com.moip.resource.Phone;
-import br.com.moip.resource.TaxDocument;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
@@ -37,24 +38,24 @@ public class PaymentAPITest {
     @Test
     public void testCreateCreditCard() {
         Payment createdPayment = api.create(
-                "ORD-HPMZSOM611M2",
-                new Payment()
-                        .setInstallmentCount(1)
-                        .setFundingInstrument(
-                                new FundingInstrument()
-                                        .setCreditCard(
-                                                new CreditCard()
-                                                        .setHash(CC_HASH)
-                                                        .setHolder(
-                                                                new Holder()
-                                                                        .setFullname("Jose Portador da Silva")
-                                                                        .setBirthdate("1988-10-10")
+                new PaymentRequest()
+                        .orderId("ORD-HPMZSOM611M2")
+                        .installmentCount(1)
+                        .fundingInstrument(
+                                new FundingInstrumentRequest()
+                                        .creditCard(
+                                                new CreditCardRequest()
+                                                        .hash(CC_HASH)
+                                                        .holder(
+                                                                new HolderRequest()
+                                                                        .fullname("Jose Portador da Silva")
+                                                                        .birthdate("1988-10-10")
                                                                         .setPhone(
-                                                                                new Phone()
+                                                                                new PhoneRequest()
                                                                                         .setAreaCode("11")
                                                                                         .setNumber("55667788")
                                                                         )
-                                                                        .setTaxDocument(TaxDocument.cpf("22222222222"))
+                                                                        .setTaxDocument(TaxDocumentRequest.cpf("22222222222"))
                                                         )
                                         )
                         )
