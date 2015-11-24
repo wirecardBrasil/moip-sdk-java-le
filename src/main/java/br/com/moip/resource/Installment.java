@@ -16,4 +16,9 @@ public class Installment {
                 "quantity=" + Arrays.toString(quantity) +
                 '}';
     }
+
+    public Installment setQuantity(int[] quantity) {
+        this.quantity = quantity;
+        return this;
+    }
 }
