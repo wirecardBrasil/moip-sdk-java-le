@@ -14,6 +14,12 @@ public class FundingInstrument {
         return supressBoleto;
     }
 
+    public FundingInstrument setSupressBoleto(final boolean supressBoleto) {
+        this.supressBoleto = supressBoleto;
+
+        return this;
+    }
+
     public Method getMethod() {
         return method;
     }

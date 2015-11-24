@@ -18,6 +18,12 @@ public class Customer {
         return email;
     }
 
+    public Customer setEmail(final String email) {
+        this.email = email;
+
+        return this;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Customer{");

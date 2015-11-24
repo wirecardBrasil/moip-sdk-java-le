@@ -50,12 +50,12 @@ public class PaymentAPITest {
                                                                 new HolderRequest()
                                                                         .fullname("Jose Portador da Silva")
                                                                         .birthdate("1988-10-10")
-                                                                        .setPhone(
+                                                                        .phone(
                                                                                 new PhoneRequest()
                                                                                         .setAreaCode("11")
                                                                                         .setNumber("55667788")
                                                                         )
-                                                                        .setTaxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
                                                         )
                                         )
                         )
