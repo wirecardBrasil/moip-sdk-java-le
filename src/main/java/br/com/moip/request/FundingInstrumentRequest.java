@@ -4,6 +4,8 @@ public class FundingInstrumentRequest {
 
     private Method method;
     private CreditCardRequest creditCard;
+    private boolean supressBoleto;
+    private boolean supressCreditCard;
 
     public Method getMethod() {
         return method;
@@ -12,6 +14,26 @@ public class FundingInstrumentRequest {
     public FundingInstrumentRequest creditCard(final CreditCardRequest creditCard) {
         this.creditCard = creditCard;
         this.method = Method.CREDIT_CARD;
+
+        return this;
+    }
+
+    public boolean isSupressBoleto() {
+        return supressBoleto;
+    }
+
+    public FundingInstrumentRequest supressBoleto(final boolean supressBoleto) {
+        this.supressBoleto = supressBoleto;
+
+        return this;
+    }
+
+    public boolean isSupressCreditCard() {
+        return supressCreditCard;
+    }
+
+    public FundingInstrumentRequest supressCreditCard(final boolean supressCreditCard) {
+        this.supressCreditCard = supressCreditCard;
 
         return this;
     }

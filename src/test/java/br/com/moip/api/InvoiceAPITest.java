@@ -2,9 +2,10 @@ package br.com.moip.api;
 
 import br.com.moip.Client;
 import br.com.moip.authentication.BasicAuth;
-import br.com.moip.resource.CheckoutPreferences;
-import br.com.moip.resource.Customer;
-import br.com.moip.resource.FundingInstrument;
+import br.com.moip.request.CheckoutPreferencesRequest;
+import br.com.moip.request.CustomerRequest;
+import br.com.moip.request.FundingInstrumentRequest;
+import br.com.moip.request.InvoiceRequest;
 import br.com.moip.resource.Invoice;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
@@ -31,21 +32,22 @@ public class InvoiceAPITest {
     public void testCreate() {
 
         Invoice invoiceCreated = api.create(
-                new Invoice()
-                        .setInvoiceAmount(12610).setDescription("teste")
-                        .setCustomer(
-                                new Customer()
-                                        .setEmail("vagner.vieira@moip.com.br"))
-                        .setCheckoutPreferences(
-                                new CheckoutPreferences()
-                                        .setFundingInstruments(
-                                                new FundingInstrument()
-                                                        .setSupressBoleto(true))
+                new InvoiceRequest()
+                        .invoiceAmount(12610)
+                        .description("teste")
+                        .customer(
+                                new CustomerRequest()
+                                        .email("vagner.vieira@moip.com.br"))
+                        .checkoutPreferences(
+                                new CheckoutPreferencesRequest()
+                                        .fundingInstruments(
+                                                new FundingInstrumentRequest()
+                                                        .supressBoleto(true))
                                         .addInstallment(
                                                 new int[]{1, 2})
                                         .addInstallment(
-                                                new int[]{6, 9}).
-                                        setSupressShippingAddress(true)));
+                                                new int[]{6, 9})
+                                        .supressShippingAddress(true)));
 
         assertEquals("INV-7761BDB06412", invoiceCreated.getId());
     }
