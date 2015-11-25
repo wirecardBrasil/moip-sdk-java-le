@@ -10,15 +10,15 @@ public class Installment {
         return quantity;
     }
 
-    public Installment setQuantity(int[] quantity) {
-        this.quantity = quantity;
-        return this;
-    }
-
     @Override
     public String toString() {
         return "Installment{" +
                 "quantity=" + Arrays.toString(quantity) +
                 '}';
+    }
+
+    public Installment setQuantity(int[] quantity) {
+        this.quantity = quantity;
+        return this;
     }
 }

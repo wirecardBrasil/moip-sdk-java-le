@@ -1,6 +1,7 @@
 package br.com.moip.api;
 
-import br.com.moip.resource.Customer;
+import br.com.moip.request.CustomerRequest;
+import br.com.moip.request.OrderRequest;
 import br.com.moip.resource.Order;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
@@ -28,13 +29,13 @@ public class OrderAPITest {
     @Play("orders/create")
     @Test
     public void testCreate() {
-        Order createdOrder = api.create(new Order()
-                        .setOwnId("order_own_id")
+        Order createdOrder = api.create(new OrderRequest()
+                        .ownId("order_own_id")
                         .addItem("Nome do produto", 1, "Mais info...", 100)
-                        .setCustomer(new Customer()
-                                        .setOwnId("customer_own_id")
-                                        .setFullname("Jose da Silva")
-                                        .setEmail("sandbox_v2_1401147277@email.com")
+                        .customer(new CustomerRequest()
+                                        .ownId("customer_own_id")
+                                        .fullname("Jose da Silva")
+                                        .email("sandbox_v2_1401147277@email.com")
                         )
         );
 

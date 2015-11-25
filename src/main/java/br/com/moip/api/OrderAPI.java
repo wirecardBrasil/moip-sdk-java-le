@@ -1,6 +1,7 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
+import br.com.moip.request.OrderRequest;
 import br.com.moip.resource.Order;
 
 public class OrderAPI {
@@ -11,7 +12,7 @@ public class OrderAPI {
         this.client = client;
     }
 
-    public Order create(final Order order) {
+    public Order create(final OrderRequest order) {
         Order createdOrder = client.post("/v2/orders", order, Order.class);
 
         return createdOrder;

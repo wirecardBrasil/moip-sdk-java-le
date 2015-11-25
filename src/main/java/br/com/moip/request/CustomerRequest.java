@@ -1,6 +1,6 @@
-package br.com.moip.resource;
+package br.com.moip.request;
 
-public class Customer {
+public class CustomerRequest {
 
     private String ownId;
     private String fullname;
@@ -10,15 +10,27 @@ public class Customer {
         return ownId;
     }
 
+    public CustomerRequest ownId(final String ownId) {
+        this.ownId = ownId;
+
+        return this;
+    }
+
     public String getFullname() {
         return fullname;
+    }
+
+    public CustomerRequest fullname(final String fullname) {
+        this.fullname = fullname;
+
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public Customer setEmail(final String email) {
+    public CustomerRequest email(final String email) {
         this.email = email;
 
         return this;
