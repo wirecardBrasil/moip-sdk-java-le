@@ -6,6 +6,9 @@ public class FundingInstrumentRequest {
     private CreditCardRequest creditCard;
     private boolean supressBoleto;
     private boolean supressCreditCard;
+    //Used on MPOS
+    private CardRequest card;
+
 
     public Method getMethod() {
         return method;
@@ -15,6 +18,18 @@ public class FundingInstrumentRequest {
         this.creditCard = creditCard;
         this.method = Method.CREDIT_CARD;
 
+        return this;
+    }
+
+    public FundingInstrumentRequest mposDebitCard(final CardRequest debitCard) {
+        this.card = debitCard;
+        this.method = Method.DEBIT_CARD;
+        return this;
+    }
+
+    public FundingInstrumentRequest mposCreditCard(final CardRequest creditCard) {
+        this.card = creditCard;
+        this.method = Method.CREDIT_CARD;
         return this;
     }
 
@@ -38,8 +53,16 @@ public class FundingInstrumentRequest {
         return this;
     }
 
+    public CardRequest getCard() {
+        return card;
+    }
+
+    public void setCard(CardRequest card) {
+        this.card = card;
+    }
+
     private enum Method {
-        CREDIT_CARD;
+        CREDIT_CARD, DEBIT_CARD;
     }
 
     @Override
