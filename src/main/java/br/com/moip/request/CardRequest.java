@@ -13,7 +13,7 @@ public class CardRequest {
         return holder;
     }
 
-    public void setHolder(HolderRequest holder) {
+    public void holder(HolderRequest holder) {
         this.holder = holder;
     }
 
@@ -21,7 +21,7 @@ public class CardRequest {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void brand(String brand) {
         this.brand = brand;
     }
 
@@ -29,7 +29,7 @@ public class CardRequest {
         return first6;
     }
 
-    public void setFirst6(String first6) {
+    public void first6(String first6) {
         this.first6 = first6;
     }
 
@@ -37,7 +37,7 @@ public class CardRequest {
         return last4;
     }
 
-    public void setLast4(String last4) {
+    public void last4(String last4) {
         this.last4 = last4;
     }
 
@@ -45,7 +45,7 @@ public class CardRequest {
         return captureMethodRequest;
     }
 
-    public void setCaptureMethodRequest(CaptureMethodRequest captureMethodRequest) {
+    public void captureMethodRequest(CaptureMethodRequest captureMethodRequest) {
         this.captureMethodRequest = captureMethodRequest;
     }
 
