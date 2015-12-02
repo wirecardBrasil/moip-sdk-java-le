@@ -6,12 +6,24 @@ public class Error {
     private String path;
     private String description;
 
+    void setCode(String code) {
+        this.code = code;
+    }
+
     public String getCode() {
         return code;
     }
 
+    void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    void setPath(String path) {
+        this.path = path;
     }
 
     public String getPath() {
