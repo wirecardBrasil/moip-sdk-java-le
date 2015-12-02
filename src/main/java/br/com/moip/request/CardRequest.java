@@ -7,7 +7,7 @@ public class CardRequest {
     private String brand;
     private String first6;
     private String last4;
-    private CaptureMethodRequest captureMethodRequest;
+    private CaptureMethodRequest captureMethod;
 
     public HolderRequest getHolder() {
         return holder;
@@ -41,12 +41,12 @@ public class CardRequest {
         this.last4 = last4;
     }
 
-    public CaptureMethodRequest getCaptureMethodRequest() {
-        return captureMethodRequest;
+    public CaptureMethodRequest getCaptureMethod() {
+        return captureMethod;
     }
 
     public void captureMethodRequest(CaptureMethodRequest captureMethodRequest) {
-        this.captureMethodRequest = captureMethodRequest;
+        this.captureMethod = captureMethodRequest;
     }
 
     @Override
@@ -56,7 +56,7 @@ public class CardRequest {
                 ", brand='" + brand + '\'' +
                 ", first6='" + first6 + '\'' +
                 ", last4='" + last4 + '\'' +
-                ", captureMethodRequest=" + captureMethodRequest +
+                ", captureMethod=" + captureMethod +
                 '}';
     }
 }
