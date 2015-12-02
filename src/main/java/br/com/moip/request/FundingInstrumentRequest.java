@@ -57,8 +57,9 @@ public class FundingInstrumentRequest {
         return card;
     }
 
-    public void setCard(CardRequest card) {
+    public FundingInstrumentRequest card(CardRequest card) {
         this.card = card;
+        return this;
     }
 
     private enum Method {

@@ -2,6 +2,7 @@ package br.com.moip;
 
 import br.com.moip.authentication.Authentication;
 import br.com.moip.exception.MoipException;
+import br.com.moip.exception.UnauthorizedException;
 import br.com.moip.exception.UnexpectecException;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.resource.Errors;
@@ -96,7 +97,13 @@ public class Client {
                 responseBody = readBody(conn.getInputStream());
             }
 
+            if(responseCode == 401){
+                throw new UnauthorizedException();
+            }
+
             if (responseCode >= 400 && responseCode < 499) {
+
+
                 responseBody = readBody(conn.getErrorStream());
 
                 Errors errors = gson.fromJson(responseBody.toString(), Errors.class);

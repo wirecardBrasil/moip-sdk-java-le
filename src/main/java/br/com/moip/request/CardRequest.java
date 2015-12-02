@@ -13,40 +13,45 @@ public class CardRequest {
         return holder;
     }
 
-    public void holder(HolderRequest holder) {
+    public CardRequest holder(HolderRequest holder) {
         this.holder = holder;
+        return this;
     }
 
     public String getBrand() {
         return brand;
     }
 
-    public void brand(String brand) {
+    public CardRequest brand(String brand) {
         this.brand = brand;
+        return this;
     }
 
     public String getFirst6() {
         return first6;
     }
 
-    public void first6(String first6) {
+    public CardRequest first6(String first6) {
         this.first6 = first6;
+        return this;
     }
 
     public String getLast4() {
         return last4;
     }
 
-    public void last4(String last4) {
+    public CardRequest last4(String last4) {
         this.last4 = last4;
+        return this;
     }
 
     public CaptureMethodRequest getCaptureMethod() {
         return captureMethod;
     }
 
-    public void captureMethodRequest(CaptureMethodRequest captureMethodRequest) {
+    public CardRequest captureMethodRequest(CaptureMethodRequest captureMethodRequest) {
         this.captureMethod = captureMethodRequest;
+        return this;
     }
 
     @Override
