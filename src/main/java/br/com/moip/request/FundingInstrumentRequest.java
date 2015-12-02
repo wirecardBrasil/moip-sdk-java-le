@@ -57,11 +57,6 @@ public class FundingInstrumentRequest {
         return card;
     }
 
-    public FundingInstrumentRequest card(CardRequest card) {
-        this.card = card;
-        return this;
-    }
-
     private enum Method {
         CREDIT_CARD, DEBIT_CARD;
     }
