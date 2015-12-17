@@ -8,7 +8,7 @@ public class Order {
     private String id;
     private Amount amount;
     private String ownId;
-    private final List<Item> items = new ArrayList<Item>();
+    private List<Item> items = new ArrayList<Item>();
     private Customer customer;
 
     public String getId() {
@@ -29,6 +29,14 @@ public class Order {
 
     public Customer getCustomer() {
         return customer;
+    }
+
+    protected Order(final Order order){
+        this.id = order.getId();
+        this.amount = order.getAmount();
+        this.ownId = order.getOwnId();
+        this.customer = order.getCustomer();
+        this.items = order.getItems();
     }
 
     @Override
