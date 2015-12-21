@@ -31,6 +31,10 @@ public class Order {
         return customer;
     }
 
+    public Order(){
+
+    }
+
     protected Order(final Order order){
         this.id = order.getId();
         this.amount = order.getAmount();
