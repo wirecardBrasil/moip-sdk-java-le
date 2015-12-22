@@ -8,7 +8,7 @@ public class Order {
     private String id;
     private Amount amount;
     private String ownId;
-    private List<Item> items = new ArrayList<Item>();
+    private final List<Item> items;
     private Customer customer;
 
     public String getId() {
@@ -32,7 +32,7 @@ public class Order {
     }
 
     public Order(){
-
+        items = new ArrayList<Item>();
     }
 
     protected Order(final Order order){
