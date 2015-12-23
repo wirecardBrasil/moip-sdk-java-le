@@ -1,13 +1,11 @@
 package br.com.moip.request;
 
-import java.util.Date;
-
 public class CustomerRequest {
 
     private String ownId;
     private String fullname;
     private String email;
-    private Date birthDate;
+    private ApiDateRequest birthDate;
     private TaxDocumentRequest taxDocument;
     private ShippingAddressRequest shippingAddress;
     private PhoneRequest phone;
@@ -42,11 +40,11 @@ public class CustomerRequest {
         return this;
     }
 
-    public Date getBirthDate() {
+    public ApiDateRequest getBirthDate() {
         return this.birthDate;
     }
 
-    public CustomerRequest birthdate(Date birthdateRequest) {
+    public CustomerRequest birthdate(ApiDateRequest birthdateRequest) {
         this.birthDate = birthdateRequest;
         return this;
     }

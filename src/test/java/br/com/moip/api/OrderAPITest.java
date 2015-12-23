@@ -1,12 +1,14 @@
 package br.com.moip.api;
 
 import br.com.moip.request.AmountRequest;
+import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.CustomerRequest;
 import br.com.moip.request.OrderRequest;
 import br.com.moip.request.PhoneRequest;
 import br.com.moip.request.ReceiverRequest;
 import br.com.moip.request.ShippingAddressRequest;
 import br.com.moip.request.TaxDocumentRequest;
+import br.com.moip.resource.ApiDate;
 import br.com.moip.resource.Order;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
@@ -81,7 +83,7 @@ public class OrderAPITest {
                         .ownId(UUID.randomUUID().toString())
                         .fullname("Jose da Silva")
                         .email("sandbox_v2_1401147277@email.com")
-                        .birthdate(new GregorianCalendar(1989, Calendar.OCTOBER, 13).getTime())
+                        .birthdate(new ApiDateRequest().date(new GregorianCalendar(1989, Calendar.OCTOBER, 13).getTime()))
                         .taxDocument(TaxDocumentRequest.cpf("12312312300"))
                         .phone(new PhoneRequest()
                                 .setAreaCode("11")
