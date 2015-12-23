@@ -38,28 +38,27 @@ public class PaymentAPITest {
     @Test
     public void testCreateCreditCard() {
         Payment createdPayment = api.create(
-                new PaymentRequest()
-                        .orderId("ORD-HPMZSOM611M2")
-                        .installmentCount(1)
-                        .fundingInstrument(
-                                new FundingInstrumentRequest()
-                                        .creditCard(
-                                                new CreditCardRequest()
-                                                        .hash(CC_HASH)
-                                                        .holder(
-                                                                new HolderRequest()
-                                                                        .fullname("Jose Portador da Silva")
-                                                                        .birthdate("1988-10-10")
-                                                                        .phone(
-                                                                                new PhoneRequest()
-                                                                                        .setAreaCode("11")
-                                                                                        .setNumber("55667788")
-                                                                        )
-                                                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
-                                                        )
+            new PaymentRequest()
+                .orderId("ORD-HPMZSOM611M2")
+                .installmentCount(1)
+                .fundingInstrument(
+                    new FundingInstrumentRequest()
+                        .creditCard(
+                            new CreditCardRequest()
+                                .hash(CC_HASH)
+                                .holder(
+                                    new HolderRequest()
+                                        .fullname("Jose Portador da Silva")
+                                        .birthdate("1988-10-10")
+                                        .phone(
+                                            new PhoneRequest()
+                                                .setAreaCode("11")
+                                                .setNumber("55667788")
                                         )
-                        )
-
+                                    .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                )
+                            )
+                )
         );
 
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));

@@ -1,10 +1,17 @@
 package br.com.moip.request;
 
+import java.util.Calendar;
+import java.util.Date;
+
 public class CustomerRequest {
 
     private String ownId;
     private String fullname;
     private String email;
+    private Date birthDate;
+    private TaxDocumentRequest taxDocument;
+    private ShippingAddressRequest shippingAddress;
+    private PhoneRequest phone;
 
     public String getOwnId() {
         return ownId;
@@ -36,13 +43,54 @@ public class CustomerRequest {
         return this;
     }
 
+    public Date getBirthDate() {
+        return this.birthDate;
+    }
+
+    public CustomerRequest birthdate(Date birthdateRequest) {
+        this.birthDate = birthdateRequest;
+        return this;
+    }
+
+    public CustomerRequest taxDocument(TaxDocumentRequest taxDocumentRequest) {
+        this.taxDocument = taxDocumentRequest;
+
+        return this;
+    }
+
+    public CustomerRequest shippingAddressRequest(ShippingAddressRequest shippingAddressRequest) {
+        this.shippingAddress = shippingAddressRequest;
+
+        return this;
+    }
+
+    public TaxDocumentRequest getTaxDocument() {
+        return taxDocument;
+    }
+
+    public ShippingAddressRequest getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public PhoneRequest getPhone() {
+        return phone;
+    }
+
+    public CustomerRequest phone(PhoneRequest phone) {
+        this.phone = phone;
+
+        return this;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Customer{");
-        sb.append("ownId='").append(ownId).append('\'');
-        sb.append(", fullname='").append(fullname).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "CustomerRequest{" +
+                "ownId='" + ownId + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", email='" + email + '\'' +
+                ", birthDate=" + birthDate +
+                ", taxDocument=" + taxDocument +
+                ", shippingAddress=" + shippingAddress +
+                '}';
     }
 }
