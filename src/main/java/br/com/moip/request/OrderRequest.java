@@ -8,6 +8,7 @@ public class OrderRequest {
     private String ownId;
     private final List<ItemRequest> items = new ArrayList<ItemRequest>();
     private CustomerRequest customer;
+    private List<ReceiverRequest> receivers = new ArrayList<ReceiverRequest>();
 
     public String getOwnId() {
         return ownId;
@@ -25,6 +26,16 @@ public class OrderRequest {
 
     public OrderRequest addItem(final String product, final Integer quantity, final String detail, final Integer price) {
         items.add(new ItemRequest(product, quantity, detail, price));
+
+        return this;
+    }
+
+    public List<ReceiverRequest> getReceivers() {
+        return receivers;
+    }
+
+    public OrderRequest addReceiver(final ReceiverRequest receiverRequest) {
+        receivers.add(receiverRequest);
 
         return this;
     }

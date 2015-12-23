@@ -80,8 +80,12 @@ public class Client {
             LOGGER.debug("---> POST {}", url.toString());
             logHeaders(conn.getRequestProperties().entrySet());
 
+            String s = gson.toJson(object);
+
+            LOGGER.debug("---> SENT JSON {}", s);
+
             DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-            wr.writeBytes(gson.toJson(object));
+            wr.writeBytes(s);
             wr.flush();
             wr.close();
 
@@ -103,9 +107,8 @@ public class Client {
 
             if (responseCode >= 400 && responseCode < 499) {
 
-
                 responseBody = readBody(conn.getErrorStream());
-
+                LOGGER.debug("API ERROR {}", responseBody.toString());
                 Errors errors = gson.fromJson(responseBody.toString(), Errors.class);
 
                 throw new ValidationException(responseCode, conn.getResponseMessage(), errors);
