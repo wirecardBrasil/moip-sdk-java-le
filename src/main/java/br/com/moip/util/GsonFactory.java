@@ -1,7 +1,7 @@
 package br.com.moip.util;
 
-import br.com.moip.request.BoletoRequest;
-import br.com.moip.resource.Boleto;
+import br.com.moip.request.ApiDateRequest;
+import br.com.moip.resource.ApiDate;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -23,8 +23,8 @@ public class GsonFactory {
         return new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss")
                 .registerTypeAdapter(Date.class, new BirthdateRequestSerializer())
-                .registerTypeAdapter(BoletoRequest.ExpirationDateRequest.class, new ExpirationDateSerializer())
-                .registerTypeAdapter(Boleto.ExpirationDate.class, new ExpirationDateDeserializer())
+                .registerTypeAdapter(ApiDateRequest.class, new ApiDateSerializer())
+                .registerTypeAdapter(ApiDate.class, new ApiDateDeserializer())
                 .create();
     }
 }
@@ -38,24 +38,24 @@ class BirthdateRequestSerializer implements JsonSerializer<Date> {
     }
 }
 
-class ExpirationDateSerializer implements JsonSerializer<BoletoRequest.ExpirationDateRequest> {
+class ApiDateSerializer implements JsonSerializer<ApiDateRequest> {
 
     @Override
-    public JsonElement serialize(BoletoRequest.ExpirationDateRequest src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(ApiDateRequest src, Type typeOfSrc, JsonSerializationContext context) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return new JsonPrimitive(format.format(src.getDate()));
     }
 }
 
-class ExpirationDateDeserializer implements JsonDeserializer<Boleto.ExpirationDate> {
+class ApiDateDeserializer implements JsonDeserializer<ApiDate> {
 
     @Override
-    public Boleto.ExpirationDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        Boleto.ExpirationDate expirationDate = new Boleto(). new ExpirationDate();
+    public ApiDate deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+        ApiDate apiDate = new ApiDate();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            expirationDate.setDate(simpleDateFormat.parse(json.getAsJsonPrimitive().getAsString()));
-            return expirationDate;
+            apiDate.setDate(simpleDateFormat.parse(json.getAsJsonPrimitive().getAsString()));
+            return apiDate;
         } catch (ParseException e) {
             return null;
         }

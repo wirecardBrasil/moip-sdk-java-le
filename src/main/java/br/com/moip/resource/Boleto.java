@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Boleto {
     private String lineCode;
-    private ExpirationDate expirationDate;
+    private ApiDate expirationDate;
     private InstructionLines instructionLines;
 
     public String getLineCode() {
@@ -16,12 +16,12 @@ public class Boleto {
         this.lineCode = lineCode;
     }
 
-    public ExpirationDate getExpirationDate() {
+    public ApiDate getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(ExpirationDate expirationDate) {
-        this.expirationDate = expirationDate;
+    public void setExpirationDate(ApiDate apiDate) {
+        this.expirationDate = apiDate;
     }
 
     public InstructionLines getInstructionLines() {
@@ -59,23 +59,6 @@ public class Boleto {
 
         public void setThird(String third) {
             this.third = third;
-        }
-    }
-
-    public class ExpirationDate {
-        private Date date;
-
-        public Date getDate() {
-            return date;
-        }
-
-        public void setDate(Date date) {
-            this.date = date;
-        }
-
-        public String getFormatedDate() {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            return simpleDateFormat.format(this.getDate());
         }
     }
 }

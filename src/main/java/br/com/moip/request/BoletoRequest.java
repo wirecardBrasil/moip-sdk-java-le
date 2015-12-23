@@ -1,14 +1,12 @@
 package br.com.moip.request;
 
-import java.util.Date;
-
 public class BoletoRequest {
 
-    private ExpirationDateRequest expirationDate;
+    private ApiDateRequest expirationDate;
     private InstructionLinesRequest instructionLines;
     private String logoUri;
 
-    public ExpirationDateRequest getExpirationDate() {
+    public ApiDateRequest getExpirationDate() {
         return expirationDate;
     }
 
@@ -20,7 +18,7 @@ public class BoletoRequest {
         return logoUri;
     }
 
-    public BoletoRequest expirationDate(final ExpirationDateRequest expirationDate) {
+    public BoletoRequest expirationDate(final ApiDateRequest expirationDate) {
         this.expirationDate = expirationDate;
 
         return this;
@@ -36,19 +34,5 @@ public class BoletoRequest {
         this.logoUri = logoUri;
 
         return this;
-    }
-
-    public class ExpirationDateRequest {
-        private Date date;
-
-        public Date getDate() {
-            return date;
-        }
-
-        public ExpirationDateRequest date(Date date) {
-            this.date = date;
-
-            return this;
-        }
     }
 }

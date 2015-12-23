@@ -1,6 +1,7 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
+import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.BoletoRequest;
 import br.com.moip.request.CreditCardRequest;
 import br.com.moip.request.FundingInstrumentRequest;
@@ -80,7 +81,7 @@ public class PaymentAPITest {
                 .installmentCount(1)
                 .fundingInstrument(new FundingInstrumentRequest()
                     .boleto(new BoletoRequest()
-                        .expirationDate(new BoletoRequest().new ExpirationDateRequest().date(new GregorianCalendar(2020, Calendar.NOVEMBER, 10).getTime()))
+                        .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2020, Calendar.NOVEMBER, 10).getTime()))
                         .logoUri("http://logo.com")
                         .instructionLines(new InstructionLinesRequest()
                             .first("Primeira linha")
