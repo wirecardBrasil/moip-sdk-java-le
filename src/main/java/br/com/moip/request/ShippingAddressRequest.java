@@ -85,4 +85,22 @@ public class ShippingAddressRequest {
     public String getZipCode() {
         return zipCode;
     }
+
+    public String getCountry() {
+        return country;
+    }
+
+    @Override
+    public String toString() {
+        return "ShippingAddressRequest{" +
+                "street='" + street + '\'' +
+                ", streetNumber='" + streetNumber + '\'' +
+                ", complement='" + complement + '\'' +
+                ", district='" + district + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                '}';
+    }
 }

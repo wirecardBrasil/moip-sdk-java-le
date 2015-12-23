@@ -1,6 +1,5 @@
 package br.com.moip.request;
 
-import java.util.Calendar;
 import java.util.Date;
 
 public class CustomerRequest {
@@ -91,6 +90,7 @@ public class CustomerRequest {
                 ", birthDate=" + birthDate +
                 ", taxDocument=" + taxDocument +
                 ", shippingAddress=" + shippingAddress +
+                ", phone=" + phone +
                 '}';
     }
 }
