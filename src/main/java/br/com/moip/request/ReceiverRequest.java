@@ -22,6 +22,18 @@ public class ReceiverRequest {
         this.moipAccount = new MoipAccountRequest(moipAccount);
         this.amount = amountRequest;
     }
+
+    public ReceiverTypeRequest getType() {
+        return type;
+    }
+
+    public MoipAccountRequest getMoipAccount() {
+        return moipAccount;
+    }
+
+    public AmountRequest getAmount() {
+        return amount;
+    }
 }
 
 class MoipAccountRequest {

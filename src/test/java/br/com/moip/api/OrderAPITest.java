@@ -1,6 +1,5 @@
 package br.com.moip.api;
 
-import br.com.moip.Client;
 import br.com.moip.request.AmountRequest;
 import br.com.moip.request.CustomerRequest;
 import br.com.moip.request.OrderRequest;
@@ -18,7 +17,6 @@ import org.junit.Test;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.Random;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
@@ -111,6 +109,7 @@ public class OrderAPITest {
         assertEquals("SP", createdOrder.getCustomer().getShippingAddress().getState());
         assertEquals("ao lado da rua dos chatos", createdOrder.getCustomer().getShippingAddress().getComplement());
         assertEquals("Bobobairro", createdOrder.getCustomer().getShippingAddress().getDistrict());
+        assertEquals("BRA", createdOrder.getCustomer().getShippingAddress().getCountry());
 
     }
 }

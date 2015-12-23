@@ -7,7 +7,7 @@ public class ShippingAddress {
     private String district;
     private String city;
     private String state;
-    private String country = "BRA";
+    private String country;
     private String zipCode;
 
     public void setStreet(String street) {
@@ -68,5 +68,9 @@ public class ShippingAddress {
 
     public String getZipCode() {
         return zipCode;
+    }
+
+    public String getCountry() {
+        return country;
     }
 }
