@@ -4,6 +4,7 @@ public class FundingInstrumentRequest {
 
     private Method method;
     private CreditCardRequest creditCard;
+    private BoletoRequest boleto;
     private boolean supressBoleto;
     private boolean supressCreditCard;
     //Used on MPOS
@@ -17,6 +18,13 @@ public class FundingInstrumentRequest {
     public FundingInstrumentRequest creditCard(final CreditCardRequest creditCard) {
         this.creditCard = creditCard;
         this.method = Method.CREDIT_CARD;
+
+        return this;
+    }
+
+    public FundingInstrumentRequest boleto(final BoletoRequest boletoRequest) {
+        this.boleto = boletoRequest;
+        this.method = Method.BOLETO;
 
         return this;
     }
@@ -58,7 +66,7 @@ public class FundingInstrumentRequest {
     }
 
     private enum Method {
-        CREDIT_CARD, DEBIT_CARD;
+        CREDIT_CARD, DEBIT_CARD, BOLETO;
     }
 
     @Override

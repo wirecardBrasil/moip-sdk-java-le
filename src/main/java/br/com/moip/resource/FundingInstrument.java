@@ -5,6 +5,7 @@ public class FundingInstrument {
     private boolean supressBoleto;
     private Method method;
     private CreditCard creditCard;
+    private Boleto boleto;
 
     public boolean isSupressCreditCard() {
         return supressCreditCard;
@@ -28,6 +29,10 @@ public class FundingInstrument {
         return creditCard;
     }
 
+    public Boleto getBoleto() {
+        return boleto;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("FundingInstrument{");
@@ -39,7 +44,7 @@ public class FundingInstrument {
         return sb.toString();
     }
 
-    private enum Method {
-        CREDIT_CARD;
+    public enum Method {
+        CREDIT_CARD, BOLETO;
     }
 }
