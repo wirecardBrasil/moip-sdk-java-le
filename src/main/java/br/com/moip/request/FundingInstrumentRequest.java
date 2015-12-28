@@ -74,6 +74,7 @@ public class FundingInstrumentRequest {
         final StringBuilder sb = new StringBuilder("FundingInstrumentRequest{");
         sb.append("method=").append(method);
         sb.append(", creditCard=").append(creditCard);
+        sb.append(", boleto=").append(boleto);
         sb.append('}');
         return sb.toString();
     }

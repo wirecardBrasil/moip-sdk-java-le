@@ -1,8 +1,5 @@
 package br.com.moip.resource;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class Boleto {
     private String lineCode;
     private ApiDate expirationDate;

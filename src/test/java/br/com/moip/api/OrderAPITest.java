@@ -8,7 +8,6 @@ import br.com.moip.request.PhoneRequest;
 import br.com.moip.request.ReceiverRequest;
 import br.com.moip.request.ShippingAddressRequest;
 import br.com.moip.request.TaxDocumentRequest;
-import br.com.moip.resource.ApiDate;
 import br.com.moip.resource.Order;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
