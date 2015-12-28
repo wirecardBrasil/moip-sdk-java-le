@@ -52,4 +52,29 @@ public class ClientTest {
     public void testPostWhen500() {
         client.post("/500", new Order(), Order.class);
     }
+
+    @Play("client/get")
+    @Test
+    public void testGetWhen200() {
+        Order order = client.get("/200", Order.class);
+        assertNotNull(order);
+    }
+
+    @Play("client/get")
+    @Test
+    public void testGetWhen400() {
+        try {
+            client.get("/400", Order.class);
+            fail("Should have thrown a ValidationException");
+        } catch(ValidationException e) {
+            assertEquals(400, e.getResponseCode());
+            assertEquals("ORD-001", e.getErrors().get(0).getCode());
+        }
+    }
+
+    @Play("client/get")
+    @Test(expected = UnexpectecException.class)
+    public void testGetWhen500() {
+        client.get("/500", Order.class);
+    }
 }

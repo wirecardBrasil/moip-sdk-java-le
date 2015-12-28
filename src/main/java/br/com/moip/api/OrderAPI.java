@@ -18,4 +18,10 @@ public class OrderAPI {
 
         return createdOrder;
     }
+
+    public Order get(final String id) {
+        Order order = client.get("/v2/orders/" + id, Order.class);
+
+        return order;
+    }
 }

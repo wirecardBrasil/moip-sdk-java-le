@@ -1,10 +1,16 @@
 package br.com.moip.resource;
 
+import java.util.Date;
+
 public class Customer {
 
     private String ownId;
     private String fullname;
     private String email;
+    private TaxDocument taxDocument;
+    private Phone phone;
+    private Date birthDate;
+    private ShippingAddress shippingAddress;
 
     public String getOwnId() {
         return ownId;
@@ -24,13 +30,32 @@ public class Customer {
         return this;
     }
 
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public TaxDocument getTaxDocument() {
+        return taxDocument;
+    }
+
+    public Phone getPhone() {
+        return phone;
+    }
+
+    public ShippingAddress getShippingAddress() {
+        return shippingAddress;
+    }
+
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Customer{");
-        sb.append("ownId='").append(ownId).append('\'');
-        sb.append(", fullname='").append(fullname).append('\'');
-        sb.append(", email='").append(email).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return "Customer{" +
+                "ownId='" + ownId + '\'' +
+                ", fullname='" + fullname + '\'' +
+                ", email='" + email + '\'' +
+                ", taxDocument=" + taxDocument +
+                ", phone=" + phone +
+                ", birthDate=" + birthDate +
+                ", shippingAddress=" + shippingAddress +
+                '}';
     }
 }

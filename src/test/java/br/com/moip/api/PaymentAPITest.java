@@ -1,12 +1,16 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
+import br.com.moip.request.ApiDateRequest;
+import br.com.moip.request.BoletoRequest;
 import br.com.moip.request.CreditCardRequest;
 import br.com.moip.request.FundingInstrumentRequest;
 import br.com.moip.request.HolderRequest;
+import br.com.moip.request.InstructionLinesRequest;
 import br.com.moip.request.PaymentRequest;
 import br.com.moip.request.PhoneRequest;
 import br.com.moip.request.TaxDocumentRequest;
+import br.com.moip.resource.FundingInstrument;
 import br.com.moip.resource.Payment;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
@@ -14,6 +18,10 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class PaymentAPITest {
@@ -30,7 +38,7 @@ public class PaymentAPITest {
     @Before
     public void setUp() {
         Client client = clientFactory.client(player.getURL("").toString());
-
+//        Client client = clientFactory.client(Client.SANDBOX);
         api = new PaymentAPI(client);
     }
 
@@ -59,9 +67,36 @@ public class PaymentAPITest {
                                                         )
                                         )
                         )
-
         );
 
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
+    }
+
+    @Play("payments/create_boleto_payment")
+    @Test
+    public void testCreateBoletoRequest() {
+        Payment createdPayment = api.create(
+            new PaymentRequest()
+                .orderId("ORD-GOHHIF4Z6PLV")
+                .installmentCount(1)
+                .fundingInstrument(new FundingInstrumentRequest()
+                    .boleto(new BoletoRequest()
+                        .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2020, Calendar.NOVEMBER, 10).getTime()))
+                        .logoUri("http://logo.com")
+                        .instructionLines(new InstructionLinesRequest()
+                            .first("Primeira linha")
+                            .second("Segunda linha")
+                            .third("Terceira linha"))
+                    )
+                )
+        );
+
+        assertTrue(createdPayment.getId().startsWith("PAY-0UQ9BTLOXCRM"));
+        assertEquals("23793.39126 60000.049464 56001.747908 8 84350000010000", createdPayment.getFundingInstrument().getBoleto().getLineCode());
+        assertEquals("2020-11-10", createdPayment.getFundingInstrument().getBoleto().getExpirationDate().getFormatedDate());
+        assertEquals("Primeira linha", createdPayment.getFundingInstrument().getBoleto().getInstructionLines().getFirst());
+        assertEquals("Segunda linha", createdPayment.getFundingInstrument().getBoleto().getInstructionLines().getSecond());
+        assertEquals("Terceira linha", createdPayment.getFundingInstrument().getBoleto().getInstructionLines().getThird());
+        assertEquals(FundingInstrument.Method.BOLETO, createdPayment.getFundingInstrument().getMethod());
     }
 }
