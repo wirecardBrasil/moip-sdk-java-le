@@ -57,13 +57,22 @@ public class Client {
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type) {
+        return doRequest("POST", path, object, type);
+    }
+
+    public <T> T get(String path, Class<T> type) {
+        return doRequest("GET", path, null, type);
+    }
+
+    private <T> T doRequest(final String method, final String path, final Object object, final Class<T> type) {
         try {
             URL url = new URL(endpoint + path);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("POST");
             conn.setRequestProperty("User-Agent", USER_AGENT);
             conn.setRequestProperty("Content-type", "application/json");
+
+            conn.setRequestMethod(method);
 
             // Disable TLS 1.0
             // TODO find a way to create a Test for this
@@ -75,19 +84,22 @@ public class Client {
                 authentication.authenticate(conn);
             }
 
-            conn.setDoOutput(true);
-
-            LOGGER.debug("---> POST {}", url.toString());
+            LOGGER.debug("---> {} {}", method, conn.getURL().toString());
             logHeaders(conn.getRequestProperties().entrySet());
 
-            String s = gson.toJson(object);
+            if (object != null) {
+                conn.setDoOutput(true);
 
-            LOGGER.debug("---> SENT JSON {}", s);
+                String body = gson.toJson(object);
 
-            DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-            wr.writeBytes(s);
-            wr.flush();
-            wr.close();
+                LOGGER.debug("");
+                LOGGER.debug("{}", body);
+
+                DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+                wr.writeBytes(body);
+                wr.flush();
+                wr.close();
+            }
 
             LOGGER.debug("---> END HTTP");
 
@@ -101,7 +113,7 @@ public class Client {
                 responseBody = readBody(conn.getInputStream());
             }
 
-            if(responseCode == 401){
+            if (responseCode == 401) {
                 throw new UnauthorizedException();
             }
 
@@ -123,11 +135,7 @@ public class Client {
             LOGGER.debug("<-- END HTTP ({}-byte body)", conn.getContentLength());
 
             return gson.fromJson(responseBody.toString(), type);
-        } catch (IOException e) {
-            throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
-        } catch (NoSuchAlgorithmException e) {
-            throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
-        } catch (KeyManagementException e) {
+        } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
         }
     }
