@@ -19,7 +19,7 @@ public class KeyAPITest {
     public Player player = new Player();
 
     @Before
-    public void setup() {
+    public void setUp() {
 //        this.api = new KeyAPI(clientFactory.client(Client.SANDBOX));
         this.api = new KeyAPI(clientFactory.client(player.getURL("").toString()));
     }
