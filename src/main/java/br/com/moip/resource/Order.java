@@ -10,6 +10,7 @@ public class Order {
     private String ownId;
     private final List<Item> items;
     private Customer customer;
+    private final List<Receiver> receivers = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -31,6 +32,10 @@ public class Order {
         return customer;
     }
 
+    public List<Receiver> getReceivers() {
+        return receivers;
+    }
+
     public Order(){
         items = new ArrayList<Item>();
     }
@@ -46,11 +51,12 @@ public class Order {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Order{");
-        sb.append("ownId='").append(ownId).append('\'');
-        sb.append(", id='").append(id).append('\'');
+        sb.append("id='").append(id).append('\'');
         sb.append(", amount=").append(amount);
-        sb.append(", customer=").append(customer);
+        sb.append(", ownId='").append(ownId).append('\'');
         sb.append(", items=").append(items);
+        sb.append(", customer=").append(customer);
+        sb.append(", receivers=").append(receivers);
         sb.append('}');
         return sb.toString();
     }

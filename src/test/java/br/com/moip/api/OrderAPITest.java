@@ -21,6 +21,7 @@ import java.util.GregorianCalendar;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class OrderAPITest {
 
@@ -70,6 +71,20 @@ public class OrderAPITest {
         );
 
         assertEquals("ORD-77O7YGFH4H62", createdOrder.getId());
+
+        assertEquals(2, createdOrder.getReceivers().size());
+
+        assertEquals(9900, createdOrder.getReceivers().get(0).getAmount().getTotal().intValue());
+        assertEquals("MPA-CULBBYHD11", createdOrder.getReceivers().get(0).getMoipAccount().getId());
+        assertEquals("Moip SandBox", createdOrder.getReceivers().get(0).getMoipAccount().getFullname());
+        assertEquals("integracao@labs.moip.com.br", createdOrder.getReceivers().get(0).getMoipAccount().getLogin());
+        assertTrue(createdOrder.getReceivers().get(0).isPrimary());
+
+        assertEquals(100, createdOrder.getReceivers().get(1).getAmount().getTotal().intValue());
+        assertEquals("MPA-123123123", createdOrder.getReceivers().get(1).getMoipAccount().getId());
+        assertEquals("Vagner Fiuza Vieira", createdOrder.getReceivers().get(1).getMoipAccount().getFullname());
+        assertEquals("vagninho99", createdOrder.getReceivers().get(1).getMoipAccount().getLogin());
+        assertTrue(createdOrder.getReceivers().get(1).isSecondary());
     }
 
     @Play("orders/create_with_customer_additional_info")
