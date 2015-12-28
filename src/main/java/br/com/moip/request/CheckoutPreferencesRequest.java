@@ -1,7 +1,5 @@
 package br.com.moip.request;
 
-import br.com.moip.resource.Installment;
-
 import java.util.ArrayList;
 import java.util.List;
 
