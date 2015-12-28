@@ -38,6 +38,14 @@ public class OrderAPITest {
 //        api = new OrderAPI(clientFactory.client(br.com.moip.Client.SANDBOX));
     }
 
+    @Play("orders/get")
+    @Test
+    public void testGet() {
+        Order order = api.get("ORD-HCOWQ2QJKTAT");
+
+        assertEquals("ORD-HCOWQ2QJKTAT", order.getId());
+    }
+
     @Play("orders/create")
     @Test
     public void testCreate() {
