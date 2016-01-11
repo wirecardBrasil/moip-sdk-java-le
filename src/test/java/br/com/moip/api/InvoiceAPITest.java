@@ -51,4 +51,13 @@ public class InvoiceAPITest {
 
         assertEquals("INV-7761BDB06412", invoiceCreated.getId());
     }
+
+    @Play("invoices/get")
+    @Test
+    public void testGet() {
+        Invoice invoice = api.get("INV-7761BDB06412");
+
+        assertEquals("INV-7761BDB06412", invoice.getId());
+    }
+
 }
