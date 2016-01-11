@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class InvoiceAPITest {
@@ -50,5 +52,21 @@ public class InvoiceAPITest {
                                         .supressShippingAddress(true)));
 
         assertEquals("INV-7761BDB06412", invoiceCreated.getId());
+    }
+
+    @Play("invoices/get")
+    @Test
+    public void testGet() {
+        Invoice invoice = api.get("INV-7761BDB06412");
+
+        assertEquals("INV-7761BDB06412", invoice.getId());
+    }
+
+    @Play("invoices/list")
+    @Test
+    public void testList() {
+        List<Invoice> invoiceList = api.list();
+
+        assertEquals(3, invoiceList.size());
     }
 }

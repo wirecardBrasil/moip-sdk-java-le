@@ -4,6 +4,9 @@ import br.com.moip.Client;
 import br.com.moip.request.InvoiceRequest;
 import br.com.moip.resource.Invoice;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class InvoiceAPI {
     private final Client client;
 
@@ -12,8 +15,14 @@ public class InvoiceAPI {
     }
 
     public Invoice create(final InvoiceRequest invoice) {
-        Invoice createdInvoice = client.post("/v2/invoices", invoice, Invoice.class);
+        return client.post("/v2/invoices", invoice, Invoice.class);
+    }
 
-        return createdInvoice;
+    public Invoice get(final String id) {
+        return client.get("/v2/invoices/" + id, Invoice.class);
+    }
+
+    public List<Invoice> list() {
+        return client.get("/v2/invoices", new ArrayList<Invoice>().getClass());
     }
 }
