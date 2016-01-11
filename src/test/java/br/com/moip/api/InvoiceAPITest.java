@@ -13,6 +13,8 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class InvoiceAPITest {
@@ -60,4 +62,11 @@ public class InvoiceAPITest {
         assertEquals("INV-7761BDB06412", invoice.getId());
     }
 
+    @Play("invoices/list")
+    @Test
+    public void testList() {
+        List<Invoice> invoiceList = api.list();
+
+        assertEquals(3, invoiceList.size());
+    }
 }

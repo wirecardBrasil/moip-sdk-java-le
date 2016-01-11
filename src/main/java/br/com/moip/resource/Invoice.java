@@ -11,7 +11,6 @@ public class Invoice {
     private CheckoutPreferences checkoutPreferences;
     private InvoiceStatus status;
 
-
     public String getId() {
         return id;
     }
