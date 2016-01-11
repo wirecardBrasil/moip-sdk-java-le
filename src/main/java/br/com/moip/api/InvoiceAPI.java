@@ -18,7 +18,6 @@ public class InvoiceAPI {
         return client.post("/v2/invoices", invoice, Invoice.class);
     }
 
-
     public Invoice get(final String id) {
         return client.get("/v2/invoices/" + id, Invoice.class);
     }
