@@ -1,6 +1,7 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
+import br.com.moip.api.filter.Pagination;
 import br.com.moip.authentication.BasicAuth;
 import br.com.moip.request.CheckoutPreferencesRequest;
 import br.com.moip.request.CustomerRequest;
@@ -73,7 +74,9 @@ public class InvoiceAPITest {
     @Play("invoices/list_limit_5")
     @Test
     public void testListLimit() {
-        List<Invoice> invoiceList = api.list(5);
+        Pagination pagination = new Pagination();
+        pagination.setLimit(5);
+        List<Invoice> invoiceList = api.list(pagination);
 
         assertEquals(5, invoiceList.size());
     }
