@@ -25,4 +25,12 @@ public class InvoiceAPI {
     public List<Invoice> list() {
         return client.get("/v2/invoices", new ArrayList<Invoice>().getClass());
     }
+
+    public List<Invoice> list(final int limit) {
+        return client.get("/v2/invoices?limit="+limit, new ArrayList<Invoice>().getClass());
+    }
+
+    public List<Invoice> list(final int limit, final int page) {
+        return client.get("/v2/invoices?limit="+limit+"&offset="+page, new ArrayList<Invoice>().getClass());
+    }
 }

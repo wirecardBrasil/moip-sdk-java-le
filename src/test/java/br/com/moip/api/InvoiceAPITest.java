@@ -69,4 +69,12 @@ public class InvoiceAPITest {
 
         assertEquals(3, invoiceList.size());
     }
+
+    @Play("invoices/list_limit_5")
+    @Test
+    public void testListLimit() {
+        List<Invoice> invoiceList = api.list(5);
+
+        assertEquals(3, invoiceList.size());
+    }
 }
