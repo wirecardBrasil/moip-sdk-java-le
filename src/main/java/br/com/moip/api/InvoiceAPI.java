@@ -1,6 +1,7 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
+import br.com.moip.api.filter.Pagination;
 import br.com.moip.request.InvoiceRequest;
 import br.com.moip.resource.Invoice;
 
@@ -26,11 +27,11 @@ public class InvoiceAPI {
         return client.get("/v2/invoices", new ArrayList<Invoice>().getClass());
     }
 
-    public List<Invoice> list(final int limit) {
-        return client.get("/v2/invoices?limit="+limit, new ArrayList<Invoice>().getClass());
-    }
-
-    public List<Invoice> list(final int limit, final int page) {
-        return client.get("/v2/invoices?limit="+limit+"&offset="+page, new ArrayList<Invoice>().getClass());
+    public List<Invoice> list(final Pagination pagination) {
+        if (pagination.getLimit() == 0)
+            return client.get("/v2/invoices", new ArrayList<Invoice>().getClass());
+        if (pagination.getPage() == 0)
+            return client.get("/v2/invoices?limit=" + pagination.getLimit(), new ArrayList<Invoice>().getClass());
+        return client.get("/v2/invoices?limit=" + pagination.getLimit() + "&offset=" + pagination.getPage(), new ArrayList<Invoice>().getClass());
     }
 }
