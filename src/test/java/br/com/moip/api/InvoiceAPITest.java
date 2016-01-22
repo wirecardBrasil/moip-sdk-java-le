@@ -75,6 +75,6 @@ public class InvoiceAPITest {
     public void testListLimit() {
         List<Invoice> invoiceList = api.list(5);
 
-        assertEquals(3, invoiceList.size());
+        assertEquals(5, invoiceList.size());
     }
 }
