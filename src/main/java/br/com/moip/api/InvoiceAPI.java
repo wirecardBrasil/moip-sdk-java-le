@@ -30,7 +30,7 @@ public class InvoiceAPI {
     public List<Invoice> list(final Pagination pagination) {
         if (pagination.getLimit() == 0)
             return client.get("/v2/invoices", new ArrayList<Invoice>().getClass());
-        if (pagination.getPage() == 0)
+        if (pagination.getPage() < 0)
             return client.get("/v2/invoices?limit=" + pagination.getLimit(), new ArrayList<Invoice>().getClass());
         return client.get("/v2/invoices?limit=" + pagination.getLimit() + "&offset=" + pagination.getPage(), new ArrayList<Invoice>().getClass());
     }
