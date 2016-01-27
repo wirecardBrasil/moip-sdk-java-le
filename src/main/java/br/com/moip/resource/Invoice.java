@@ -11,6 +11,8 @@ public class Invoice {
     private CheckoutPreferences checkoutPreferences;
     private InvoiceStatus status;
 
+    private Links _links;
+
     public String getId() {
         return id;
     }
