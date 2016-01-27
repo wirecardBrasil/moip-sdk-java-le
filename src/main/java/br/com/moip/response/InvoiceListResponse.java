@@ -7,20 +7,20 @@ import br.com.moip.resource.invoice.Summary;
 import java.util.List;
 
 public class InvoiceListResponse {
-//    public static final String NEXT = "next";
-//    public static final String PREVIOUS = "previous";
+    public static final String NEXT = "next";
+    public static final String PREVIOUS = "previous";
 
     private List<Invoice> invoices;
     private Summary summary;
     private Links _links;
 
-//    public String next() {
-//        return _links.getLinks().get(NEXT).toString();
-//    }
-//
-//    public String previous() {
-//        return _links.getLinks().get(PREVIOUS).toString();
-//    }
+    public String next() {
+        return _links.getLinks().get(NEXT).toString();
+    }
+
+    public String previous() {
+        return _links.getLinks().get(PREVIOUS).toString();
+    }
 
     public List<Invoice> getInvoices() {
         return invoices;
