@@ -8,6 +8,7 @@ import br.com.moip.request.CustomerRequest;
 import br.com.moip.request.FundingInstrumentRequest;
 import br.com.moip.request.InvoiceRequest;
 import br.com.moip.resource.Invoice;
+import br.com.moip.response.InvoiceListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
@@ -66,9 +67,9 @@ public class InvoiceAPITest {
     @Play("invoices/list")
     @Test
     public void testList() {
-        List<Invoice> invoiceList = api.list();
+        InvoiceListResponse response = api.list();
 
-        assertEquals(3, invoiceList.size());
+        assertEquals(3, response.getInvoices().size());
     }
 
     @Play("invoices/list_limit_5")
@@ -76,8 +77,8 @@ public class InvoiceAPITest {
     public void testListLimit() {
         Pagination pagination = new Pagination();
         pagination.setLimit(5);
-        List<Invoice> invoiceList = api.list(pagination);
+        InvoiceListResponse invoiceListResponse = api.list(pagination);
 
-        assertEquals(5, invoiceList.size());
+        assertEquals(5, invoiceListResponse.getInvoices().size());
     }
 }

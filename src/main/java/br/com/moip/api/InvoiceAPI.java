@@ -4,6 +4,7 @@ import br.com.moip.Client;
 import br.com.moip.api.filter.Pagination;
 import br.com.moip.request.InvoiceRequest;
 import br.com.moip.resource.Invoice;
+import br.com.moip.response.InvoiceListResponse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +24,15 @@ public class InvoiceAPI {
         return client.get("/v2/invoices/" + id, Invoice.class);
     }
 
-    public List<Invoice> list() {
-        return client.get("/v2/invoices", new ArrayList<Invoice>().getClass());
+    public InvoiceListResponse list() {
+        return client.get("/v2/invoices", InvoiceListResponse.class);
     }
 
-    public List<Invoice> list(final Pagination pagination) {
+    public InvoiceListResponse list(final Pagination pagination) {
         if (pagination.getLimit() == 0)
-            return client.get("/v2/invoices", new ArrayList<Invoice>().getClass());
-        if (pagination.getPage() < 0)
-            return client.get("/v2/invoices?limit=" + pagination.getLimit(), new ArrayList<Invoice>().getClass());
-        return client.get("/v2/invoices?limit=" + pagination.getLimit() + "&offset=" + pagination.getPage(), new ArrayList<Invoice>().getClass());
+            return client.get("/v2/invoices", InvoiceListResponse.class);
+        if (pagination.getOffset() <= 0)
+            return client.get("/v2/invoices?limit=" + pagination.getLimit(), InvoiceListResponse.class);
+        return client.get("/v2/invoices?limit=" + pagination.getLimit() + "&offset=" + pagination.getOffset(), InvoiceListResponse.class);
     }
 }

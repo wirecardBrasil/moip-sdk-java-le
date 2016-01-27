@@ -2,14 +2,28 @@ package br.com.moip.api.filter;
 
 public class Pagination {
 
-    private int page, limit;
+    private int offset, limit;
 
-    public int getPage() {
-        return page;
+    public Pagination(){
+
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public Pagination(final String url) {
+        String[] params = url.split("&");
+        String limit = params[0].split("=")[1];
+        String offset = params[1].split("=")[1];
+
+
+        this.limit = Integer.parseInt(limit);
+        this.offset = Integer.parseInt(offset);
+    }
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
     }
 
     public int getLimit() {
