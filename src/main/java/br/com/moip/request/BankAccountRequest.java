@@ -7,47 +7,52 @@ public class BankAccountRequest {
     private String agencyCheckNumber;
     private String accountNumber;
     private String accountCheckNumber;
-    private Enum type;
+    private Type type;
     private HolderRequest holder;
 
     public String getBankNumber() {
         return bankNumber;
     }
 
-    public void setBankNumber(String bankNumber) {
+    public BankAccountRequest bankNumber(final String bankNumber) {
         this.bankNumber = bankNumber;
+        return this;
     }
 
     public String getAgencyNumber() {
         return agencyNumber;
     }
 
-    public void setAgencyNumber(String agencyNumber) {
+    public BankAccountRequest agencyNumber(final String agencyNumber) {
         this.agencyNumber = agencyNumber;
+        return this;
     }
 
     public String getAgencyCheckNumber() {
         return agencyCheckNumber;
     }
 
-    public void setAgencyCheckNumber(String agencyCheckNumber) {
+    public BankAccountRequest agencyCheckNumber(final String agencyCheckNumber) {
         this.agencyCheckNumber = agencyCheckNumber;
+        return this;
     }
 
     public String getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(String accountNumber) {
+    public BankAccountRequest accountNumber(final String accountNumber) {
         this.accountNumber = accountNumber;
+        return this;
     }
 
     public String getAccountCheckNumber() {
         return accountCheckNumber;
     }
 
-    public void setAccountCheckNumber(String accountCheckNumber) {
+    public BankAccountRequest accountCheckNumber(final String accountCheckNumber) {
         this.accountCheckNumber = accountCheckNumber;
+        return this;
     }
 
     public Enum getType() {
@@ -58,16 +63,19 @@ public class BankAccountRequest {
         return holder;
     }
 
-    public void setHolder(HolderRequest holder) {
+    public BankAccountRequest holder(final HolderRequest holder) {
         this.holder = holder;
+        return this;
     }
 
-    public void checking(){
+    public BankAccountRequest checking(){
         this.type = Type.CHECKING;
+        return this;
     }
 
-    public void saving(){
+    public BankAccountRequest saving(){
         this.type = Type.SAVING;
+        return this;
     }
 
     private enum Type {

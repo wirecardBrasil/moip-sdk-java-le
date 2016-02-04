@@ -15,7 +15,7 @@ public class BankAccountsAPI {
     }
 
     public BankAccount create(final String moipAccount, final BankAccountRequest bankAccountRequest) {
-        BankAccount createdBankAccount = client.post("v2/accounts/" + moipAccount + "/bankaccounts", bankAccountRequest, BankAccount.class);
+        BankAccount createdBankAccount = client.post("/v2/accounts/" + moipAccount + "/bankaccounts", bankAccountRequest, BankAccount.class);
         return createdBankAccount;
     }
 
@@ -29,4 +29,5 @@ public class BankAccountsAPI {
 
         return bankAccounts;
     }
+
 }
