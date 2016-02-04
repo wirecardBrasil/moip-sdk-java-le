@@ -36,6 +36,14 @@ public class TaxDocumentRequest {
         return taxDocument;
     }
 
+    public static TaxDocumentRequest cnpj(final String number) {
+        TaxDocumentRequest taxDocument = new TaxDocumentRequest()
+                .type(Type.CNPJ)
+                .number(number);
+
+        return taxDocument;
+    }
+
     @Override
     public String toString() {
         return "TaxDocument{" +
