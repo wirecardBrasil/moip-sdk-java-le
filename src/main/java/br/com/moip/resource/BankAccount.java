@@ -63,4 +63,21 @@ public class BankAccount {
     private enum Type {
         CHECKING, SAVING;
     }
+
+    @Override
+    public String toString() {
+        return "BankAccount{" +
+                "id='" + id + '\'' +
+                ", agencyNumber='" + agencyNumber + '\'' +
+                ", agencyCheckNumber='" + agencyCheckNumber + '\'' +
+                ", bankName='" + bankName + '\'' +
+                ", bankNumber='" + bankNumber + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", holder=" + holder +
+                ", type=" + type +
+                ", status='" + status + '\'' +
+                ", createdAt=" + createdAt +
+                ", _links=" + _links +
+                '}';
+    }
 }

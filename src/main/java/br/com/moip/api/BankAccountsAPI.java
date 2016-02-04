@@ -5,6 +5,7 @@ import br.com.moip.request.BankAccountRequest;
 import br.com.moip.resource.BankAccount;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class BankAccountsAPI {
@@ -26,9 +27,9 @@ public class BankAccountsAPI {
     }
 
     public List<BankAccount> getList(final String moipAccount) {
-        List<BankAccount> bankAccounts = client.get("/v2/accounts/" + moipAccount + "/bankaccounts", new ArrayList<BankAccount>().getClass());
+        BankAccount[] bankAccounts = client.get("/v2/accounts/" + moipAccount + "/bankaccounts", BankAccount[].class);
 
-        return bankAccounts;
+        return Arrays.asList(bankAccounts);
     }
 
 }
