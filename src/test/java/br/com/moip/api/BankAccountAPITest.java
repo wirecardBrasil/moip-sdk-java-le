@@ -7,11 +7,13 @@ import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.resource.BankAccount;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BankAccountAPITest {
@@ -32,7 +34,7 @@ public class BankAccountAPITest {
 
     @Play("bankaccounts/create")
     @Test
-    public void testBankAccount() {
+    public void shouldCreateBankAccount() {
 
         BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
                 new BankAccountRequest()
@@ -49,6 +51,23 @@ public class BankAccountAPITest {
                         )
         );
         assertTrue(createdBankAccount.getId().startsWith("BKA-"));
+    }
+
+    @Play("bankaccounts/get")
+    @Test
+    public void shouldGetOneAccount() {
+        BankAccount createdBankAccount = api.get("BKA-P9O93Z6PKUTI");
+        assertEquals("BKA-P9O93Z6PKUTI", createdBankAccount.getId());
+
+    }
+
+    @Play("bankaccounts/getall")
+    @Test
+    public void shouldGetAccountList() {
+        List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
+        assertEquals(4, createdBankAccounts.size());
+        assertEquals("BKA-P9O93Z6PKUTI", createdBankAccounts.get(0).getId());
+
     }
 
 }

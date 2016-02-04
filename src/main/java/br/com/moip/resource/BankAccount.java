@@ -14,7 +14,7 @@ public class BankAccount {
     private Type type;
     private String status;
     private Date createdAt;
-    private Links links;
+    private Links _links;
 
     public String getId() {
         return id;
@@ -57,7 +57,7 @@ public class BankAccount {
     }
 
     public Links getLinks() {
-        return links;
+        return _links;
     }
 
     private enum Type {
