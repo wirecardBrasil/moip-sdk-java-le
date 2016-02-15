@@ -1,7 +1,6 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
-import br.com.moip.api.filter.Pagination;
 import br.com.moip.resource.Transfer;
 import br.com.moip.resource.TransferStatus;
 import br.com.moip.response.TransferListResponse;
