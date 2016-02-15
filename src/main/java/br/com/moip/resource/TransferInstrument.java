@@ -30,6 +30,18 @@ public class TransferInstrument {
         this.moipAccount = moipAccount;
     }
 
+    @Override
+    public String toString() {
+
+        final StringBuilder sb = new StringBuilder("TransferInstrument{");
+        sb.append("method=").append(method);
+        sb.append(", bankAccount=").append(bankAccount);
+        sb.append(", bankAccount=").append(bankAccount);
+        sb.append('}');
+        return sb.toString();
+
+    }
+
     public enum Method {
         BANK_ACCOUNT, MOIP_ACCOUNT;
     }

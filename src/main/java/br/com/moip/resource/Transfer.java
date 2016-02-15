@@ -67,4 +67,19 @@ public class Transfer {
     public void setTransferInstrument(TransferInstrument transferInstrument) {
         this.transferInstrument = transferInstrument;
     }
+
+    @Override
+    public String toString() {
+
+        final StringBuilder sb = new StringBuilder("Transfer{");
+        sb.append("id=").append(id);
+        sb.append(", amount=").append(amount);
+        sb.append(", fee=").append(fee);
+        sb.append(", status=").append(status);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", transferInstrument=").append(transferInstrument);
+        sb.append('}');
+        return sb.toString();
+    }
 }
