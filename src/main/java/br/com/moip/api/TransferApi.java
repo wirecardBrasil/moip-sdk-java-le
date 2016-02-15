@@ -2,13 +2,8 @@ package br.com.moip.api;
 
 import br.com.moip.Client;
 import br.com.moip.api.filter.Pagination;
-import br.com.moip.resource.BankAccount;
 import br.com.moip.resource.Transfer;
-import br.com.moip.response.InvoiceListResponse;
 import br.com.moip.response.TransferListResponse;
-
-import java.util.Arrays;
-import java.util.List;
 
 public class TransferApi {
 
