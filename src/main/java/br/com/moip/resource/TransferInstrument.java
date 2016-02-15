@@ -4,6 +4,7 @@ public class TransferInstrument {
 
     private Method method;
     private BankAccount bankAccount;
+    private MoipAccount moipAccount;
 
     public Method getMethod() {
         return method;
@@ -19,6 +20,14 @@ public class TransferInstrument {
 
     public void setBankAccount(BankAccount bankAccount) {
         this.bankAccount = bankAccount;
+    }
+
+    public MoipAccount getMoipAccount() {
+        return moipAccount;
+    }
+
+    public void setMoipAccount(MoipAccount moipAccount) {
+        this.moipAccount = moipAccount;
     }
 
     public enum Method {
