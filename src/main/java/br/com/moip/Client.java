@@ -46,6 +46,7 @@ public class Client {
         }
     }
 
+
     private final String endpoint;
     private final Authentication authentication;
     private final Gson gson;
