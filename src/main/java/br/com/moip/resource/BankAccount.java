@@ -60,6 +60,14 @@ public class BankAccount {
         return _links;
     }
 
+    public boolean isChecking(){
+        return getType().equals(Type.CHECKING);
+    }
+
+    public boolean isSaving(){
+        return getType().equals(Type.SAVING);
+    }
+
     private enum Type {
         CHECKING, SAVING;
     }
