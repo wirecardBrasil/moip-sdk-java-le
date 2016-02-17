@@ -36,7 +36,7 @@ public class TransferInstrument {
         final StringBuilder sb = new StringBuilder("TransferInstrument{");
         sb.append("method=").append(method);
         sb.append(", bankAccount=").append(bankAccount);
-        sb.append(", bankAccount=").append(bankAccount);
+        sb.append(", moipAccount=").append(moipAccount);
         sb.append('}');
         return sb.toString();
 
