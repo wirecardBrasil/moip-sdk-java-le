@@ -10,6 +10,7 @@ public class Transfer {
     private TransferStatus status;
     private Date createdAt;
     private Date updatedAt;
+    private Role role;
     private TransferInstrument transferInstrument;
 
     public String getId() {
@@ -66,6 +67,19 @@ public class Transfer {
 
     public void setTransferInstrument(TransferInstrument transferInstrument) {
         this.transferInstrument = transferInstrument;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public enum Role {
+        RECEIVER,
+        PAYER
     }
 
     @Override

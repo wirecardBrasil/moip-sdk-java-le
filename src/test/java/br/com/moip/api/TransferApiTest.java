@@ -44,9 +44,10 @@ public class TransferApiTest {
         assertEquals("TRA-08T6Z0ELJIPB", transferListResponse.getTransfers().get(0).getId());
         assertEquals("BKA-RYW7ICQBW126", transferListResponse.getTransfers().get(0).getTransferInstrument().getBankAccount().getId());
         assertEquals(TransferStatus.REQUESTED, transferListResponse.getTransfers().get(0).getStatus());
+        assertEquals(Transfer.Role.PAYER, transferListResponse.getTransfers().get(0).getRole());
         assertEquals("MPA-Y51WUXLPHBJJ", transferListResponse.getTransfers().get(1).getTransferInstrument().getMoipAccount().getId());
         assertEquals("TRA-BVVSKE5K26GG", transferListResponse.getTransfers().get(1).getId());
         assertEquals(TransferStatus.COMPLETED, transferListResponse.getTransfers().get(1).getStatus());
-
+        assertEquals(Transfer.Role.RECEIVER, transferListResponse.getTransfers().get(1).getRole());
     }
 }
