@@ -50,15 +50,14 @@ public class Order {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Order{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", amount=").append(amount);
-        sb.append(", ownId='").append(ownId).append('\'');
-        sb.append(", items=").append(items);
-        sb.append(", customer=").append(customer);
-        sb.append(", receivers=").append(receivers);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("Order{")
+                .append("id='").append(id).append('\'')
+                .append(", amount=").append(amount)
+                .append(", ownId='").append(ownId).append('\'')
+                .append(", items=").append(items)
+                .append(", customer=").append(customer)
+                .append(", receivers=").append(receivers)
+                .append('}').toString();
     }
 
     public static final class Item {
@@ -85,13 +84,12 @@ public class Order {
 
         @Override
         public String toString() {
-            final StringBuilder sb = new StringBuilder("Item{");
-            sb.append("product='").append(product).append('\'');
-            sb.append(", quantity=").append(quantity);
-            sb.append(", detail='").append(detail).append('\'');
-            sb.append(", price=").append(price);
-            sb.append('}');
-            return sb.toString();
+            return new StringBuilder("Item{")
+                    .append("product='").append(product).append('\'')
+                    .append(", quantity=").append(quantity)
+                    .append(", detail='").append(detail).append('\'')
+                    .append(", price=").append(price)
+                    .append('}').toString();
         }
     }
 }

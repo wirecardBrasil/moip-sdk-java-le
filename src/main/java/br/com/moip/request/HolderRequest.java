@@ -49,12 +49,11 @@ public class HolderRequest {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("HolderRequest{");
-        sb.append("fullname='").append(fullname).append('\'');
-        sb.append(", birthdate='").append(birthdate).append('\'');
-        sb.append(", phone=").append(phone);
-        sb.append(", taxDocument=").append(taxDocument);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("HolderRequest{")
+                .append("fullname='").append(fullname).append('\'')
+                .append(", birthdate='").append(birthdate).append('\'')
+                .append(", phone=").append(phone)
+                .append(", taxDocument=").append(taxDocument)
+                .append('}').toString();
     }
 }

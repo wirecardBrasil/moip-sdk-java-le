@@ -41,10 +41,9 @@ public class TransferListResponse {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("TransferListResponse{");
-        sb.append("summary=").append(summary);
-        sb.append(", transfers=").append(transfers);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("TransferListResponse{")
+                .append("summary=").append(summary)
+                .append(", transfers=").append(transfers)
+                .append('}').toString();
     }
 }

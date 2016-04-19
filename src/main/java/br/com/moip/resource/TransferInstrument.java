@@ -33,12 +33,11 @@ public class TransferInstrument {
     @Override
     public String toString() {
 
-        final StringBuilder sb = new StringBuilder("TransferInstrument{");
-        sb.append("method=").append(method);
-        sb.append(", bankAccount=").append(bankAccount);
-        sb.append(", moipAccount=").append(moipAccount);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("TransferInstrument{")
+                .append("method=").append(method)
+                .append(", bankAccount=").append(bankAccount)
+                .append(", moipAccount=").append(moipAccount)
+                .append('}').toString();
 
     }
 

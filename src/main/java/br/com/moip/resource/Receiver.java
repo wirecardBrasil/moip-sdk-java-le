@@ -28,12 +28,11 @@ public class Receiver {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Receiver{");
-        sb.append("amount=").append(amount);
-        sb.append(", type=").append(type);
-        sb.append(", moipAccount=").append(moipAccount);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("Receiver{")
+                .append("amount=").append(amount)
+                .append(", type=").append(type)
+                .append(", moipAccount=").append(moipAccount)
+                .append('}').toString();
     }
 
     public enum Type {

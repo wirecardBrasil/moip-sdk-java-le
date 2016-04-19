@@ -35,13 +35,12 @@ public class FundingInstrument {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FundingInstrument{");
-        sb.append("supressCreditCard=").append(supressCreditCard);
-        sb.append(", supressBoleto=").append(supressBoleto);
-        sb.append(", method=").append(method);
-        sb.append(", creditCard=").append(creditCard);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("FundingInstrument{")
+                .append("supressCreditCard=").append(supressCreditCard)
+                .append(", supressBoleto=").append(supressBoleto)
+                .append(", method=").append(method)
+                .append(", creditCard=").append(creditCard)
+                .append('}').toString();
     }
 
     public enum Method {

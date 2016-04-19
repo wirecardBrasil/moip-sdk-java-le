@@ -10,10 +10,9 @@ public class Key {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Key{");
-        sb.append("keys=").append(keys);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("Key{")
+                .append("keys=").append(keys)
+                .append('}').toString();
     }
 
     public static final class Keys {
@@ -31,11 +30,9 @@ public class Key {
 
         @Override
         public String toString() {
-            final StringBuilder sb = new StringBuilder("Keys{");
-            sb.append("basicAuth=").append(basicAuth);
-            sb.append(", encryption='").append(truncate(encryption, 10)).append('\'');
-            sb.append('}');
-            return sb.toString();
+            return new StringBuilder("Keys{").append("basicAuth=").append(basicAuth)
+                    .append(", encryption='").append(truncate(encryption, 10)).append('\'')
+                    .append('}').toString();
         }
     }
 
@@ -54,11 +51,10 @@ public class Key {
 
         @Override
         public String toString() {
-            final StringBuilder sb = new StringBuilder("BasicAuth{");
-            sb.append("token='").append(truncate(token, 5)).append('\'');
-            sb.append(", secret='").append(truncate(secret, 5)).append('\'');
-            sb.append('}');
-            return sb.toString();
+            return new StringBuilder("BasicAuth{")
+                    .append("token='").append(truncate(token, 5)).append('\'')
+                    .append(", secret='").append(truncate(secret, 5)).append('\'')
+                    .append('}').toString();
         }
     }
 

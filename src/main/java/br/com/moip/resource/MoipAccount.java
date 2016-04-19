@@ -41,12 +41,11 @@ public class MoipAccount {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("MoipAccount{");
-        sb.append("id='").append(id).append('\'');
-        sb.append("email='").append(email).append('\'');
-        sb.append(", fullname='").append(fullname).append('\'');
-        sb.append(", login='").append(login).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("MoipAccount{")
+                .append("id='").append(id).append('\'')
+                .append("email='").append(email).append('\'')
+                .append(", fullname='").append(fullname).append('\'')
+                .append(", login='").append(login).append('\'')
+                .append('}').toString();
     }
 }

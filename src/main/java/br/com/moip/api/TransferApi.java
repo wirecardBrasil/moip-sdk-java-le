@@ -15,8 +15,7 @@ public class TransferApi {
     }
 
     public Transfer get(final String id) {
-        Transfer transfer = client.get(TRANSFER_URL + "/" + id, Transfer.class);
-        return transfer;
+        return client.get(TRANSFER_URL + "/" + id, Transfer.class);
     }
 
     public TransferListResponse list() {

@@ -71,11 +71,10 @@ public class FundingInstrumentRequest {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("FundingInstrumentRequest{");
-        sb.append("method=").append(method);
-        sb.append(", creditCard=").append(creditCard);
-        sb.append(", boleto=").append(boleto);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("FundingInstrumentRequest{")
+                .append("method=").append(method)
+                .append(", creditCard=").append(creditCard)
+                .append(", boleto=").append(boleto)
+                .append('}').toString();
     }
 }

@@ -24,11 +24,10 @@ public class CaptureMethod {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CaptureMethod{");
-        sb.append("type=").append(type);
-        sb.append(", voucher='").append(voucher).append('\'');
-        sb.append(", stoneId='").append(stoneId).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("CaptureMethod{")
+                .append("type=").append(type)
+                .append(", voucher='").append(voucher).append('\'')
+                .append(", stoneId='").append(stoneId).append('\'')
+                .append('}').toString();
     }
 }

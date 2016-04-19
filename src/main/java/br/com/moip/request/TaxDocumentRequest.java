@@ -29,19 +29,15 @@ public class TaxDocumentRequest {
     }
 
     public static TaxDocumentRequest cpf(final String number) {
-        TaxDocumentRequest taxDocument = new TaxDocumentRequest()
+        return new TaxDocumentRequest()
                 .type(Type.CPF)
                 .number(number);
-
-        return taxDocument;
     }
 
     public static TaxDocumentRequest cnpj(final String number) {
-        TaxDocumentRequest taxDocument = new TaxDocumentRequest()
+        return new TaxDocumentRequest()
                 .type(Type.CNPJ)
                 .number(number);
-
-        return taxDocument;
     }
 
     @Override
