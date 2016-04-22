@@ -15,10 +15,9 @@ public class Summary {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Summary{");
-        sb.append("count=").append(count);
-        sb.append(", amount=").append(amount);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("Summary{")
+                .append("count=").append(count)
+                .append(", amount=").append(amount)
+                .append('}').toString();
     }
 }

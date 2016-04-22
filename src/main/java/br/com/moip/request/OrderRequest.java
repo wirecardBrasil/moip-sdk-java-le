@@ -52,12 +52,11 @@ public class OrderRequest {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("OrderRequest{");
-        sb.append("ownId='").append(ownId).append('\'');
-        sb.append(", items=").append(items);
-        sb.append(", customer=").append(customer);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("OrderRequest{")
+                .append("ownId='").append(ownId).append('\'')
+                .append(", items=").append(items)
+                .append(", customer=").append(customer)
+                .append('}').toString();
     }
 
     public static final class ItemRequest {
@@ -91,13 +90,12 @@ public class OrderRequest {
 
         @Override
         public String toString() {
-            final StringBuilder sb = new StringBuilder("Item{");
-            sb.append("product='").append(product).append('\'');
-            sb.append(", quantity=").append(quantity);
-            sb.append(", detail='").append(detail).append('\'');
-            sb.append(", price=").append(price);
-            sb.append('}');
-            return sb.toString();
+            return new StringBuilder("Item{")
+                    .append("product='").append(product).append('\'')
+                    .append(", quantity=").append(quantity)
+                    .append(", detail='").append(detail).append('\'')
+                    .append(", price=").append(price)
+                    .append('}').toString();
         }
     }
 }

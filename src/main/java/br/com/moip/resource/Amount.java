@@ -10,9 +10,8 @@ public class Amount {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Amount{");
-        sb.append("total=").append(total);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("Amount{")
+                .append("total=").append(total)
+                .append('}').toString();
     }
 }

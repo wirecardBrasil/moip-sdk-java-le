@@ -17,13 +17,11 @@ public class BankAccountsAPI {
     }
 
     public BankAccount create(final String moipAccount, final BankAccountRequest bankAccountRequest) {
-        BankAccount createdBankAccount = client.post("/v2/accounts/" + moipAccount + "/bankaccounts", bankAccountRequest, BankAccount.class);
-        return createdBankAccount;
+        return client.post("/v2/accounts/" + moipAccount + "/bankaccounts", bankAccountRequest, BankAccount.class);
     }
 
     public BankAccount get(final String id) {
-        BankAccount bankAccount = client.get("/v2/bankaccounts/" + id, BankAccount.class);
-        return bankAccount;
+        return client.get("/v2/bankaccounts/" + id, BankAccount.class);
     }
 
     public List<BankAccount> getList(final String moipAccount) {

@@ -13,15 +13,10 @@ public class OrderAPI {
     }
 
     public Order create(final OrderRequest order) {
-
-        Order createdOrder = client.post("/v2/orders", order, Order.class);
-
-        return createdOrder;
+        return client.post("/v2/orders", order, Order.class);
     }
 
     public Order get(final String id) {
-        Order order = client.get("/v2/orders/" + id, Order.class);
-
-        return order;
+        return client.get("/v2/orders/" + id, Order.class);
     }
 }

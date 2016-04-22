@@ -27,10 +27,9 @@ public class PhoneRequest {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("PhoneRequest{");
-        sb.append("areaCode='").append(areaCode).append('\'');
-        sb.append(", number='").append(number).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("PhoneRequest{")
+                .append("areaCode='").append(areaCode).append('\'')
+                .append(", number='").append(number).append('\'')
+                .append('}').toString();
     }
 }

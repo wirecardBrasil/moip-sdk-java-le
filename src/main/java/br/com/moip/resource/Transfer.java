@@ -85,15 +85,14 @@ public class Transfer {
     @Override
     public String toString() {
 
-        final StringBuilder sb = new StringBuilder("Transfer{");
-        sb.append("id=").append(id);
-        sb.append(", amount=").append(amount);
-        sb.append(", fee=").append(fee);
-        sb.append(", status=").append(status);
-        sb.append(", createdAt=").append(createdAt);
-        sb.append(", updatedAt=").append(updatedAt);
-        sb.append(", transferInstrument=").append(transferInstrument);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("Transfer{")
+                .append("id=").append(id)
+                .append(", amount=").append(amount)
+                .append(", fee=").append(fee)
+                .append(", status=").append(status)
+                .append(", createdAt=").append(createdAt)
+                .append(", updatedAt=").append(updatedAt)
+                .append(", transferInstrument=").append(transferInstrument)
+                .append('}').toString();
     }
 }

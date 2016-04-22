@@ -32,13 +32,12 @@ public class CreditCard {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("CreditCard{");
-        sb.append("holder=").append(holder);
-        sb.append(", brand='").append(brand).append('\'');
-        sb.append(", first6='").append(first6).append('\'');
-        sb.append(", last4='").append(last4).append('\'');
-        sb.append(", captureMethod=").append(captureMethod);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("CreditCard{")
+                .append("holder=").append(holder)
+                .append(", brand='").append(brand).append('\'')
+                .append(", first6='").append(first6).append('\'')
+                .append(", last4='").append(last4).append('\'')
+                .append(", captureMethod=").append(captureMethod)
+                .append('}').toString();
     }
 }

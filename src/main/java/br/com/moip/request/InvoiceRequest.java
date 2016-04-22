@@ -46,12 +46,11 @@ public class InvoiceRequest {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("InvoiceRequest{");
-        sb.append("description='").append(description).append('\'');
-        sb.append(", invoiceAmount=").append(invoiceAmount);
-        sb.append(", customer=").append(customer);
-        sb.append(", checkoutPreferences=").append(checkoutPreferences);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("InvoiceRequest{")
+                .append("description='").append(description).append('\'')
+                .append(", invoiceAmount=").append(invoiceAmount)
+                .append(", customer=").append(customer)
+                .append(", checkoutPreferences=").append(checkoutPreferences)
+                .append('}').toString();
     }
 }

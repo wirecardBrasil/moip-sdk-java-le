@@ -40,10 +40,9 @@ public class InvoiceListResponse {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("InvoiceListResponse{");
-        sb.append("summary=").append(summary);
-        sb.append(", invoices=").append(invoices);
-        sb.append('}');
-        return sb.toString();
+        return new StringBuilder("InvoiceListResponse{")
+                .append("summary=").append(summary)
+                .append(", invoices=").append(invoices)
+                .append('}').toString();
     }
 }
