@@ -42,14 +42,14 @@ API api = new API(client);
 ## Criando um Pedido
 
 ```java
-Order createdOrder = api.order().create(new Order()
-    .setOwnId("order_own_id")
-    .addItem("Nome do produto", 1, "Mais info...", 100)
-    .setCustomer(new Customer()
-                    .setOwnId("customer_own_id")
-                    .setFullname("Jose da Silva")
-                    .setEmail("sandbox_v2_1401147277@email.com")
-    )
+Order createdOrder = api.create(new OrderRequest()
+                                        .ownId("order_own_id")
+                                        .addItem("Nome do produto", 1, "Mais info...", 100)
+                                        .customer(new CustomerRequest()
+                                                        .ownId("customer_own_id")
+                                                        .fullname("Jose da Silva")
+                                                        .email("sandbox_v2_1401147277@email.com")
+                                        )
 );
 ```
 
@@ -58,42 +58,49 @@ Order createdOrder = api.order().create(new Order()
 ### Cartão de crédito
 
 ```java
-Payment createdPayment = order.payments()
-    .setInstallmentCount(1)
-    .setCreditCard(
-        new CreditCard()
-            .setNumber("4012001038443335")
-            .setCvc("123")
-            .setExpirationMonth("04")
-            .setExpirationYear("18")
-            .setHolder(
-                new Holder()
-                    .setFullname("Jose Portador da Silva")
-                    .setBirthDate("1988-10-10")
-                    .setPhone(
-                        new Phone()
-                            .setAreaCode("11")
-                            .setNumber("55667788")
-                    )
-                    .setTaxDocument(TaxDocument.cpf("22222222222"))
-            )
-    )
-    .execute();
+Payment createdPayment = api.create(
+        new PaymentRequest()
+                .orderId("ORD-HPMZSOM611M2")
+                .installmentCount(1)
+                .fundingInstrument(
+                        new FundingInstrumentRequest()
+                                .creditCard(
+                                        new CreditCardRequest()
+                                                .hash(CC_HASH)
+                                                .holder(
+                                                        new HolderRequest()
+                                                                .fullname("Jose Portador da Silva")
+                                                                .birthdate("1988-10-10")
+                                                                .phone(
+                                                                        new PhoneRequest()
+                                                                                .setAreaCode("11")
+                                                                                .setNumber("55667788")
+                                                                )
+                                                                .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                                )
+                                )
+                )
+    );
 ```
 
 ### Boleto
 
 ```java
-Payment createdPayment = order.payments()
-    .setBoleto(
-        new Boleto()
-            .setExpirationDate("2015-09-30")
-            .setLogoUri("https://")
-            .setFirstInstructionLine("Primeira linha do boleto")
-            .setSecondInstructionLine("Segunda linha do boleto")
-            .setThirdInstructionLine("Terceira linha do boleto")
-    )
-    .execute();
+ Payment createdPayment = api.create(
+        new PaymentRequest()
+            .orderId("ORD-GOHHIF4Z6PLV")
+            .installmentCount(1)
+            .fundingInstrument(new FundingInstrumentRequest()
+                .boleto(new BoletoRequest()
+                    .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2020, Calendar.NOVEMBER, 10).getTime()))
+                    .logoUri("http://logo.com")
+                    .instructionLines(new InstructionLinesRequest()
+                        .first("Primeira linha")
+                        .second("Segunda linha")
+                        .third("Terceira linha"))
+                )
+            )
+    );
 ```
 
 ## Tratamento de Exceções
