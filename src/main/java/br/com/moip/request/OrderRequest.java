@@ -8,7 +8,7 @@ public class OrderRequest {
     private String ownId;
     private final List<ItemRequest> items = new ArrayList<ItemRequest>();
     private CustomerRequest customer;
-    private List<ReceiverRequest> receivers = new ArrayList<ReceiverRequest>();
+    private final List<ReceiverRequest> receivers = new ArrayList<ReceiverRequest>();
 
     public String getOwnId() {
         return ownId;

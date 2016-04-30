@@ -3,7 +3,7 @@ package br.com.moip.authentication;
 import java.net.HttpURLConnection;
 
 public class OAuth implements Authentication {
-	private String accessToken;
+	private final String accessToken;
 
 	public OAuth(String accessToken) {
 		this.accessToken = accessToken;

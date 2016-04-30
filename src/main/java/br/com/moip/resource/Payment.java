@@ -4,7 +4,7 @@ public class Payment {
 
     private String id;
     private int installmentCount;
-    private FundingInstrument fundingInstrument = new FundingInstrument();
+    private final FundingInstrument fundingInstrument = new FundingInstrument();
 
     public String getId() {
         return id;

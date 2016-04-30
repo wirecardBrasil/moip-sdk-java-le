@@ -37,7 +37,7 @@ public class ReceiverRequest {
 }
 
 class MoipAccountRequest {
-    private String id;
+    private final String id;
 
     public MoipAccountRequest(String moipAccount) {
         this.id = moipAccount;
