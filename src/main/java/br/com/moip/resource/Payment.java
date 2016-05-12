@@ -3,6 +3,8 @@ package br.com.moip.resource;
 public class Payment {
 
     private String id;
+    private PaymentStatus status;
+    private Amount amount;
     private int installmentCount;
     private FundingInstrument fundingInstrument = new FundingInstrument();
 
@@ -16,5 +18,13 @@ public class Payment {
 
     public int getInstallmentCount() {
         return installmentCount;
+    }
+
+    public PaymentStatus getStatus() {
+        return status;
+    }
+
+    public Amount getAmount() {
+        return amount;
     }
 }
