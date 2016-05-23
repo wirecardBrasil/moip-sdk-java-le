@@ -13,14 +13,14 @@ public class TransferListResponse {
 
     private List<Transfer> transfers;
     private Summary summary;
-    private Links _links;
+    private Links links;
 
     public String next() {
-        return _links.getLinks().get(NEXT).toString();
+        return links.getLinks().get(NEXT).toString();
     }
 
     public String previous() {
-        return _links.getLinks().get(PREVIOUS).toString();
+        return links.getLinks().get(PREVIOUS).toString();
     }
 
     public List<Transfer> getTransfers() {

@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Errors {
 
-    private List<Error> errors = new ArrayList<Error>();
+    private final List<Error> errors = new ArrayList<Error>();
 
     public List<Error> getErrors() {
         return errors;

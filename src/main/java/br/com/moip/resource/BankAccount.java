@@ -14,7 +14,7 @@ public class BankAccount {
     private Type type;
     private String status;
     private Date createdAt;
-    private Links _links;
+    private Links links;
 
     public String getId() {
         return id;
@@ -57,7 +57,7 @@ public class BankAccount {
     }
 
     public Links getLinks() {
-        return _links;
+        return links;
     }
 
     public boolean isChecking(){
@@ -85,7 +85,7 @@ public class BankAccount {
                 ", type=" + type +
                 ", status='" + status + '\'' +
                 ", createdAt=" + createdAt +
-                ", _links=" + _links +
+                ", _links=" + links +
                 '}';
     }
 }

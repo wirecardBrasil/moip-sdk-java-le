@@ -14,10 +14,10 @@ import java.util.List;
 // http://stackoverflow.com/questions/1037590/which-cipher-suites-to-enable-for-ssl-socket/23365536#23365536
 public class SSLSupport extends SSLSocketFactory {
 
-    private SSLContext m_ctx;
+    private SSLContext mCtx;
 
-    private String[] m_ciphers;
-    private String[] m_protocols;
+    private String[] mCiphers;
+    private String[] mProtocols;
 
     public SSLSupport() throws NoSuchAlgorithmException, KeyManagementException, IOException {
         initSSLSocketFactoryEx(null,null,null);
@@ -33,94 +33,94 @@ public class SSLSupport extends SSLSocketFactory {
 
     public String[] getDefaultCipherSuites()
     {
-        return m_ciphers;
+        return mCiphers;
     }
 
     public String[] getSupportedCipherSuites()
     {
-        return m_ciphers;
+        return mCiphers;
     }
 
     public String[] getDefaultProtocols()
     {
-        return m_protocols;
+        return mProtocols;
     }
 
     public String[] getSupportedProtocols()
     {
-        return m_protocols;
+        return mProtocols;
     }
 
     public Socket createSocket(Socket s, String host, int port, boolean autoClose) throws IOException
     {
-        SSLSocketFactory factory = m_ctx.getSocketFactory();
+        SSLSocketFactory factory = mCtx.getSocketFactory();
         SSLSocket ss = (SSLSocket)factory.createSocket(s, host, port, autoClose);
 
-        ss.setEnabledProtocols(m_protocols);
-        ss.setEnabledCipherSuites(m_ciphers);
+        ss.setEnabledProtocols(mProtocols);
+        ss.setEnabledCipherSuites(mCiphers);
 
         return ss;
     }
 
     public Socket createSocket(InetAddress address, int port, InetAddress localAddress, int localPort) throws IOException
     {
-        SSLSocketFactory factory = m_ctx.getSocketFactory();
+        SSLSocketFactory factory = mCtx.getSocketFactory();
         SSLSocket ss = (SSLSocket)factory.createSocket(address, port, localAddress, localPort);
 
-        ss.setEnabledProtocols(m_protocols);
-        ss.setEnabledCipherSuites(m_ciphers);
+        ss.setEnabledProtocols(mProtocols);
+        ss.setEnabledCipherSuites(mCiphers);
 
         return ss;
     }
 
     public Socket createSocket(String host, int port, InetAddress localHost, int localPort) throws IOException
     {
-        SSLSocketFactory factory = m_ctx.getSocketFactory();
+        SSLSocketFactory factory = mCtx.getSocketFactory();
         SSLSocket ss = (SSLSocket)factory.createSocket(host, port, localHost, localPort);
 
-        ss.setEnabledProtocols(m_protocols);
-        ss.setEnabledCipherSuites(m_ciphers);
+        ss.setEnabledProtocols(mProtocols);
+        ss.setEnabledCipherSuites(mCiphers);
 
         return ss;
     }
 
     public Socket createSocket(InetAddress host, int port) throws IOException
     {
-        SSLSocketFactory factory = m_ctx.getSocketFactory();
+        SSLSocketFactory factory = mCtx.getSocketFactory();
         SSLSocket ss = (SSLSocket)factory.createSocket(host, port);
 
-        ss.setEnabledProtocols(m_protocols);
-        ss.setEnabledCipherSuites(m_ciphers);
+        ss.setEnabledProtocols(mProtocols);
+        ss.setEnabledCipherSuites(mCiphers);
 
         return ss;
     }
 
     public Socket createSocket(String host, int port) throws IOException
     {
-        SSLSocketFactory factory = m_ctx.getSocketFactory();
+        SSLSocketFactory factory = mCtx.getSocketFactory();
         SSLSocket ss = (SSLSocket)factory.createSocket(host, port);
 
-        ss.setEnabledProtocols(m_protocols);
-        ss.setEnabledCipherSuites(m_ciphers);
+        ss.setEnabledProtocols(mProtocols);
+        ss.setEnabledCipherSuites(mCiphers);
 
         return ss;
     }
 
     private void initSSLSocketFactoryEx(KeyManager[] km, TrustManager[] tm, SecureRandom random)
             throws NoSuchAlgorithmException, KeyManagementException, IOException {
-        m_ctx = SSLContext.getInstance("TLS");
-        m_ctx.init(km, tm, random);
+        mCtx = SSLContext.getInstance("TLS");
+        mCtx.init(km, tm, random);
 
-        m_protocols = getProtocolList();
-        m_ciphers = getCipherList();
+        mProtocols = getProtocolList();
+        mCiphers = getCipherList();
     }
 
     private void initSSLSocketFactoryEx(SSLContext ctx)
             throws NoSuchAlgorithmException, KeyManagementException, IOException {
-        m_ctx = ctx;
+        mCtx = ctx;
 
-        m_protocols = getProtocolList();
-        m_ciphers = getCipherList();
+        mProtocols = getProtocolList();
+        mCiphers = getCipherList();
     }
 
     protected String[] getProtocolList() throws IOException {
@@ -131,7 +131,7 @@ public class SSLSupport extends SSLSocketFactory {
 
         try
         {
-            SSLSocketFactory factory = m_ctx.getSocketFactory();
+            SSLSocketFactory factory = mCtx.getSocketFactory();
             socket = (SSLSocket)factory.createSocket();
 
             availableProtocols = socket.getSupportedProtocols();
@@ -215,7 +215,7 @@ public class SSLSupport extends SSLSocketFactory {
 
         try
         {
-            SSLSocketFactory factory = m_ctx.getSocketFactory();
+            SSLSocketFactory factory = mCtx.getSocketFactory();
             availableCiphers = factory.getSupportedCipherSuites();
             Arrays.sort(availableCiphers);
         }
