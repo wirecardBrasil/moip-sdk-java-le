@@ -90,9 +90,12 @@ final class Base64 {
             quantum = (quantum << 6) | (byte) bits;
             if (inIndex % 4 == 3) {
                 // 4 characters were read, so make the output:
-                out[outIndex++] = (byte) (quantum >> 16);
-                out[outIndex++] = (byte) (quantum >> 8);
-                out[outIndex++] = (byte) quantum;
+                out[outIndex] = (byte) (quantum >> 16);
+                outIndex++;
+                out[outIndex] = (byte) (quantum >> 8);
+                outIndex++;
+                out[outIndex] = (byte) quantum;
+                outIndex++;
             }
             inIndex++;
         }
@@ -100,9 +103,11 @@ final class Base64 {
             // adjust the quantum value according to the padding
             quantum = quantum << (6 * pad);
             // make output
-            out[outIndex++] = (byte) (quantum >> 16);
+            out[outIndex] = (byte) (quantum >> 16);
+            outIndex++;
             if (pad == 1) {
-                out[outIndex++] = (byte) (quantum >> 8);
+                out[outIndex] = (byte) (quantum >> 8);
+                outIndex++;
             }
         }
         // create the resulting array
@@ -116,23 +121,35 @@ final class Base64 {
         byte[] out = new byte[length];
         int index = 0, end = in.length - in.length % 3;
         for (int i = 0; i < end; i += 3) {
-            out[index++] = MAP[(in[i] & 0xff) >> 2];
-            out[index++] = MAP[((in[i] & 0x03) << 4) | ((in[i + 1] & 0xff) >> 4)];
-            out[index++] = MAP[((in[i + 1] & 0x0f) << 2) | ((in[i + 2] & 0xff) >> 6)];
-            out[index++] = MAP[(in[i + 2] & 0x3f)];
+            out[index] = MAP[(in[i] & 0xff) >> 2];
+            index++;
+            out[index] = MAP[((in[i] & 0x03) << 4) | ((in[i + 1] & 0xff) >> 4)];
+            index++;
+            out[index] = MAP[((in[i + 1] & 0x0f) << 2) | ((in[i + 2] & 0xff) >> 6)];
+            index++;
+            out[index] = MAP[(in[i + 2] & 0x3f)];
+            index++;
         }
         switch (in.length % 3) {
             case 1:
-                out[index++] = MAP[(in[end] & 0xff) >> 2];
-                out[index++] = MAP[(in[end] & 0x03) << 4];
-                out[index++] = '=';
-                out[index++] = '=';
+                out[index] = MAP[(in[end] & 0xff) >> 2];
+                index++;
+                out[index] = MAP[(in[end] & 0x03) << 4];
+                index++;
+                out[index] = '=';
+                index++;
+                out[index] = '=';
+                index++;
                 break;
             case 2:
-                out[index++] = MAP[(in[end] & 0xff) >> 2];
-                out[index++] = MAP[((in[end] & 0x03) << 4) | ((in[end + 1] & 0xff) >> 4)];
-                out[index++] = MAP[((in[end + 1] & 0x0f) << 2)];
-                out[index++] = '=';
+                out[index] = MAP[(in[end] & 0xff) >> 2];
+                index++;
+                out[index] = MAP[((in[end] & 0x03) << 4) | ((in[end + 1] & 0xff) >> 4)];
+                index++;
+                out[index] = MAP[((in[end + 1] & 0x0f) << 2)];
+                index++;
+                out[index] = '=';
+                index++;
                 break;
         }
         try {
