@@ -1,0 +1,76 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/orders/ORD-GOHHIF4Z6PLV/payments
+    headers:
+      "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: POST
+  response:
+    status: 200
+    headers:
+      "Content-Type": application/json
+    body: |
+      {
+         "id":"PAY-3D2AGQ2U7F9C",
+         "status":"WAITING",
+         "delayCapture":false,
+         "amount":{
+            "total":10000,
+            "fees":418,
+            "refunds":0,
+            "liquid":9582,
+            "currency":"BRL"
+         },
+         "installmentCount":2,
+         "fundingInstrument":{
+            "mpos":{
+               "pinpadId":"D180-64000000"
+            },
+            "method":"CREDIT_CARD"
+         },
+         "fees":[
+            {
+               "type":"TRANSACTION",
+               "amount":418
+            }
+         ],
+         "events":[
+            {
+               "type":"PAYMENT.CREATED",
+               "createdAt":"2016-08-03T16:21:34.290-03"
+            },
+            {
+               "type":"PAYMENT.WAITING",
+               "createdAt":"2016-08-03T16:21:34.290-03"
+            }
+         ],
+         "receivers":[
+            {
+               "moipAccount":{
+                  "id":"MPA-AE2OAL41CBB1",
+                  "login":"iori@labs.moip.com.br",
+                  "fullname":"Iori Yagami"
+               },
+               "type":"PRIMARY",
+               "amount":{
+                  "total":10000,
+                  "fees":418,
+                  "refunds":0
+               },
+               "amountValid":true
+            }
+         ],
+         "_links":{
+            "self":{
+               "href":"http://order/order-api/v2/payments/PAY-3D2AGQ2U7F9C"
+            },
+            "order":{
+               "href":"http://order/order-api/v2/orders/ORD-DK6PXHSLFZR6",
+               "title":"ORD-DK6PXHSLFZR6"
+            }
+         },
+         "createdAt":"2016-08-03T16:21:34.150-03",
+         "updatedAt":"2016-08-03T16:21:34.150-03"
+      }

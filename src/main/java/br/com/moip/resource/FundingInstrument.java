@@ -6,6 +6,7 @@ public class FundingInstrument {
     private Method method;
     private CreditCard creditCard;
     private Boleto boleto;
+    private Mpos mpos;
 
     public boolean isSupressCreditCard() {
         return supressCreditCard;
@@ -33,17 +34,27 @@ public class FundingInstrument {
         return boleto;
     }
 
-    @Override
-    public String toString() {
-        return new StringBuilder("FundingInstrument{")
-                .append("supressCreditCard=").append(supressCreditCard)
-                .append(", supressBoleto=").append(supressBoleto)
-                .append(", method=").append(method)
-                .append(", creditCard=").append(creditCard)
-                .append('}').toString();
+    public Mpos getMpos() {
+        return mpos;
+    }
+
+    public void setMpos(Mpos mpos) {
+        this.mpos = mpos;
     }
 
     public enum Method {
         CREDIT_CARD, BOLETO;
+    }
+
+    @Override
+    public String toString() {
+        return "FundingInstrument{" +
+                "supressCreditCard=" + supressCreditCard +
+                ", supressBoleto=" + supressBoleto +
+                ", method=" + method +
+                ", creditCard=" + creditCard +
+                ", boleto=" + boleto +
+                ", mpos=" + mpos +
+                '}';
     }
 }

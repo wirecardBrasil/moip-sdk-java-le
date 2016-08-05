@@ -7,8 +7,7 @@ public class FundingInstrumentRequest {
     private BoletoRequest boleto;
     private boolean supressBoleto;
     private boolean supressCreditCard;
-    //Used on MPOS
-    private CardRequest card;
+    private MposRequest mposRequest;
 
 
     public Method getMethod() {
@@ -29,14 +28,14 @@ public class FundingInstrumentRequest {
         return this;
     }
 
-    public FundingInstrumentRequest mposDebitCard(final CardRequest debitCard) {
-        this.card = debitCard;
+    public FundingInstrumentRequest mposDebitCard(final MposRequest mposRequest) {
+        this.mposRequest = mposRequest;
         this.method = Method.DEBIT_CARD;
         return this;
     }
 
-    public FundingInstrumentRequest mposCreditCard(final CardRequest creditCard) {
-        this.card = creditCard;
+    public FundingInstrumentRequest mposCreditCard(final MposRequest mposRequest) {
+        this.mposRequest = mposRequest;
         this.method = Method.CREDIT_CARD;
         return this;
     }
@@ -61,20 +60,27 @@ public class FundingInstrumentRequest {
         return this;
     }
 
-    public CardRequest getCard() {
-        return card;
-    }
-
     private enum Method {
         CREDIT_CARD, DEBIT_CARD, BOLETO;
     }
 
+    public MposRequest getMposRequest() {
+        return mposRequest;
+    }
+
+    public void setMposRequest(MposRequest mposRequest) {
+        this.mposRequest = mposRequest;
+    }
+
     @Override
     public String toString() {
-        return new StringBuilder("FundingInstrumentRequest{")
-                .append("method=").append(method)
-                .append(", creditCard=").append(creditCard)
-                .append(", boleto=").append(boleto)
-                .append('}').toString();
+        return "FundingInstrumentRequest{" +
+                "method=" + method +
+                ", creditCard=" + creditCard +
+                ", boleto=" + boleto +
+                ", supressBoleto=" + supressBoleto +
+                ", supressCreditCard=" + supressCreditCard +
+                ", mposRequest=" + mposRequest +
+                '}';
     }
 }

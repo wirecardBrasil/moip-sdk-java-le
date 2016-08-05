@@ -7,11 +7,13 @@ import br.com.moip.request.CreditCardRequest;
 import br.com.moip.request.FundingInstrumentRequest;
 import br.com.moip.request.HolderRequest;
 import br.com.moip.request.InstructionLinesRequest;
+import br.com.moip.request.MposRequest;
 import br.com.moip.request.PaymentRequest;
 import br.com.moip.request.PhoneRequest;
 import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.resource.FundingInstrument;
 import br.com.moip.resource.Payment;
+import br.com.moip.resource.PaymentStatus;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
@@ -98,5 +100,24 @@ public class PaymentAPITest {
         assertEquals("Segunda linha", createdPayment.getFundingInstrument().getBoleto().getInstructionLines().getSecond());
         assertEquals("Terceira linha", createdPayment.getFundingInstrument().getBoleto().getInstructionLines().getThird());
         assertEquals(FundingInstrument.Method.BOLETO, createdPayment.getFundingInstrument().getMethod());
+    }
+
+    @Play("payments/create_mpos_credit_payment")
+    @Test
+    public void testCreateMposCreditRequest() {
+        Payment createdPayment = api.create(
+                new PaymentRequest()
+                        .orderId("ORD-GOHHIF4Z6PLV")
+                        .installmentCount(1)
+                        .fundingInstrument(new FundingInstrumentRequest()
+                                                    .mposCreditCard(new MposRequest()
+                                                                    .PinpadId("D180")
+                                                    )
+                        )
+        );
+
+        assertEquals(createdPayment.getId(), "PAY-3D2AGQ2U7F9C");
+        assertEquals(createdPayment.getStatus(), PaymentStatus.WAITING);
+        assertEquals(createdPayment.getFundingInstrument().getMpos().getPinpadId(), "D180-64000000");
     }
 }
