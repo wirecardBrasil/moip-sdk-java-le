@@ -45,10 +45,12 @@ public class PaymentRequest {
 
     @Override
     public String toString() {
-        return new StringBuilder("PaymentRequest{")
-                .append("orderId='").append(orderId).append('\'')
-                .append(", installmentCount=").append(installmentCount)
-                .append(", fundingInstrument=").append(fundingInstrument)
-                .append('}').toString();
+        final StringBuilder sb = new StringBuilder("PaymentRequest{");
+        sb.append("orderId='").append(orderId).append('\'');
+        sb.append(", installmentCount=").append(installmentCount);
+        sb.append(", fundingInstrument=").append(fundingInstrument);
+        sb.append(", geolocation=").append(geolocation);
+        sb.append('}');
+        return sb.toString();
     }
 }

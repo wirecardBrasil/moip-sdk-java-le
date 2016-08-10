@@ -11,4 +11,12 @@ public class MposRequest {
     public String getPinpadId() {
         return pinpadId;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("MposRequest{");
+        sb.append("pinpadId='").append(pinpadId).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

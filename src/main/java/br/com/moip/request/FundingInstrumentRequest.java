@@ -64,23 +64,16 @@ public class FundingInstrumentRequest {
         CREDIT_CARD, DEBIT_CARD, BOLETO;
     }
 
-    public MposRequest getMpos() {
-        return mpos;
-    }
-
-    public void setMpos(MposRequest mpos) {
-        this.mpos = mpos;
-    }
-
     @Override
     public String toString() {
-        return "FundingInstrumentRequest{" +
-                "method=" + method +
-                ", creditCard=" + creditCard +
-                ", boleto=" + boleto +
-                ", supressBoleto=" + supressBoleto +
-                ", supressCreditCard=" + supressCreditCard +
-                ", mpos=" + mpos +
-                '}';
+        final StringBuilder sb = new StringBuilder("FundingInstrumentRequest{");
+        sb.append("method=").append(method);
+        sb.append(", creditCard=").append(creditCard);
+        sb.append(", boleto=").append(boleto);
+        sb.append(", supressBoleto=").append(supressBoleto);
+        sb.append(", supressCreditCard=").append(supressCreditCard);
+        sb.append(", mpos=").append(mpos);
+        sb.append('}');
+        return sb.toString();
     }
 }

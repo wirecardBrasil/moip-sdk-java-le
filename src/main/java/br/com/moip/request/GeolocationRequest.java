@@ -13,4 +13,13 @@ public class GeolocationRequest {
         this.longitude = longitude;
         return this;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("GeolocationRequest{");
+        sb.append("latitude=").append(latitude);
+        sb.append(", longitude=").append(longitude);
+        sb.append('}');
+        return sb.toString();
+    }
 }
