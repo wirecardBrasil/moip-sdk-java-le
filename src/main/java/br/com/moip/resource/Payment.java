@@ -7,6 +7,7 @@ public class Payment {
     private Amount amount;
     private int installmentCount;
     private final FundingInstrument fundingInstrument = new FundingInstrument();
+    private Geolocation geolocation;
 
     public String getId() {
         return id;
@@ -26,5 +27,13 @@ public class Payment {
 
     public Amount getAmount() {
         return amount;
+    }
+
+    public Geolocation getGeolocation() {
+        return geolocation;
+    }
+
+    public void setGeolocation(Geolocation geolocation) {
+        this.geolocation = geolocation;
     }
 }

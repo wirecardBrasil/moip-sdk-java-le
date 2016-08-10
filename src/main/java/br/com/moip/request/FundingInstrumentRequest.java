@@ -7,7 +7,7 @@ public class FundingInstrumentRequest {
     private BoletoRequest boleto;
     private boolean supressBoleto;
     private boolean supressCreditCard;
-    private MposRequest mposRequest;
+    private MposRequest mpos;
 
 
     public Method getMethod() {
@@ -29,13 +29,13 @@ public class FundingInstrumentRequest {
     }
 
     public FundingInstrumentRequest mposDebitCard(final MposRequest mposRequest) {
-        this.mposRequest = mposRequest;
+        this.mpos = mposRequest;
         this.method = Method.DEBIT_CARD;
         return this;
     }
 
     public FundingInstrumentRequest mposCreditCard(final MposRequest mposRequest) {
-        this.mposRequest = mposRequest;
+        this.mpos = mposRequest;
         this.method = Method.CREDIT_CARD;
         return this;
     }
@@ -64,12 +64,12 @@ public class FundingInstrumentRequest {
         CREDIT_CARD, DEBIT_CARD, BOLETO;
     }
 
-    public MposRequest getMposRequest() {
-        return mposRequest;
+    public MposRequest getMpos() {
+        return mpos;
     }
 
-    public void setMposRequest(MposRequest mposRequest) {
-        this.mposRequest = mposRequest;
+    public void setMpos(MposRequest mpos) {
+        this.mpos = mpos;
     }
 
     @Override
@@ -80,7 +80,7 @@ public class FundingInstrumentRequest {
                 ", boleto=" + boleto +
                 ", supressBoleto=" + supressBoleto +
                 ", supressCreditCard=" + supressCreditCard +
-                ", mposRequest=" + mposRequest +
+                ", mpos=" + mpos +
                 '}';
     }
 }

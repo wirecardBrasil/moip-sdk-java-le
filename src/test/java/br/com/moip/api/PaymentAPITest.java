@@ -5,6 +5,7 @@ import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.BoletoRequest;
 import br.com.moip.request.CreditCardRequest;
 import br.com.moip.request.FundingInstrumentRequest;
+import br.com.moip.request.GeolocationRequest;
 import br.com.moip.request.HolderRequest;
 import br.com.moip.request.InstructionLinesRequest;
 import br.com.moip.request.MposRequest;
@@ -109,15 +110,20 @@ public class PaymentAPITest {
                 new PaymentRequest()
                         .orderId("ORD-GOHHIF4Z6PLV")
                         .installmentCount(1)
+                        .geolocation(new GeolocationRequest()
+                                .latitude(-33.867)
+                                .longitude(151.206))
                         .fundingInstrument(new FundingInstrumentRequest()
-                                                    .mposCreditCard(new MposRequest()
-                                                                    .PinpadId("D180")
-                                                    )
+                                        .mposCreditCard(new MposRequest()
+                                                        .PinpadId("D180")
+                                        )
                         )
         );
 
-        assertEquals(createdPayment.getId(), "PAY-3D2AGQ2U7F9C");
+        assertEquals(createdPayment.getId(), "PAY-1TUOVJ3D18NM");
         assertEquals(createdPayment.getStatus(), PaymentStatus.WAITING);
-        assertEquals(createdPayment.getFundingInstrument().getMpos().getPinpadId(), "D180-64000000");
+        assertEquals(createdPayment.getFundingInstrument().getMpos().getPinpadId(), "D180-64000786");
+        assertEquals(createdPayment.getGeolocation().getLatitude(), -33.867, 0);
+        assertEquals(createdPayment.getGeolocation().getLongitude(), 151.206,0);
     }
 }

@@ -5,6 +5,7 @@ public class PaymentRequest {
     private String orderId;
     private int installmentCount;
     private FundingInstrumentRequest fundingInstrument = new FundingInstrumentRequest();
+    private GeolocationRequest geolocation;
 
     public String getOrderId() {
         return orderId;
@@ -12,7 +13,6 @@ public class PaymentRequest {
 
     public PaymentRequest orderId(final String orderId) {
         this.orderId = orderId;
-
         return this;
     }
 
@@ -22,7 +22,6 @@ public class PaymentRequest {
 
     public PaymentRequest installmentCount(final int installmentCount) {
         this.installmentCount = installmentCount;
-
         return this;
     }
 
@@ -32,8 +31,16 @@ public class PaymentRequest {
 
     public PaymentRequest fundingInstrument(final FundingInstrumentRequest fundingInstrument) {
         this.fundingInstrument = fundingInstrument;
-
         return this;
+    }
+
+    public PaymentRequest geolocation(GeolocationRequest geolocation){
+        this.geolocation = geolocation;
+        return this;
+    }
+
+    public GeolocationRequest getGeolocation() {
+        return geolocation;
     }
 
     @Override
