@@ -6,6 +6,7 @@ public class FundingInstrument {
     private Method method;
     private CreditCard creditCard;
     private Boleto boleto;
+    private Mpos mpos;
 
     public boolean isSupressCreditCard() {
         return supressCreditCard;
@@ -15,35 +16,60 @@ public class FundingInstrument {
         return supressBoleto;
     }
 
-    public FundingInstrument setSupressBoleto(final boolean supressBoleto) {
-        this.supressBoleto = supressBoleto;
+    public void setSupressCreditCard(boolean supressCreditCard) {
+        this.supressCreditCard = supressCreditCard;
+    }
 
-        return this;
+    public void setSupressBoleto(boolean supressBoleto) {
+        this.supressBoleto = supressBoleto;
     }
 
     public Method getMethod() {
         return method;
     }
 
+    public void setMethod(Method method) {
+        this.method = method;
+    }
+
     public CreditCard getCreditCard() {
         return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
 
     public Boleto getBoleto() {
         return boleto;
     }
 
-    @Override
-    public String toString() {
-        return new StringBuilder("FundingInstrument{")
-                .append("supressCreditCard=").append(supressCreditCard)
-                .append(", supressBoleto=").append(supressBoleto)
-                .append(", method=").append(method)
-                .append(", creditCard=").append(creditCard)
-                .append('}').toString();
+    public void setBoleto(Boleto boleto) {
+        this.boleto = boleto;
+    }
+
+    public Mpos getMpos() {
+        return mpos;
+    }
+
+    public void setMpos(Mpos mpos) {
+        this.mpos = mpos;
     }
 
     public enum Method {
         CREDIT_CARD, BOLETO;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("FundingInstrument{");
+        sb.append("supressCreditCard=").append(supressCreditCard);
+        sb.append(", supressBoleto=").append(supressBoleto);
+        sb.append(", method=").append(method);
+        sb.append(", creditCard=").append(creditCard);
+        sb.append(", boleto=").append(boleto);
+        sb.append(", mpos=").append(mpos);
+        sb.append('}');
+        return sb.toString();
     }
 }
