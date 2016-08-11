@@ -16,26 +16,44 @@ public class FundingInstrument {
         return supressBoleto;
     }
 
-    public FundingInstrument setSupressBoleto(final boolean supressBoleto) {
-        this.supressBoleto = supressBoleto;
+    public void setSupressCreditCard(boolean supressCreditCard) {
+        this.supressCreditCard = supressCreditCard;
+    }
 
-        return this;
+    public void setSupressBoleto(boolean supressBoleto) {
+        this.supressBoleto = supressBoleto;
     }
 
     public Method getMethod() {
         return method;
     }
 
+    public void setMethod(Method method) {
+        this.method = method;
+    }
+
     public CreditCard getCreditCard() {
         return creditCard;
+    }
+
+    public void setCreditCard(CreditCard creditCard) {
+        this.creditCard = creditCard;
     }
 
     public Boleto getBoleto() {
         return boleto;
     }
 
+    public void setBoleto(Boleto boleto) {
+        this.boleto = boleto;
+    }
+
     public Mpos getMpos() {
         return mpos;
+    }
+
+    public void setMpos(Mpos mpos) {
+        this.mpos = mpos;
     }
 
     public enum Method {

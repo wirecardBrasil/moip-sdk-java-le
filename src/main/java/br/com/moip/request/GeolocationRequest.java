@@ -14,6 +14,14 @@ public class GeolocationRequest {
         return this;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("GeolocationRequest{");

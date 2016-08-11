@@ -7,26 +7,14 @@ public class PaymentRequest {
     private FundingInstrumentRequest fundingInstrument = new FundingInstrumentRequest();
     private GeolocationRequest geolocation;
 
-    public String getOrderId() {
-        return orderId;
-    }
-
     public PaymentRequest orderId(final String orderId) {
         this.orderId = orderId;
         return this;
     }
 
-    public int getInstallmentCount() {
-        return installmentCount;
-    }
-
     public PaymentRequest installmentCount(final int installmentCount) {
         this.installmentCount = installmentCount;
         return this;
-    }
-
-    public FundingInstrumentRequest getFundingInstrument() {
-        return fundingInstrument;
     }
 
     public PaymentRequest fundingInstrument(final FundingInstrumentRequest fundingInstrument) {
@@ -37,6 +25,18 @@ public class PaymentRequest {
     public PaymentRequest geolocation(GeolocationRequest geolocation){
         this.geolocation = geolocation;
         return this;
+    }
+
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public int getInstallmentCount() {
+        return installmentCount;
+    }
+
+    public FundingInstrumentRequest getFundingInstrument() {
+        return fundingInstrument;
     }
 
     public GeolocationRequest getGeolocation() {

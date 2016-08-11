@@ -13,8 +13,9 @@ public class Mpos {
 
     @Override
     public String toString() {
-        return "Mpos{" +
-                "pinpadId='" + pinpadId + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("Mpos{");
+        sb.append("pinpadId='").append(pinpadId).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }
