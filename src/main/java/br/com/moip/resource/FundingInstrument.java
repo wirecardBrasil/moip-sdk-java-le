@@ -38,23 +38,20 @@ public class FundingInstrument {
         return mpos;
     }
 
-    public void setMpos(Mpos mpos) {
-        this.mpos = mpos;
-    }
-
     public enum Method {
         CREDIT_CARD, BOLETO;
     }
 
     @Override
     public String toString() {
-        return "FundingInstrument{" +
-                "supressCreditCard=" + supressCreditCard +
-                ", supressBoleto=" + supressBoleto +
-                ", method=" + method +
-                ", creditCard=" + creditCard +
-                ", boleto=" + boleto +
-                ", mpos=" + mpos +
-                '}';
+        final StringBuilder sb = new StringBuilder("FundingInstrument{");
+        sb.append("supressCreditCard=").append(supressCreditCard);
+        sb.append(", supressBoleto=").append(supressBoleto);
+        sb.append(", method=").append(method);
+        sb.append(", creditCard=").append(creditCard);
+        sb.append(", boleto=").append(boleto);
+        sb.append(", mpos=").append(mpos);
+        sb.append('}');
+        return sb.toString();
     }
 }
