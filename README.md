@@ -14,7 +14,7 @@ Adicionar no seu pom.xml:
 <dependency>
     <groupId>br.com.moip</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>2.0.0</version>
+    <version>2.0.0-RC6</version>
 </dependency>
 ```
 
