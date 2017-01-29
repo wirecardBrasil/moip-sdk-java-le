@@ -42,7 +42,7 @@ API api = new API(client);
 ## Criando um Pedido
 
 ```java
-Order createdOrder = api.create(new OrderRequest()
+Order createdOrder = api.order().create(new OrderRequest()
                                         .ownId("order_own_id")
                                         .addItem("Nome do produto", 1, "Mais info...", 100)
                                         .customer(new CustomerRequest()
@@ -58,7 +58,7 @@ Order createdOrder = api.create(new OrderRequest()
 ### Cartão de crédito
 
 ```java
-Payment createdPayment = api.create(
+Payment createdPayment = api.payment().create(
         new PaymentRequest()
                 .orderId("ORD-HPMZSOM611M2")
                 .installmentCount(1)
@@ -86,7 +86,7 @@ Payment createdPayment = api.create(
 ### Boleto
 
 ```java
- Payment createdPayment = api.create(
+ Payment createdPayment = api.payment().create(
         new PaymentRequest()
             .orderId("ORD-GOHHIF4Z6PLV")
             .installmentCount(1)
