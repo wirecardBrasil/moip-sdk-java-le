@@ -28,9 +28,8 @@ public class CustomerAPITest {
     private CustomerAPI api;
 
     @Before
-    public void setup() {
-        ClientFactory clientFactory = new ClientFactory();
-        api = new CustomerAPI(clientFactory.client(player.getURL("").toString()));
+    public void setUp() {
+        api = new CustomerAPI(new ClientFactory().client(player.getURL("").toString()));
     }
 
     @Play("customer/create")
