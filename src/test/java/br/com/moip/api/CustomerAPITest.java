@@ -28,7 +28,7 @@ public class CustomerAPITest {
     private CustomerAPI api;
 
     @Before
-    public void setup() throws Exception {
+    public void setup() {
         ClientFactory clientFactory = new ClientFactory();
         api = new CustomerAPI(clientFactory.client(player.getURL("").toString()));
     }
@@ -160,56 +160,5 @@ public class CustomerAPITest {
         assertEquals("555566", customer.getFundingInstrument().getCreditCard().getFirst6());
         assertEquals("1111", customer.getFundingInstrument().getCreditCard().getLast4());
     }
-
-
-//    {
-//        "ownId": "{{$timestamp}}",
-//            "fullname": "Jose Silva Altermann",
-//            "email": "oi@email.com",
-//            "birthDate": "1988-07-30",
-//            "taxDocument": {
-//        "type": "CPF",
-//                "number": "32222222222"
-//    },
-//        "phone": {
-//        "countryCode": "55",
-//                "areaCode": "11",
-//                "number": "66778899"
-//    },
-//        "shippingAddress": {
-//        "city": "Sao Paulo",
-//                "complement": "8",
-//                "district": "Itaim",
-//                "street": "Avenida Faria Lima",
-//                "streetNumber": "2927",
-//                "zipCode": "01234000",
-//                "state": "SP",
-//                "country": "BRA"
-//    },
-//        "fundingInstrument":
-//        {
-//            "method": "CREDIT_CARD",
-//                "creditCard": {
-//            "expirationMonth": "01",
-//                    "expirationYear": "25",
-//                    "number": "5555666677771111",
-//                    "cvc": "111",
-//                    "holder": {
-//                          "fullname": "Jose Portador",
-//                        "birthdate": "1988-01-01",
-//                        "taxDocument": {
-//                    "type": "CPF",
-//                            "number": "11111111111"
-//                },
-//                "phone": {
-//                    "countryCode": "11",
-//                            "areaCode": "11",
-//                            "number": "11111111"
-//                }
-//            }
-//        }
-//        }
-//    }
-
 
 }
