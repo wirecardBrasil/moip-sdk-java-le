@@ -16,7 +16,7 @@ public class AccountAPITest {
     private AccountAPI api;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         ClientFactory clientFactory = new ClientFactory();
 
         api = new AccountAPI(clientFactory.client(player.getURL("").toString()));

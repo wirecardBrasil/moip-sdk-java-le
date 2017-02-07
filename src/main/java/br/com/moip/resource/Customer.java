@@ -11,6 +11,8 @@ public class Customer {
     private Phone phone;
     private Date birthDate;
     private ShippingAddress shippingAddress;
+    private String id;
+    private FundingInstrument fundingInstrument;
 
     public String getOwnId() {
         return ownId;
@@ -18,6 +20,10 @@ public class Customer {
 
     public String getFullname() {
         return fullname;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
     }
 
     public String getEmail() {
@@ -28,10 +34,6 @@ public class Customer {
         this.email = email;
 
         return this;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
     }
 
     public TaxDocument getTaxDocument() {
@@ -46,6 +48,10 @@ public class Customer {
         return shippingAddress;
     }
 
+    public FundingInstrument getFundingInstrument() {
+        return fundingInstrument;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -58,4 +64,9 @@ public class Customer {
                 ", shippingAddress=" + shippingAddress +
                 '}';
     }
+
+    public String getId() {
+        return id;
+    }
+
 }

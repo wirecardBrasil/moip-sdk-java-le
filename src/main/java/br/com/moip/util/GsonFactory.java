@@ -29,13 +29,29 @@ public class GsonFactory {
     }
 }
 
-class BirthdateRequestSerializer implements JsonSerializer<Date> {
+class BirthdateRequestSerializer implements JsonSerializer<Date>, JsonDeserializer<Date> {
 
     @Override
     public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        return new JsonPrimitive(format.format(src));
+        return new JsonPrimitive(sdf().format(src));
     }
+
+    @Override
+    public Date deserialize(JsonElement jsonElement, Type type,
+                            JsonDeserializationContext jsonDeserializationContext)
+            throws JsonParseException {
+        try {
+            return sdf().parse(jsonElement.getAsString());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new Date();
+    }
+
+    private SimpleDateFormat sdf() {
+        return new SimpleDateFormat("yyyy-MM-dd");
+    }
+
 }
 
 class ApiDateSerializer implements JsonSerializer<ApiDateRequest> {

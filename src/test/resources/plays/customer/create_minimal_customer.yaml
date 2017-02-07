@@ -1,0 +1,30 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/customers
+    headers:
+      Content-Type: application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: POST
+  response:
+    status: 201
+    headers:
+      "Content-Type": application/json
+    body: |
+       {
+         "id": "CUS-YZA5DJ41GFXU",
+         "ownId": "1486483588",
+         "fullname": "Jose Silva",
+         "createdAt": "2017-02-07T14:06:31.000-02",
+         "birthDate": "1988-07-30",
+         "email": "oi@email.com",
+         "_links": {
+           "self": {
+             "href": "https://sandbox.moip.com.br/v2/customers/CUS-YZA5DJ41GFXU"
+           },
+           "hostedAccount": {
+             "redirectHref": "https://hostedaccount-sandbox.moip.com.br?token=374b58e8-fdfe-4428-aaf7-9356e5c29fb2&id=CUS-YZA5DJ41GFXU&mpa=MPA-PNYDE2TGOHQ9"
+           }
+         }
+       }
