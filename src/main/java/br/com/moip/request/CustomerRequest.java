@@ -97,4 +97,8 @@ public class CustomerRequest {
         this.fundingInstrument = fundingInstrument;
         return this;
     }
+
+    public FundingInstrumentRequest getFundingInstrument() {
+        return fundingInstrument;
+    }
 }
