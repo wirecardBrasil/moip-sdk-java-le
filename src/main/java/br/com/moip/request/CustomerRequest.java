@@ -9,6 +9,7 @@ public class CustomerRequest {
     private TaxDocumentRequest taxDocument;
     private ShippingAddressRequest shippingAddress;
     private PhoneRequest phone;
+    private FundingInstrumentRequest fundingInstrument;
 
     public String getOwnId() {
         return ownId;
@@ -90,5 +91,10 @@ public class CustomerRequest {
                 ", shippingAddress=" + shippingAddress +
                 ", phone=" + phone +
                 '}';
+    }
+
+    public CustomerRequest fundingInstrument(FundingInstrumentRequest fundingInstrument) {
+        this.fundingInstrument = fundingInstrument;
+        return this;
     }
 }
