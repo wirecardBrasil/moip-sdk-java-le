@@ -73,6 +73,7 @@ public class PaymentAPITest {
         );
 
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
+        assertEquals("https://sandbox.moip.com.br/v2/payments/PAY-KY4QPKGHZAC4", createdPayment.getPaymentLink());
     }
 
     @Play("payments/create_boleto_payment")
@@ -126,4 +127,5 @@ public class PaymentAPITest {
         assertEquals(createdPayment.getGeolocation().getLatitude(), -33.867, 0);
         assertEquals(createdPayment.getGeolocation().getLongitude(), 151.206,0);
     }
+
 }
