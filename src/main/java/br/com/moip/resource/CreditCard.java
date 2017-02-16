@@ -8,6 +8,7 @@ public class CreditCard {
     private String brand;
     private String first6;
     private String last4;
+    private String id;
 
     public Holder getHolder() {
         return holder;
@@ -25,6 +26,10 @@ public class CreditCard {
         return last4;
     }
 
+    public String getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return new StringBuilder("CreditCard{")
@@ -32,6 +37,7 @@ public class CreditCard {
                 .append(", brand='").append(brand).append('\'')
                 .append(", first6='").append(first6).append('\'')
                 .append(", last4='").append(last4).append('\'')
+                .append(", id='").append(id).append('\'')
                 .append('}').toString();
     }
 }

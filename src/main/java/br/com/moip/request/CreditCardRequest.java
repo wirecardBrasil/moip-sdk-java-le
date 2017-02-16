@@ -82,72 +82,19 @@ public class CreditCardRequest {
         return this;
     }
 
-
-    private static Cipher cipher;
-
-    public String hashCard() {
-       // Security.addProvider();
-
-        StringBuilder builder = new StringBuilder();
-        builder.append("number=").append(number).append("&");
-        if (cvc != null)
-            builder.append("cvc=").append(cvc).append("&");
-        builder.append("expirationMonth=").append(expirationMonth).append("&");
-        builder.append("expirationYear=").append(expirationYear);
-
-        try {
-            try {
-                cipher = Cipher.getInstance("RSA/None/PKCS1Padding", "BS");
-            } catch (SecurityException se) {
-                //workaround for tests
-                cipher = Cipher.getInstance("RSA");
-            }
-
-            BufferedReader pemReader = null;
-            pemReader = new BufferedReader(new InputStreamReader(
-                    new ByteArrayInputStream(publicKey.getBytes("UTF-8"))));
-
-            StringBuffer content = new StringBuffer();
-            String line = null;
-            while ((line = pemReader.readLine()) != null) {
-                if (line.indexOf("-----BEGIN PUBLIC KEY-----") != -1) {
-                    while ((line = pemReader.readLine()) != null) {
-                        if (line.indexOf("-----END PUBLIC KEY") != -1) {
-                            break;
-                        }
-                        content.append(line.trim());
-                    }
-                    break;
-                }
-            }
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            //cipher.init(Cipher.ENCRYPT_MODE, keyFactory.generatePublic(new X509EncodedKeySpec(Base64.decode(content.toString()))));
-            byte[] cipherText = cipher.doFinal(builder.toString().getBytes());
-
-            // return Base64.encode(cipherText);
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (NoSuchProviderException e) {
-            e.printStackTrace();
-//        } catch (Base64DecodingException e) {
-//            e.printStackTrace();
-        }
-
-        return null;
-//        InputStream stream = new ByteArrayInputStream(publicKey.getBytes());
-//        return PPK.publicKey(stream).encryptAsBase64(builder.toString());
+    public String getNumber() {
+        return number;
     }
 
+    public String getCvc() {
+        return cvc;
+    }
 
+    public String getExpirationMonth() {
+        return expirationMonth;
+    }
+
+    public String getExpirationYear() {
+        return expirationYear;
+    }
 }
