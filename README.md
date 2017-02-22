@@ -42,15 +42,27 @@ API api = new API(client);
 ## Criando um Pedido
 
 ```java
-Order createdOrder = api.create(new OrderRequest()
-                                        .ownId("order_own_id")
-                                        .addItem("Nome do produto", 1, "Mais info...", 100)
-                                        .customer(new CustomerRequest()
-                                                        .ownId("customer_own_id")
-                                                        .fullname("Jose da Silva")
-                                                        .email("sandbox_v2_1401147277@email.com")
-                                        )
-);
+Order createdOrder = api.order().create(new OrderRequest()
+                .ownId("order_own_id")
+                .addItem("Nome do produto", 1, "Mais info...", 100)
+                .customer(new CustomerRequest()
+                        .ownId("customer_own_id")
+                        .fullname("Jose da Silva")
+                        .email("josedasilva@email.com")
+                        .birthdate(new ApiDateRequest().date(new Date()))
+                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                        .phone(new PhoneRequest().setAreaCode("11").setNumber("55443322"))
+                        .shippingAddressRequest(new ShippingAddressRequest().street("Avenida Faria Lima")
+                            .streetNumber("3064")
+                            .complement("12 andar")
+                            .city("São Paulo")
+                            .state("SP")
+                            .district("Itaim")
+                            .country("BRA")
+                            .zipCode("01452-000")
+                        )
+                )
+        );
 ```
 
 ## Criando um pagamento
@@ -58,7 +70,7 @@ Order createdOrder = api.create(new OrderRequest()
 ### Cartão de crédito
 
 ```java
-Payment createdPayment = api.create(
+Payment createdPayment = api.order().create(
         new PaymentRequest()
                 .orderId("ORD-HPMZSOM611M2")
                 .installmentCount(1)
@@ -86,7 +98,7 @@ Payment createdPayment = api.create(
 ### Boleto
 
 ```java
- Payment createdPayment = api.create(
+ Payment createdPayment = api.order().create(
         new PaymentRequest()
             .orderId("ORD-GOHHIF4Z6PLV")
             .installmentCount(1)
