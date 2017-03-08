@@ -2,6 +2,7 @@ package br.com.moip.request;
 
 public class CustomerRequest {
 
+    private String id;
     private String ownId;
     private String fullname;
     private String email;
@@ -80,18 +81,6 @@ public class CustomerRequest {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "CustomerRequest{" +
-                "ownId='" + ownId + '\'' +
-                ", fullname='" + fullname + '\'' +
-                ", email='" + email + '\'' +
-                ", birthDate=" + birthDate +
-                ", taxDocument=" + taxDocument +
-                ", shippingAddress=" + shippingAddress +
-                ", phone=" + phone +
-                '}';
-    }
 
     public CustomerRequest fundingInstrument(FundingInstrumentRequest fundingInstrument) {
         this.fundingInstrument = fundingInstrument;
@@ -100,5 +89,29 @@ public class CustomerRequest {
 
     public FundingInstrumentRequest getFundingInstrument() {
         return fundingInstrument;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("CustomerRequest{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", ownId='").append(ownId).append('\'');
+        sb.append(", fullname='").append(fullname).append('\'');
+        sb.append(", email='").append(email).append('\'');
+        sb.append(", birthDate=").append(birthDate);
+        sb.append(", taxDocument=").append(taxDocument);
+        sb.append(", shippingAddress=").append(shippingAddress);
+        sb.append(", phone=").append(phone);
+        sb.append(", fundingInstrument=").append(fundingInstrument);
+        sb.append('}');
+        return sb.toString();
     }
 }

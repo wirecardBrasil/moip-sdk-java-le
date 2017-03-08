@@ -16,6 +16,10 @@ public class CustomerAPI {
         return client.post("/v2/customers", customer, Customer.class);
     }
 
+    public Customer addFundingIntrument(CustomerRequest customer) {
+        return client.post("/v2/customers/" + customer.getId() + "/fundinginstruments", customer, Customer.class);
+    }
+
     public Customer get(String externalId) {
         return client.get("/v2/customers/" + externalId, Customer.class);
     }
