@@ -122,7 +122,6 @@ public class CustomerRequest {
         return this;
     }
 
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("CustomerRequest{");

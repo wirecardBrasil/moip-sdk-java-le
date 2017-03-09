@@ -3,6 +3,7 @@ package br.com.moip.request;
 
 public class CreditCardRequest {
 
+    private String id;
     private String publicKey;
     private String number;
     private String cvc;
@@ -31,13 +32,15 @@ public class CreditCardRequest {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "CreditCardRequest{" +
-                "hash='" + hash + '\'' +
-                ", holder=" + holder +
-                '}';
+    public CreditCardRequest id(String id) {
+        this.id = id;
+        return this;
     }
+
+    public String getId() {
+        return this.id;
+    }
+
 
     public CreditCardRequest publicKey(String publicKey) {
         this.publicKey = publicKey;
@@ -78,5 +81,20 @@ public class CreditCardRequest {
 
     public String getExpirationYear() {
         return expirationYear;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("CreditCardRequest{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", publicKey='").append(publicKey).append('\'');
+        sb.append(", number='").append(number).append('\'');
+        sb.append(", cvc='").append(cvc).append('\'');
+        sb.append(", expirationMonth='").append(expirationMonth).append('\'');
+        sb.append(", expirationYear='").append(expirationYear).append('\'');
+        sb.append(", hash='").append(hash).append('\'');
+        sb.append(", holder=").append(holder);
+        sb.append('}');
+        return sb.toString();
     }
 }
