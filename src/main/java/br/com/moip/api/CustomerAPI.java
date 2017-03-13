@@ -17,7 +17,7 @@ public class CustomerAPI {
     }
 
     public Customer addFundingIntrument(CustomerRequest customer) {
-        return client.post("/v2/customers/" + customer.getId() + "/fundinginstruments", customer, Customer.class);
+        return client.post("/v2/customers/" + customer.getId() + "/fundinginstruments", customer.getFundingInstruments(), Customer.class);
     }
 
     public Customer get(String externalId) {
