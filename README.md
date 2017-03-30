@@ -14,8 +14,9 @@ Adicionar no seu pom.xml:
 <dependency>
     <groupId>br.com.moip</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>2.0.0-RC6</version>
+    <version>2.1.2</version>
 </dependency>
+
 ```
 
 ## Configurando sua autenticação
@@ -70,7 +71,7 @@ Order createdOrder = api.order().create(new OrderRequest()
 ### Cartão de crédito
 
 ```java
-Payment createdPayment = api.order().create(
+Payment createdPayment = api.payment().create(
         new PaymentRequest()
                 .orderId("ORD-HPMZSOM611M2")
                 .installmentCount(1)
@@ -98,7 +99,7 @@ Payment createdPayment = api.order().create(
 ### Boleto
 
 ```java
- Payment createdPayment = api.order().create(
+ Payment createdPayment = api.payment().create(
         new PaymentRequest()
             .orderId("ORD-GOHHIF4Z6PLV")
             .installmentCount(1)
