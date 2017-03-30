@@ -70,7 +70,7 @@ Order createdOrder = api.order().create(new OrderRequest()
 ### Cartão de crédito
 
 ```java
-Payment createdPayment = api.order().create(
+Payment createdPayment = api.payment().create(
         new PaymentRequest()
                 .orderId("ORD-HPMZSOM611M2")
                 .installmentCount(1)
@@ -98,7 +98,7 @@ Payment createdPayment = api.order().create(
 ### Boleto
 
 ```java
- Payment createdPayment = api.order().create(
+ Payment createdPayment = api.payment().create(
         new PaymentRequest()
             .orderId("ORD-GOHHIF4Z6PLV")
             .installmentCount(1)
