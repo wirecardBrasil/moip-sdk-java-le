@@ -4,6 +4,7 @@ public class PhoneRequest {
 
     private String areaCode;
     private String number;
+    private String countryCode;
 
     public PhoneRequest setAreaCode(final String areaCode) {
         this.areaCode = areaCode;
@@ -18,6 +19,16 @@ public class PhoneRequest {
     public PhoneRequest setNumber(final String number) {
         this.number = number;
 
+        return this;
+    }
+
+
+    public String getCountryCode() {
+        return countryCode;
+    }
+
+    public PhoneRequest countryCode(String countryCode) {
+        this.countryCode = countryCode;
         return this;
     }
 
