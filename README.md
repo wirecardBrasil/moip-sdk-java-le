@@ -44,14 +44,26 @@ API api = new API(client);
 
 ```java
 Order createdOrder = api.order().create(new OrderRequest()
-                                        .ownId("order_own_id")
-                                        .addItem("Nome do produto", 1, "Mais info...", 100)
-                                        .customer(new CustomerRequest()
-                                                        .ownId("customer_own_id")
-                                                        .fullname("Jose da Silva")
-                                                        .email("sandbox_v2_1401147277@email.com")
-                                        )
-);
+                .ownId("order_own_id")
+                .addItem("Nome do produto", 1, "Mais info...", 100)
+                .customer(new CustomerRequest()
+                        .ownId("customer_own_id")
+                        .fullname("Jose da Silva")
+                        .email("josedasilva@email.com")
+                        .birthdate(new ApiDateRequest().date(new Date()))
+                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                        .phone(new PhoneRequest().setAreaCode("11").setNumber("55443322"))
+                        .shippingAddressRequest(new ShippingAddressRequest().street("Avenida Faria Lima")
+                            .streetNumber("3064")
+                            .complement("12 andar")
+                            .city("São Paulo")
+                            .state("SP")
+                            .district("Itaim")
+                            .country("BRA")
+                            .zipCode("01452-000")
+                        )
+                )
+        );
 ```
 
 ## Criando um pagamento
