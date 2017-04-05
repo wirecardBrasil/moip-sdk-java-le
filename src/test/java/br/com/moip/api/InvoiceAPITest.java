@@ -7,6 +7,7 @@ import br.com.moip.request.CheckoutPreferencesRequest;
 import br.com.moip.request.CustomerRequest;
 import br.com.moip.request.FundingInstrumentRequest;
 import br.com.moip.request.InvoiceRequest;
+import br.com.moip.request.ItemRequest;
 import br.com.moip.resource.Invoice;
 import br.com.moip.response.InvoiceListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
@@ -14,8 +15,6 @@ import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -37,11 +36,10 @@ public class InvoiceAPITest {
 
         Invoice invoiceCreated = api.create(
                 new InvoiceRequest()
-                        .invoiceAmount(12610)
-                        .description("teste")
+                        .addItem(new ItemRequest("Product", 1, "Detail", 1000))
                         .customer(
                                 new CustomerRequest()
-                                        .email("vagner.vieira@moip.com.br"))
+                                        .email("vavagner.vieira@moip.com.br"))
                         .checkoutPreferences(
                                 new CheckoutPreferencesRequest()
                                         .fundingInstruments(
@@ -53,15 +51,18 @@ public class InvoiceAPITest {
                                                 new int[]{6, 9})
                                         .supressShippingAddress(true)));
 
-        assertEquals("INV-7761BDB06412", invoiceCreated.getId());
+        assertEquals("INV-B36128A22351", invoiceCreated.getId());
+        assertEquals(Integer.valueOf(1000), invoiceCreated.getAmount().getTotal());
+        assertEquals("My Invoice Product", invoiceCreated.getItems().get(0).getProduct());
+        assertEquals("My Invoice Detail", invoiceCreated.getItems().get(0).getDetail());
     }
 
     @Play("invoices/get")
     @Test
     public void testGet() {
-        Invoice invoice = api.get("INV-7761BDB06412");
+        Invoice invoice = api.get("INV-CA56C3217FA8");
 
-        assertEquals("INV-7761BDB06412", invoice.getId());
+        assertEquals("INV-CA56C3217FA8", invoice.getId());
     }
 
     @Play("invoices/list")
