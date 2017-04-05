@@ -9,8 +9,8 @@ public class InvoiceRequest {
     private CustomerRequest customer;
     private CheckoutPreferencesRequest checkoutPreferences;
 
-    public InvoiceRequest addItem(final ItemRequest itemsRequest) {
-        this.items.add(itemsRequest);
+    public InvoiceRequest addItem(final String product, final Integer quantity, final String detail, final Integer price) {
+        this.items.add(new ItemRequest(product, quantity, detail, price));
         return this;
     }
 
