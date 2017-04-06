@@ -36,7 +36,7 @@ public class InvoiceAPITest {
 
         Invoice invoiceCreated = api.create(
                 new InvoiceRequest()
-                        .addItem("Product", 1, "Detail", 1000)
+                        .addItem("My Invoice Product", 1, "My Invoice Detail", 1000)
                         .customer(
                                 new CustomerRequest()
                                         .email("vavagner.vieira@moip.com.br"))
