@@ -8,3 +8,4 @@ target
 *.swp
 .gradle
 build/
+out/
