@@ -62,6 +62,10 @@ public class Payment {
         this._links.setSelf(links);
     }
 
+    public String getPayBoletoLink() {
+        return _links.getPayBoleto();
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Payment{");

@@ -36,9 +36,5 @@ public class PaymentLinks {
         public String getRedirectHref() {
             return redirectHref;
         }
-
-        public void setRedirectHref(String redirectHref) {
-            this.redirectHref = redirectHref;
-        }
     }
 }
