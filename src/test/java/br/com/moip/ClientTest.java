@@ -4,7 +4,6 @@ import br.com.moip.authentication.Authentication;
 import br.com.moip.authentication.BasicAuth;
 import br.com.moip.exception.UnexpectecException;
 import br.com.moip.exception.ValidationException;
-import br.com.moip.request.CreditCardRequest;
 import br.com.moip.resource.Order;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
