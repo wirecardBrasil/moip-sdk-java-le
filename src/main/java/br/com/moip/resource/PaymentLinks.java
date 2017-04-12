@@ -4,12 +4,18 @@ public class PaymentLinks {
 
     private PaymentLink self = new PaymentLink();
 
+    private PaymentBoletoLink payBoleto = new PaymentBoletoLink();
+
     public String getSelf() {
         return self.getHref();
     }
 
     public void setSelf(String link) {
         this.self.setHref(link);
+    }
+
+    public String getPayBoleto() {
+        return payBoleto.getRedirectHref();
     }
 
     private class PaymentLink {
@@ -21,6 +27,18 @@ public class PaymentLinks {
 
         public void setHref(String href) {
             this.href = href;
+        }
+    }
+
+    private class PaymentBoletoLink {
+        private String redirectHref;
+
+        public String getRedirectHref() {
+            return redirectHref;
+        }
+
+        public void setRedirectHref(String redirectHref) {
+            this.redirectHref = redirectHref;
         }
     }
 }
