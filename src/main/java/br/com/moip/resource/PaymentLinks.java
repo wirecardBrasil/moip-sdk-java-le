@@ -18,6 +18,10 @@ public class PaymentLinks {
         return payBoleto.getRedirectHref();
     }
 
+    public void setPayBoleto(String link) {
+        this.payBoleto.setRedirectHref(link);
+    }
+
     private class PaymentLink {
         private String href;
 
@@ -35,6 +39,10 @@ public class PaymentLinks {
 
         public String getRedirectHref() {
             return redirectHref;
+        }
+
+        public void setRedirectHref(String redirectHref) {
+            this.redirectHref = redirectHref;
         }
     }
 }
