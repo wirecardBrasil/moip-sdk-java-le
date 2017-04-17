@@ -77,4 +77,5 @@ public class ClientTest {
     public void testGetWhen500() {
         client.get("/500", Order.class);
     }
+
 }

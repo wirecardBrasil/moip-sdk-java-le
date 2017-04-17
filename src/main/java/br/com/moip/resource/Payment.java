@@ -8,6 +8,7 @@ public class Payment {
     private int installmentCount;
     private final FundingInstrument fundingInstrument = new FundingInstrument();
     private Geolocation geolocation;
+    private PaymentLinks _links = new PaymentLinks();
 
     public String getId() {
         return id;
@@ -53,6 +54,22 @@ public class Payment {
         this.geolocation = geolocation;
     }
 
+    public String getPaymentLink() {
+        return _links.getSelf();
+    }
+
+    public void setPaymentLink(String links) {
+        this._links.setSelf(links);
+    }
+
+    public String getPayBoletoLink() {
+        return _links.getPayBoleto();
+    }
+
+    public void setPayBoletoLink(String link) {
+        this._links.setPayBoleto(link);
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Payment{");
@@ -62,7 +79,9 @@ public class Payment {
         sb.append(", installmentCount=").append(installmentCount);
         sb.append(", fundingInstrument=").append(fundingInstrument);
         sb.append(", geolocation=").append(geolocation);
+        sb.append(", links=").append(_links);
         sb.append('}');
         return sb.toString();
     }
+
 }
