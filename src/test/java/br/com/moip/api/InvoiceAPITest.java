@@ -7,7 +7,6 @@ import br.com.moip.request.CheckoutPreferencesRequest;
 import br.com.moip.request.CustomerRequest;
 import br.com.moip.request.FundingInstrumentRequest;
 import br.com.moip.request.InvoiceRequest;
-import br.com.moip.request.ItemRequest;
 import br.com.moip.resource.Invoice;
 import br.com.moip.response.InvoiceListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
@@ -63,6 +62,15 @@ public class InvoiceAPITest {
         Invoice invoice = api.get("INV-CA56C3217FA8");
 
         assertEquals("INV-CA56C3217FA8", invoice.getId());
+    }
+
+    @Play("invoices/get_with_payment")
+    @Test
+    public void testGetWithPayment() {
+        Invoice invoice = api.get("INV-C0ABE12156DB");
+
+        assertEquals(1, invoice.getPayments().size());
+        assertEquals("PAY-W9NUNMYNQMFJ", invoice.getPayments().get(0).getId());
     }
 
     @Play("invoices/list")

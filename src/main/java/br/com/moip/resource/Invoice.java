@@ -12,6 +12,7 @@ public class Invoice {
     private Customer customer;
     private CheckoutPreferences checkoutPreferences;
     private InvoiceStatus status;
+    private List<Payment> payments;
 
     public String getId() {
         return id;
@@ -85,6 +86,14 @@ public class Invoice {
         return this;
     }
 
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
+    }
+
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Invoice{");
@@ -96,6 +105,7 @@ public class Invoice {
         sb.append(", customer=").append(customer);
         sb.append(", checkoutPreferences=").append(checkoutPreferences);
         sb.append(", status=").append(status);
+        sb.append(", payments=").append(payments);
         sb.append('}');
         return sb.toString();
     }

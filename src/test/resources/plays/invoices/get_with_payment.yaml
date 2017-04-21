@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/invoices/INV-C0ABE12156DB
+    headers:
+      "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: GET
+  response:
+    status: 200
+    headers:
+      "Content-Type": application/json
+    body: |
+      {"id":"INV-C0ABE12156DB","amount":{"total":1200,"fees":0,"refunds":0,"liquid":0,"otherReceivers":0,"currency":"BRL","subtotals":{"shipping":1000,"addition":0,"discount":0,"items":200}},"items":[{"product":"new Item","detail":"Detalhe","price":200}],"customer":{"email":"cliente@moip.com.br"},"receivers":[{"moipAccount":{"id":"MPA-CULBBYHD11","fullname":"Jose Silva dos Santos","company":{"name":null}}}],"status":"DELIVERED","payments":[{"id":"PAY-W9NUNMYNQMFJ","status":"AUTHORIZED","delayCapture":false,"amount":{"total":1200,"fees":128,"refunds":0,"liquid":1072,"currency":"BRL"},"installmentCount":1,"fundingInstrument":{"creditCard":{"id":"CRC-9ZN9Y3M2C4FM","brand":"MASTERCARD","first6":"555566","last4":"8884","store":true,"holder":{"birthdate":"1980-02-01","birthDate":"1980-02-01","taxDocument":{"type":"CPF","number":"12345679891"},"billingAddress":{"street":"Rua Doutor Albuquerque Lins","streetNumber":"2923","district":"Santa Cecília","city":"São Paulo","state":"São Paulo","country":"BRA","zipCode":"01230000"},"fullname":"TEste moip"}},"method":"CREDIT_CARD"},"fees":[{"type":"TRANSACTION","amount":128}],"events":[{"type":"PAYMENT.AUTHORIZED","createdAt":"2017-04-20T20:25:02.000-03"},{"type":"PAYMENT.IN_ANALYSIS","createdAt":"2017-04-20T20:24:56.000-03"},{"type":"PAYMENT.CREATED","createdAt":"2017-04-20T20:24:52.000-03"}],"receivers":[{"moipAccount":{"id":"MPA-CULBBYHD11","login":"integracao@labs.moip.com.br","fullname":"Moip SandBox"},"type":"PRIMARY","amount":{"total":1200,"fees":128,"refunds":0},"feePayor":true}],"_links":{"self":{"href":"https://sandbox.moip.com.br/v2/payments/PAY-W9NUNMYNQMFJ"}},"createdAt":"2017-04-20T20:24:52.000-03","updatedAt":"2017-04-20T20:25:02.000-03"}],"createdAt":"2017-04-20T23:23:10.000-00","updatedAt":"2017-04-20T23:24:06.000-00","_links":{"self":{"href":"/invoice/INV-C0ABE12156DB"},"checkout":{"pay":{"redirectHref":"https://checkout-new-sandbox.moip.com.br?id=INV-C0ABE12156DB\u0026token=761f6998-32b9-4b63-9fbb-71b5ecc39c2a"}}}}
