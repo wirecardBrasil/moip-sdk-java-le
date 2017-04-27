@@ -6,8 +6,8 @@ public class FundingInstrumentRequest {
     private CreditCardRequest creditCard;
     private BoletoRequest boleto;
     private MposRequest mpos;
-    private boolean supressBoleto;
-    private boolean supressCreditCard;
+    private boolean suppressBoleto;
+    private boolean suppressCreditCard;
 
     public FundingInstrumentRequest creditCard(final CreditCardRequest creditCard) {
         this.creditCard = creditCard;
@@ -34,21 +34,21 @@ public class FundingInstrumentRequest {
     }
 
     public FundingInstrumentRequest supressBoleto(final boolean supressBoleto) {
-        this.supressBoleto = supressBoleto;
+        this.suppressBoleto = supressBoleto;
         return this;
     }
 
     public FundingInstrumentRequest supressCreditCard(final boolean supressCreditCard) {
-        this.supressCreditCard = supressCreditCard;
+        this.suppressCreditCard = supressCreditCard;
         return this;
     }
 
-    public boolean isSupressBoleto() {
-        return supressBoleto;
+    public boolean isSuppressBoleto() {
+        return suppressBoleto;
     }
 
-    public boolean isSupressCreditCard() {
-        return supressCreditCard;
+    public boolean isSuppressCreditCard() {
+        return suppressCreditCard;
     }
 
     public Method getMethod() {
@@ -77,8 +77,8 @@ public class FundingInstrumentRequest {
         sb.append("method=").append(method);
         sb.append(", creditCard=").append(creditCard);
         sb.append(", boleto=").append(boleto);
-        sb.append(", supressBoleto=").append(supressBoleto);
-        sb.append(", supressCreditCard=").append(supressCreditCard);
+        sb.append(", suppressBoleto=").append(suppressBoleto);
+        sb.append(", suppressCreditCard=").append(suppressCreditCard);
         sb.append(", mpos=").append(mpos);
         sb.append('}');
         return sb.toString();
