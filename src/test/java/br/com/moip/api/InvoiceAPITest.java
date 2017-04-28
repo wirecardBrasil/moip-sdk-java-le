@@ -43,7 +43,7 @@ public class InvoiceAPITest {
                                 new CheckoutPreferencesRequest()
                                         .fundingInstruments(
                                                 new FundingInstrumentRequest()
-                                                        .supressBoleto(true))
+                                                        .suppressBoleto(true))
                                         .addInstallment(
                                                 new int[]{1, 2})
                                         .addInstallment(

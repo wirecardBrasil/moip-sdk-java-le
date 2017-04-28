@@ -33,12 +33,12 @@ public class FundingInstrumentRequest {
         return this;
     }
 
-    public FundingInstrumentRequest supressBoleto(final boolean supressBoleto) {
+    public FundingInstrumentRequest suppressBoleto(final boolean supressBoleto) {
         this.suppressBoleto = supressBoleto;
         return this;
     }
 
-    public FundingInstrumentRequest supressCreditCard(final boolean supressCreditCard) {
+    public FundingInstrumentRequest suppressCreditCard(final boolean supressCreditCard) {
         this.suppressCreditCard = supressCreditCard;
         return this;
     }
