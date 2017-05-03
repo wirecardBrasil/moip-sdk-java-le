@@ -7,7 +7,7 @@ public class CheckoutPreferences {
 
     private FundingInstrument fundingInstruments;
     private List<Installment> installments;
-    private boolean supressShippingAddress;
+    private boolean suppressShippingAddress;
 
     public FundingInstrument getFundingInstruments() {
         return fundingInstruments;
@@ -27,12 +27,12 @@ public class CheckoutPreferences {
         return this;
     }
 
-    public boolean isSupressShippingAddress() {
-        return supressShippingAddress;
+    public boolean isSuppressShippingAddress() {
+        return suppressShippingAddress;
     }
 
-    public CheckoutPreferences setSupressShippingAddress(boolean supressShippingAddress) {
-        this.supressShippingAddress = supressShippingAddress;
+    public CheckoutPreferences setSuppressShippingAddress(boolean suppressShippingAddress) {
+        this.suppressShippingAddress = suppressShippingAddress;
         return this;
     }
 
@@ -57,7 +57,7 @@ public class CheckoutPreferences {
         return "CheckoutPreferences{" +
                 "fundingInstruments=" + fundingInstruments +
                 ", installments=" + installments +
-                ", supressShippingAddress=" + supressShippingAddress +
+                ", suppressShippingAddress=" + suppressShippingAddress +
                 '}';
     }
 }
