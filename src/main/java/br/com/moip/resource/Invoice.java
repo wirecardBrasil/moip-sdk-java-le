@@ -1,15 +1,18 @@
 package br.com.moip.resource;
 
 import java.util.Date;
+import java.util.List;
 
 public class Invoice {
-    private String id, description;
-    private int invoiceAmount;
-    private Date createdAt, updatedAt;
 
+    private String id;
+    private Amount amount;
+    private List<Item> items;
+    private Date createdAt, updatedAt;
     private Customer customer;
     private CheckoutPreferences checkoutPreferences;
     private InvoiceStatus status;
+    private List<Payment> payments;
 
     public String getId() {
         return id;
@@ -20,12 +23,12 @@ public class Invoice {
         return this;
     }
 
-    public int getInvoiceAmount() {
-        return invoiceAmount;
+    public Amount getAmount() {
+        return amount;
     }
 
-    public Invoice setInvoiceAmount(int invoiceAmount) {
-        this.invoiceAmount = invoiceAmount;
+    public Invoice setAmount(Amount amount) {
+        this.amount = amount;
         return this;
     }
 
@@ -74,26 +77,36 @@ public class Invoice {
         return this;
     }
 
-    public String getDescription() {
-        return description;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public Invoice setDescription(String description) {
-        this.description = description;
+    public Invoice setItems(List<Item> items) {
+        this.items = items;
         return this;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
     }
 
     @Override
     public String toString() {
-        return "Invoice{" +
-                "id='" + id + '\'' +
-                ", description='" + description + '\'' +
-                ", invoiceAmount=" + invoiceAmount +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", customer=" + customer +
-                ", checkoutPreferences=" + checkoutPreferences +
-                ", status=" + status +
-                '}';
+        final StringBuffer sb = new StringBuffer("Invoice{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", amount=").append(amount);
+        sb.append(", items=").append(items);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", customer=").append(customer);
+        sb.append(", checkoutPreferences=").append(checkoutPreferences);
+        sb.append(", status=").append(status);
+        sb.append(", payments=").append(payments);
+        sb.append('}');
+        return sb.toString();
     }
 }

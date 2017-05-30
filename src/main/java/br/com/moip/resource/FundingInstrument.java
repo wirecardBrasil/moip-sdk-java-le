@@ -1,27 +1,27 @@
 package br.com.moip.resource;
 
 public class FundingInstrument {
-    private boolean supressCreditCard;
-    private boolean supressBoleto;
+    private boolean suppressCreditCard;
+    private boolean suppressBoleto;
     private Method method;
     private CreditCard creditCard;
     private Boleto boleto;
     private Mpos mpos;
 
-    public boolean isSupressCreditCard() {
-        return supressCreditCard;
+    public boolean isSuppressCreditCard() {
+        return suppressCreditCard;
     }
 
-    public boolean isSupressBoleto() {
-        return supressBoleto;
+    public boolean isSuppressBoleto() {
+        return suppressBoleto;
     }
 
-    public void setSupressCreditCard(boolean supressCreditCard) {
-        this.supressCreditCard = supressCreditCard;
+    public void setSuppressCreditCard(boolean suppressCreditCard) {
+        this.suppressCreditCard = suppressCreditCard;
     }
 
-    public void setSupressBoleto(boolean supressBoleto) {
-        this.supressBoleto = supressBoleto;
+    public void setSuppressBoleto(boolean suppressBoleto) {
+        this.suppressBoleto = suppressBoleto;
     }
 
     public Method getMethod() {
@@ -63,8 +63,8 @@ public class FundingInstrument {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("FundingInstrument{");
-        sb.append("supressCreditCard=").append(supressCreditCard);
-        sb.append(", supressBoleto=").append(supressBoleto);
+        sb.append("suppressCreditCard=").append(suppressCreditCard);
+        sb.append(", suppressBoleto=").append(suppressBoleto);
         sb.append(", method=").append(method);
         sb.append(", creditCard=").append(creditCard);
         sb.append(", boleto=").append(boleto);

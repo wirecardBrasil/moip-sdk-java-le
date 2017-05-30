@@ -2,7 +2,7 @@
 interactions:
 -
   request:
-    uri: /v2/invoices/INV-7761BDB06412
+    uri: /v2/invoices/INV-CA56C3217FA8
     headers:
       "Content-Type": application/json
       Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
@@ -12,4 +12,4 @@ interactions:
     headers:
       "Content-Type": application/json
     body: |
-      { "id": "INV-7761BDB06412", "invoiceAmount": 12610, "customer": { "email": "vagner.vieira@moip.com.br" }, "checkoutPreferences": { "fundingInstruments": { "suppressBoleto": true }, "installments": [ { "quantity": [ 1, 2 ] }, { "quantity": [ 6, 9 ] } ], "suppressShippingAddress": true }, "status": "SENT", "createdAt": "2015-11-03T13:05:00.962Z", "updatedAt": "2015-11-03T13:05:00.962Z", "_links": { "self": { "href": "/invoice/INV-7761BDB06412" }, "checkout": { "pay": "/invoice/INV-7761BDB06412" }}}
+      {"id":"INV-CA56C3217FA8","amount":{"total":1000,"fees":0,"refunds":0,"liquid":0,"otherReceivers":0,"currency":"BRL","subtotals":{"shipping":0,"addition":0,"discount":0,"items":1000}},"items":[{"product":"My Invoice Product","detail":"My Invoice Detail","price":1000}],"customer":{"email":"vavagner.vieira@moip.com.br"},"receivers":[{"moipAccount":{"id":"MPA-CULBBYHD11","fullname":"Jose Silva dos Santos","company":{"name":null}}}],"status":"DELIVERED","createdAt":"2017-04-05T14:44:11.000-00","updatedAt":"2017-04-05T14:44:12.000-00","_links":{"self":{"href":"/invoice/INV-CA56C3217FA8"},"checkout":{"pay":{"redirectHref":"https://checkout-new-sandbox.moip.com.br?id=INV-CA56C3217FA8\u0026token=e643bc92-652d-4898-8f67-815faa821e36"}}}}
