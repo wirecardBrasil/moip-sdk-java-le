@@ -3,7 +3,7 @@ package br.com.moip;
 import br.com.moip.authentication.Authentication;
 import br.com.moip.exception.MoipException;
 import br.com.moip.exception.UnauthorizedException;
-import br.com.moip.exception.UnexpectecException;
+import br.com.moip.exception.UnexpectedException;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.resource.Errors;
 import br.com.moip.ssl.SSLSupport;
@@ -130,7 +130,7 @@ public class Client {
             }
 
             if (responseCode >= 500) {
-                throw new UnexpectecException();
+                throw new UnexpectedException();
             }
 
             LOGGER.debug("");
