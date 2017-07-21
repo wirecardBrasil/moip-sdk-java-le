@@ -73,27 +73,27 @@ Order createdOrder = api.order().create(new OrderRequest()
 ```java
 Payment createdPayment = api.payment().create(
         new PaymentRequest()
-                .orderId("ORD-HPMZSOM611M2")
-                .installmentCount(1)
-                .fundingInstrument(
-                        new FundingInstrumentRequest()
-                                .creditCard(
-                                        new CreditCardRequest()
-                                                .hash(CC_HASH)
-                                                .holder(
-                                                        new HolderRequest()
-                                                                .fullname("Jose Portador da Silva")
-                                                                .birthdate("1988-10-10")
-                                                                .phone(
-                                                                        new PhoneRequest()
-                                                                                .setAreaCode("11")
-                                                                                .setNumber("55667788")
-                                                                )
-                                                                .taxDocument(TaxDocumentRequest.cpf("22222222222"))
-                                                )
-                                )
+            .orderId("ORD-HPMZSOM611M2")
+            .installmentCount(1)
+            .fundingInstrument(
+                new FundingInstrumentRequest()
+                    .creditCard(
+                        new CreditCardRequest()
+                            .hash(CC_HASH)
+                            .holder(
+                                new HolderRequest()
+                                    .fullname("Jose Portador da Silva")
+                                    .birthdate("1988-10-10")
+                                    .phone(
+                                        new PhoneRequest()
+                                            .setAreaCode("11")
+                                            .setNumber("55667788")
+                                        )
+                                    .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                            )
+                        )
                 )
-    );
+        );
 ```
 
 ### Boleto
@@ -118,5 +118,18 @@ Payment createdPayment = api.payment().create(
 
 ## Tratamento de Exceções
 
-Quando ocorre algum erro na API, você deve utilizar o método hasUnexpectedError() para tratar erros inesperados e
-para erros de validação,deverá utilizar o método hasValidationError().
+Quando ocorre algum erro na API, é lançada a exceção UnexpectecException para erros inesperados e ValidationException 
+para erros de validação.
+
+
+```java
+try {
+ Payment createdPayment = api.payment().create(
+        //...
+    );
+} catch(UnexpectecException e) {
+  //StatusCode >= 500
+} catch(ValidationException e) {
+  //StatusCode entre 400 e 499 (exceto 401)
+}
+```
