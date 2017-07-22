@@ -78,7 +78,6 @@ public class Client {
             conn.setRequestMethod(method);
 
             // Disable TLS 1.0
-            // TODO find a way to create a Test for this
             if (conn instanceof HttpsURLConnection) {
                 ((HttpsURLConnection) conn).setSSLSocketFactory(new SSLSupport());
             }
@@ -139,6 +138,7 @@ public class Client {
 
             return gson.fromJson(responseBody.toString(), type);
         } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
+        	e.printStackTrace();
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
         }
     }

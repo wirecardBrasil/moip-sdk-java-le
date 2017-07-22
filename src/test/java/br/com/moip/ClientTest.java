@@ -1,20 +1,38 @@
 package br.com.moip;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import java.io.DataOutputStream;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import static org.mockito.Mockito.any;
+import static org.powermock.api.mockito.PowerMockito.*;
+import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
+
+import com.rodrigosaito.mockwebserver.player.Play;
+import com.rodrigosaito.mockwebserver.player.Player;
+
 import br.com.moip.authentication.Authentication;
 import br.com.moip.authentication.BasicAuth;
 import br.com.moip.exception.UnexpectecException;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.resource.Order;
-import com.rodrigosaito.mockwebserver.player.Play;
-import com.rodrigosaito.mockwebserver.player.Player;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
+import br.com.moip.ssl.SSLSupport;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
-
+@RunWith(PowerMockRunner.class)
+@PrepareForTest({Client.class, URL.class, SSLContext.class})
 public class ClientTest {
 
     @Rule
@@ -26,6 +44,31 @@ public class ClientTest {
     public void setUp() {
         Authentication basicAuth = new BasicAuth("01010101010101010101010101010101", "ABABABABABABABABABABABABABABABABABABABAB");
         this.client = new Client(player.getURL("").toString(), basicAuth);
+    }
+    
+    @Test
+    public void testSSLSupport() throws Exception {
+    	URL urlMock = mock(URL.class);
+    	HttpsURLConnection httpsMock = mock(HttpsURLConnection.class);
+    	
+    	whenNew(URL.class).withAnyArguments().thenReturn(urlMock);
+    	when(urlMock.openConnection()).thenReturn(httpsMock);
+    	
+    	doCallRealMethod().when(httpsMock).setSSLSocketFactory(any());
+    	when(httpsMock.getSSLSocketFactory()).thenCallRealMethod();
+    	when(httpsMock.getURL()).thenReturn(urlMock);
+    	when(httpsMock.getOutputStream()).thenReturn(mock(DataOutputStream.class));
+    	
+    	SSLContext context = mock(SSLContext.class);
+
+        mockStatic(SSLContext.class);
+        when(SSLContext.getInstance("TLS")).thenReturn(context);
+    	
+        client.post("/200", new Order(), Order.class);
+        
+        SSLSocketFactory sslSocketFactory = httpsMock.getSSLSocketFactory();
+        assertTrue(sslSocketFactory instanceof SSLSupport);
+        
     }
 
     @Play("client/post")
