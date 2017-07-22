@@ -6,6 +6,7 @@ import java.util.List;
 public class OrderRequest {
 
     private String ownId;
+    private OrderAmountRequest amount;
     private final List<ItemRequest> items = new ArrayList<ItemRequest>();
     private CustomerRequest customer;
     private final List<ReceiverRequest> receivers = new ArrayList<ReceiverRequest>();
@@ -19,6 +20,16 @@ public class OrderRequest {
 
         return this;
     }
+    
+    public OrderAmountRequest getAmount() {
+		return amount;
+	}
+    
+    public OrderRequest amount(OrderAmountRequest amount) {
+    	this.amount = amount;
+    	
+		return this;
+	}
 
     public List<ItemRequest> getItems() {
         return items;
@@ -98,4 +109,5 @@ public class OrderRequest {
                     .append('}').toString();
         }
     }
+
 }
