@@ -15,7 +15,7 @@ public class OrderRequestTest extends RequestTest {
 	private static final boolean ORDERING_DATA = false;
 
     @Test
-    public void testCreate() throws JSONException {
+    public void testOrder() throws JSONException {
         OrderRequest order = new OrderRequest()
                         .ownId("order_own_id")
                         .addItem("Nome do produto", 1, "Mais info...", 100)
@@ -32,7 +32,7 @@ public class OrderRequestTest extends RequestTest {
     }
     
     @Test
-    public void testCreateWithReceivers() throws JSONException {
+    public void testOrderWithReceivers() throws JSONException {
         OrderRequest order = new OrderRequest()
                 .ownId("order_own_id")
                 .addItem("Nome do produto", 1, "Mais info...", 10000)
@@ -53,7 +53,7 @@ public class OrderRequestTest extends RequestTest {
     }
 
     @Test
-    public void testCreateWithFullCustomer() throws JSONException {
+    public void testOrderWithFullCustomer() throws JSONException {
         OrderRequest order = new OrderRequest()
                 .ownId("order_own_id")
                 .addItem("Nome do produto", 1, "Mais info...", 10000)
@@ -84,7 +84,7 @@ public class OrderRequestTest extends RequestTest {
     }
     
     @Test
-    public void testCreateWithFullCustomerAndOrderAmount() throws JSONException {
+    public void testOrderWithFullCustomerAndOrderAmount() throws JSONException {
         OrderRequest order = new OrderRequest()
                 .ownId("order_own_id")
                 .amount(new OrderAmountRequest()
