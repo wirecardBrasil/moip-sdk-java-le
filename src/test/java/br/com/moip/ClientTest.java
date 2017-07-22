@@ -54,7 +54,7 @@ public class ClientTest {
     	whenNew(URL.class).withAnyArguments().thenReturn(urlMock);
     	when(urlMock.openConnection()).thenReturn(httpsMock);
     	
-    	doCallRealMethod().when(httpsMock).setSSLSocketFactory(any());
+    	doCallRealMethod().when(httpsMock).setSSLSocketFactory(any(SSLSocketFactory.class));
     	when(httpsMock.getSSLSocketFactory()).thenCallRealMethod();
     	when(httpsMock.getURL()).thenReturn(urlMock);
     	when(httpsMock.getOutputStream()).thenReturn(mock(DataOutputStream.class));
