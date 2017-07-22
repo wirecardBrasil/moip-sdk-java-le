@@ -71,28 +71,22 @@ Order createdOrder = api.order().create(new OrderRequest()
 ### Cartão de crédito
 
 ```java
-Payment createdPayment = api.payment().create(
-        new PaymentRequest()
+Payment createdPayment = api.payment().create(new PaymentRequest()
             .orderId("ORD-HPMZSOM611M2")
             .installmentCount(1)
-            .fundingInstrument(
-                new FundingInstrumentRequest()
-                    .creditCard(
-                        new CreditCardRequest()
-                            .hash(CC_HASH)
-                            .holder(
-                                new HolderRequest()
-                                    .fullname("Jose Portador da Silva")
-                                    .birthdate("1988-10-10")
-                                    .phone(
-                                        new PhoneRequest()
-                                            .setAreaCode("11")
-                                            .setNumber("55667788")
-                                        )
-                                    .taxDocument(TaxDocumentRequest.cpf("22222222222"))
-                            )
-                        )
+            .fundingInstrument(new FundingInstrumentRequest()
+                .creditCard(new CreditCardRequest()
+                    .hash(CC_HASH)
+                    .holder(new HolderRequest()
+                        .fullname("Jose Portador da Silva")
+                        .birthdate("1988-10-10")
+                        .phone(new PhoneRequest()
+                            .setAreaCode("11")
+                            .setNumber("55667788"))
+                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                    )
                 )
+            )
         );
 ```
 
