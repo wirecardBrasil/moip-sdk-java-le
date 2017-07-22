@@ -138,7 +138,6 @@ public class Client {
 
             return gson.fromJson(responseBody.toString(), type);
         } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
-        	e.printStackTrace();
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
         }
     }
