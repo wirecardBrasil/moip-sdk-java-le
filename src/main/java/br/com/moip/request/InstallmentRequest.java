@@ -25,7 +25,7 @@ public class InstallmentRequest {
                 .append('}').toString();
     }
 
-    public InstallmentRequest quantity(int[] quantity) {
+    public InstallmentRequest quantity(final int[] quantity) {
         this.quantity = quantity;
         return this;
     }
