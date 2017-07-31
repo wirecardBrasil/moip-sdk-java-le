@@ -68,7 +68,7 @@ public class CheckoutPreferencesRequest {
                 .append("fundingInstruments=").append(fundingInstruments)
                 .append(", installments=").append(installments)
                 .append(", supressShippingAddress=").append(supressShippingAddress)
-                .append(", redirectUrls").append(redirectUrls)
+                .append(", redirectUrls=").append(redirectUrls)
                 .append('}').toString();
     }
 
