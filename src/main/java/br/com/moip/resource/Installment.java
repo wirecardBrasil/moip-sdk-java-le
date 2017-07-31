@@ -12,6 +12,14 @@ public class Installment {
         return quantity;
     }
 
+    public int getAddition() {
+        return addition;
+    }
+
+    public int getDiscount() {
+        return discount;
+    }
+
     @Override
     public String toString() {
         return new StringBuilder("Installment{")

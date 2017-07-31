@@ -7,6 +7,7 @@ public class CheckoutPreferencesRequest {
 
     private FundingInstrumentRequest fundingInstruments;
     private List<InstallmentRequest> installments;
+    private RedirectUrlsRequest redirectUrls;
     private boolean supressShippingAddress;
 
     public FundingInstrumentRequest getFundingInstruments() {
@@ -52,12 +53,56 @@ public class CheckoutPreferencesRequest {
         return this;
     }
 
+    public RedirectUrlsRequest getRedirectUrls() {
+        return redirectUrls;
+    }
+
+    public CheckoutPreferencesRequest setRedirectUrls(RedirectUrlsRequest redirectUrls) {
+        this.redirectUrls = redirectUrls;
+        return this;
+    }
+
     @Override
     public String toString() {
-        return "CheckoutPreferences{" +
-                "fundingInstruments=" + fundingInstruments +
-                ", installments=" + installments +
-                ", supressShippingAddress=" + supressShippingAddress +
-                '}';
+        return new StringBuilder("CheckoutPreferences{")
+                .append("fundingInstruments=").append(fundingInstruments)
+                .append(", installments=").append(installments)
+                .append(", supressShippingAddress=").append(supressShippingAddress)
+                .append(", redirectUrls").append(redirectUrls)
+                .append('}').toString();
+    }
+
+    public static final class RedirectUrlsRequest {
+        private String urlSuccess;
+        private String urlFailure;
+
+        public RedirectUrlsRequest(String urlSuccess, String urlFailure) {
+            this.urlSuccess = urlSuccess;
+            this.urlFailure = urlFailure;
+        }
+
+        public String getUrlSuccess() {
+            return urlSuccess;
+        }
+
+        public void setUrlSuccess(String urlSuccess) {
+            this.urlSuccess = urlSuccess;
+        }
+
+        public String getUrlFailure() {
+            return urlFailure;
+        }
+
+        public void setUrlFailure(String urlFailure) {
+            this.urlFailure = urlFailure;
+        }
+
+        @Override
+        public String toString() {
+            return new StringBuilder("RedirectUrlsRequest{")
+                    .append("urlSuccess='").append(urlSuccess).append('\'')
+                    .append(", urlFailure='").append(urlFailure).append('\'')
+                    .append('}').toString();
+        }
     }
 }

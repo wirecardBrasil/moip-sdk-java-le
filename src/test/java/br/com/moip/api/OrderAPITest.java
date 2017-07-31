@@ -1,13 +1,6 @@
 package br.com.moip.api;
 
-import br.com.moip.request.AmountRequest;
-import br.com.moip.request.ApiDateRequest;
-import br.com.moip.request.CustomerRequest;
-import br.com.moip.request.OrderRequest;
-import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.ReceiverRequest;
-import br.com.moip.request.ShippingAddressRequest;
-import br.com.moip.request.TaxDocumentRequest;
+import br.com.moip.request.*;
 import br.com.moip.resource.Order;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
@@ -20,8 +13,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class OrderAPITest {
 
@@ -35,7 +27,7 @@ public class OrderAPITest {
         ClientFactory clientFactory = new ClientFactory();
 
         api = new OrderAPI(clientFactory.client(player.getURL("").toString()));
-//        api = new OrderAPI(clientFactory.client(br.com.moip.Client.SANDBOX));
+        //api = new OrderAPI(clientFactory.client(br.com.moip.Client.SANDBOX));
     }
 
     @Play("orders/get")
@@ -87,12 +79,47 @@ public class OrderAPITest {
         assertEquals("Moip SandBox", createdOrder.getReceivers().get(0).getMoipAccount().getFullname());
         assertEquals("integracao@labs.moip.com.br", createdOrder.getReceivers().get(0).getMoipAccount().getLogin());
         assertTrue(createdOrder.getReceivers().get(0).isPrimary());
+        assertTrue(createdOrder.getReceivers().get(0).getFeePayor());
 
         assertEquals(100, createdOrder.getReceivers().get(1).getAmount().getTotal().intValue());
         assertEquals("MPA-123123123", createdOrder.getReceivers().get(1).getMoipAccount().getId());
         assertEquals("Vagner Fiuza Vieira", createdOrder.getReceivers().get(1).getMoipAccount().getFullname());
         assertEquals("vagninho99", createdOrder.getReceivers().get(1).getMoipAccount().getLogin());
         assertTrue(createdOrder.getReceivers().get(1).isSecondary());
+        assertFalse(createdOrder.getReceivers().get(1).getFeePayor());
+    }
+
+    @Play("orders/create_with_checkout_preferences")
+    @Test
+    public void testCreateWithCheckoutPreferences() {
+        int[] quantity = {1,6};
+        Order createdOrder = api.create(new OrderRequest()
+                .ownId("order_own_id")
+                .addItem("Nome do produto", 1, "Mais info...", 10000)
+                .customer(new CustomerRequest()
+                        .ownId("customer_own_id")
+                        .fullname("Jose da Silva")
+                        .email("sandbox_v2_1401147277@email.com")
+                )
+                .checkoutPreferences(new CheckoutPreferencesRequest()
+                        .addInstallment(new InstallmentRequest()
+                            .quantity(quantity)
+                            .addition(100)
+                            .discount(0)
+                        )
+                        .setRedirectUrls(new CheckoutPreferencesRequest.RedirectUrlsRequest(
+                                "https://dev.moip.com.br",
+                                "https://dev.moip.com.br/docs"
+                            )
+                        )
+                )
+        );
+
+        assertArrayEquals(quantity, createdOrder.getCheckoutPreferences().getInstallments().get(0).getQuantity());
+        assertEquals(100, createdOrder.getCheckoutPreferences().getInstallments().get(0).getAddition());
+        assertEquals(0, createdOrder.getCheckoutPreferences().getInstallments().get(0).getDiscount());
+        assertEquals("https://dev.moip.com.br/docs", createdOrder.getCheckoutPreferences().getRedirectUrls().getUrlFailure());
+        assertEquals("https://dev.moip.com.br", createdOrder.getCheckoutPreferences().getRedirectUrls().getUrlSuccess());
     }
 
     @Play("orders/create_with_customer_additional_info")
