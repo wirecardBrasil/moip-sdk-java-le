@@ -39,7 +39,6 @@ public class OrderAPITest {
         ClientFactory clientFactory = new ClientFactory();
 
         api = new OrderAPI(clientFactory.client(player.getURL("").toString()));
-        //api = new OrderAPI(clientFactory.client(br.com.moip.Client.SANDBOX));
     }
 
     @Play("orders/get")
