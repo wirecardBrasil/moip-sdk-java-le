@@ -10,7 +10,7 @@
 **Índice**
 
 - [Instalação](#instalação)
-- [Configurando a autenticação](#configurando-sua-autenticação)
+- [Configurando a autenticação](#configurando-a-autenticação)
   - [Por BasicAuth](#autenticando-por-basicauth)
   - [Por OAuth](#autenticando-por-oauth)
 - [Configurando o ambiente](#configurando-o-ambiente)
@@ -19,11 +19,12 @@
     - [Criação](#criação)
     - [Consulta](#consulta)
   - [Pagamentos](#pagamentos)
-    - [Cartão de Credito](#cartão-de-credito)
+    - [Cartão de Crédito](#cartão-de-crédito)
     - [Boleto](#boleto)
   - [Clientes](#clientes)
     - [Criação](#criação-1)
     - [Consulta](#consulta-1)
+- [Tratamento de Exceções](#tratamento-de-exceções)
 - [Documentação](#documentação)
 - [Licença](#licença)
 
@@ -40,7 +41,7 @@ Adicionar no seu pom.xml:
 
 ```
 
-## Configurando sua autenticação
+## Configurando a autenticação
 
 ### Autenticando por BasicAuth
 ```java
@@ -90,7 +91,7 @@ Order createdOrder = api.order().create(new OrderRequest()
 
 ### Consulta
 ```java
-String orderId = "9999";
+String orderId = "ORD-HPMZSOM611M2";
 Order order = api.order().get(orderId);
 System.out.println(order.toString());
 ```
@@ -170,7 +171,7 @@ System.out.println(customer.toString());
 
 ### Consulta
 ```java
-    String customerId = "99";
+    String customerId = "CUS-Q3BL0CAJ2G33";
     Customer customer = api.customer().get(customerId);
     System.out.println(customer.toString());
 ```
