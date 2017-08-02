@@ -121,41 +121,41 @@ Payment createdPayment = api.payment().create(new PaymentRequest()
 ### Boleto
 
 ```java
- Payment createdPayment = api.payment().create(new PaymentRequest()
-   .orderId("ORD-GOHHIF4Z6PLV")
-   .installmentCount(1)
-   .fundingInstrument(new FundingInstrumentRequest()
-     .boleto(new BoletoRequest()
-       .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2020, Calendar.NOVEMBER, 10).getTime()))
-       .logoUri("http://logo.com")
-       .instructionLines(new InstructionLinesRequest()
-         .first("Primeira linha")
-         .second("Segunda linha")
-         .third("Terceira linha")
-       )
-     )
-   )
- );
+Payment createdPayment = api.payment().create(new PaymentRequest()
+  .orderId("ORD-GOHHIF4Z6PLV")
+  .installmentCount(1)
+  .fundingInstrument(new FundingInstrumentRequest()
+    .boleto(new BoletoRequest()
+      .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2020, Calendar.NOVEMBER, 10).getTime()))
+      .logoUri("http://logo.com")
+      .instructionLines(new InstructionLinesRequest()
+        .first("Primeira linha")
+        .second("Segunda linha")
+        .third("Terceira linha")
+      )
+    )
+  )
+);
 ```
 
 ## Clientes
 ### Criação
 ```java
 Customer customer = api.customer().create(new CustomerRequest()
-   .ownId("CUS-" + System.currentTimeMillis())
-   .fullname("Jose da Silva")
-   .email("josedasilva@email.com")
-   .birthdate(new ApiDateRequest().date(new Date()))
-   .taxDocument(TaxDocumentRequest.cpf("22222222222"))
-   .phone(new PhoneRequest().setAreaCode("11").setNumber("55443322"))
-   .shippingAddressRequest(new ShippingAddressRequest().street("Avenida Faria Lima")
-     .streetNumber("3064")
-     .complement("12 andar")
-     .city("São Paulo")
-     .state("SP")
-     .district("Itaim")
-     .country("BRA")
-     .zipCode("01452-000")
+  .ownId("CUS-" + System.currentTimeMillis())
+  .fullname("Jose da Silva")
+  .email("josedasilva@email.com")
+  .birthdate(new ApiDateRequest().date(new Date()))
+  .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+  .phone(new PhoneRequest().setAreaCode("11").setNumber("55443322"))
+  .shippingAddressRequest(new ShippingAddressRequest().street("Avenida Faria Lima")
+    .streetNumber("3064")
+    .complement("12 andar")
+    .city("São Paulo")
+    .state("SP")
+    .district("Itaim")
+    .country("BRA")
+    .zipCode("01452-000")
   )
 );
 System.out.println(customer.toString());
@@ -163,9 +163,9 @@ System.out.println(customer.toString());
 
 ### Consulta
 ```java
-    String customerId = "CUS-Q3BL0CAJ2G33";
-    Customer customer = api.customer().get(customerId);
-    System.out.println(customer.toString());
+String customerId = "CUS-Q3BL0CAJ2G33";
+Customer customer = api.customer().get(customerId);
+System.out.println(customer.toString());
 ```
 
 ## Tratamento de Exceções
