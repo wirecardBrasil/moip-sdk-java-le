@@ -44,7 +44,7 @@ public class Client {
 
             USER_AGENT = properties.getProperty("userAgent");
         } catch (Exception e) {
-            USER_AGENT = "MoipJavaSDK/UnknownVersion";
+            USER_AGENT = "MoipJavaSDK/UnknownVersion (+https://github.com/moip/moip-sdk-java/)";
         }
     }
 
