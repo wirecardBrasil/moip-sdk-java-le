@@ -1,5 +1,6 @@
 package br.com.moip.request;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +10,7 @@ public class OrderRequest {
     private final List<ItemRequest> items = new ArrayList<ItemRequest>();
     private CustomerRequest customer;
     private final List<ReceiverRequest> receivers = new ArrayList<ReceiverRequest>();
+    @SerializedName("checkoutPreferences") private CheckoutPreferencesRequest checkoutPreferences;
 
     public String getOwnId() {
         return ownId;
@@ -50,12 +52,23 @@ public class OrderRequest {
         return this;
     }
 
+    public CheckoutPreferencesRequest getCheckoutPreferences() {
+        return checkoutPreferences;
+    }
+
+    public OrderRequest checkoutPreferences(String urlSuccess, String urlFailure) {
+        this.checkoutPreferences = new CheckoutPreferencesRequest(urlSuccess, urlFailure);
+        
+        return this;
+    }
+
     @Override
     public String toString() {
         return new StringBuilder("OrderRequest{")
                 .append("ownId='").append(ownId).append('\'')
                 .append(", items=").append(items)
                 .append(", customer=").append(customer)
+                .append(", checkoutPreferences=").append(checkoutPreferences)
                 .append('}').toString();
     }
 
@@ -95,6 +108,62 @@ public class OrderRequest {
                     .append(", quantity=").append(quantity)
                     .append(", detail='").append(detail).append('\'')
                     .append(", price=").append(price)
+                    .append('}').toString();
+        }
+    }
+    
+    public static final class CheckoutPreferencesRequest {
+        @SerializedName("redirectUrls") private RedirectUrlsRequest redirectUrls;
+
+        public CheckoutPreferencesRequest(String urlSuccess, String urlFailure) {
+            this.redirectUrls = new RedirectUrlsRequest(urlSuccess, urlFailure);
+        }
+
+        public RedirectUrlsRequest getRedirectUrls() {
+            return redirectUrls;
+        }
+
+        public void setRedirectUrls(RedirectUrlsRequest redirectUrls) {
+            this.redirectUrls = redirectUrls;
+        }
+
+        @Override
+        public String toString() {
+            return new StringBuilder("CheckoutPreferencesRequest{")
+                    .append("redirectUrls=").append(redirectUrls).append('}').toString();
+        }
+    }
+    
+    public static final class RedirectUrlsRequest {
+        @SerializedName("urlSuccess") private String urlSuccess;
+        @SerializedName("urlFailure") private String urlFailure;
+
+        public RedirectUrlsRequest(String urlSuccess, String urlFailure) {
+            this.urlSuccess = urlSuccess;
+            this.urlFailure = urlFailure;
+        }
+
+        public String getUrlSuccess() {
+            return urlSuccess;
+        }
+
+        public void setUrlSuccess(String urlSuccess) {
+            this.urlSuccess = urlSuccess;
+        }
+
+        public String getUrlFailure() {
+            return urlFailure;
+        }
+
+        public void setUrlFailure(String urlFailure) {
+            this.urlFailure = urlFailure;
+        }
+
+        @Override
+        public String toString() {
+            return new StringBuilder("RedirectUrlsRequest{")
+                    .append("urlSuccess='").append(urlSuccess).append('\'')
+                    .append(", urlFailure='").append(urlFailure).append('\'')
                     .append('}').toString();
         }
     }

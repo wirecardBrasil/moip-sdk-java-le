@@ -1,5 +1,6 @@
 package br.com.moip.resource;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class Order {
     private final List<Item> items;
     private Customer customer;
     private final List<Receiver> receivers = new ArrayList<>();
+    @SerializedName("_links") private Links links;
 
     public String getId() {
         return id;
@@ -36,6 +38,10 @@ public class Order {
         return receivers;
     }
 
+    public Links getLinks() {
+        return links;
+    }
+
     public Order(){
         items = new ArrayList<Item>();
     }
@@ -57,6 +63,7 @@ public class Order {
                 .append(", items=").append(items)
                 .append(", customer=").append(customer)
                 .append(", receivers=").append(receivers)
+                .append(", links=").append(links)
                 .append('}').toString();
     }
 
@@ -90,6 +97,24 @@ public class Order {
                     .append(", detail='").append(detail).append('\'')
                     .append(", price=").append(price)
                     .append('}').toString();
+        }
+    }
+    
+    public static final class Links {
+        private Checkout checkout;
+
+        public Checkout getCheckout() {
+            return checkout;
+        }
+
+        public void setCheckout(Checkout checkout) {
+            this.checkout = checkout;
+        }
+
+        @Override
+        public String toString() {
+            return new StringBuilder("Links{")
+                    .append("checkout=").append(checkout).append('}').toString();
         }
     }
 }
