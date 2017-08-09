@@ -6,6 +6,7 @@ public class PaymentRequest {
     private int installmentCount;
     private FundingInstrumentRequest fundingInstrument = new FundingInstrumentRequest();
     private GeolocationRequest geolocation;
+    private Boolean delayCapture;
 
     public PaymentRequest orderId(final String orderId) {
         this.orderId = orderId;
@@ -27,6 +28,11 @@ public class PaymentRequest {
         return this;
     }
 
+    public PaymentRequest delayCapture(Boolean delayCapture) {
+        this.delayCapture = delayCapture;
+        return this;
+    }
+
     public String getOrderId() {
         return orderId;
     }
@@ -43,6 +49,10 @@ public class PaymentRequest {
         return geolocation;
     }
 
+    public Boolean getDelayCapture() {
+        return delayCapture;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("PaymentRequest{");
@@ -50,6 +60,7 @@ public class PaymentRequest {
         sb.append(", installmentCount=").append(installmentCount);
         sb.append(", fundingInstrument=").append(fundingInstrument);
         sb.append(", geolocation=").append(geolocation);
+        sb.append(", delayCapture=").append(delayCapture);
         sb.append('}');
         return sb.toString();
     }

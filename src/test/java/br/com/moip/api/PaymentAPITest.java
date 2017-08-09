@@ -25,6 +25,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class PaymentAPITest {
@@ -49,29 +50,30 @@ public class PaymentAPITest {
     @Test
     public void testCreateCreditCard() {
         Payment createdPayment = api.create(
-                new PaymentRequest()
-                        .orderId("ORD-HPMZSOM611M2")
-                        .installmentCount(1)
-                        .fundingInstrument(
-                                new FundingInstrumentRequest()
-                                        .creditCard(
-                                                new CreditCardRequest()
-                                                        .hash(CC_HASH)
-                                                        .holder(
-                                                                new HolderRequest()
-                                                                        .fullname("Jose Portador da Silva")
-                                                                        .birthdate("1988-10-10")
-                                                                        .phone(
-                                                                                new PhoneRequest()
-                                                                                        .setAreaCode("11")
-                                                                                        .setNumber("55667788")
-                                                                        )
-                                                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
-                                                        )
+            new PaymentRequest()
+                .orderId("ORD-HPMZSOM611M2")
+                .installmentCount(1)
+                .delayCapture(false)
+                .fundingInstrument(
+                    new FundingInstrumentRequest()
+                        .creditCard(
+                            new CreditCardRequest()
+                                .hash(CC_HASH)
+                                .holder(
+                                    new HolderRequest()
+                                        .fullname("Jose Portador da Silva")
+                                        .birthdate("1988-10-10")
+                                        .phone(
+                                            new PhoneRequest()
+                                                .setAreaCode("11")
+                                                .setNumber("55667788")
                                         )
+                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                )
                         )
+                )
         );
-
+        assertFalse(createdPayment.getDelayCapture());
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
     }
 
@@ -107,17 +109,17 @@ public class PaymentAPITest {
     @Test
     public void testCreateMposCreditRequest() {
         Payment createdPayment = api.create(
-                new PaymentRequest()
-                        .orderId("ORD-GOHHIF4Z6PLV")
-                        .installmentCount(1)
-                        .geolocation(new GeolocationRequest()
-                                .latitude(-33.867)
-                                .longitude(151.206))
-                        .fundingInstrument(new FundingInstrumentRequest()
-                                        .mposCreditCard(new MposRequest()
-                                                        .PinpadId("D180")
-                                        )
-                        )
+            new PaymentRequest()
+                .orderId("ORD-GOHHIF4Z6PLV")
+                .installmentCount(1)
+                .geolocation(new GeolocationRequest()
+                    .latitude(-33.867)
+                    .longitude(151.206))
+                .fundingInstrument(new FundingInstrumentRequest()
+                    .mposCreditCard(new MposRequest()
+                        .PinpadId("D180")
+                    )
+                )
         );
 
         assertEquals(createdPayment.getId(), "PAY-1TUOVJ3D18NM");
