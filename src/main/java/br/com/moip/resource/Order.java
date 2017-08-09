@@ -1,6 +1,6 @@
 package br.com.moip.resource;
 
-import br.com.moip.request.CheckoutPreferencesRequest;
+import br.com.moip.resource.links.OrderLinks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,7 @@ public class Order {
     private Customer customer;
     private final List<Receiver> receivers = new ArrayList<>();
     private CheckoutPreferences checkoutPreferences;
+    private OrderLinks _links;
 
     public String getId() {
         return id;
@@ -41,6 +42,10 @@ public class Order {
 
     public CheckoutPreferences getCheckoutPreferences() {
         return checkoutPreferences;
+    }
+
+    public OrderLinks getLinks() {
+        return _links;
     }
 
     public Order(){

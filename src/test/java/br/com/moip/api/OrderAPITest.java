@@ -53,15 +53,19 @@ public class OrderAPITest {
     @Test
     public void testCreate() {
         Order createdOrder = api.create(new OrderRequest()
-                        .ownId("order_own_id")
-                        .addItem("Nome do produto", 1, "Mais info...", 100)
-                        .customer(new CustomerRequest()
-                                        .ownId("customer_own_id")
-                                        .fullname("Jose da Silva")
-                                        .email("sandbox_v2_1401147277@email.com")
-                        )
+                .ownId("order_own_id")
+                .addItem("Nome do produto", 1, "Mais info...", 100)
+                .customer(new CustomerRequest()
+                                .ownId("customer_own_id")
+                                .fullname("Jose da Silva")
+                                .email("sandbox_v2_1401147277@email.com")
+                )
         );
 
+        assertEquals("https://sandbox.moip.com.br/v2/orders/ORD-HCOWQ2QJKTAT", createdOrder.getLinks().self());
+        assertEquals("https://checkout-sandbox.moip.com.br/boleto/ORD-HCOWQ2QJKTAT", createdOrder.getLinks().payBoleto());
+        assertEquals("https://checkout-sandbox.moip.com.br/creditcard/ORD-HCOWQ2QJKTAT", createdOrder.getLinks().payCreditCard());
+        assertEquals("https://checkout-sandbox.moip.com.br/debit/itau/ORD-HCOWQ2QJKTAT", createdOrder.getLinks().payOnlineBankDebitItau());
         assertEquals("ORD-HCOWQ2QJKTAT", createdOrder.getId());
     }
 
