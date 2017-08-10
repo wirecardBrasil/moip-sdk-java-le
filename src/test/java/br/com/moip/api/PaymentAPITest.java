@@ -77,6 +77,39 @@ public class PaymentAPITest {
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
     }
 
+    @Play("payments/create")
+    @Test
+    public void testCreateCreditCardPCI() {
+        Payment createdPayment = api.create(
+            new PaymentRequest()
+                .orderId("ORD-HPMZSOM611M2")
+                .installmentCount(1)
+                .delayCapture(false)
+                .fundingInstrument(
+                    new FundingInstrumentRequest()
+                        .creditCard(
+                            new CreditCardRequest()
+                                .number("4012001037141112")
+                                .cvc(123)
+                                .expirationMonth("05")
+                                .expirationYear("18")
+                                .holder(
+                                    new HolderRequest()
+                                        .fullname("Jose Portador da Silva")
+                                        .birthdate("1988-10-10")
+                                        .phone(
+                                            new PhoneRequest()
+                                                .setAreaCode("11")
+                                                .setNumber("55667788")
+                                        )
+                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                )
+                        )
+                )
+        );
+        assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
+    }
+
     @Play("payments/create_boleto_payment")
     @Test
     public void testCreateBoletoRequest() {
