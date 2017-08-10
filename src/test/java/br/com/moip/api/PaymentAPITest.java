@@ -1,17 +1,7 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
-import br.com.moip.request.ApiDateRequest;
-import br.com.moip.request.BoletoRequest;
-import br.com.moip.request.CreditCardRequest;
-import br.com.moip.request.FundingInstrumentRequest;
-import br.com.moip.request.GeolocationRequest;
-import br.com.moip.request.HolderRequest;
-import br.com.moip.request.InstructionLinesRequest;
-import br.com.moip.request.MposRequest;
-import br.com.moip.request.PaymentRequest;
-import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.TaxDocumentRequest;
+import br.com.moip.request.*;
 import br.com.moip.resource.FundingInstrument;
 import br.com.moip.resource.Payment;
 import br.com.moip.resource.PaymentStatus;
@@ -108,6 +98,29 @@ public class PaymentAPITest {
                 )
         );
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
+    }
+
+    @Play("payments/create_online_bank_debit_payment")
+    @Test
+    public void testCreateOnlineBankDebitPayment() {
+        Payment createdPayment = api.create(
+            new PaymentRequest()
+                .orderId("ORD-0DE8DP0K3E4Q")
+                .installmentCount(1)
+                .fundingInstrument(
+                    new FundingInstrumentRequest()
+                        .onlineBankDebit(new OnlineBankDebitRequest()
+                            .bankNumber("341")
+                            .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2020, Calendar.AUGUST, 10).getTime()))
+                            .returnUri("https://moip.com.br/")
+                        )
+                )
+        );
+        assertEquals("341", createdPayment.getFundingInstrument().getOnlineBankDebit().getBankNumber());
+        assertEquals("2020-08-10", createdPayment.getFundingInstrument().getOnlineBankDebit().getExpirationDate().getFormatedDate());
+        assertEquals("https://moip.com.br/", createdPayment.getFundingInstrument().getOnlineBankDebit().getReturnUri());
+        assertEquals(FundingInstrument.Method.ONLINE_BANK_DEBIT, createdPayment.getFundingInstrument().getMethod());
+        assertTrue(createdPayment.getId().startsWith("PAY-FZJSASNSUOB7"));
     }
 
     @Play("payments/create_boleto_payment")
