@@ -1,7 +1,18 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
-import br.com.moip.request.*;
+import br.com.moip.request.ApiDateRequest;
+import br.com.moip.request.BoletoRequest;
+import br.com.moip.request.CreditCardRequest;
+import br.com.moip.request.FundingInstrumentRequest;
+import br.com.moip.request.GeolocationRequest;
+import br.com.moip.request.HolderRequest;
+import br.com.moip.request.InstructionLinesRequest;
+import br.com.moip.request.MposRequest;
+import br.com.moip.request.PaymentRequest;
+import br.com.moip.request.PhoneRequest;
+import br.com.moip.request.TaxDocumentRequest;
+import br.com.moip.request.OnlineBankDebitRequest;
 import br.com.moip.resource.FundingInstrument;
 import br.com.moip.resource.Payment;
 import br.com.moip.resource.PaymentStatus;
