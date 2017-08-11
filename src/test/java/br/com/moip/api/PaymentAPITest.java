@@ -40,8 +40,8 @@ public class PaymentAPITest {
 
     @Before
     public void setUp() {
-        Client client = clientFactory.client(player.getURL("").toString());
-//        Client client = clientFactory.client(Client.SANDBOX);
+//        Client client = clientFactory.client(player.getURL("").toString());
+        Client client = clientFactory.client(Client.SANDBOX);
         api = new PaymentAPI(client);
     }
 
@@ -49,27 +49,27 @@ public class PaymentAPITest {
     @Test
     public void testCreateCreditCard() {
         Payment createdPayment = api.create(
-                new PaymentRequest()
-                        .orderId("ORD-HPMZSOM611M2")
-                        .installmentCount(1)
-                        .fundingInstrument(
-                                new FundingInstrumentRequest()
-                                        .creditCard(
-                                                new CreditCardRequest()
-                                                        .hash(CC_HASH)
-                                                        .holder(
-                                                                new HolderRequest()
-                                                                        .fullname("Jose Portador da Silva")
-                                                                        .birthdate("1988-10-10")
-                                                                        .phone(
-                                                                                new PhoneRequest()
-                                                                                        .setAreaCode("11")
-                                                                                        .setNumber("55667788")
-                                                                        )
-                                                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
-                                                        )
+            new PaymentRequest()
+                .orderId("ORD-HPMZSOM611M2")
+                .installmentCount(1)
+                .fundingInstrument(
+                    new FundingInstrumentRequest()
+                        .creditCard(
+                            new CreditCardRequest()
+                                .hash(CC_HASH)
+                                .holder(
+                                    new HolderRequest()
+                                        .fullname("Jose Portador da Silva")
+                                        .birthdate("1988-10-10")
+                                        .phone(
+                                            new PhoneRequest()
+                                                .setAreaCode("11")
+                                                .setNumber("55667788")
                                         )
+                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                )
                         )
+                )
         );
 
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
@@ -107,17 +107,18 @@ public class PaymentAPITest {
     @Test
     public void testCreateMposCreditRequest() {
         Payment createdPayment = api.create(
-                new PaymentRequest()
-                        .orderId("ORD-GOHHIF4Z6PLV")
-                        .installmentCount(1)
-                        .geolocation(new GeolocationRequest()
-                                .latitude(-33.867)
-                                .longitude(151.206))
-                        .fundingInstrument(new FundingInstrumentRequest()
-                                        .mposCreditCard(new MposRequest()
-                                                        .PinpadId("D180")
-                                        )
-                        )
+            new PaymentRequest()
+                .orderId("ORD-GOHHIF4Z6PLV")
+                .installmentCount(1)
+                .geolocation(new GeolocationRequest()
+                    .latitude(-33.867)
+                    .longitude(151.206)
+                )
+                .fundingInstrument(new FundingInstrumentRequest()
+                    .mposCreditCard(new MposRequest()
+                        .PinpadId("D180")
+                    )
+                )
         );
 
         assertEquals(createdPayment.getId(), "PAY-1TUOVJ3D18NM");
@@ -125,5 +126,26 @@ public class PaymentAPITest {
         assertEquals(createdPayment.getFundingInstrument().getMpos().getPinpadId(), "D180-64000786");
         assertEquals(createdPayment.getGeolocation().getLatitude(), -33.867, 0);
         assertEquals(createdPayment.getGeolocation().getLongitude(), 151.206,0);
+    }
+
+    @Play("payments/get")
+    @Test
+    public void testGetPayment() {
+        Payment payment = api.get("PAY-FRAAY8GN1HSB");
+
+        assertEquals(payment.getId(), "PAY-FRAAY8GN1HSB");
+        assertEquals(payment.getStatus(), PaymentStatus.AUTHORIZED);
+        assertEquals(payment.getAmount().getTotal(), (Integer)7300);
+        assertEquals(payment.getFundingInstrument().getMethod(), FundingInstrument.Method.CREDIT_CARD);
+        assertEquals(payment.getInstallmentCount(), 1);
+    }
+
+    @Play("payments/capture")
+    @Test
+    public void testCapturePayment() {
+        Payment capturedPayment = api.capture("PAY-FRAAY8GN1HSB");
+
+        assertEquals(capturedPayment.getId(), "PAY-FRAAY8GN1HSB");
+        assertEquals(capturedPayment.getStatus(), PaymentStatus.AUTHORIZED);
     }
 }
