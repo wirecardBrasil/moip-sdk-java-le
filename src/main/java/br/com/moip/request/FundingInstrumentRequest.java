@@ -6,6 +6,7 @@ public class FundingInstrumentRequest {
     private CreditCardRequest creditCard;
     private BoletoRequest boleto;
     private MposRequest mpos;
+    private OnlineBankDebitRequest onlineBankDebit;
     private boolean suppressBoleto;
     private boolean suppressCreditCard;
 
@@ -30,6 +31,12 @@ public class FundingInstrumentRequest {
     public FundingInstrumentRequest mposCreditCard(final MposRequest mposRequest) {
         this.mpos = mposRequest;
         this.method = Method.CREDIT_CARD;
+        return this;
+    }
+
+    public FundingInstrumentRequest onlineBankDebit(final OnlineBankDebitRequest onlineBankDebit) {
+        this.onlineBankDebit = onlineBankDebit;
+        this.method = Method.ONLINE_BANK_DEBIT;
         return this;
     }
 
@@ -67,8 +74,12 @@ public class FundingInstrumentRequest {
         return mpos;
     }
 
+    public OnlineBankDebitRequest getOnlineBankDebit() {
+        return onlineBankDebit;
+    }
+
     private enum Method {
-        CREDIT_CARD, DEBIT_CARD, BOLETO;
+        CREDIT_CARD, DEBIT_CARD, BOLETO, ONLINE_BANK_DEBIT;
     }
 
     @Override
@@ -79,6 +90,7 @@ public class FundingInstrumentRequest {
         sb.append(", boleto=").append(boleto);
         sb.append(", suppressBoleto=").append(suppressBoleto);
         sb.append(", suppressCreditCard=").append(suppressCreditCard);
+        sb.append(", onlineBankDebit=").append(onlineBankDebit);
         sb.append(", mpos=").append(mpos);
         sb.append('}');
         return sb.toString();

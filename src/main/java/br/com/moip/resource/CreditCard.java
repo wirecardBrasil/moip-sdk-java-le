@@ -4,6 +4,8 @@ public class CreditCard {
 
     private Holder holder;
 
+    private Boolean store;
+
     //Used on MPOS
     private String brand;
     private String first6;
@@ -11,6 +13,10 @@ public class CreditCard {
 
     public Holder getHolder() {
         return holder;
+    }
+
+    public Boolean getStore() {
+        return store;
     }
 
     public String getBrand() {
@@ -32,6 +38,7 @@ public class CreditCard {
                 .append(", brand='").append(brand).append('\'')
                 .append(", first6='").append(first6).append('\'')
                 .append(", last4='").append(last4).append('\'')
+                .append(", store=").append(store)
                 .append('}').toString();
     }
 }
