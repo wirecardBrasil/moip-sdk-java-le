@@ -43,7 +43,6 @@ public class PaymentAPITest {
     @Before
     public void setUp() {
         Client client = clientFactory.client(player.getURL("").toString());
-//        Client client = clientFactory.client(Client.SANDBOX);
         api = new PaymentAPI(client);
     }
 
@@ -171,7 +170,8 @@ public class PaymentAPITest {
                 .installmentCount(1)
                 .geolocation(new GeolocationRequest()
                     .latitude(-33.867)
-                    .longitude(151.206))
+                    .longitude(151.206)
+                )
                 .fundingInstrument(new FundingInstrumentRequest()
                     .mposCreditCard(new MposRequest()
                         .PinpadId("D180")
@@ -184,5 +184,35 @@ public class PaymentAPITest {
         assertEquals(createdPayment.getFundingInstrument().getMpos().getPinpadId(), "D180-64000786");
         assertEquals(createdPayment.getGeolocation().getLatitude(), -33.867, 0);
         assertEquals(createdPayment.getGeolocation().getLongitude(), 151.206,0);
+    }
+
+    @Play("payments/get")
+    @Test
+    public void testGetPayment() {
+        Payment payment = api.get("PAY-FRAAY8GN1HSB");
+
+        assertEquals(payment.getId(), "PAY-FRAAY8GN1HSB");
+        assertEquals(payment.getStatus(), PaymentStatus.AUTHORIZED);
+        assertEquals(payment.getAmount().getTotal(), (Integer)7300);
+        assertEquals(payment.getFundingInstrument().getMethod(), FundingInstrument.Method.CREDIT_CARD);
+        assertEquals(payment.getInstallmentCount(), 1);
+    }
+
+    @Play("payments/capture")
+    @Test
+    public void testCapturePayment() {
+        Payment capturedPayment = api.capture("PAY-FRAAY8GN1HSB");
+
+        assertEquals(capturedPayment.getId(), "PAY-FRAAY8GN1HSB");
+        assertEquals(capturedPayment.getStatus(), PaymentStatus.AUTHORIZED);
+    }
+
+    @Play("payments/cancel_pre_authorized")
+    @Test
+    public void testCancelPayment() {
+        Payment cancelledPayment = api.cancelPreAuthorized("PAY-1ECF490M0E25");
+
+        assertEquals(cancelledPayment.getId(), "PAY-1ECF490M0E25");
+        assertEquals(cancelledPayment.getStatus(), PaymentStatus.CANCELLED);
     }
 }
