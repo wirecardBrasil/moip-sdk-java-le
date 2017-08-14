@@ -23,4 +23,9 @@ public class PaymentAPI {
     public Payment capture(final String paymentId) {
         return client.post("/v2/payments/" + paymentId + "/capture", null, Payment.class);
     }
+
+    public Payment avoid(final String paymentId) {
+        return client.post("/v2/payments/" + paymentId + "/void", null, Payment.class);
+    }
+
 }

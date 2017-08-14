@@ -40,8 +40,7 @@ public class PaymentAPITest {
 
     @Before
     public void setUp() {
-//        Client client = clientFactory.client(player.getURL("").toString());
-        Client client = clientFactory.client(Client.SANDBOX);
+        Client client = clientFactory.client(player.getURL("").toString());
         api = new PaymentAPI(client);
     }
 
@@ -147,5 +146,14 @@ public class PaymentAPITest {
 
         assertEquals(capturedPayment.getId(), "PAY-FRAAY8GN1HSB");
         assertEquals(capturedPayment.getStatus(), PaymentStatus.AUTHORIZED);
+    }
+
+    @Play("payments/cancel_pre_authorized")
+    @Test
+    public void testCancelPayment() {
+        Payment cancelledPayment = api.avoid("PAY-1ECF490M0E25");
+
+        assertEquals(cancelledPayment.getId(), "PAY-1ECF490M0E25");
+        assertEquals(cancelledPayment.getStatus(), PaymentStatus.CANCELLED);
     }
 }
