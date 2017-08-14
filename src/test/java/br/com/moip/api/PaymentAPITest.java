@@ -13,6 +13,7 @@ import br.com.moip.request.PaymentRequest;
 import br.com.moip.request.PhoneRequest;
 import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.request.OnlineBankDebitRequest;
+import br.com.moip.resource.EscrowStatus;
 import br.com.moip.resource.FundingInstrument;
 import br.com.moip.resource.Payment;
 import br.com.moip.resource.PaymentStatus;
@@ -184,6 +185,40 @@ public class PaymentAPITest {
         assertEquals(createdPayment.getFundingInstrument().getMpos().getPinpadId(), "D180-64000786");
         assertEquals(createdPayment.getGeolocation().getLatitude(), -33.867, 0);
         assertEquals(createdPayment.getGeolocation().getLongitude(), 151.206,0);
+    }
+
+    @Play("payments/create_payment_escrow")
+    @Test
+    public void testCreatePaymentWithEscrow() {
+        Payment createdPayment = api.create(
+            new PaymentRequest()
+                .orderId("ORD-3435DIB58HYN")
+                .installmentCount(1)
+                .escrow(new PaymentRequest.EscrowRequest("Teste de descricao"))
+                .fundingInstrument(new FundingInstrumentRequest()
+                    .creditCard(
+                        new CreditCardRequest()
+                            .hash(CC_HASH)
+                            .holder(
+                                new HolderRequest()
+                                    .fullname("Jose Portador da Silva")
+                                    .birthdate("1988-10-10")
+                                    .phone(
+                                        new PhoneRequest()
+                                            .setAreaCode("11")
+                                            .setNumber("55667788")
+                                    )
+                                    .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                            )
+                    )
+                )
+        );
+
+        assertEquals("PAY-LDHXW5P34766", createdPayment.getId());
+        assertEquals("ECW-S0QEDXJM7TXT", createdPayment.getEscrows().get(0).getId());
+        assertEquals(EscrowStatus.HOLD_PENDING, createdPayment.getEscrows().get(0).getStatus());
+        assertEquals((Integer)7300, createdPayment.getAmount().getTotal());
+        assertEquals(PaymentStatus.IN_ANALYSIS, createdPayment.getStatus());
     }
 
     @Play("payments/get")

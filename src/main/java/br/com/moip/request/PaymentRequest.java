@@ -7,6 +7,7 @@ public class PaymentRequest {
     private FundingInstrumentRequest fundingInstrument = new FundingInstrumentRequest();
     private GeolocationRequest geolocation;
     private Boolean delayCapture;
+    private EscrowRequest escrow;
 
     public PaymentRequest orderId(final String orderId) {
         this.orderId = orderId;
@@ -30,6 +31,11 @@ public class PaymentRequest {
 
     public PaymentRequest delayCapture(Boolean delayCapture) {
         this.delayCapture = delayCapture;
+        return this;
+    }
+
+    public PaymentRequest escrow(EscrowRequest escrow) {
+        this.escrow = escrow;
         return this;
     }
 
@@ -61,7 +67,29 @@ public class PaymentRequest {
         sb.append(", fundingInstrument=").append(fundingInstrument);
         sb.append(", geolocation=").append(geolocation);
         sb.append(", delayCapture=").append(delayCapture);
+        sb.append(", escrow=").append(escrow);
         sb.append('}');
         return sb.toString();
+    }
+
+    public static final class EscrowRequest {
+
+        private String description;
+
+        public EscrowRequest() {
+
+        }
+
+        public EscrowRequest(String description) {
+            this.description = description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getDescription() {
+            return description;
+        }
     }
 }
