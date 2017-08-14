@@ -1,5 +1,7 @@
 package br.com.moip.resource;
 
+import java.util.List;
+
 public class Payment {
 
     private String id;
@@ -9,6 +11,7 @@ public class Payment {
     private final FundingInstrument fundingInstrument = new FundingInstrument();
     private Geolocation geolocation;
     private Boolean delayCapture;
+    private List<Escrow> escrows;
 
     public String getId() {
         return id;
@@ -62,6 +65,10 @@ public class Payment {
         this.delayCapture = delayCapture;
     }
 
+    public List<Escrow>getEscrows() {
+        return escrows;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Payment{");
@@ -72,6 +79,7 @@ public class Payment {
         sb.append(", fundingInstrument=").append(fundingInstrument);
         sb.append(", geolocation=").append(geolocation);
         sb.append(", delayCapture=").append(delayCapture);
+        sb.append(", escrows=").append(escrows);
         sb.append('}');
         return sb.toString();
     }
