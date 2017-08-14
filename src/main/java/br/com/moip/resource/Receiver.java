@@ -5,6 +5,7 @@ public class Receiver {
     private Amount amount;
     private Type type;
     private MoipAccount moipAccount;
+    private boolean feePayor;
 
     public Amount getAmount() {
         return amount;
@@ -16,6 +17,10 @@ public class Receiver {
 
     public MoipAccount getMoipAccount() {
         return moipAccount;
+    }
+
+    public boolean getFeePayor() {
+        return feePayor;
     }
 
     public boolean isPrimary() {
