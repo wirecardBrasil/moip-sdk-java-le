@@ -12,6 +12,7 @@ import br.com.moip.request.MposRequest;
 import br.com.moip.request.PaymentRequest;
 import br.com.moip.request.PhoneRequest;
 import br.com.moip.request.TaxDocumentRequest;
+import br.com.moip.request.OnlineBankDebitRequest;
 import br.com.moip.resource.FundingInstrument;
 import br.com.moip.resource.Payment;
 import br.com.moip.resource.PaymentStatus;
@@ -25,6 +26,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class PaymentAPITest {
@@ -49,30 +51,87 @@ public class PaymentAPITest {
     @Test
     public void testCreateCreditCard() {
         Payment createdPayment = api.create(
-                new PaymentRequest()
-                        .orderId("ORD-HPMZSOM611M2")
-                        .installmentCount(1)
-                        .fundingInstrument(
-                                new FundingInstrumentRequest()
-                                        .creditCard(
-                                                new CreditCardRequest()
-                                                        .hash(CC_HASH)
-                                                        .holder(
-                                                                new HolderRequest()
-                                                                        .fullname("Jose Portador da Silva")
-                                                                        .birthdate("1988-10-10")
-                                                                        .phone(
-                                                                                new PhoneRequest()
-                                                                                        .setAreaCode("11")
-                                                                                        .setNumber("55667788")
-                                                                        )
-                                                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
-                                                        )
+            new PaymentRequest()
+                .orderId("ORD-HPMZSOM611M2")
+                .installmentCount(1)
+                .delayCapture(false)
+                .fundingInstrument(
+                    new FundingInstrumentRequest()
+                        .creditCard(
+                            new CreditCardRequest()
+                                .hash(CC_HASH)
+                                .holder(
+                                    new HolderRequest()
+                                        .fullname("Jose Portador da Silva")
+                                        .birthdate("1988-10-10")
+                                        .phone(
+                                            new PhoneRequest()
+                                                .setAreaCode("11")
+                                                .setNumber("55667788")
                                         )
+                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                )
                         )
+                )
         );
-
+        assertFalse(createdPayment.getDelayCapture());
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
+    }
+
+    @Play("payments/create")
+    @Test
+    public void testCreateCreditCardPCI() {
+        Payment createdPayment = api.create(
+            new PaymentRequest()
+                .orderId("ORD-HPMZSOM611M2")
+                .installmentCount(1)
+                .delayCapture(false)
+                .fundingInstrument(
+                    new FundingInstrumentRequest()
+                        .creditCard(
+                            new CreditCardRequest()
+                                .number("4012001037141112")
+                                .cvc(123)
+                                .expirationMonth("05")
+                                .expirationYear("18")
+                                .holder(
+                                    new HolderRequest()
+                                        .fullname("Jose Portador da Silva")
+                                        .birthdate("1988-10-10")
+                                        .phone(
+                                            new PhoneRequest()
+                                                .setAreaCode("11")
+                                                .setNumber("55667788")
+                                        )
+                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                )
+                        )
+                )
+        );
+        assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
+    }
+
+    @Play("payments/create_online_bank_debit_payment")
+    @Test
+    public void testCreateOnlineBankDebitPayment() {
+        Payment createdPayment = api.create(
+            new PaymentRequest()
+                .orderId("ORD-0DE8DP0K3E4Q")
+                .installmentCount(1)
+                .fundingInstrument(
+                    new FundingInstrumentRequest()
+                        .onlineBankDebit(new OnlineBankDebitRequest()
+                            .bankNumber("341")
+                            .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2020, Calendar.AUGUST, 10).getTime()))
+                            .returnUri("https://moip.com.br/")
+                        )
+                )
+        );
+        assertEquals("341", createdPayment.getFundingInstrument().getOnlineBankDebit().getBankNumber());
+        assertEquals("2020-08-10", createdPayment.getFundingInstrument().getOnlineBankDebit().getExpirationDate().getFormatedDate());
+        assertEquals("https://moip.com.br/", createdPayment.getFundingInstrument().getOnlineBankDebit().getReturnUri());
+        assertEquals(FundingInstrument.Method.ONLINE_BANK_DEBIT, createdPayment.getFundingInstrument().getMethod());
+        assertTrue(createdPayment.getId().startsWith("PAY-FZJSASNSUOB7"));
     }
 
     @Play("payments/create_boleto_payment")
@@ -107,17 +166,17 @@ public class PaymentAPITest {
     @Test
     public void testCreateMposCreditRequest() {
         Payment createdPayment = api.create(
-                new PaymentRequest()
-                        .orderId("ORD-GOHHIF4Z6PLV")
-                        .installmentCount(1)
-                        .geolocation(new GeolocationRequest()
-                                .latitude(-33.867)
-                                .longitude(151.206))
-                        .fundingInstrument(new FundingInstrumentRequest()
-                                        .mposCreditCard(new MposRequest()
-                                                        .PinpadId("D180")
-                                        )
-                        )
+            new PaymentRequest()
+                .orderId("ORD-GOHHIF4Z6PLV")
+                .installmentCount(1)
+                .geolocation(new GeolocationRequest()
+                    .latitude(-33.867)
+                    .longitude(151.206))
+                .fundingInstrument(new FundingInstrumentRequest()
+                    .mposCreditCard(new MposRequest()
+                        .PinpadId("D180")
+                    )
+                )
         );
 
         assertEquals(createdPayment.getId(), "PAY-1TUOVJ3D18NM");
