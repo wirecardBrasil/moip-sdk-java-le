@@ -198,7 +198,10 @@ public class PaymentAPITest {
                 .fundingInstrument(new FundingInstrumentRequest()
                     .creditCard(
                         new CreditCardRequest()
-                            .hash(CC_HASH)
+                            .number("4012001037141112")
+                            .cvc(123)
+                            .expirationMonth("05")
+                            .expirationYear("18")
                             .holder(
                                 new HolderRequest()
                                     .fullname("Jose Portador da Silva")

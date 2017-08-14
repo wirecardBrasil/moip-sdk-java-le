@@ -20,13 +20,12 @@ public class EscrowAPITest {
     @Before
     public void setUp() {
         ClientFactory clientFactory = new ClientFactory();
-
         api = new EscrowAPI(clientFactory.client(player.getURL("").toString()));
     }
 
     @Play("escrow/release")
     @Test
-    public void testCreate() {
+    public void testReleaseEscrow() {
         Escrow escrowReleased = api.release("ECW-S0QEDXJM7TXT");
 
         assertEquals(EscrowStatus.RELEASED, escrowReleased.getStatus());
@@ -38,7 +37,5 @@ public class EscrowAPITest {
         assertEquals("ORD-3435DIB58HYN", escrowReleased.getLinks().orderTitle());
         assertEquals("https://aws-sand-gapi-01c.moip.in/v2/payments/PAY-LDHXW5P34766", escrowReleased.getLinks().paymentLink());
         assertEquals("PAY-LDHXW5P34766", escrowReleased.getLinks().paymentTitle());
-
-
     }
 }

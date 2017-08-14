@@ -13,7 +13,6 @@ public class Href {
         return title;
     }
 
-
     @Override
     public String toString() {
         return new StringBuilder("Href{")
