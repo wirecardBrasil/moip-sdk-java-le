@@ -151,7 +151,7 @@ public class PaymentAPITest {
     @Play("payments/cancel_pre_authorized")
     @Test
     public void testCancelPayment() {
-        Payment cancelledPayment = api.avoid("PAY-1ECF490M0E25");
+        Payment cancelledPayment = api.cancelPreAuthorized("PAY-1ECF490M0E25");
 
         assertEquals(cancelledPayment.getId(), "PAY-1ECF490M0E25");
         assertEquals(cancelledPayment.getStatus(), PaymentStatus.CANCELLED);

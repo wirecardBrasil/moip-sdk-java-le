@@ -24,7 +24,7 @@ public class PaymentAPI {
         return client.post("/v2/payments/" + paymentId + "/capture", null, Payment.class);
     }
 
-    public Payment avoid(final String paymentId) {
+    public Payment cancelPreAuthorized(final String paymentId) {
         return client.post("/v2/payments/" + paymentId + "/void", null, Payment.class);
     }
 
