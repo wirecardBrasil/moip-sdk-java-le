@@ -22,10 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 public class Client {
 
@@ -66,6 +63,53 @@ public class Client {
     public <T> T get(String path, Class<T> type) {
         return doRequest("GET", path, null, type);
     }
+
+    /*public HttpURLConnection getConn() {
+
+    }
+
+    private HttpURLConnection request(final String method, final String path, final Object object) {
+        HttpURLConnection conn = null;
+
+        try {
+            URL url = new URL(endpoint + path);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestProperty("User-Agent", USER_AGENT);
+            conn.setRequestProperty("Content-type", "application/json");
+
+            conn.setRequestMethod(method);
+
+            if (conn instanceof HttpsURLConnection) {
+                ((HttpsURLConnection) conn).setSSLSocketFactory(new SSLSupport());
+            }
+
+            if (authentication != null) {
+                authentication.authenticate(conn);
+            }
+
+            LOGGER.debug("---> {} {}", method, conn.getURL().toString());
+            logHeaders(conn.getRequestProperties().entrySet());
+
+            if (object != null) {
+                conn.setDoOutput(true);
+
+                String body = gson.toJson(object);
+
+                LOGGER.debug("");
+                LOGGER.debug("{}", body);
+
+                DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+                wr.writeBytes(body);
+                wr.flush();
+                wr.close();
+            }
+
+            LOGGER.debug("---> END HTTP");
+        } catch (Exception e) {
+
+        }
+        return conn;
+    }*/
 
     private <T> T doRequest(final String method, final String path, final Object object, final Class<T> type) {
         try {

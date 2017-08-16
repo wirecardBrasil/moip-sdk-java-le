@@ -1,12 +1,20 @@
 package br.com.moip.api;
 
+import br.com.moip.request.*;
 import br.com.moip.resource.Account;
+import br.com.moip.resource.ApiDate;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class AccountAPITest {
 
@@ -32,5 +40,141 @@ public class AccountAPITest {
         assertEquals("iorilabsmoip", account.getSoftDescriptor());
         assertEquals("iori@labs.moip.com.br", account.getEmail().getAddress());
         assertEquals(false, account.isTransparentAccount());
+    }
+
+    @Play("accounts/check_account")
+    @Test
+    public void checkExistingAccount() {
+        assertTrue(api.checkAccountExists("123.456.798-91"));
+    }
+
+    @Play("accounts/check_account")
+    @Test
+    public void checkNonExistingAccount() {
+        assertFalse(api.checkAccountExists("781.513.493-95"));
+    }
+
+    @Play("accounts/create")
+    @Test
+    public void createAccount() {
+        Account account = api.create(new AccountRequest()
+            .email("dev.moip@labs314325.moip.com.br")
+            .type(AccountRequest.Type.MERCHANT)
+            .person(new PersonRequest()
+                .name("Runscope")
+                .lastName("Random 9123")
+                .birthDate(new ApiDateRequest().date(new GregorianCalendar(1990, Calendar.JANUARY, 1).getTime()))
+                .nationality("BRA")
+                .birthPlace("Santos")
+                .taxDocument(TaxDocumentRequest.cpf("940.718.037-97"))
+                .address(new ShippingAddressRequest()
+                    .street("Av. Brigadeiro Faria Lima")
+                    .streetNumber("2927")
+                    .district("Itaim")
+                    .city("São Paulo")
+                    .state("SP")
+                    .country("BRA")
+                    .zipCode("01234000")
+                )
+                .phone(new PhoneRequest()
+                    .countryCode("55")
+                    .setAreaCode("11")
+                    .setNumber("965213244")
+                )
+                .addAlternativePhone(new PhoneRequest()
+                    .countryCode("55")
+                    .setAreaCode("11")
+                    .setNumber("975142244")
+                )
+                .identityDocument(new IdentityDocumentRequest()
+                    .number("434322344")
+                    .issuer("SSP")
+                    .issueDate(new ApiDateRequest().date(new GregorianCalendar(2000, Calendar.DECEMBER, 12).getTime()))
+                    .type(IdentityDocumentRequest.Type.RG)
+                )
+            )
+        );
+
+        assertEquals("dev.moip@labs8489.moip.com.br", account.getEmail().getAddress());
+        assertEquals(Account.Type.MERCHANT, account.getType());
+        assertEquals("Runscope", account.getPerson().getName());
+        assertEquals("Random 9123", account.getPerson().getLastName());
+        assertEquals("1990-01-01", account.getPerson().getBirthDate().getFormatedDate());
+        assertEquals("BRA", account.getPerson().getNationality());
+        assertEquals("Santos", account.getPerson().getBirthPlace());
+        assertEquals("232.233.768-44", account.getPerson().getTaxDocument().getNumber());
+        assertEquals("434322344", account.getPerson().getIdentityDocument().getNumber());
+        assertEquals("965213244", account.getPerson().getPhone().getNumber());
+        assertEquals("975142244", account.getPerson().getAlternativePhones().get(0).getNumber());
+    }
+
+    @Play("accounts/create_with_company")
+    @Test
+    public void createAccountWithCompany() {
+        Account account = api.create(new AccountRequest()
+            .email("dev.moip@labs52453.moip.com.br")
+            .type(AccountRequest.Type.MERCHANT)
+            .person(new PersonRequest()
+                    .name("Runscope")
+                    .lastName("Random 9123")
+                    .birthDate(new ApiDateRequest().date(new GregorianCalendar(1990, Calendar.JANUARY, 1).getTime()))
+                    .nationality("BRA")
+                    .birthPlace("Santos")
+                    .taxDocument(TaxDocumentRequest.cpf("953.394.633-46"))
+                    .address(new ShippingAddressRequest()
+                        .street("Av. Brigadeiro Faria Lima")
+                        .streetNumber("434")
+                        .district("Itaim")
+                        .city("São Paulo")
+                        .state("SP")
+                        .country("BRA")
+                        .zipCode("01234000")
+                    )
+                    .phone(new PhoneRequest()
+                        .countryCode("55")
+                        .setAreaCode("11")
+                        .setNumber("965213244")
+                    )
+                    .identityDocument(new IdentityDocumentRequest()
+                        .number("434322344")
+                        .issuer("SSP")
+                        .issueDate(new ApiDateRequest().date(new GregorianCalendar(2000, Calendar.DECEMBER, 12).getTime()))
+                        .type(IdentityDocumentRequest.Type.RG)
+                    )
+            )
+            .company(new CompanyRequest()
+                .name("Teste LTDA")
+                .businessName("Teste")
+                .address(new ShippingAddressRequest()
+                    .street("Av. Brigadeiro Faria Lima")
+                    .streetNumber("4530")
+                    .district("Itaim")
+                    .city("São Paulo")
+                    .state("SP")
+                    .country("BRA")
+                    .zipCode("01234000")
+                )
+                .mainActivity(new CompanyRequest.MainActivityRequest()
+                    .cnae("82.91-1/00")
+                    .description("Atividades de cobranças e informações cadastrais")
+                )
+                .taxDocument(TaxDocumentRequest.cnpj("61.148.461/0001-09"))
+                .openingDate(new ApiDateRequest().date(new GregorianCalendar(2000, Calendar.JANUARY, 1).getTime()))
+                .phone(new PhoneRequest()
+                    .countryCode("55")
+                    .setAreaCode("11")
+                    .setNumber("975142244")
+                )
+            )
+        );
+
+        assertEquals("dev.moip@labs52453.moip.com.br", account.getEmail().getAddress());
+        assertEquals("4530", account.getCompany().getAddress().getStreetNumber());
+        assertEquals("953.394.633-46", account.getPerson().getTaxDocument().getNumber());
+        assertEquals("Teste LTDA", account.getCompany().getName());
+        assertEquals("61.148.461/0001-09", account.getCompany().getTaxDocument().getNumber());
+        assertEquals("Teste", account.getCompany().getBusinessName());
+        assertEquals("2000-01-01", account.getCompany().getOpeningDate().getFormatedDate());
+        assertEquals("975142244", account.getCompany().getPhone().getNumber());
     }
 }
