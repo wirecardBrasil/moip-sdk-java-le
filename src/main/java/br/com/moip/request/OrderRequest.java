@@ -114,8 +114,11 @@ public class OrderRequest {
 
 		@Override
 		public String toString() {
-			return new StringBuilder("Item{").append("product='").append(product).append('\'').append(", quantity=")
-					.append(quantity).append(", detail='").append(detail).append('\'').append(", price=").append(price)
+			return new StringBuilder("Item{")
+					.append("product='").append(product).append('\'')
+					.append(", quantity=").append(quantity)
+					.append(", detail='").append(detail).append('\'')
+					.append(", price=").append(price)
 					.append('}').toString();
 		}
 	}
