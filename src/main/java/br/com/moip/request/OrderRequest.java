@@ -10,6 +10,7 @@ public class OrderRequest {
 	private final List<ItemRequest> items = new ArrayList<ItemRequest>();
 	private CustomerRequest customer;
 	private final List<ReceiverRequest> receivers = new ArrayList<ReceiverRequest>();
+	private CheckoutPreferencesRequest checkoutPreferences;
 
 	public String getOwnId() {
 		return ownId;
@@ -62,10 +63,23 @@ public class OrderRequest {
 		return this;
 	}
 
+	public CheckoutPreferencesRequest getCheckoutPreferences() {
+		return checkoutPreferences;
+	}
+
+	public OrderRequest checkoutPreferences(CheckoutPreferencesRequest checkoutPreferences) {
+		this.checkoutPreferences = checkoutPreferences;
+
+		return this;
+	}
+
 	@Override
 	public String toString() {
-		return new StringBuilder("OrderRequest{").append("ownId='").append(ownId).append('\'').append(", items=")
-				.append(items).append(", customer=").append(customer).append('}').toString();
+		return new StringBuilder("OrderRequest{")
+				.append("ownId='").append(ownId).append('\'')
+				.append(", items=").append(items)
+				.append(", customer=").append(customer)
+				.append('}').toString();
 	}
 
 	public static final class ItemRequest {
@@ -99,11 +113,8 @@ public class OrderRequest {
 
 		@Override
 		public String toString() {
-			return new StringBuilder("Item{")
-					.append("product='").append(product).append('\'')
-					.append(", quantity=").append(quantity)
-					.append(", detail='").append(detail).append('\'')
-					.append(", price=").append(price)
+			return new StringBuilder("Item{").append("product='").append(product).append('\'').append(", quantity=")
+					.append(quantity).append(", detail='").append(detail).append('\'').append(", price=").append(price)
 					.append('}').toString();
 		}
 	}
