@@ -79,6 +79,7 @@ public class OrderRequest {
 				.append("ownId='").append(ownId).append('\'')
 				.append(", items=").append(items)
 				.append(", customer=").append(customer)
+				.append(", checkoutPreferences=").append(checkoutPreferences)
 				.append('}').toString();
 	}
 
