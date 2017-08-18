@@ -1,5 +1,7 @@
 package br.com.moip.api;
 
+import br.com.moip.Client;
+import br.com.moip.exception.MoipException;
 import br.com.moip.request.*;
 import br.com.moip.resource.Account;
 import br.com.moip.resource.ApiDate;
@@ -27,7 +29,8 @@ public class AccountAPITest {
     public void setUp() {
         ClientFactory clientFactory = new ClientFactory();
 
-        api = new AccountAPI(clientFactory.client(player.getURL("").toString()));
+        //api = new AccountAPI(clientFactory.client(player.getURL("").toString()));
+        api = new AccountAPI(clientFactory.client(Client.SANDBOX));
     }
 
     @Play("accounts/get")
@@ -60,6 +63,7 @@ public class AccountAPITest {
         Account account = api.create(new AccountRequest()
             .email("dev.moip@labs314325.moip.com.br")
             .type(AccountRequest.Type.MERCHANT)
+            .transparentAccount(true)
             .person(new PersonRequest()
                 .name("Runscope")
                 .lastName("Random 9123")

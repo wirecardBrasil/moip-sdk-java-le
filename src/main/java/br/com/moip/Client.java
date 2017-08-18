@@ -64,53 +64,6 @@ public class Client {
         return doRequest("GET", path, null, type);
     }
 
-    /*public HttpURLConnection getConn() {
-
-    }
-
-    private HttpURLConnection request(final String method, final String path, final Object object) {
-        HttpURLConnection conn = null;
-
-        try {
-            URL url = new URL(endpoint + path);
-            conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestProperty("User-Agent", USER_AGENT);
-            conn.setRequestProperty("Content-type", "application/json");
-
-            conn.setRequestMethod(method);
-
-            if (conn instanceof HttpsURLConnection) {
-                ((HttpsURLConnection) conn).setSSLSocketFactory(new SSLSupport());
-            }
-
-            if (authentication != null) {
-                authentication.authenticate(conn);
-            }
-
-            LOGGER.debug("---> {} {}", method, conn.getURL().toString());
-            logHeaders(conn.getRequestProperties().entrySet());
-
-            if (object != null) {
-                conn.setDoOutput(true);
-
-                String body = gson.toJson(object);
-
-                LOGGER.debug("");
-                LOGGER.debug("{}", body);
-
-                DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-                wr.writeBytes(body);
-                wr.flush();
-                wr.close();
-            }
-
-            LOGGER.debug("---> END HTTP");
-        } catch (Exception e) {
-
-        }
-        return conn;
-    }*/
-
     private <T> T doRequest(final String method, final String path, final Object object, final Class<T> type) {
         try {
             URL url = new URL(endpoint + path);
@@ -168,12 +121,19 @@ public class Client {
 
                 responseBody = readBody(conn.getErrorStream());
                 LOGGER.debug("API ERROR {}", responseBody.toString());
-                Errors errors = gson.fromJson(responseBody.toString(), Errors.class);
+
+                Errors errors = new Errors();
+                try {
+                     errors = gson.fromJson(responseBody.toString(), Errors.class);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 throw new ValidationException(responseCode, conn.getResponseMessage(), errors);
             }
 
             if (responseCode >= 500) {
+                System.out.println("teste: " + readBody(conn.getInputStream()));
                 throw new UnexpectecException();
             }
 
