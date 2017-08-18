@@ -1,10 +1,15 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
-import br.com.moip.exception.MoipException;
-import br.com.moip.request.*;
+import br.com.moip.request.AccountRequest;
+import br.com.moip.request.ApiDateRequest;
+import br.com.moip.request.CompanyRequest;
+import br.com.moip.request.IdentityDocumentRequest;
+import br.com.moip.request.PersonRequest;
+import br.com.moip.request.PhoneRequest;
+import br.com.moip.request.ShippingAddressRequest;
+import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.resource.Account;
-import br.com.moip.resource.ApiDate;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
@@ -29,8 +34,7 @@ public class AccountAPITest {
     public void setUp() {
         ClientFactory clientFactory = new ClientFactory();
 
-        //api = new AccountAPI(clientFactory.client(player.getURL("").toString()));
-        api = new AccountAPI(clientFactory.client(Client.SANDBOX));
+        api = new AccountAPI(clientFactory.client(player.getURL("").toString()));
     }
 
     @Play("accounts/get")

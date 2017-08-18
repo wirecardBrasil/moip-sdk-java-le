@@ -1,15 +1,9 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
-import br.com.moip.exception.MoipException;
-import br.com.moip.exception.UnauthorizedException;
-import br.com.moip.exception.UnexpectecException;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.request.AccountRequest;
 import br.com.moip.resource.Account;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class AccountAPI {
 

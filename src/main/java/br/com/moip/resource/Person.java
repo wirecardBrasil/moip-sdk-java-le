@@ -77,7 +77,7 @@ public class Person {
         public String toString() {
             final StringBuilder sb = new StringBuilder("ParentsName{");
             sb.append("mother='").append(mother).append('\'');
-            sb.append(", father='").append(address).append('\'');
+            sb.append(", father='").append(father).append('\'');
             sb.append('}');
             return sb.toString();
         }
