@@ -88,25 +88,9 @@ public class PersonRequest {
         private String mother;
         private String father;
 
-        public ParentsNameRequest() {
-
-        }
-
         public ParentsNameRequest(String mother, String father) {
             this.mother = mother;
             this.father = father;
-        }
-
-        public ParentsNameRequest mother(String mother) {
-            this.mother = mother;
-
-            return this;
-        }
-
-        public ParentsNameRequest father(String father) {
-            this.father = father;
-
-            return this;
         }
     }
 

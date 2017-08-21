@@ -32,7 +32,8 @@ public class AccountAPITest {
     public void setUp() {
         ClientFactory clientFactory = new ClientFactory();
 
-        api = new AccountAPI(clientFactory.client(player.getURL("").toString()));
+        //api = new AccountAPI(clientFactory.client(player.getURL("").toString()));
+        api = new AccountAPI(clientFactory.client(Client.SANDBOX));
     }
 
     @Play("accounts/get")
@@ -66,6 +67,7 @@ public class AccountAPITest {
             .email("dev.moip@labs8489.moip.com.br")
             .type(AccountRequest.Type.MERCHANT)
             .transparentAccount(true)
+            .site("https://dev.moip.com.br/")
             .person(new PersonRequest()
                 .name("Runscope")
                 .lastName("Random 9123")
@@ -102,6 +104,7 @@ public class AccountAPITest {
         );
 
         assertEquals("dev.moip@labs8489.moip.com.br", account.getEmail().getAddress());
+        assertEquals("https://dev.moip.com.br", account.getSite());
         assertEquals(Account.Type.MERCHANT, account.getType());
         assertEquals("Runscope", account.getPerson().getName());
         assertEquals("Random 9123", account.getPerson().getLastName());
@@ -121,6 +124,8 @@ public class AccountAPITest {
             .email("dev.moip@labs52453.moip.com.br")
             .type(AccountRequest.Type.MERCHANT)
             .transparentAccount(true)
+            .businessSegment(new AccountRequest.BusinessSegmentRequest("35"))
+            .site("https://dev.moip.com.br/")
             .person(new PersonRequest()
                     .name("Runscope")
                     .lastName("Random 9123")
@@ -183,5 +188,6 @@ public class AccountAPITest {
         assertEquals("Teste", account.getCompany().getBusinessName());
         assertEquals("2000-01-01", account.getCompany().getOpeningDate().getFormatedDate());
         assertEquals("975142244", account.getCompany().getPhone().getNumber());
+        assertEquals("35", account.getBusinessSegment().getId());
     }
 }

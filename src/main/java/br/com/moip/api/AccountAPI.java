@@ -26,16 +26,16 @@ public class AccountAPI {
     }
 
     public Boolean checkAccountExists(String taxDocument) {
-        Boolean accountExists = false;
         try {
             client.get("/v2/accounts/exists?tax_document=" + taxDocument, String.class);
-            accountExists = true;
+
+            return true;
         } catch (ValidationException e) {
             if (e.getResponseCode() != 404) {
                 throw new ValidationException(e.getResponseCode(), e.getResponseStatus(), e.getError());
             }
         }
-        return accountExists;
+        return false;
     }
 
 

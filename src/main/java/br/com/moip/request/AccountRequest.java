@@ -62,18 +62,8 @@ public class AccountRequest {
     public static final class EmailRequest {
         private String address;
 
-        public EmailRequest() {
-
-        }
-
         public EmailRequest(String address) {
             this.address = address;
-        }
-
-        public EmailRequest setAddress(String address) {
-            this.address = address;
-
-            return this;
         }
 
         public String getAddress() {
@@ -84,20 +74,9 @@ public class AccountRequest {
     public static class BusinessSegmentRequest {
         private String id;
 
-        public BusinessSegmentRequest() {
-
-        }
-
         public BusinessSegmentRequest(String id) {
             this.id = id;
         }
-
-        public BusinessSegmentRequest id(String id) {
-            this.id = id;
-
-            return this;
-        }
-
     }
 
     public static class TosAcceptanceRequest {
