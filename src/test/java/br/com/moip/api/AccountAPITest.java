@@ -65,7 +65,7 @@ public class AccountAPITest {
     @Test
     public void createAccount() {
         Account account = api.create(new AccountRequest()
-            .email("dev.moip@labs314325.moip.com.br")
+            .email("dev.moip@labs8489.moip.com.br")
             .type(AccountRequest.Type.MERCHANT)
             .transparentAccount(true)
             .person(new PersonRequest()
@@ -74,7 +74,7 @@ public class AccountAPITest {
                 .birthDate(new ApiDateRequest().date(new GregorianCalendar(1990, Calendar.JANUARY, 1).getTime()))
                 .nationality("BRA")
                 .birthPlace("Santos")
-                .taxDocument(TaxDocumentRequest.cpf("940.718.037-97"))
+                .taxDocument(TaxDocumentRequest.cpf("232.233.768-44"))
                 .address(new ShippingAddressRequest()
                     .street("Av. Brigadeiro Faria Lima")
                     .streetNumber("2927")
@@ -122,6 +122,7 @@ public class AccountAPITest {
         Account account = api.create(new AccountRequest()
             .email("dev.moip@labs52453.moip.com.br")
             .type(AccountRequest.Type.MERCHANT)
+            .transparentAccount(true)
             .person(new PersonRequest()
                     .name("Runscope")
                     .lastName("Random 9123")

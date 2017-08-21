@@ -14,15 +14,20 @@ import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 public class Client {
 
@@ -96,7 +101,9 @@ public class Client {
                 LOGGER.debug("{}", body);
 
                 DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-                wr.writeBytes(body);
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(wr, "UTF-8"));
+                writer.write(body);
+                writer.close();
                 wr.flush();
                 wr.close();
             }
@@ -133,7 +140,6 @@ public class Client {
             }
 
             if (responseCode >= 500) {
-                System.out.println("teste: " + readBody(conn.getInputStream()));
                 throw new UnexpectecException();
             }
 
