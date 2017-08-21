@@ -131,7 +131,7 @@ public class Client {
 
                 Errors errors = new Errors();
                 try {
-                     errors = gson.fromJson(responseBody.toString(), Errors.class);
+                    errors = gson.fromJson(responseBody.toString(), Errors.class);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

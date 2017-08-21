@@ -15,10 +15,8 @@ import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
