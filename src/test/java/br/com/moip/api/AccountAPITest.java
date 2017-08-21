@@ -1,6 +1,5 @@
 package br.com.moip.api;
 
-import br.com.moip.Client;
 import br.com.moip.request.AccountRequest;
 import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.CompanyRequest;
@@ -32,8 +31,7 @@ public class AccountAPITest {
     public void setUp() {
         ClientFactory clientFactory = new ClientFactory();
 
-        //api = new AccountAPI(clientFactory.client(player.getURL("").toString()));
-        api = new AccountAPI(clientFactory.client(Client.SANDBOX));
+        api = new AccountAPI(clientFactory.client(player.getURL("").toString()));
     }
 
     @Play("accounts/get")
