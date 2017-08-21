@@ -170,8 +170,20 @@ System.out.println(customer.toString());
 
 ## Tratamento de Exceções
 
-Quando ocorre algum erro na API, você deve utilizar o método hasUnexpectedError() para tratar erros inesperados e
-para erros de validação,deverá utilizar o método hasValidationError().
+Quando ocorre algum erro na API, é lançada a exceção UnexpectecException para erros inesperados e ValidationException 
+para erros de validação.
+
+```java
+try {
+ Payment createdPayment = api.payment().create(
+        //...
+    );
+} catch(UnexpectecException e) {
+  //StatusCode >= 500
+} catch(ValidationException e) {
+  //StatusCode entre 400 e 499 (exceto 401)
+}
+```
 
 ## Documentação
 

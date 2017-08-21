@@ -78,7 +78,6 @@ public class Client {
             conn.setRequestMethod(method);
 
             // Disable TLS 1.0
-            // TODO find a way to create a Test for this
             if (conn instanceof HttpsURLConnection) {
                 ((HttpsURLConnection) conn).setSSLSocketFactory(new SSLSupport());
             }
