@@ -9,23 +9,29 @@ import br.com.moip.resource.Errors;
 import br.com.moip.ssl.SSLSupport;
 import br.com.moip.util.GsonFactory;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+
+import org.apache.http.entity.ContentType;
 
 public class Client {
 
@@ -60,14 +66,18 @@ public class Client {
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type) {
-        return doRequest("POST", path, object, type);
+        return doRequest("POST", path, object, type, ContentType.APPLICATION_JSON);
+    }
+
+    public <T> T post(final String path, final Object object, final Class<T> type, ContentType contentType) {
+        return doRequest("POST", path, object, type, contentType);
     }
 
     public <T> T get(String path, Class<T> type) {
-        return doRequest("GET", path, null, type);
+        return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON);
     }
 
-    private <T> T doRequest(final String method, final String path, final Object object, final Class<T> type) {
+    private <T> T doRequest(final String method, final String path, final Object object, final Class<T> type, final ContentType contentType) {
         try {
             URL url = new URL(endpoint + path);
 
@@ -93,7 +103,7 @@ public class Client {
             if (object != null) {
                 conn.setDoOutput(true);
 
-                String body = gson.toJson(object);
+                String body = getBody(object, contentType);
 
                 LOGGER.debug("");
                 LOGGER.debug("{}", body);
@@ -162,5 +172,20 @@ public class Client {
         in.close();
 
         return body;
+    }
+
+    private String getBody(Object object, ContentType contentType) {
+
+        if (contentType == ContentType.APPLICATION_FORM_URLENCODED) {
+            JsonElement json = gson.toJsonTree(object);
+            
+            return object.toString();
+        }
+
+        return gson.toJson(object);
+    }
+
+    public Authentication getAuthentication() {
+        return authentication;
     }
 }

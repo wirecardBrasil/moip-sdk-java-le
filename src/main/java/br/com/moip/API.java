@@ -1,10 +1,6 @@
 package br.com.moip;
 
-import br.com.moip.api.AccountAPI;
-import br.com.moip.api.CustomerAPI;
-import br.com.moip.api.InvoiceAPI;
-import br.com.moip.api.OrderAPI;
-import br.com.moip.api.PaymentAPI;
+import br.com.moip.api.*;
 
 public class API {
 
@@ -32,5 +28,9 @@ public class API {
 
     public CustomerAPI customer() {
         return new CustomerAPI(client);
+    }
+
+    public ConnectAPI connect() {
+        return new ConnectAPI(new Client(Client.CONNECT_SANDBOX, client.getAuthentication()));
     }
 }

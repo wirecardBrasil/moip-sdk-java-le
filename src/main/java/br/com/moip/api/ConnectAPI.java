@@ -7,8 +7,11 @@ import java.net.URISyntaxException;
 import java.net.URL;
 
 import br.com.moip.exception.MoipException;
+import br.com.moip.request.ConnectRequest;
+import br.com.moip.resource.Connect;
 import br.com.moip.resource.ScopePermissionList;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.entity.ContentType;
 
 public class ConnectAPI {
 
@@ -36,5 +39,9 @@ public class ConnectAPI {
             throw new MoipException("Error trying to build URL: " + e.getMessage());
         }
 
+    }
+
+    public Connect authorize(final ConnectRequest connectRequest) {
+        return client.post("/oauth/token", connectRequest, Connect.class, ContentType.APPLICATION_FORM_URLENCODED);
     }
 }
