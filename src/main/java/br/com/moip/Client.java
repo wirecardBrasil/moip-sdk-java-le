@@ -14,10 +14,12 @@ import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.KeyManagementException;
@@ -98,7 +100,9 @@ public class Client {
                 LOGGER.debug("{}", body);
 
                 DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
-                wr.writeBytes(body);
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(wr, "UTF-8"));
+                writer.write(body);
+                writer.close();
                 wr.flush();
                 wr.close();
             }
@@ -123,7 +127,13 @@ public class Client {
 
                 responseBody = readBody(conn.getErrorStream());
                 LOGGER.debug("API ERROR {}", responseBody.toString());
-                Errors errors = gson.fromJson(responseBody.toString(), Errors.class);
+
+                Errors errors = new Errors();
+                try {
+                    errors = gson.fromJson(responseBody.toString(), Errors.class);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 throw new ValidationException(responseCode, conn.getResponseMessage(), errors);
             }
