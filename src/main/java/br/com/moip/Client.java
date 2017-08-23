@@ -15,15 +15,18 @@ import com.google.gson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.net.ssl.HttpsURLConnection;
+import java.io.DataOutputStream;
+import java.io.OutputStreamWriter;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -180,7 +183,6 @@ public class Client {
     }
 
     private String getBody(Object object, ContentType contentType) {
-        System.out.println(gson.toJson(object));
         if (contentType == ContentType.APPLICATION_FORM_URLENCODED) {
             return jsonToUrlEncodedString((JsonObject) new JsonParser().parse(gson.toJson(object)));
         }
@@ -199,25 +201,31 @@ public class Client {
     private static String jsonToUrlEncodedString(JsonObject jsonObject, String prefix) {
         StringBuilder url = new StringBuilder("");
         Boolean firstEntry = true;
-        for (Map.Entry<String, JsonElement> item : jsonObject.entrySet()) {
-            if (item.getValue() != null && item.getValue().isJsonObject()) {
-                url.append(jsonToUrlEncodedString(
-                        item.getValue().getAsJsonObject(),
-                        prefix.isEmpty() ? item.getKey() : prefix + "[" + item.getKey() + "]"
-                    )
-                );
-            } else {
+
+        try {
+            for (Map.Entry<String, JsonElement> item : jsonObject.entrySet()) {
                 if (!firstEntry) {
-                  url.append("&");
+                    url.append("&");
                 }
 
-                url.append(prefix.isEmpty() ?
-                    item.getKey() + "=" + item.getValue().getAsString() :
-                    prefix + "[" + item.getKey() + "]=" + item.getValue().getAsString()
-                );
+                if (item.getValue() != null && item.getValue().isJsonObject()) {
+                    url.append(jsonToUrlEncodedString(
+                            item.getValue().getAsJsonObject(),
+                            prefix.isEmpty() ? item.getKey() : prefix + "[" + item.getKey() + "]"
+                        )
+                    );
+                } else {
+                    url.append(prefix.isEmpty() ?
+                        item.getKey() + "=" + URLEncoder.encode(item.getValue().getAsString(), "UTF-8") :
+                        prefix + "[" + item.getKey() + "]=" + URLEncoder.encode(item.getValue().getAsString(), "UTF-8")
+                    );
+                }
+
+                firstEntry = false;
             }
 
-            firstEntry = false;
+        } catch(UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
         return url.toString();
     }

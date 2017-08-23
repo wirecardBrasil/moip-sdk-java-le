@@ -6,7 +6,7 @@ public class ConnectRequest {
     private String client_secret;
     private String code;
     private String redirect_uri;
-    private final static String grant_type = "AUTHORIZATION_CODE";
+    private final String grant_type = "authorization_code";
 
     public ConnectRequest clientId(String clientId) {
         this.client_id = clientId;
