@@ -5,6 +5,8 @@ import br.com.moip.authentication.BasicAuth;
 import br.com.moip.exception.UnexpectecException;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.resource.Order;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
@@ -76,5 +78,13 @@ public class ClientTest {
     @Test(expected = UnexpectecException.class)
     public void testGetWhen500() {
         client.get("/500", Order.class);
+    }
+
+    @Test
+    public void testJsonToFormEncoded() {
+        String json = "{\"client_id\":\"APP-XT5FIAK2F8I7\",\"client_secret\":\"e2bd3951b87e469eb0f2c2b781a753d5\",\"code\":\"8870af1372ada7a18fdff4fa4ca1a60f4d542272\",\"redirect_uri\":\"http://localhost/test-moip-sdk-php/callback.php\"}";
+        String expected = "client_id=APP-XT5FIAK2F8I7&client_secret=e2bd3951b87e469eb0f2c2b781a753d5&code=8870af1372ada7a18fdff4fa4ca1a60f4d542272&redirect_uri=http://localhost/test-moip-sdk-php/callback.php";
+
+        assertEquals(expected, client.jsonToUrlEncodedString((JsonObject) new JsonParser().parse(json)));
     }
 }

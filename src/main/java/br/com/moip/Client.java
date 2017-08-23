@@ -11,6 +11,7 @@ import br.com.moip.util.GsonFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import javax.net.ssl.HttpsURLConnection;
@@ -83,7 +84,7 @@ public class Client {
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
-            conn.setRequestProperty("Content-type", "application/json");
+            conn.setRequestProperty("Content-type", contentType.getMimeType());
 
             conn.setRequestMethod(method);
 
@@ -102,7 +103,6 @@ public class Client {
 
             if (object != null) {
                 conn.setDoOutput(true);
-
                 String body = getBody(object, contentType);
 
                 LOGGER.debug("");
@@ -175,11 +175,9 @@ public class Client {
     }
 
     private String getBody(Object object, ContentType contentType) {
-
+        System.out.println(gson.toJson(object));
         if (contentType == ContentType.APPLICATION_FORM_URLENCODED) {
-            JsonElement json = gson.toJsonTree(object);
-            
-            return object.toString();
+            return jsonToUrlEncodedString((JsonObject) new JsonParser().parse(gson.toJson(object)));
         }
 
         return gson.toJson(object);
@@ -187,5 +185,35 @@ public class Client {
 
     public Authentication getAuthentication() {
         return authentication;
+    }
+
+    public static String jsonToUrlEncodedString(JsonObject jsonObject) {
+        return jsonToUrlEncodedString(jsonObject, "");
+    }
+
+    private static String jsonToUrlEncodedString(JsonObject jsonObject, String prefix) {
+        StringBuilder url = new StringBuilder("");
+        Boolean firstEntry = true;
+        for (Map.Entry<String, JsonElement> item : jsonObject.entrySet()) {
+            if (item.getValue() != null && item.getValue().isJsonObject()) {
+                url.append(jsonToUrlEncodedString(
+                        item.getValue().getAsJsonObject(),
+                        prefix.isEmpty() ? item.getKey() : prefix + "[" + item.getKey() + "]"
+                    )
+                );
+            } else {
+                if (!firstEntry) {
+                  url.append("&");
+                }
+
+                url.append(prefix.isEmpty() ?
+                    item.getKey() + "=" + item.getValue().getAsString() :
+                    prefix + "[" + item.getKey() + "]=" + item.getValue().getAsString()
+                );
+            }
+
+            firstEntry = false;
+        }
+        return url.toString();
     }
 }

@@ -51,7 +51,7 @@ public class ConnectAPITest {
         );
 
         assertEquals("21e39345432346329ca7f4967473d55d_v2", connect.getAccessToken());
-        assertEquals("q71dfab2b2824f5b80506ae6adfbdb5b_v2", connect.getRefreshToken());
+        assertEquals("c71dfab2b2824f5b80506ae6adfbdb5b_v2", connect.getRefreshToken());
         assertEquals("2027-08-22", connect.getExpiresIn().getFormatedDate());
     }
 }

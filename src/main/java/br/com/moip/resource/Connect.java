@@ -3,13 +3,13 @@ package br.com.moip.resource;
 public class Connect {
 
     private String accessToken;
-    private ApiDate expiresIn;
+    private ApiDate expires_in;
     private String scope;
     private MoipAccount moipAccount;
     private String refreshToken;
 
     public ApiDate getExpiresIn() {
-        return expiresIn;
+        return expires_in;
     }
 
     public String getAccessToken() {
@@ -32,7 +32,7 @@ public class Connect {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Connect{");
         sb.append("accessToken='").append(accessToken).append('\'');
-        sb.append("expiresIn='").append(expiresIn);
+        sb.append("expiresIn='").append(expires_in);
         sb.append("scope='").append(scope).append('\'');
         sb.append("refreshToken='").append(refreshToken).append('\'');
         sb.append("moipAccount='").append(moipAccount);
