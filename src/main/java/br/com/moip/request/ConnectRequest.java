@@ -6,7 +6,8 @@ public class ConnectRequest {
     private String client_secret;
     private String code;
     private String redirect_uri;
-    private final String grant_type = "authorization_code";
+    private GrantType grant_type;
+    private String refresh_token;
 
     public ConnectRequest clientId(String clientId) {
         this.client_id = clientId;
@@ -28,6 +29,18 @@ public class ConnectRequest {
 
     public ConnectRequest redirectUri(String redirectUri) {
         this.redirect_uri = redirectUri;
+
+        return this;
+    }
+
+    public ConnectRequest grantType(GrantType grantType) {
+        this.grant_type = grantType;
+
+        return this;
+    }
+
+    public ConnectRequest refreshToken(String refreshToken) {
+        this.refresh_token = refreshToken;
 
         return this;
     }
