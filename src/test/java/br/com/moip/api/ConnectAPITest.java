@@ -1,6 +1,5 @@
 package br.com.moip.api;
 
-import br.com.moip.Client;
 import br.com.moip.request.ConnectRequest;
 import br.com.moip.request.GrantType;
 import br.com.moip.resource.Connect;
@@ -22,8 +21,7 @@ public class ConnectAPITest {
 
     @Before
     public void setUp() {
-        //api = new ConnectAPI(new ClientFactory().client(player.getURL("").toString()));
-        api = new ConnectAPI(new ClientFactory().client(Client.CONNECT_SANDBOX));
+        api = new ConnectAPI(new ClientFactory().client(player.getURL("").toString()));
     }
 
     @Test
@@ -59,16 +57,16 @@ public class ConnectAPITest {
         assertEquals("2027-08-22", connect.getExpiresIn().getFormatedDate());
     }
 
-    @Play("connect/generate_token")
+    @Play("connect/refresh_token")
     @Test
     public void testRefreshTokenOAuth() {
         Connect connect = api.authorize(new ConnectRequest()
-            .refreshToken("217f71a43f7f496f86175d18333a7886_v2")
+            .refreshToken("80ca5fb244674117be068d2535ecbe2f_v2")
             .grantType(GrantType.refresh_token)
         );
 
-        assertEquals("21e39345432346329ca7f4967473d55d_v2", connect.getAccessToken());
-        assertEquals("c71dfab2b2824f5b80506ae6adfbdb5b_v2", connect.getRefreshToken());
-        assertEquals("2027-08-22", connect.getExpiresIn().getFormatedDate());
+        assertEquals("f1bb699fd8d54b72b71b1f71d05b2a89_v2", connect.getAccessToken());
+        assertEquals("80ca5fb244674117be068d2535ecbe2f_v2", connect.getRefreshToken());
+        assertEquals("2027-08-24", connect.getExpiresIn().getFormatedDate());
     }
 }
