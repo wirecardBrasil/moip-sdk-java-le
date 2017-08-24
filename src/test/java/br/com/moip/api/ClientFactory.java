@@ -2,7 +2,6 @@ package br.com.moip.api;
 
 import br.com.moip.Client;
 import br.com.moip.authentication.BasicAuth;
-import br.com.moip.authentication.OAuth;
 
 public class ClientFactory {
 

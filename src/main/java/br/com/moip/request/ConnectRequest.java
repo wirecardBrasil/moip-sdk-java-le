@@ -47,12 +47,12 @@ public class ConnectRequest {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Connect{");
+        final StringBuilder sb = new StringBuilder("ConnectRequest{");
         sb.append("client_id='").append(client_id).append('\'');
-        sb.append("client_secret='").append(client_secret).append('\'');
-        sb.append("code='").append(code).append('\'');
-        sb.append("redirect_uri='").append(redirect_uri).append('\'');
-        sb.append("grant_type='").append(grant_type).append('\'');
+        sb.append(", client_secret='").append(client_secret).append('\'');
+        sb.append(", code='").append(code).append('\'');
+        sb.append(", redirect_uri='").append(redirect_uri).append('\'');
+        sb.append(", grant_type='").append(grant_type).append('\'');
         sb.append('}');
         return sb.toString();
     }

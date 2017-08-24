@@ -32,10 +32,10 @@ public class Connect {
     public String toString() {
         final StringBuilder sb = new StringBuilder("Connect{");
         sb.append("accessToken='").append(accessToken).append('\'');
-        sb.append("expiresIn='").append(expires_in);
-        sb.append("scope='").append(scope).append('\'');
-        sb.append("refreshToken='").append(refreshToken).append('\'');
-        sb.append("moipAccount='").append(moipAccount);
+        sb.append(", expiresIn='").append(expires_in);
+        sb.append(", scope='").append(scope).append('\'');
+        sb.append(", refreshToken='").append(refreshToken).append('\'');
+        sb.append(", moipAccount='").append(moipAccount);
         sb.append('}');
         return sb.toString();
     }
