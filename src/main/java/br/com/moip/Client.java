@@ -9,7 +9,6 @@ import br.com.moip.resource.Errors;
 import br.com.moip.ssl.SSLSupport;
 import br.com.moip.util.GsonFactory;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.slf4j.Logger;
@@ -22,10 +21,8 @@ import java.io.BufferedWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
@@ -33,6 +30,8 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import org.apache.http.entity.ContentType;
+
+import static br.com.moip.util.DataHelper.jsonToUrlEncodedString;
 
 public class Client {
 
@@ -191,41 +190,5 @@ public class Client {
 
     public Authentication getAuthentication() {
         return authentication;
-    }
-
-    public static String jsonToUrlEncodedString(JsonObject jsonObject) {
-        return jsonToUrlEncodedString(jsonObject, "");
-    }
-
-    private static String jsonToUrlEncodedString(JsonObject jsonObject, String prefix) {
-        StringBuilder url = new StringBuilder("");
-        Boolean firstEntry = true;
-
-        try {
-            for (Map.Entry<String, JsonElement> item : jsonObject.entrySet()) {
-                if (!firstEntry) {
-                    url.append("&");
-                }
-
-                if (item.getValue() != null && item.getValue().isJsonObject()) {
-                    url.append(jsonToUrlEncodedString(
-                            item.getValue().getAsJsonObject(),
-                            prefix.isEmpty() ? item.getKey() : prefix + "[" + item.getKey() + "]"
-                        )
-                    );
-                } else {
-                    url.append(prefix.isEmpty() ?
-                        item.getKey() + "=" + URLEncoder.encode(item.getValue().getAsString(), "UTF-8") :
-                        prefix + "[" + item.getKey() + "]=" + URLEncoder.encode(item.getValue().getAsString(), "UTF-8")
-                    );
-                }
-
-                firstEntry = false;
-            }
-
-        } catch(UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        return url.toString();
     }
 }

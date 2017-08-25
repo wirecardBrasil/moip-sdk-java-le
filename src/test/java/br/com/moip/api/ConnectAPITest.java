@@ -27,7 +27,7 @@ public class ConnectAPITest {
     @Test
     public void testGetAuthURL() {
 
-        String authURL = api.getAuthUrl("APP-XT5FIAK2F8I7",
+        String authURL = api.getAuthorizeUrl("APP-XT5FIAK2F8I7",
             "http://localhost/moip/callback.php",
             new ScopePermissionList(ScopePermission.DEFINE_PREFERENCES
                 , ScopePermission.MANAGE_ACCOUNT_INFO
