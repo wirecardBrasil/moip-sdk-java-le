@@ -1,5 +1,6 @@
 package br.com.moip.api;
 
+import br.com.moip.Client;
 import br.com.moip.request.AmountRequest;
 import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.CustomerRequest;
@@ -13,6 +14,7 @@ import br.com.moip.request.SubtotalsRequest;
 import br.com.moip.request.TaxDocumentRequest;
 
 import br.com.moip.resource.Multiorder;
+import br.com.moip.resource.OrderStatus;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
@@ -112,5 +114,20 @@ public class MultiorderAPITest {
         assertEquals("MPA-321321321", multiorder.getOrders().get(0).getReceivers().get(0).getMoipAccount().getId());
         assertEquals("pedido_2_id", multiorder.getOrders().get(1).getOwnId());
         assertEquals((Integer)8000, multiorder.getAmount().getTotal());
+        assertEquals(OrderStatus.CREATED, multiorder.getStatus());
+    }
+
+    @Play("multiorder/get")
+    @Test
+    public void testGetMultiorder() {
+        Multiorder multiorder = api.get("MOR-F2R675R1X97P");
+
+        assertEquals(multiorder.getId(), "MOR-F2R675R1X97P");
+        assertEquals("meu_multiorder_id", multiorder.getOwnId());
+        assertEquals("pedido_1_id", multiorder.getOrders().get(0).getOwnId());
+        assertEquals("MPA-321321321", multiorder.getOrders().get(0).getReceivers().get(0).getMoipAccount().getId());
+        assertEquals("pedido_2_id", multiorder.getOrders().get(1).getOwnId());
+        assertEquals((Integer)8000, multiorder.getAmount().getTotal());
+        assertEquals(OrderStatus.CREATED, multiorder.getStatus());
     }
 }

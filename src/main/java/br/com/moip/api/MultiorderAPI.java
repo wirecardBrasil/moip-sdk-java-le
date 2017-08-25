@@ -15,4 +15,8 @@ public class MultiorderAPI {
     public Multiorder create(MultiorderRequest multiorder) {
         return client.post("/v2/multiorders", multiorder, Multiorder.class);
     }
+
+    public Multiorder get(String multiorderId) {
+        return client.get("/v2/multiorders/" + multiorderId, Multiorder.class);
+    }
 }

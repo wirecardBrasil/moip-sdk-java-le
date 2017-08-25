@@ -78,7 +78,7 @@ public class MultiorderRequestTest extends RequestTest{
             );
 
         String multiorderJSON = new Gson().toJson(multiorder);
-        JsonObject expectedJSON = getJsonFileAsJsonObject("multiorder/multiorder_basic.json");
+        JsonObject expectedJSON = getJsonFileAsJsonObject("multiorder/create.json");
         JSONAssert.assertEquals(expectedJSON.toString(), multiorderJSON, false);
 
     }
