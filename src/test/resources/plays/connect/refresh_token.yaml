@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /oauth/token
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: POST
+  response:
+    status: 201
+    headers:
+      "Content-Type": application/json
+    body: |
+       {"accessToken":"f1bb699fd8d54b72b71b1f71d05b2a89_v2","access_token":"f1bb699fd8d54b72b71b1f71d05b2a89_v2","expires_in":"2027-08-24","refreshToken":"80ca5fb244674117be068d2535ecbe2f_v2","refresh_token":"80ca5fb244674117be068d2535ecbe2f_v2","scope":"RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO,RETRIEVE_FINANCIAL_INFO,TRANSFER_FUNDS,DEFINE_PREFERENCES,RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO,RETRIEVE_FINANCIAL_INFO","moipAccount":{"id":"MPA-824GB4EF8B8"}}
