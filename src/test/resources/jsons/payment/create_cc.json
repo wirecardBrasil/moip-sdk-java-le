@@ -1,0 +1,1 @@
+{"installmentCount":1,"delayCapture":true,"escrow":{"description":"Teste"},"fundingInstrument":{"method":"CREDIT_CARD","creditCard":{"number":"4012001037141112","expirationMonth":"05","expirationYear":"2018","cvc":123,"store":true,"holder":{"birthdate":"1988-12-30","taxDocument":{"type":"CPF","number":"22222222222"},"fullname":"Jose Portador da Silva"}}}}

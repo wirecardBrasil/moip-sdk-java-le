@@ -14,7 +14,8 @@ public enum  PaymentStatus {
     REVERTED(7, "Revertido"),
     IN_REVISION(8, "Em revisão"),
     REFUNDED(9, "Reembolsado"),
-    WAITING(10, "Aguardando confirmação");
+    WAITING(10, "Aguardando confirmação"),
+    PRE_AUTHORIZED(11, "Pré-autorizado");
 
     private String description;
     private int id;
