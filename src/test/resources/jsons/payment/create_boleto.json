@@ -1,1 +1,1 @@
-{"fundingInstrument":{"method":"BOLETO","boleto":{"expirationDate":{"date":"Sep 30, 2017 12:00:00 AM"},"instructionLines":{"first":"Primeira linha se instrução","second":"Segunda linha se instrução","third":"Terceira linha se instrução"},"logoUri":"http://"}}}
+{"orderId":"ORD-GOHHIF4Z6PLV","installmentCount":1,"fundingInstrument":{"method":"BOLETO","boleto":{"expirationDate":"2020-11-10","instructionLines":{"first":"Primeira linha","second":"Segunda linha","third":"Terceira linha"},"logoUri":"http://logo.com"},"suppressBoleto":false,"suppressCreditCard":false}}

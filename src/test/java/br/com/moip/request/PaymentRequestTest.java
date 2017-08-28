@@ -1,5 +1,6 @@
 package br.com.moip.request;
 
+import br.com.moip.util.GsonFactory;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.json.JSONException;
@@ -14,20 +15,21 @@ public class PaymentRequestTest extends RequestTest {
     @Test
     public void testPaymentWithBoleto() throws JSONException {
         PaymentRequest payment = new PaymentRequest()
-            .orderId("MOR-F2R675R1X97P")
+            .orderId("ORD-GOHHIF4Z6PLV")
+            .installmentCount(1)
             .fundingInstrument(new FundingInstrumentRequest()
                 .boleto(new BoletoRequest()
-                    .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2017, Calendar.SEPTEMBER, 30).getTime()))
+                    .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2020, Calendar.NOVEMBER, 10).getTime()))
                     .instructionLines(new InstructionLinesRequest()
-                        .first("Primeira linha se instrução")
-                        .second("Segunda linha se instrução")
-                        .third("Terceira linha se instrução")
+                        .first("Primeira linha")
+                        .second("Segunda linha")
+                        .third("Terceira linha")
                     )
-                    .logoUri("http://")
+                    .logoUri("http://logo.com")
                 )
             );
 
-        String paymentJSON = new Gson().toJson(payment);
+        String paymentJSON = new GsonFactory().gson().toJson(payment);
         JsonObject expectedJSON = getJsonFileAsJsonObject("payment/create_boleto.json");
 
         JSONAssert.assertEquals(expectedJSON.toString(), paymentJSON, false);
