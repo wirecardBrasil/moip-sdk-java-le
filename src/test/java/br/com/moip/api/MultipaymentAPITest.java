@@ -22,6 +22,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class MultipaymentAPITest {
 
@@ -102,5 +103,17 @@ public class MultipaymentAPITest {
         assertEquals((Integer)4000, multipayment.getPayments().get(1).getAmount().getTotal());
         assertEquals("https://sandbox.moip.com.br/v2/multiorders/MOR-BMJN4E5LSG6N", multipayment.getLinks().multiorderLink());
         assertEquals("VISA", multipayment.getPayments().get(0).getFundingInstrument().getCreditCard().getBrand());
+    }
+
+    @Play("multipayment/get")
+    @Test
+    public void testGetMultipayment() {
+        Multipayment multipayment = api.get("MPY-OUGA0AHH2BOF");
+
+        assertEquals("MPY-OUGA0AHH2BOF", multipayment.getId());
+        assertEquals(PaymentStatus.PRE_AUTHORIZED, multipayment.getStatus());
+        assertEquals((Integer)8000, multipayment.getAmount().getTotal());
+        assertEquals(1, multipayment.getInstallmentCount());
+        assertNotNull(multipayment.getPayments());
     }
 }

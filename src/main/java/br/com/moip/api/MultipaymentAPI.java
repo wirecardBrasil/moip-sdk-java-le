@@ -15,4 +15,8 @@ public class MultipaymentAPI {
     public Multipayment create(PaymentRequest multipayment) {
         return client.post("/v2/multiorders/" + multipayment.getOrderId() + "/multipayments", multipayment, Multipayment.class);
     }
+
+    public Multipayment get(String multipaymentId) {
+        return client.get("/v2/multipayments/" + multipaymentId, Multipayment.class);
+    }
 }

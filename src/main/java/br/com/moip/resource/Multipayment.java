@@ -13,7 +13,6 @@ public class Multipayment {
     private int installmentCount;
     private final FundingInstrument fundingInstrument = new FundingInstrument();
     private final List<Payment> payments = new ArrayList<Payment>();
-    private Boolean delayCapture;
     private MultipaymentLinks _links;
 
 
@@ -51,14 +50,6 @@ public class Multipayment {
 
     public FundingInstrument getFundingInstrument() {
         return fundingInstrument;
-    }
-
-    public void setDelayCapture(Boolean delayCapture) {
-        this.delayCapture = delayCapture;
-    }
-
-    public Boolean getDelayCapture() {
-        return delayCapture;
     }
 
     public List<Payment> getPayments() {
