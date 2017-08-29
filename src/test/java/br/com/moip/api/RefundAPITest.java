@@ -229,4 +229,20 @@ public class RefundAPITest {
         assertEquals(RefundingInstrument.Method.BANK_ACCOUNT, refund.getRefundingInstrument().getMethod());
         assertEquals("https://sandbox.moip.com.br/v2/orders/ORD-XOZB2LRQ9BZ3", refund.getLinks().orderLink());
     }
+
+    @Play("refunds/get")
+    @Test
+    public void testGetRefund() {
+        Refund refund = api.get("REF-JR2WAKM894UJ");
+
+        assertEquals("REF-JR2WAKM894UJ", refund.getId());
+        assertEquals(Refund.Status.REQUESTED, refund.getStatus());
+        assertEquals(Refund.Type.PARTIAL, refund.getType());
+        assertNotNull(refund.getEvents());
+        assertEquals((Integer)10000, refund.getAmount().getTotal());
+        assertEquals(RefundingInstrument.Method.BANK_ACCOUNT, refund.getRefundingInstrument().getMethod());
+        assertEquals("1234", refund.getRefundingInstrument().getBankAccount().getAccountNumber());
+        assertEquals("https://sandbox.moip.com.br/v2/orders/ORD-XOZB2LRQ9BZ3", refund.getLinks().orderLink());
+        assertEquals("https://sandbox.moip.com.br/v2/payments/PAY-E4Q0N9TK0BFW", refund.getLinks().paymentLink());
+    }
 }

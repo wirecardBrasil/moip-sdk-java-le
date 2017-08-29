@@ -20,4 +20,8 @@ public class RefundAPI {
         return client.post("/v2/payments/" + refundRequest.getId() + "/refunds", refundRequest, Refund.class);
     }
 
+    public Refund get(String refundId) {
+        return client.get("/v2/refunds/" + refundId, Refund.class);
+    }
+
 }
