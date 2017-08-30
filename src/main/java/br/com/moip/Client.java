@@ -77,6 +77,10 @@ public class Client {
         return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON);
     }
 
+    public <T> T delete(String path, Class<T> type) {
+        return doRequest("DELETE", path, null, type, ContentType.APPLICATION_JSON);
+    }
+
     private <T> T doRequest(final String method, final String path, final Object object, final Class<T> type, final ContentType contentType) {
         try {
             URL url = new URL(endpoint + path);

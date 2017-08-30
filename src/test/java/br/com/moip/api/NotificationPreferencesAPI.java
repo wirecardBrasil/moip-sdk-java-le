@@ -1,6 +1,7 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
+import br.com.moip.exception.ValidationException;
 import br.com.moip.request.NotificationPreferenceRequest;
 import br.com.moip.resource.NotificationPreference;
 
@@ -18,5 +19,19 @@ public class NotificationPreferencesAPI {
 
     public NotificationPreference get(final String notificationId) {
         return client.get("/v2/preferences/notifications/" + notificationId, NotificationPreference.class);
+    }
+
+    public Boolean delete(final String notificationId) {
+        try {
+            client.delete("/v2/preferences/notifications/" + notificationId, NotificationPreference.class);
+
+            return true;
+        } catch (ValidationException e) {
+            if (e.getResponseCode() != 404) {
+                throw new ValidationException(e.getResponseCode(), e.getResponseStatus(), e.getError());
+            }
+        }
+
+        return false;
     }
 }

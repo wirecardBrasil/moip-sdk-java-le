@@ -9,7 +9,9 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class NotificationPreferencesAPITest {
 
@@ -57,4 +59,17 @@ public class NotificationPreferencesAPITest {
         assertEquals("1465c36fce654c6186dd805eb8a8acb7", notificationPreference.getToken());
         assertNotNull(notificationPreference.getToken());
     }
+
+    @Play("notification_preferences/delete")
+    @Test
+    public void testDeleteNotification() {
+        assertTrue(api.delete("NPR-NR0GR85KHL10"));
+    }
+
+    @Play("notification_preferences/delete")
+    @Test
+    public void testDeleteNotificationDeleted() {
+        assertFalse(api.delete("NPR-CQU74AQOIVCV"));
+    }
+
 }
