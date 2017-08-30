@@ -1,0 +1,1 @@
+{"refundingInstrument":{"method":"BANK_ACCOUNT","bankAccount":{"type":"CHECKING","bankNumber":"001","agencyNumber":"4444444","agencyCheckNumber":"2","accountNumber":"1234","accountCheckNumber":"1","holder":{"fullname":"Nome do Portador","taxDocument":{"type":"CPF","number":"22222222222"}}}}}

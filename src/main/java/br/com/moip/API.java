@@ -6,6 +6,7 @@ import br.com.moip.api.CustomerAPI;
 import br.com.moip.api.InvoiceAPI;
 import br.com.moip.api.OrderAPI;
 import br.com.moip.api.PaymentAPI;
+import br.com.moip.api.RefundAPI;
 
 public class API {
 
@@ -37,5 +38,9 @@ public class API {
 
     public ConnectAPI connect() {
         return new ConnectAPI(new Client(Client.CONNECT_SANDBOX, client.getAuthentication()));
+    }
+
+    public RefundAPI refund() {
+        return new RefundAPI(client);
     }
 }

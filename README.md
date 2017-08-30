@@ -24,6 +24,10 @@
   - [Clientes](#clientes)
     - [Criação](#criação-1)
     - [Consulta](#consulta-1)
+  - [Reembolsos](#reembolsos)
+    - [Pedido](#pedido)
+    - [Pagamento](#pagamento)
+    - [Consulta](#consulta-2)
 - [Tratamento de Exceções](#tratamento-de-exceções)
 - [Documentação](#documentação)
 - [Licença](#licença)
@@ -166,6 +170,83 @@ System.out.println(customer.toString());
 String customerId = "CUS-Q3BL0CAJ2G33";
 Customer customer = api.customer().get(customerId);
 System.out.println(customer.toString());
+```
+
+### Reembolsos
+
+> Para fazer reembolsos totais basta remover o método ```amount```.
+
+### Pedido
+#### Cartão de Crédito
+```java
+Refund refund = api.refund().order(
+    new RefundRequest("ORD-89SOQ6FMPJPX")
+        .refundingInstrument(new RefundingInstrumentRequest().creditCard())
+        .amount(2000)
+);
+```
+
+#### Conta Bancária
+```java
+Refund refund = api.refund().order(
+    new RefundRequest("ORD-GS1FSQ3SO9SY")
+        .refundingInstrument(new RefundingInstrumentRequest()
+            .bankAccount(
+                new BankAccountRequest()
+                    .checking()
+                    .bankNumber("001")
+                    .accountNumber("1234")
+                    .accountCheckNumber("1")
+                    .agencyNumber("4444444")
+                    .agencyCheckNumber("2")
+                    .holder(new HolderRequest()
+                        .fullname("Nome do Portador")
+                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                    )
+            )
+        )
+        .amount(2000)
+);
+```
+
+### Pagamento
+#### Cartão de Crédito
+
+```java
+Refund refund = api.refund().payment(
+    new RefundRequest("PAY-70380H9B6L5R")
+        .refundingInstrument(new RefundingInstrumentRequest().creditCard())
+        .amount(2000)
+);
+```
+
+#### Conta Bancária
+```java
+Refund refund = api.refund().payment(
+    new RefundRequest("PAY-E4Q0N9TK0BFW")
+        .refundingInstrument(new RefundingInstrumentRequest()
+            .bankAccount(
+                new BankAccountRequest()
+                    .checking()
+                    .bankNumber("001")
+                    .accountNumber("1234")
+                    .accountCheckNumber("1")
+                    .agencyNumber("4444444")
+                    .agencyCheckNumber("2")
+                    .holder(new HolderRequest()
+                        .fullname("Nome do Portador")
+                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                    )
+            )
+        )
+        .amount(2000)
+);
+```
+
+### Consulta
+```java
+Refund refund = api.refund().get("REF-JR4WALM894UJ");
+System.out.println(refund);
 ```
 
 ## Tratamento de Exceções
