@@ -1,7 +1,9 @@
 package br.com.moip.api;
 
+import br.com.moip.Client;
 import br.com.moip.request.NotificationPreferenceRequest;
 import br.com.moip.resource.NotificationPreference;
+import br.com.moip.response.NotificationPreferenceListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
@@ -70,6 +72,15 @@ public class NotificationPreferencesAPITest {
     @Test
     public void testDeleteNotificationDeleted() {
         assertFalse(api.delete("NPR-CQU74AQOIVCV"));
+    }
+
+    @Play("notification_preferences/list")
+    @Test
+    public void testListNotificationPreferences() {
+        NotificationPreferenceListResponse notificationPreferenceList = api.list();
+
+        assertEquals("NPR-KINZC2J1C3LJ", notificationPreferenceList.get(0).getId());
+        assertEquals("NPR-LCUIYBWHN87X", notificationPreferenceList.get(5).getId());
     }
 
 }

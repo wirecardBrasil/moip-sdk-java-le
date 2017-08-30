@@ -4,6 +4,7 @@ import br.com.moip.Client;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.request.NotificationPreferenceRequest;
 import br.com.moip.resource.NotificationPreference;
+import br.com.moip.response.NotificationPreferenceListResponse;
 
 public class NotificationPreferencesAPI {
 
@@ -33,5 +34,9 @@ public class NotificationPreferencesAPI {
         }
 
         return false;
+    }
+
+    public NotificationPreferenceListResponse list() {
+        return client.get("/v2/preferences/notifications", NotificationPreferenceListResponse.class);
     }
 }
