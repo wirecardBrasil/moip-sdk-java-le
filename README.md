@@ -245,7 +245,7 @@ Refund refund = api.refund().payment(
 
 ### Consulta
 ```java
-Refund refund = api.get("REF-JR4WALM894UJ");
+Refund refund = api.refund().get("REF-JR4WALM894UJ");
 System.out.println(refund);
 ```
 
