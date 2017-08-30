@@ -1,7 +1,12 @@
 package br.com.moip;
 
-import br.com.moip.api.*;
-import br.com.moip.resource.NotificationPreference;
+import br.com.moip.api.AccountAPI;
+import br.com.moip.api.CustomerAPI;
+import br.com.moip.api.ConnectAPI;
+import br.com.moip.api.InvoiceAPI;
+import br.com.moip.api.NotificationPreferencesAPI;
+import br.com.moip.api.OrderAPI;
+import br.com.moip.api.PaymentAPI;
 
 public class API {
 
