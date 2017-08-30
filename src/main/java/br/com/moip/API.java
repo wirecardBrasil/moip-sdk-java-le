@@ -1,11 +1,7 @@
 package br.com.moip;
 
-import br.com.moip.api.AccountAPI;
-import br.com.moip.api.ConnectAPI;
-import br.com.moip.api.CustomerAPI;
-import br.com.moip.api.InvoiceAPI;
-import br.com.moip.api.OrderAPI;
-import br.com.moip.api.PaymentAPI;
+import br.com.moip.api.*;
+import br.com.moip.resource.NotificationPreference;
 
 public class API {
 
@@ -36,6 +32,14 @@ public class API {
     }
 
     public ConnectAPI connect() {
+        if (client.getEndpoint() == Client.PRODUCTION) {
+            return new ConnectAPI(new Client(Client.CONNECT_PRODUCTION, client.getAuthentication()));
+        }
+
         return new ConnectAPI(new Client(Client.CONNECT_SANDBOX, client.getAuthentication()));
+    }
+
+    public NotificationPreferencesAPI notification() {
+        return new NotificationPreferencesAPI(client);
     }
 }

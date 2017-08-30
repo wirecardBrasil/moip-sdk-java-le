@@ -24,6 +24,11 @@
   - [Clientes](#clientes)
     - [Criação](#criação-1)
     - [Consulta](#consulta-1)
+  - [Preferências de Notificação](#preferências-de-notificação)
+    -  [Criação](#criacao-2)
+    -  [Consulta](#consulta-2)
+    -  [Exclusão](#exclusão)
+    -  [Listagem](#listagem)
 - [Tratamento de Exceções](#tratamento-de-exceções)
 - [Documentação](#documentação)
 - [Licença](#licença)
@@ -166,6 +171,36 @@ System.out.println(customer.toString());
 String customerId = "CUS-Q3BL0CAJ2G33";
 Customer customer = api.customer().get(customerId);
 System.out.println(customer.toString());
+```
+
+
+## Preferências de notificação
+
+### Criação
+```java
+NotificationPreference notificationPreference = api.notification().create(
+    new NotificationPreferenceRequest()
+        .addEvent("ORDER.*")
+        .addEvent("PAYMENT.AUTHORIZED")
+        .addEvent("PAYMENT.CANCELLED")
+        .target("http://requestb.in/1dhjesw1")
+);
+```
+
+### Consulta
+```java
+NotificationPreference notificationPreference = api.notification().get("NPR-NR0GR85KHL10");
+System.out.println(notificationPreference.toString());
+```
+
+### Exclusão
+```java
+api.notification().delete("NPR-NR0GR85KHL10"));
+```
+
+### Listagem
+```java
+NotificationPreferenceListResponse notificationList = api.notification().list();
 ```
 
 ## Tratamento de Exceções

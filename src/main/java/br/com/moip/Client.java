@@ -195,4 +195,9 @@ public class Client {
     public Authentication getAuthentication() {
         return authentication;
     }
+
+    public String getEndpoint() {
+        return endpoint;
+    }
+
 }
