@@ -27,6 +27,7 @@
   - [Reembolsos](#reembolsos)
     - [Pedido](#pedido)
     - [Pagamento](#pagamento)
+    - [Consulta](#consulta-2)
 - [Tratamento de Exceções](#tratamento-de-exceções)
 - [Documentação](#documentação)
 - [Licença](#licença)
@@ -240,6 +241,12 @@ Refund refund = api.refund().payment(
         )
         .amount(2000)
 );
+```
+
+### Consulta
+```java
+Refund refund = api.get("REF-JR4WALM894UJ");
+System.out.println(refund);
 ```
 
 ## Tratamento de Exceções
