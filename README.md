@@ -24,7 +24,7 @@
   - [Clientes](#clientes)
     - [Criação](#criação-1)
     - [Consulta](#consulta-1)
-  -  [Reembolsos](#reembolsos)
+  - [Reembolsos](#reembolsos)
     - [Pedido](#pedido)
     - [Pagamento](#pagamento)
 - [Tratamento de Exceções](#tratamento-de-exceções)
