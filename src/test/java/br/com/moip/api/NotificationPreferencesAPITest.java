@@ -43,4 +43,18 @@ public class NotificationPreferencesAPITest {
         assertEquals("http://requestb.in/1dhjesw1", notificationPreference.getTarget());
         assertNotNull(notificationPreference.getToken());
     }
+
+    @Play("notification_preferences/get")
+    @Test
+    public void testGetNotification() {
+        NotificationPreference notificationPreference = api.get("NPR-NR0GR85KHL10");
+
+        assertEquals("NPR-NR0GR85KHL10", notificationPreference.getId());
+        assertEquals("ORDER.*", notificationPreference.getEvents().get(0));
+        assertEquals("PAYMENT.AUTHORIZED", notificationPreference.getEvents().get(1));
+        assertEquals("PAYMENT.CANCELLED", notificationPreference.getEvents().get(2));
+        assertEquals("http://requestb.in/1dhjesw1", notificationPreference.getTarget());
+        assertEquals("1465c36fce654c6186dd805eb8a8acb7", notificationPreference.getToken());
+        assertNotNull(notificationPreference.getToken());
+    }
 }

@@ -15,4 +15,8 @@ public class NotificationPreferencesAPI {
     public NotificationPreference create(final NotificationPreferenceRequest notificationPreference) {
         return client.post("/v2/preferences/notifications", notificationPreference, NotificationPreference.class);
     }
+
+    public NotificationPreference get(final String notificationId) {
+        return client.get("/v2/preferences/notifications/" + notificationId, NotificationPreference.class);
+    }
 }
