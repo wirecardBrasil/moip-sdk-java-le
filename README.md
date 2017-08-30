@@ -25,7 +25,7 @@
     - [Criação](#criação-1)
     - [Consulta](#consulta-1)
   - [Preferências de Notificação](#preferências-de-notificação)
-    -  [Criação](#criacao-2)
+    -  [Criação](#criação-2)
     -  [Consulta](#consulta-2)
     -  [Exclusão](#exclusão)
     -  [Listagem](#listagem)
