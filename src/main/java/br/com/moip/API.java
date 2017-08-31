@@ -7,6 +7,7 @@ import br.com.moip.api.InvoiceAPI;
 import br.com.moip.api.NotificationPreferencesAPI;
 import br.com.moip.api.OrderAPI;
 import br.com.moip.api.PaymentAPI;
+import br.com.moip.api.RefundAPI;
 
 public class API {
 
@@ -46,5 +47,9 @@ public class API {
 
     public NotificationPreferencesAPI notification() {
         return new NotificationPreferencesAPI(client);
+    }
+
+    public RefundAPI refund() {
+        return new RefundAPI(client);
     }
 }
