@@ -5,3 +5,9 @@ jdk:
   - openjdk7
 install: ./gradlew dependencies -PossrhUsername=username -PossrhPassword=password
 script: ./gradlew test -PossrhUsername=username -PossrhPassword=password
+deploy:
+  provider: script
+  script: ./gradlew uploadArchives -PossrhUsername="${MVN_USERNAME}" -PossrhPassword="${MVN_PASSWORD}"
+  on:
+    tags: true
+    branch: master
