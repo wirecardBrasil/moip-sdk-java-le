@@ -1,9 +1,10 @@
 language: java
 jdk:
   - oraclejdk8
-  - oraclejdk7
   - openjdk7
-install: ./gradlew dependencies -PossrhUsername=username -PossrhPassword=password
+
+# Workaround for https://github.com/gradle/gradle/issues/2421
+install: JAVA_HOME=$(jdk_switcher home openjdk8) ./gradlew dependencies -PossrhUsername=username -PossrhPassword=password
 script: ./gradlew test -PossrhUsername=username -PossrhPassword=password
 deploy:
   provider: script
