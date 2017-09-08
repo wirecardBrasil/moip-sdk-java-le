@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class CustomerAPITest {
 
@@ -112,7 +113,7 @@ public class CustomerAPITest {
                     new FundingInstrumentRequest()
                         .creditCard(
                             new CreditCardRequest()
-                                .number("4012001037141112")
+                                .number("5555666677778884")
                                 .cvc(123)
                                 .expirationMonth("05")
                                 .expirationYear("18")
@@ -135,6 +136,12 @@ public class CustomerAPITest {
         assertEquals(creditCard.getCreditCard().getId(), "CRC-NMNW6VIY2L0T");
         assertEquals(creditCard.getCreditCard().getFirst6(), "401200");
         assertEquals(creditCard.getCreditCard().getLast4(), "1112");
+    }
+
+    @Play("customer/delete_credit_card")
+    @Test
+    public void testDeleteCreditCard() {
+        assertTrue(api.deleteCreditCard("CRC-NMNW6VIY2L0T"));
     }
 
 }
