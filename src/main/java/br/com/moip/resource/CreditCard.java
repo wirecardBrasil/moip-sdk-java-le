@@ -6,10 +6,15 @@ public class CreditCard {
 
     private Boolean store;
 
+    private String id;
     //Used on MPOS
     private String brand;
     private String first6;
     private String last4;
+
+    public String getId() {
+        return id;
+    }
 
     public Holder getHolder() {
         return holder;
