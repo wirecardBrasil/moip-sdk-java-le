@@ -636,7 +636,7 @@ System.out.println(connect);
 
 ## Tratamento de Exceções
 
-Quando ocorre algum erro na API, é lançada a exceção UnexpectecException para erros inesperados e ValidationException 
+Quando ocorre algum erro na API, é lançada a exceção UnexpectedException para erros inesperados e ValidationException 
 para erros de validação.
 
 ```java
@@ -644,7 +644,7 @@ try {
  Payment createdPayment = api.payment().create(
         //...
     );
-} catch(UnexpectecException e) {
+} catch(UnexpectedException e) {
   //StatusCode >= 500
 } catch(ValidationException e) {
   //StatusCode entre 400 e 499 (exceto 401)

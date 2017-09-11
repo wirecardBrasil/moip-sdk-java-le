@@ -26,7 +26,7 @@ import com.rodrigosaito.mockwebserver.player.Player;
 
 import br.com.moip.authentication.Authentication;
 import br.com.moip.authentication.BasicAuth;
-import br.com.moip.exception.UnexpectecException;
+import br.com.moip.exception.UnexpectedException;
 import br.com.moip.exception.ValidationException;
 import br.com.moip.resource.Order;
 import br.com.moip.ssl.SSLSupport;
@@ -91,7 +91,7 @@ public class ClientTest {
     }
 
     @Play("client/post")
-    @Test(expected = UnexpectecException.class)
+    @Test(expected = UnexpectedException.class)
     public void testPostWhen500() {
         client.post("/500", new Order(), Order.class);
     }
@@ -116,7 +116,7 @@ public class ClientTest {
     }
 
     @Play("client/get")
-    @Test(expected = UnexpectecException.class)
+    @Test(expected = UnexpectedException.class)
     public void testGetWhen500() {
         client.get("/500", Order.class);
     }
