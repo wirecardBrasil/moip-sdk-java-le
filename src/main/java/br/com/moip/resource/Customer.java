@@ -1,6 +1,7 @@
 package br.com.moip.resource;
 
 import java.util.Date;
+import java.util.List;
 
 public class Customer {
 
@@ -13,6 +14,7 @@ public class Customer {
     private ShippingAddress shippingAddress;
     private String id;
     private FundingInstrument fundingInstrument;
+    private List<FundingInstrument> fundingInstruments;
 
     public String getOwnId() {
         return ownId;
@@ -50,6 +52,10 @@ public class Customer {
 
     public FundingInstrument getFundingInstrument() {
         return fundingInstrument;
+    }
+
+    public List<FundingInstrument> getFundingInstruments() {
+        return fundingInstruments;
     }
 
     @Override

@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/orders/ORD-0DE8DP0K3E4Q/payments
+    headers:
+      "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: POST
+  response:
+    status: 200
+    headers:
+      "Content-Type": application/json
+    body: |
+      {"id":"PAY-FZJSASNSUOB7","status":"WAITING","delayCapture":false,"amount":{"total":102470,"gross":102470,"fees":0,"refunds":0,"liquid":102470,"currency":"BRL"},"installmentCount":1,"fundingInstrument":{"method":"ONLINE_BANK_DEBIT","onlineBankDebit":{"bankNumber":"341","expirationDate":"2020-08-10","returnUri":"https://moip.com.br/","bankName":"BANCO ITAU S.A."}},"fees":[{"type":"TRANSACTION","amount":0}],"events":[{"type":"PAYMENT.CREATED","createdAt":"2017-08-10T11:20:23.422-03"},{"type":"PAYMENT.WAITING","createdAt":"2017-08-10T11:20:23.422-03"}],"receivers":[{"moipAccount":{"id":"MPA-8D3DBB4FR8B8","login":"teste@moip.com.br","fullname":"Jose da Silva"},"type":"PRIMARY","amount":{"total":102470,"refunds":0}}],"_links":{"self":{"href":"https://aws-sand-gapi-01c.moip.in/v2/payments/PAY-FZJSASNSUOB7"},"order":{"href":"https://aws-sand-gapi-01c.moip.in/v2/orders/ORD-0DE8DP0K3E4Q","title":"ORD-0DE8DP0K3E4Q"},"payOnlineBankDebitItau":{"redirectHref":"https://checkout-sandbox.moip.com.br/debit/itau/PAY-FZJSASNSUOB7"}},"updatedAt":"2017-08-10T11:20:23.420-03","createdAt":"2017-08-10T11:20:23.420-03"}
