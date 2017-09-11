@@ -2,6 +2,7 @@ package br.com.moip.request;
 
 public class CustomerRequest {
 
+    private String id;
     private String ownId;
     private String fullname;
     private String email;
@@ -38,6 +39,15 @@ public class CustomerRequest {
     public CustomerRequest email(final String email) {
         this.email = email;
 
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public CustomerRequest id(String id) {
+        this.id = id;
         return this;
     }
 

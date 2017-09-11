@@ -27,6 +27,8 @@
   - [Clientes](#clientes)
     - [Criação](#criação-2)
     - [Consulta](#consulta-1)
+    - [Adicionar cartão de crédito](#adicionar-cartão-de-crédito)
+    - [Deletar cartão de crédito](#deletar-cartão-de-crédito)
   - [Preferências de Notificação](#preferências-de-notificação)
     -  [Criação](#criação-3)
     -  [Consulta](#consulta-2)
@@ -208,6 +210,41 @@ System.out.println(customer.toString());
 String customerId = "CUS-Q3BL0CAJ2G33";
 Customer customer = api.customer().get(customerId);
 System.out.println(customer.toString());
+```
+
+### Adicionar cartão de crédito
+```java
+FundingInstrument creditCard = api.customer().addCreditCard(
+    new CustomerRequest()
+        .fundingInstrument(
+            new FundingInstrumentRequest()
+                .creditCard(
+                    new CreditCardRequest()
+                        .number("5555666677778884")
+                        .cvc(123)
+                        .expirationMonth("05")
+                        .expirationYear("18")
+                        .holder(
+                            new HolderRequest()
+                                .fullname("Jose Portador da Silva")
+                                .birthdate("1988-10-10")
+                                .phone(
+                                    new PhoneRequest()
+                                        .setAreaCode("11")
+                                        .setNumber("55667788")
+                                )
+                                .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                        )
+                )
+        )
+        .id("CUS-1RM8JPVKWEVR")
+);
+System.out.println(creditCard);
+```
+
+### Deletar cartão de crédito
+```java
+api.customer().deleteCreditCard("CRC-NMNW6VIY2L0T")
 ```
 
 ## Preferências de notificação

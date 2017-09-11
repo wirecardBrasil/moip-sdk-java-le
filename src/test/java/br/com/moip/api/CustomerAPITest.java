@@ -1,7 +1,13 @@
 package br.com.moip.api;
 
+import br.com.moip.request.CreditCardRequest;
 import br.com.moip.request.CustomerRequest;
+import br.com.moip.request.FundingInstrumentRequest;
+import br.com.moip.request.HolderRequest;
+import br.com.moip.request.PhoneRequest;
+import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.resource.Customer;
+import br.com.moip.resource.FundingInstrument;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
@@ -10,6 +16,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class CustomerAPITest {
 
@@ -95,6 +102,46 @@ public class CustomerAPITest {
         assertEquals("MASTERCARD", customer.getFundingInstrument().getCreditCard().getBrand());
         assertEquals("555566", customer.getFundingInstrument().getCreditCard().getFirst6());
         assertEquals("1111", customer.getFundingInstrument().getCreditCard().getLast4());
+    }
+
+    @Play("customer/add_credit_card")
+    @Test
+    public void testAddCreditCardToCustomer() {
+        FundingInstrument creditCard = api.addCreditCard(
+            new CustomerRequest()
+                .fundingInstrument(
+                    new FundingInstrumentRequest()
+                        .creditCard(
+                            new CreditCardRequest()
+                                .number("5555666677778884")
+                                .cvc(123)
+                                .expirationMonth("05")
+                                .expirationYear("18")
+                                .holder(
+                                    new HolderRequest()
+                                        .fullname("Jose Portador da Silva")
+                                        .birthdate("1988-10-10")
+                                        .phone(
+                                            new PhoneRequest()
+                                                .setAreaCode("11")
+                                                .setNumber("55667788")
+                                        )
+                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                )
+                        )
+                )
+                .id("CUS-1RM8JPVKWEVR")
+        );
+
+        assertEquals(creditCard.getCreditCard().getId(), "CRC-NMNW6VIY2L0T");
+        assertEquals(creditCard.getCreditCard().getFirst6(), "401200");
+        assertEquals(creditCard.getCreditCard().getLast4(), "1112");
+    }
+
+    @Play("customer/delete_credit_card")
+    @Test
+    public void testDeleteCreditCard() {
+        assertTrue(api.deleteCreditCard("CRC-NMNW6VIY2L0T"));
     }
 
 }
