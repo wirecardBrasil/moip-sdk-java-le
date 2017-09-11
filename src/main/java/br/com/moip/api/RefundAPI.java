@@ -13,15 +13,15 @@ public class RefundAPI {
     }
 
     public Refund order(RefundRequest refundRequest) {
-        return client.post("/v2/orders/" + refundRequest.getId() + "/refunds", refundRequest, Refund.class);
+        return client.post(String.format("/v2/orders/%s/refunds", refundRequest.getId()), refundRequest, Refund.class);
     }
 
     public Refund payment(RefundRequest refundRequest) {
-        return client.post("/v2/payments/" + refundRequest.getId() + "/refunds", refundRequest, Refund.class);
+        return client.post(String.format("/v2/payments/%s/refunds", refundRequest.getId()), refundRequest, Refund.class);
     }
 
     public Refund get(String refundId) {
-        return client.get("/v2/refunds/" + refundId, Refund.class);
+        return client.get(String.format("/v2/refunds/%s", refundId), Refund.class);
     }
 
 }

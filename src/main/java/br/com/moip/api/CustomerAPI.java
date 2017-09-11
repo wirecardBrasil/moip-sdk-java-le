@@ -19,16 +19,16 @@ public class CustomerAPI {
     }
 
     public Customer get(String externalId) {
-        return client.get("/v2/customers/" + externalId, Customer.class);
+        return client.get(String.format("/v2/customers/%s", externalId), Customer.class);
     }
 
     public FundingInstrument addCreditCard (CustomerRequest customer) {
-        return client.post("/v2/customers/" + customer.getId() + "/fundinginstruments", customer.getFundingInstrument(), FundingInstrument.class);
+        return client.post(String.format("/v2/customers/%s/fundinginstruments", customer.getId()), customer.getFundingInstrument(), FundingInstrument.class);
     }
 
     public Boolean deleteCreditCard (String creditCardId) {
         try {
-            client.delete("/v2/fundinginstruments/" + creditCardId, FundingInstrument.class);
+            client.delete(String.format("/v2/fundinginstruments/%s", creditCardId), FundingInstrument.class);
 
             return true;
         } catch (ValidationException e) {
