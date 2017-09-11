@@ -49,7 +49,7 @@ public class ConnectAPITest {
             .clientSecret("e2bd3951b87e469eb0f2c2b781a753d5")
             .code("8870af1372ada7a18fdff4fa4ca1a60f4d542272")
             .redirectUri("http://localhost/test-moip-sdk-php/callback.php")
-            .grantType(GrantType.authorization_code)
+            .grantType(GrantType.AUTHORIZATION_CODE)
         );
 
         assertEquals("21e39345432346329ca7f4967473d55d_v2", connect.getAccessToken());
@@ -62,7 +62,7 @@ public class ConnectAPITest {
     public void testRefreshTokenOAuth() {
         Connect connect = api.authorize(new ConnectRequest()
             .refreshToken("80ca5fb244674117be068d2535ecbe2f_v2")
-            .grantType(GrantType.refresh_token)
+            .grantType(GrantType.REFRESH_TOKEN)
         );
 
         assertEquals("f1bb699fd8d54b72b71b1f71d05b2a89_v2", connect.getAccessToken());

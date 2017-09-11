@@ -6,7 +6,7 @@ public class ConnectRequest {
     private String client_secret;
     private String code;
     private String redirect_uri;
-    private GrantType grant_type;
+    private String grant_type;
     private String refresh_token;
 
     public ConnectRequest clientId(String clientId) {
@@ -34,7 +34,7 @@ public class ConnectRequest {
     }
 
     public ConnectRequest grantType(GrantType grantType) {
-        this.grant_type = grantType;
+        this.grant_type = grantType.getDescription();
 
         return this;
     }
