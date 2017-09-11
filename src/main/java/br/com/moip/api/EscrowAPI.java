@@ -11,6 +11,6 @@ public class EscrowAPI {
     }
 
     public Escrow release(String escrowId) {
-        return client.post("/v2/escrows/" + escrowId + "/release", null, Escrow.class);
+        return client.post(String.format("/v2/escrows/%s/release", escrowId), null, Escrow.class);
     }
 }

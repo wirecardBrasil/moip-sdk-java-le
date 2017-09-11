@@ -13,19 +13,19 @@ public class PaymentAPI {
     }
 
     public Payment create(final PaymentRequest payment) {
-        return client.post("/v2/orders/" + payment.getOrderId() + "/payments", payment, Payment.class);
+        return client.post(String.format("/v2/orders/%s/payments", payment.getOrderId()), payment, Payment.class);
     }
 
     public Payment get(final String paymentId) {
-        return client.get("/v2/payments/" + paymentId, Payment.class);
+        return client.get(String.format("/v2/payments/%s", paymentId), Payment.class);
     }
 
     public Payment capture(final String paymentId) {
-        return client.post("/v2/payments/" + paymentId + "/capture", null, Payment.class);
+        return client.post(String.format("/v2/payments/%s/capture", paymentId), null, Payment.class);
     }
 
     public Payment cancelPreAuthorized(final String paymentId) {
-        return client.post("/v2/payments/" + paymentId + "/void", null, Payment.class);
+        return client.post(String.format("/v2/payments/%s/void", paymentId), null, Payment.class);
     }
 
 }
