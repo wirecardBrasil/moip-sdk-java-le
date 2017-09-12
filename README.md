@@ -19,11 +19,44 @@
     - [Criação](#criação)
     - [Consulta](#consulta)
   - [Pagamentos](#pagamentos)
-    - [Cartão de Crédito](#cartão-de-crédito)
-    - [Boleto](#boleto)
-  - [Clientes](#clientes)
     - [Criação](#criação-1)
+      - [Cartão de Crédito](#cartão-de-crédito)
+      - [Boleto](#boleto)
+    - [Capturar pagamento pré-autorizado](#capturar-pagamento-pré-autorizado)
+    - [Cancelar pagamento pré-autorizado](#cancelar-pagamento-pré-autorizado)
+  - [Clientes](#clientes)
+    - [Criação](#criação-2)
     - [Consulta](#consulta-1)
+    - [Adicionar cartão de crédito](#adicionar-cartão-de-crédito)
+    - [Deletar cartão de crédito](#deletar-cartão-de-crédito)
+  - [Preferências de Notificação](#preferências-de-notificação)
+    -  [Criação](#criação-3)
+    -  [Consulta](#consulta-2)
+    -  [Exclusão](#exclusão)
+    -  [Listagem](#listagem)
+  - [Reembolsos](#reembolsos)
+    - [Pedido](#pedido)
+    - [Pagamento](#pagamento)
+    - [Consulta](#consulta-3)
+  - [Multipedidos](#multipedidos)
+    - [Criação](#criação-4)
+    - [Consulta](#consulta-4)
+  - [Multipagamentos](#multipagamentos)
+    - [Criação](#criação-5)
+      - [Cartão de Crédito](#cartão-de-crédito-1)
+      - [Boleto Bancário](#boleto-bancário)
+    - [Consulta](#consulta-5)
+  - [Conta Moip](#conta-moip)
+    - [Criação](#criação-6)
+    - [Consulta](#consulta-6)
+    - [Verifica se usuário já possui Conta Moip](#verifica-se-usuário-já-possui-conta-moip)
+  - [Custódia](#custódia)
+    - [Pagamento com custódia](#pagamento-com-custódia)
+    - [Liberação de custódia](#liberação-de-custódia)
+  - [OAuth (Moip Connect)](#oauth-(moip-connect))
+    - [Solicitar permissões de acesso ao usuário](#solicitar-permissões-de-acesso-ao-usuário)
+    - [Gerar Token OAuth](#gerar-token-oauth)
+    - [Atualizar Token OAuth](#atualizar-token-oauth)
 - [Tratamento de Exceções](#tratamento-de-exceções)
 - [Documentação](#documentação)
 - [Licença](#licença)
@@ -98,8 +131,8 @@ System.out.println(order.toString());
 
 ## Pagamentos
 
-### Cartão de crédito
-
+### Criação
+#### Cartão de crédito
 ```java
 Payment createdPayment = api.payment().create(new PaymentRequest()
   .orderId("ORD-HPMZSOM611M2")
@@ -118,8 +151,7 @@ Payment createdPayment = api.payment().create(new PaymentRequest()
 );
 ```
 
-### Boleto
-
+#### Boleto
 ```java
 Payment createdPayment = api.payment().create(new PaymentRequest()
   .orderId("ORD-GOHHIF4Z6PLV")
@@ -136,6 +168,18 @@ Payment createdPayment = api.payment().create(new PaymentRequest()
     )
   )
 );
+```
+
+### Capturar pagamento pré-autorizado
+```java
+Payment capturedPayment = api.payment().capture("PAY-FRAAY8GN1HSB");
+System.out.println(capturedPayment);
+```
+
+### Cancelar pagamento pré-autorizado
+```java
+Payment cancelledPayment = api.payment().cancelPreAuthorized("PAY-1ECF490M0E25");
+System.out.println(cancelledPayment);
 ```
 
 ## Clientes
@@ -168,10 +212,444 @@ Customer customer = api.customer().get(customerId);
 System.out.println(customer.toString());
 ```
 
+### Adicionar cartão de crédito
+```java
+FundingInstrument creditCard = api.customer().addCreditCard(
+    new CustomerRequest()
+        .fundingInstrument(
+            new FundingInstrumentRequest()
+                .creditCard(
+                    new CreditCardRequest()
+                        .number("5555666677778884")
+                        .cvc(123)
+                        .expirationMonth("05")
+                        .expirationYear("18")
+                        .holder(
+                            new HolderRequest()
+                                .fullname("Jose Portador da Silva")
+                                .birthdate("1988-10-10")
+                                .phone(
+                                    new PhoneRequest()
+                                        .setAreaCode("11")
+                                        .setNumber("55667788")
+                                )
+                                .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                        )
+                )
+        )
+        .id("CUS-1RM8JPVKWEVR")
+);
+System.out.println(creditCard);
+```
+
+### Deletar cartão de crédito
+```java
+api.customer().deleteCreditCard("CRC-NMNW6VIY2L0T")
+```
+
+## Preferências de notificação
+
+### Criação
+```java
+NotificationPreference notificationPreference = api.notification().create(
+    new NotificationPreferenceRequest()
+        .addEvent("ORDER.*")
+        .addEvent("PAYMENT.AUTHORIZED")
+        .addEvent("PAYMENT.CANCELLED")
+        .target("http://requestb.in/1dhjesw1")
+);
+```
+
+### Consulta
+```java
+NotificationPreference notificationPreference = api.notification().get("NPR-NR0GR85KHL10");
+System.out.println(notificationPreference.toString());
+```
+
+### Exclusão
+```java
+api.notification().delete("NPR-NR0GR85KHL10"));
+```
+
+### Listagem
+```java
+NotificationPreferenceListResponse notificationList = api.notification().list();
+```
+
+### Reembolsos
+
+> Para fazer reembolsos totais basta remover o método ```amount```.
+
+### Pedido
+#### Cartão de Crédito
+```java
+Refund refund = api.refund().order(
+    new RefundRequest("ORD-89SOQ6FMPJPX")
+        .refundingInstrument(new RefundingInstrumentRequest().creditCard())
+        .amount(2000)
+);
+```
+
+#### Conta Bancária
+```java
+Refund refund = api.refund().order(
+    new RefundRequest("ORD-GS1FSQ3SO9SY")
+        .refundingInstrument(new RefundingInstrumentRequest()
+            .bankAccount(
+                new BankAccountRequest()
+                    .checking()
+                    .bankNumber("001")
+                    .accountNumber("1234")
+                    .accountCheckNumber("1")
+                    .agencyNumber("4444444")
+                    .agencyCheckNumber("2")
+                    .holder(new HolderRequest()
+                        .fullname("Nome do Portador")
+                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                    )
+            )
+        )
+        .amount(2000)
+);
+```
+
+### Pagamento
+#### Cartão de Crédito
+
+```java
+Refund refund = api.refund().payment(
+    new RefundRequest("PAY-70380H9B6L5R")
+        .refundingInstrument(new RefundingInstrumentRequest().creditCard())
+        .amount(2000)
+);
+```
+
+#### Conta Bancária
+```java
+Refund refund = api.refund().payment(
+    new RefundRequest("PAY-E4Q0N9TK0BFW")
+        .refundingInstrument(new RefundingInstrumentRequest()
+            .bankAccount(
+                new BankAccountRequest()
+                    .checking()
+                    .bankNumber("001")
+                    .accountNumber("1234")
+                    .accountCheckNumber("1")
+                    .agencyNumber("4444444")
+                    .agencyCheckNumber("2")
+                    .holder(new HolderRequest()
+                        .fullname("Nome do Portador")
+                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                    )
+            )
+        )
+        .amount(2000)
+);
+```
+
+### Consulta
+```java
+Refund refund = api.refund().get("REF-JR4WALM894UJ");
+System.out.println(refund);
+```
+
+## Multipedidos
+
+### Criação
+```java
+Multiorder multiorder = api.multiorder().create(new MultiorderRequest()
+    .ownId("meu_multiorder_id")
+    .addOrder(new OrderRequest()
+        .ownId("pedido_1_id")
+        .amount(new OrderAmountRequest()
+            .subtotals(new SubtotalsRequest().shipping(2000))
+            .currency("BRL")
+        )
+        .addItem("Camisa Verde e Amarelo - Brasil", 1, "Seleção Brasileira", 2000)
+        .customer(new CustomerRequest()
+            .ownId("customer[1234]")
+            .fullname("Joao Sousa")
+            .email("joao.sousa@email.com")
+            .birthdate(new ApiDateRequest().date(new GregorianCalendar(1988, Calendar.DECEMBER, 30).getTime()))
+            .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+            .phone(new PhoneRequest()
+                .countryCode("55")
+                .setAreaCode("11")
+                .setNumber("66778899"))
+            .shippingAddressRequest(new ShippingAddressRequest()
+                .street("Avenida Faria Lima")
+                .streetNumber("2927")
+                .zipCode("01234000")
+                .city("Sao Paulo")
+                .state("SP")
+                .complement("8")
+                .district("Itaim"))
+        )
+        .addReceiver(new ReceiverRequest()
+            .secondary("MPA-E3C8493A06AE", new AmountRequest().fixed(500), false))
+        .addReceiver(new ReceiverRequest()
+            .primary("MPA-8D5DBB4EF8B8", new AmountRequest(), true))
+    )
+    .addOrder(new OrderRequest()
+        .ownId("pedido_2_id")
+        .amount(new OrderAmountRequest()
+            .subtotals(new SubtotalsRequest().shipping(3000))
+            .currency("BRL")
+        )
+        .addItem("Camisa Preta - Alemanha", 1, "Camiseta da Copa 2014", 1000)
+        .customer(new CustomerRequest()
+            .ownId("customer[1234]")
+            .fullname("Joao Sousa")
+            .email("joao.sousa@email.com")
+            .birthdate(new ApiDateRequest().date(new GregorianCalendar(1988, Calendar.DECEMBER, 30).getTime()))
+            .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+            .phone(new PhoneRequest()
+                .countryCode("55")
+                .setAreaCode("11")
+                .setNumber("66778899"))
+            .shippingAddressRequest(new ShippingAddressRequest()
+                .street("Avenida Faria Lima")
+                .streetNumber("2927")
+                .zipCode("01234000")
+                .city("Sao Paulo")
+                .state("SP")
+                .complement("8")
+                .district("Itaim"))
+        )
+        .addReceiver(new ReceiverRequest()
+            .primary("MPA-123123123", new AmountRequest())
+        )
+    )
+);
+```
+
+### Consulta
+```java
+Multiorder multiorder = api.multiorder().get("MOR-F2R675E1X97P");
+System.out.println(multiorder);
+```
+
+## Multipagamentos
+
+### Criação
+#### Cartão de Crédito
+```java
+Multipayment multipayment = api.multipayment().create(new PaymentRequest()
+    .orderId("MOR-BMJN4E5LSG6N")
+    .installmentCount(1)
+    .delayCapture(false)
+    .fundingInstrument(
+        new FundingInstrumentRequest()
+            .creditCard(
+                new CreditCardRequest()
+                    .hash(CC_HASH)
+                    .holder(
+                        new HolderRequest()
+                            .fullname("Jose Portador da Silva")
+                            .birthdate("1988-10-10")
+                            .phone(
+                                new PhoneRequest()
+                                    .setAreaCode("11")
+                                    .setNumber("55667788")
+                            )
+                            .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                    )
+            )
+    )
+);
+```
+
+#### Boleto Bancário
+```java
+Multipayment multipayment = api.multipayment().create(new PaymentRequest()
+        .orderId("MOR-F2R675T1X97P")
+        .installmentCount(1)
+        .fundingInstrument(new FundingInstrumentRequest()
+            .boleto(new BoletoRequest()
+                .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2017, Calendar.SEPTEMBER, 30).getTime()))
+                .instructionLines(new InstructionLinesRequest()
+                    .first("Primeira linha se instrução")
+                    .second("Segunda linha se instrução")
+                    .third("Terceira linha se instrução")
+                )
+                .logoUri("http://")
+            )
+        )
+    );
+```
+
+### Consulta
+```java
+Multipayment multipayment = api.multipayment().get("MPY-OUGA0AHH2BOF");
+System.out.println(multipayment);
+```
+
+## Conta Moip
+### Criação
+```java
+Account account = api.account().create(new AccountRequest()
+    .email("dev.moip@labs52453.moip.com.br")
+    .type(AccountRequest.Type.MERCHANT)
+    .transparentAccount(true)
+    .businessSegment(new AccountRequest.BusinessSegmentRequest("35"))
+    .site("https://dev.moip.com.br/")
+    .person(new PersonRequest()
+        .name("Runscope")
+        .lastName("Random 9123")
+        .birthDate(new ApiDateRequest().date(new GregorianCalendar(1990, Calendar.JANUARY, 1).getTime()))
+        .nationality("BRA")
+        .birthPlace("Santos")
+        .taxDocument(TaxDocumentRequest.cpf("953.394.633-46"))
+        .address(new ShippingAddressRequest()
+            .street("Av. Brigadeiro Faria Lima")
+            .streetNumber("434")
+            .district("Itaim")
+            .city("São Paulo")
+            .state("SP")
+            .country("BRA")
+            .zipCode("01234000")
+        )
+        .phone(new PhoneRequest()
+            .countryCode("55")
+            .setAreaCode("11")
+            .setNumber("965213244")
+        )
+        .identityDocument(new IdentityDocumentRequest()
+            .number("434322344")
+            .issuer("SSP")
+            .issueDate(new ApiDateRequest().date(new GregorianCalendar(2000, Calendar.DECEMBER, 12).getTime()))
+            .type(IdentityDocumentRequest.Type.RG)
+        )
+    )
+    .company(new CompanyRequest()
+        .name("Teste LTDA")
+        .businessName("Teste")
+        .address(new ShippingAddressRequest()
+            .street("Av. Brigadeiro Faria Lima")
+            .streetNumber("4530")
+            .district("Itaim")
+            .city("São Paulo")
+            .state("SP")
+            .country("BRA")
+            .zipCode("01234000")
+        )
+        .mainActivity(new CompanyRequest.MainActivityRequest()
+            .cnae("82.91-1/00")
+            .description("Atividades de cobranças e informações cadastrais")
+        )
+        .taxDocument(TaxDocumentRequest.cnpj("61.148.461/0001-09"))
+        .openingDate(new ApiDateRequest().date(new GregorianCalendar(2000, Calendar.JANUARY, 1).getTime()))
+        .phone(new PhoneRequest()
+            .countryCode("55")
+            .setAreaCode("11")
+            .setNumber("975142244")
+        )
+    )
+);
+```
+
+### Consulta
+```java
+Account account = api.account().get("MPA-AE2OAL41CBG1");
+System.out.println(account);
+```
+
+### Verifica se usuário já possui Conta Moip
+```java
+api.account().checkAccountExists("123.456.798-91");
+```
+
+## Custódia
+### Pagamento com custódia
+```java
+Payment payment = api.payment().create(
+    new PaymentRequest()
+        .orderId("ORD-3435DIB58HYN")
+        .installmentCount(1)
+        .escrow(new PaymentRequest.EscrowRequest("Teste de descricao"))
+        .fundingInstrument(new FundingInstrumentRequest()
+            .creditCard(
+                new CreditCardRequest()
+                    .number("4012001037141112")
+                    .cvc(123)
+                    .expirationMonth("05")
+                    .expirationYear("18")
+                    .holder(
+                        new HolderRequest()
+                            .fullname("Jose Portador da Silva")
+                            .birthdate("1988-10-10")
+                            .phone(
+                                new PhoneRequest()
+                                    .setAreaCode("11")
+                                    .setNumber("55667788")
+                            )
+                            .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                    )
+            )
+        )
+);
+System.out.println(payment);
+```
+
+### Liberação de custódia
+```java
+Escrow escrow = api.escrow().release("ECW-S0QEDXJM7TXT");
+System.out.println(escrow);
+```
+
+## OAuth (Moip Connect)
+### Solicitar permissões de acesso ao usuário
+```java
+String authURL = api.connect().getAuthorizeUrl("APP-XT5FIAK2F8I7",
+    "http://localhost/moip/callback.php",
+    new ScopePermissionList(ScopePermission.DEFINE_PREFERENCES
+        , ScopePermission.MANAGE_ACCOUNT_INFO
+        , ScopePermission.RECEIVE_FUNDS
+        , ScopePermission.REFUND
+        , ScopePermission.RETRIEVE_FINANCIAL_INFO
+        , ScopePermission.TRANSFER_FUNDS
+    )
+);
+System.out.println(authURL);
+```
+
+### Gerar token OAuth
+```java
+Connect connect = api.connect().authorize(new ConnectRequest()
+    .clientId("APP-XT5FIAK2F8I7")
+    .clientSecret("e2bd3951b87e469eb0f2c2b781a753d5")
+    .code("8870af1372ada7a18fdff4fa4ca1a60f4d542272")
+    .redirectUri("http://localhost/moip-sdk/callback")
+    .grantType(GrantType.authorization_code)
+);
+System.out.println(connect);
+```
+
+### Atualizar token OAuth
+```java
+Connect connect = api.connect().authorize(new ConnectRequest()
+    .refreshToken("80ca5fb244674117be068d2535ecbe2f_v2")
+    .grantType(GrantType.refresh_token)
+);
+System.out.println(connect);
+```
+
 ## Tratamento de Exceções
 
-Quando ocorre algum erro na API, você deve utilizar o método hasUnexpectedError() para tratar erros inesperados e
-para erros de validação,deverá utilizar o método hasValidationError().
+Quando ocorre algum erro na API, é lançada a exceção UnexpectedException para erros inesperados e ValidationException 
+para erros de validação.
+
+```java
+try {
+ Payment createdPayment = api.payment().create(
+        //...
+    );
+} catch(UnexpectedException e) {
+  //StatusCode >= 500
+} catch(ValidationException e) {
+  //StatusCode entre 400 e 499 (exceto 401)
+}
+```
 
 ## Documentação
 

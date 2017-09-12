@@ -25,6 +25,10 @@ public class ValidationException extends MoipException {
         return responseStatus;
     }
 
+    public Errors getError() {
+        return errors;
+    }
+
     public List<Error> getErrors() {
         return errors.getErrors();
     }

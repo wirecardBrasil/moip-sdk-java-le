@@ -1,0 +1,1 @@
+{"ownId":"order_own_id","items":[{"product":"Nome do produto","quantity":1,"detail":"Mais info...","price":10000}],"customer":{"ownId":"customer_own_id","fullname":"Jose da Silva","email":"sandbox_v2_1401147277@email.com"},"receivers":[{"type":"SECONDARY","moipAccount":{"id":"MPA-123123123"},"amount":{"fixed":100}}]}

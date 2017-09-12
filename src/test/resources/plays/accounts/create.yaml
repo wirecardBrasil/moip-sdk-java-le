@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/accounts
+    headers:
+      Content-Type: application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: POST
+  response:
+    status: 201
+    headers:
+      "Content-Type": application/json
+    body: |
+      {"id":"MPA-1E43D791C52A","login":"dev.moip@labs8489.moip.com.br","accessToken":"ce2d7ad2b2dc4ed2afe3c72109916459_v2","channelId":"APP-18JTHC3LEMT9","type":"MERCHANT","transparentAccount":false,"email":{"address":"dev.moip@labs8489.moip.com.br","confirmed":false},"person":{"name":"Runscope","lastName":"Random 9123","birthDate":"1990-01-01","taxDocument":{"type":"CPF","number":"232.233.768-44"},"address":{"street":"Av. Brigadeiro Faria Lima","streetNumber":"2927","district":"Itaim","zipcode":"01234000","zipCode":"01234000","city":"São Paulo","state":"SP","country":"BRA"},"phone":{"countryCode":"55","areaCode":"11","number":"965213244"},"nationality":"BRA","identityDocument":{"number":"434322344","issuer":"SSP","issueDate":"2000-12-12","type":"RG"},"alternativePhones":[{"countryCode":"55","areaCode":"11","number":"975142244"}],"birthPlace":"Santos"},"site":"https://dev.moip.com.br","createdAt":"2017-08-16T17:13:18.379Z","_links":{"self":{"href":"https://sandbox.moip.com.br/moipaccounts/MPA-267F7689DBAB","title":null},"setPassword":{"href":"https://desenvolvedor.moip.com.br/sandbox/AskForNewPassword.do?method=confirm\u0026email=dev.moip%40labs8489.moip.com.br\u0026code=99f009eb1990a96b1d338975211e4109"}}}

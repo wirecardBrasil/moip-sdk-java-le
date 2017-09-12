@@ -6,6 +6,7 @@ public class FundingInstrument {
     private Method method;
     private CreditCard creditCard;
     private Boleto boleto;
+    private OnlineBankDebit onlineBankDebit;
     private Mpos mpos;
 
     public boolean isSuppressCreditCard() {
@@ -56,8 +57,16 @@ public class FundingInstrument {
         this.mpos = mpos;
     }
 
+    public OnlineBankDebit getOnlineBankDebit() {
+        return onlineBankDebit;
+    }
+
+    public void setOnlineBankDebit(OnlineBankDebit onlineBankDebit) {
+        this.onlineBankDebit = onlineBankDebit;
+    }
+
     public enum Method {
-        CREDIT_CARD, BOLETO;
+        CREDIT_CARD, BOLETO, ONLINE_BANK_DEBIT;
     }
 
     @Override
@@ -69,6 +78,7 @@ public class FundingInstrument {
         sb.append(", creditCard=").append(creditCard);
         sb.append(", boleto=").append(boleto);
         sb.append(", mpos=").append(mpos);
+        sb.append(", onlineBankDebit=").append(onlineBankDebit);
         sb.append('}');
         return sb.toString();
     }
