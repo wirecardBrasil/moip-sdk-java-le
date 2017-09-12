@@ -69,7 +69,7 @@ Adicionar no seu pom.xml:
 <dependency>
     <groupId>br.com.moip</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>2.1.2</version>
+    <version>3.0.0</version>
 </dependency>
 
 ```

@@ -6,7 +6,7 @@ install: JAVA_HOME=$(jdk_switcher home openjdk8) ./gradlew dependencies -PossrhU
   -PossrhPassword=password
 script: ./gradlew test -PossrhUsername=username -PossrhPassword=password
 before_deploy:
-- openssl aes-256-cbc -K $encrypted_213eefa2382d_key -iv $encrypted_213eefa2382d_iv
+- openssl aes-256-cbc -K $encrypted_fd9e12525773_key -iv $encrypted_fd9e12525773_iv
   -in secring.gpg.enc -out secring.gpg -d
 deploy:
   skip_cleanup: true
