@@ -1,5 +1,6 @@
 package br.com.moip.api;
 
+import br.com.moip.Client;
 import br.com.moip.request.ConnectRequest;
 import br.com.moip.request.GrantType;
 import br.com.moip.resource.Connect;
@@ -26,7 +27,7 @@ public class ConnectAPITest {
 
     @Test
     public void testGetAuthURL() {
-
+        api = new ConnectAPI(new ClientFactory().client(Client.CONNECT_SANDBOX));
         String authURL = api.getAuthorizeUrl("APP-XT5FIAK2F8I7",
             "http://localhost/moip/callback.php",
             new ScopePermissionList(ScopePermission.DEFINE_PREFERENCES

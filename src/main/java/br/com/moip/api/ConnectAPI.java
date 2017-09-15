@@ -24,7 +24,7 @@ public class ConnectAPI {
     public String getAuthorizeUrl(String clientId, String redirectUri, ScopePermissionList scope) {
 
         try {
-            URIBuilder b = new URIBuilder(Client.CONNECT_SANDBOX + "/oauth/authorize");
+            URIBuilder b = new URIBuilder(client.getEndpoint() + "/oauth/authorize");
             b.addParameter("response_type", "code");
             b.addParameter("client_id", clientId);
             b.addParameter("redirect_uri", redirectUri);
