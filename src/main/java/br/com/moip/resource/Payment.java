@@ -1,5 +1,7 @@
 package br.com.moip.resource;
 
+import br.com.moip.resource.links.PaymentLinks;
+
 import java.util.List;
 
 public class Payment {
@@ -12,6 +14,7 @@ public class Payment {
     private Geolocation geolocation;
     private Boolean delayCapture;
     private List<Escrow> escrows;
+    private PaymentLinks _links;
 
     public String getId() {
         return id;
@@ -67,6 +70,10 @@ public class Payment {
 
     public List<Escrow>getEscrows() {
         return escrows;
+    }
+
+    public PaymentLinks getLinks() {
+        return _links;
     }
 
     @Override
