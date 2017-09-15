@@ -22,33 +22,34 @@
     - [Criação](#criação-1)
       - [Cartão de Crédito](#cartão-de-crédito)
       - [Boleto](#boleto)
+    - [Consulta](#consulta-1)
     - [Capturar pagamento pré-autorizado](#capturar-pagamento-pré-autorizado)
     - [Cancelar pagamento pré-autorizado](#cancelar-pagamento-pré-autorizado)
   - [Clientes](#clientes)
     - [Criação](#criação-2)
-    - [Consulta](#consulta-1)
+    - [Consulta](#consulta-2)
     - [Adicionar cartão de crédito](#adicionar-cartão-de-crédito)
     - [Deletar cartão de crédito](#deletar-cartão-de-crédito)
   - [Preferências de Notificação](#preferências-de-notificação)
     -  [Criação](#criação-3)
-    -  [Consulta](#consulta-2)
+    -  [Consulta](#consulta-3)
     -  [Exclusão](#exclusão)
     -  [Listagem](#listagem)
   - [Reembolsos](#reembolsos)
     - [Pedido](#pedido)
     - [Pagamento](#pagamento)
-    - [Consulta](#consulta-3)
+    - [Consulta](#consulta-4)
   - [Multipedidos](#multipedidos)
     - [Criação](#criação-4)
-    - [Consulta](#consulta-4)
+    - [Consulta](#consulta-5)
   - [Multipagamentos](#multipagamentos)
     - [Criação](#criação-5)
       - [Cartão de Crédito](#cartão-de-crédito-1)
       - [Boleto Bancário](#boleto-bancário)
-    - [Consulta](#consulta-5)
+    - [Consulta](#consulta-6)
   - [Conta Moip](#conta-moip)
     - [Criação](#criação-6)
-    - [Consulta](#consulta-6)
+    - [Consulta](#consulta-7)
     - [Verifica se usuário já possui Conta Moip](#verifica-se-usuário-já-possui-conta-moip)
   - [Custódia](#custódia)
     - [Pagamento com custódia](#pagamento-com-custódia)
@@ -168,6 +169,22 @@ Payment createdPayment = api.payment().create(new PaymentRequest()
     )
   )
 );
+```
+
+> Para capturar links do boleto:
+
+```java
+// Link do Boleto
+createdPayment.getLinks().payBoletoLink();
+
+// Link para impressão do boleto
+createdPayment.getLinks().payBoletoPrintLink();
+```
+
+### Consulta
+```java
+Payment payment = api.payment().get(PAYMENT_ID);
+System.out.println(payment.toString());
 ```
 
 ### Capturar pagamento pré-autorizado
