@@ -6,11 +6,9 @@
 
 * **ConnectAPI:** Fix a bug in method to generate authorize URL ([851aa2a](https://github.com/caiogaspar/moip-sdk-java/commit/851aa2a))
 
-
 ### Features
 
 * Create structure to HATEOAS links in Payment and fix toString methods to some Link Resources ([cf6c46f](https://github.com/caiogaspar/moip-sdk-java/commit/cf6c46f))
-
 
 
 <a name="v3.0.0"></a>
