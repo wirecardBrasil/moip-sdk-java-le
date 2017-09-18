@@ -1,3 +1,18 @@
+<a name="v3.1.0"></a>
+# [](https://github.com/caiogaspar/moip-sdk-java/compare/v3.0.0...v3.1.0) (2017-09-18)
+
+
+### Bug Fixes
+
+* **ConnectAPI:** Fix a bug in method to generate authorize URL ([851aa2a](https://github.com/caiogaspar/moip-sdk-java/commit/851aa2a))
+
+
+### Features
+
+* Create structure to HATEOAS links in Payment and fix toString methods to some Link Resources ([cf6c46f](https://github.com/caiogaspar/moip-sdk-java/commit/cf6c46f))
+
+
+
 <a name="v3.0.0"></a>
 # [3.0.0](https://github.com/moip/moip-sdk-java/compare/v2.0.0-RC6...v3.0.0) (2017-09-11)
 
