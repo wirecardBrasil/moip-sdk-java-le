@@ -34,9 +34,9 @@ public class OrderLinks {
 
     @Override
     public String toString() {
-            return new StringBuilder("OrderLinks{")
-                    .append("self='").append(this.self)
-                    .append("checkout='").append(this.checkout)
-                    .append('}').toString();
+        return new StringBuilder("OrderLinks{")
+            .append("self=").append(self)
+            .append(", checkout=").append(checkout)
+            .append('}').toString();
     }
 }
