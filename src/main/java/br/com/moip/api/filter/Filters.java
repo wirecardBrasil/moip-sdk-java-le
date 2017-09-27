@@ -1,6 +1,6 @@
 package br.com.moip.api.filter;
 
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 
