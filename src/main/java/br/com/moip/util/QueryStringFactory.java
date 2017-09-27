@@ -37,15 +37,14 @@ public class QueryStringFactory {
     }
 
     private void addParams() {
-        for (Map.Entry<String, String> entry : params.entrySet())
-        {
+        for (Map.Entry<String, String> entry : params.entrySet()) {
             uri.addParameter(entry.getKey(), entry.getValue());
         }
     }
 
     public String generate() {
         if (pagination != null) {
-            addPagination();
+            this.addPagination();
         }
 
         if (filters != null) {
@@ -53,7 +52,7 @@ public class QueryStringFactory {
         }
 
         if (params != null) {
-            addParams();
+            this.addParams();
         }
 
         return uri.toString();
