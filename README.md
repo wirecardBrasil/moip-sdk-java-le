@@ -18,6 +18,12 @@
   - [Pedidos](#pedidos)
     - [Criação](#criação)
     - [Consulta](#consulta)
+      - [Pedido Específico](#pedido-específico)
+      - [Todos os Pedidos](#todos-os-pedidos)
+        - [Sem Filtro](#sem-filtro)
+        - [Com Filtros](#com-filtros)
+        - [Com Paginação](#com-paginação)
+        - [Consulta Valor Específico](#consulta-valor-específico)
   - [Pagamentos](#pagamentos)
     - [Criação](#criação-1)
       - [Cartão de Crédito](#cartão-de-crédito)
@@ -124,10 +130,44 @@ Order createdOrder = api.order().create(new OrderRequest()
 ```
 
 ### Consulta
+#### Pedido Específico
 ```java
 String orderId = "ORD-HPMZSOM611M2";
 Order order = api.order().get(orderId);
 System.out.println(order.toString());
+```
+
+#### Todos os Pedidos
+##### Sem Filtro
+```java
+OrderListResponse orders = api.order().list();
+```
+
+##### Com Filtros
+```java
+Filters filters = new Filters()
+            .between("amount", "1000", "10000")
+            .in("status", status);
+OrderListResponse orders = api.order().list(filters);
+```
+
+##### Com Paginação
+```java
+OrderListResponse orders = api.order().list(new Pagination(10,0));
+```
+
+##### Consulta Valor Específico
+```java
+OrderListResponse orders = api.order().list("josé silva");
+```
+
+> Também é possível usar paginação, filtros e consulta de valor específico juntos
+
+```java
+Filters filters = new Filters()
+            .between("amount", "1000", "10000")
+            .in("status", status);
+OrderListResponse orders = api.order().list(new Pagination(10,0), filters, "josé silva");
 ```
 
 ## Pagamentos
