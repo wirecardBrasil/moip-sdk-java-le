@@ -3,10 +3,11 @@ package br.com.moip.api.filter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Filters {
 
-    private ArrayList<String> filters = new ArrayList<>();
+    private List<String> filters = new ArrayList<>();
 
     public Filters greaterThan(String field, String value) {
         filters.add(String.format("%s::gt(%s)", field, value));
@@ -32,7 +33,7 @@ public class Filters {
         return this;
     }
 
-    public Filters in (String field, ArrayList<String>values) {
+    public Filters in (String field, List<String> values) {
         filters.add(String.format("%s::in(%s)", field, StringUtils.join(values, ",")));
 
         return this;

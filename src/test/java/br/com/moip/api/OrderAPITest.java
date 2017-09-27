@@ -1,8 +1,5 @@
 package br.com.moip.api;
 
-import br.com.moip.Client;
-import br.com.moip.api.filter.Filters;
-import br.com.moip.api.filter.Pagination;
 import br.com.moip.request.AmountRequest;
 import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.CustomerRequest;
@@ -22,11 +19,8 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
 import static org.junit.Assert.assertArrayEquals;
