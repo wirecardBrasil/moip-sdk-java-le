@@ -14,8 +14,7 @@ public class Filters {
         return this;
     }
 
-    public Filters greaterThanOrEqual(String field, String value)
-    {
+    public Filters greaterThanOrEqual(String field, String value) {
         filters.add(String.format("%s::ge(%s)", field, value));
 
         return this;
