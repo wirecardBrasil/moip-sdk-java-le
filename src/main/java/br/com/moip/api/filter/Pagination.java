@@ -8,6 +8,11 @@ public class Pagination {
 
     }
 
+    public Pagination (int limit, int offset) {
+        this.limit = limit;
+        this.offset = offset;
+    }
+
     public Pagination(final String url) {
         String[] params = url.split("&");
         String limit = params[0].split("=")[1];
