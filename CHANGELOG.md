@@ -16,11 +16,11 @@
 
 ### Features
 
-* Create structure to HATEOAS links in Payment a
+* Create structure to HATEOAS links in Payment and fix toString methods to some Link Resources ([cf6c46f](https://github.com/caiogaspar/moip-sdk-java/commit/cf6c46f))
+
 
 <a name="v3.0.0"></a>
-# [3.0.0](https://github.com/moip/moip-sdk-java/compare/v2.0.0-RC6...v3.0.0) (201nd fix toString methods to some Link Resources ([cf6c46f](https://github.com/moip/moip-sdk-java/commit/cf6c46f))
-7-09-11)
+# [3.0.0](https://github.com/moip/moip-sdk-java/compare/v2.0.0-RC6...v3.0.0) (2017-09-11)
 
 
 ### Bug Fixes
