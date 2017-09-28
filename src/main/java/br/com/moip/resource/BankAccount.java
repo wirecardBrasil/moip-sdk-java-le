@@ -10,6 +10,7 @@ public class BankAccount {
     private String bankName;
     private String bankNumber;
     private String accountNumber;
+    private String accountCheckNumber;
     private Holder holder;
     private Type type;
     private String status;
@@ -38,6 +39,10 @@ public class BankAccount {
 
     public String getAccountNumber() {
         return accountNumber;
+    }
+
+    public String getAccountCheckNumber() {
+        return accountCheckNumber;
     }
 
     public Holder getHolder() {
