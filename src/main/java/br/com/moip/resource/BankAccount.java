@@ -79,18 +79,19 @@ public class BankAccount {
 
     @Override
     public String toString() {
-        return "BankAccount{" +
-                "id='" + id + '\'' +
-                ", agencyNumber='" + agencyNumber + '\'' +
-                ", agencyCheckNumber='" + agencyCheckNumber + '\'' +
-                ", bankName='" + bankName + '\'' +
-                ", bankNumber='" + bankNumber + '\'' +
-                ", accountNumber='" + accountNumber + '\'' +
-                ", holder=" + holder +
-                ", type=" + type +
-                ", status='" + status + '\'' +
-                ", createdAt=" + createdAt +
-                ", _links=" + links +
-                '}';
+        return new StringBuilder("BankAccount{")
+                .append("id='").append(id).append('\'')
+                .append(", agencyNumber='").append(agencyNumber).append('\'')
+                .append(", agencyCheckNumber='").append(agencyCheckNumber).append('\'')
+                .append(", bankName='").append(bankName).append('\'')
+                .append(", bankNumber='").append(bankNumber).append('\'')
+                .append(", accountNumber='").append(accountNumber).append('\'')
+                .append(", accountCheckNumber='").append(accountCheckNumber).append('\'')
+                .append(", holder=").append(holder)
+                .append(", type=").append(type)
+                .append(", status='").append(status).append('\'')
+                .append(", createdAt=").append(createdAt)
+                .append(", _links=").append(links)
+                .append('}').toString();
     }
 }
