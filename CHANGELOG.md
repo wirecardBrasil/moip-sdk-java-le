@@ -1,10 +1,18 @@
+<a name="v3.2.0"></a>
+# [](https://github.com/moip/moip-sdk-java/compare/v3.1.0...v3.2.0) (2017-09-28)
+
+### Features
+
+* **BankAccount:** Added accountCheckNumber property to BankAccount([8ab448b](https://github.com/moip/moip-sdk-java/commit/8ab448b))
+
+
 <a name="v3.1.0"></a>
-# [](https://github.com/caiogaspar/moip-sdk-java/compare/v3.0.0...v3.1.0) (2017-09-18)
+# [](https://github.com/moip/moip-sdk-java/compare/v3.0.0...v3.1.0) (2017-09-18)
 
 
 ### Bug Fixes
 
-* **ConnectAPI:** Fix a bug in method to generate authorize URL ([851aa2a](https://github.com/caiogaspar/moip-sdk-java/commit/851aa2a))
+* **ConnectAPI:** Fix a bug in method to generate authorize URL ([851aa2a](https://github.com/moip/moip-sdk-java/commit/851aa2a))
 
 ### Features
 
