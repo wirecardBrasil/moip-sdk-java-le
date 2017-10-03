@@ -11,6 +11,7 @@ import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.request.CheckoutPreferencesRequest;
 import br.com.moip.request.InstallmentRequest;
 import br.com.moip.resource.Order;
+import br.com.moip.response.OrderListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
@@ -178,4 +179,15 @@ public class OrderAPITest {
         assertEquals("BRA", createdOrder.getCustomer().getShippingAddress().getCountry());
 
     }
+
+    @Play("orders/list")
+    @Test
+    public void testGetOrderList() {
+        OrderListResponse orderListResponse = api.list();
+        assertEquals(20, orderListResponse.getOrders().size());
+        assertEquals("ORD-UQUCZIB66I4U", orderListResponse.getOrders().get(0).getId());
+        assertEquals("ORD-OBC77GS8R20D", orderListResponse.getOrders().get(1).getId());
+        assertEquals("jose silva", orderListResponse.getOrders().get(0).getCustomer().getFullname());
+    }
+
 }
