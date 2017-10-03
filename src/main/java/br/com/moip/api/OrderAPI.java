@@ -43,29 +43,29 @@ public class OrderAPI {
         return client.get(new QueryStringFactory(PATH, null, filters, null).generate(), OrderListResponse.class);
     }
 
-    public OrderListResponse list(final String qParam) {
-        return client.get(new QueryStringFactory(PATH, null, null, hashParams(qParam)).generate(), OrderListResponse.class);
+    public OrderListResponse list(final String queryParam) {
+        return client.get(new QueryStringFactory(PATH, null, null, hashParams(queryParam)).generate(), OrderListResponse.class);
     }
 
     public OrderListResponse list(final Pagination pagination, final Filters filters) {
         return client.get(new QueryStringFactory(PATH, pagination, filters, null).generate(), OrderListResponse.class);
     }
 
-    public OrderListResponse list(final Pagination pagination, final String qParam) {
-        return client.get(new QueryStringFactory(PATH, pagination, null, hashParams(qParam)).generate(), OrderListResponse.class);
+    public OrderListResponse list(final Pagination pagination, final String queryParam) {
+        return client.get(new QueryStringFactory(PATH, pagination, null, hashParams(queryParam)).generate(), OrderListResponse.class);
     }
 
-    public OrderListResponse list(final Filters filters, final String qParam) {
-        return client.get(new QueryStringFactory(PATH, null, filters, hashParams(qParam)).generate(), OrderListResponse.class);
+    public OrderListResponse list(final Filters filters, final String queryParam) {
+        return client.get(new QueryStringFactory(PATH, null, filters, hashParams(queryParam)).generate(), OrderListResponse.class);
     }
 
     public OrderListResponse list(final Pagination pagination, final Filters filters, final String qParam) {
         return client.get(new QueryStringFactory(PATH, pagination, filters, hashParams(qParam)).generate(), OrderListResponse.class);
     }
 
-    private Map<String, String> hashParams(final String qParam) {
+    private Map<String, String> hashParams(final String queryParam) {
         return new HashMap<String, String>() {{
-            put("q", qParam);
+            put("q", queryParam);
         }};
     }
 }
