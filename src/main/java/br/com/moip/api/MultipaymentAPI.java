@@ -19,4 +19,9 @@ public class MultipaymentAPI {
     public Multipayment get(String multipaymentId) {
         return client.get("/v2/multipayments/" + multipaymentId, Multipayment.class);
     }
+
+    public Multipayment capture(String multipaymentId) {
+        return client.post(String.format("/v2/multipayments/%s/capture", multipaymentId), null, Multipayment.class);
+    }
+
 }

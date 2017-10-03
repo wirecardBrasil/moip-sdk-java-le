@@ -116,4 +116,15 @@ public class MultipaymentAPITest {
         assertEquals(1, multipayment.getInstallmentCount());
         assertNotNull(multipayment.getPayments());
     }
+
+    @Play("multipayment/capture")
+    @Test
+    public void testCaptureMultipayment() {
+        Multipayment multipayment = api.capture("MPY-UGZLJMVJ37LX");
+
+        assertEquals("MPY-UGZLJMVJ37LX", multipayment.getId());
+        assertEquals((Integer)8000, multipayment.getAmount().getTotal());
+        assertEquals(PaymentStatus.AUTHORIZED, multipayment.getStatus());
+    }
+
 }
