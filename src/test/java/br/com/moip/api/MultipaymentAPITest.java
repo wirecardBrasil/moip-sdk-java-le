@@ -127,4 +127,13 @@ public class MultipaymentAPITest {
         assertEquals(PaymentStatus.AUTHORIZED, multipayment.getStatus());
     }
 
+    @Play("multipayment/cancel_pre_authorized")
+    @Test
+    public void testCancelMultipayment() {
+        Multipayment cancelledPayment = api.cancelPreAuthorized("MPY-YDNM3U17OSDD");
+
+        assertEquals("MPY-YDNM3U17OSDD", cancelledPayment.getId());
+        assertEquals(PaymentStatus.CANCELLED, cancelledPayment.getStatus());
+    }
+
 }
