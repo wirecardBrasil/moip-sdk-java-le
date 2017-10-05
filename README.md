@@ -53,6 +53,8 @@
       - [Cartão de Crédito](#cartão-de-crédito-1)
       - [Boleto Bancário](#boleto-bancário)
     - [Consulta](#consulta-6)
+    - [Capturar multipagamento pré-autorizado](#capturar-multipagamento-pré-autorizado)
+    - [Cancelar multipagamento pré-autorizado](#cancelar-multipagamento-pré-autorizado)
   - [Conta Moip](#conta-moip)
     - [Criação](#criação-6)
     - [Consulta](#consulta-7)
@@ -539,6 +541,18 @@ Multipayment multipayment = api.multipayment().create(new PaymentRequest()
 ```java
 Multipayment multipayment = api.multipayment().get("MPY-OUGA0AHH2BOF");
 System.out.println(multipayment);
+```
+
+### Capturar multipagamento pré-autorizado
+```java
+Multipayment capturedMultipayment = api.multipayment().capture("MPY-UGZLJMVJ37LX");
+System.out.println(capturedMultipayment);
+```
+
+### Cancelar multipagamento pré-autorizado
+```java
+Multipayment cancelledMultipayment = api.multipayment().cancelPreAuthorized("MPY-YDNM3U17OSDD");
+System.out.println(cancelledMultipayment);
 ```
 
 ## Conta Moip

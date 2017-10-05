@@ -13,10 +13,19 @@ public class MultipaymentAPI {
     }
 
     public Multipayment create(PaymentRequest multipayment) {
-        return client.post("/v2/multiorders/" + multipayment.getOrderId() + "/multipayments", multipayment, Multipayment.class);
+        return client.post(String.format("/v2/multiorders/%s/multipayments", multipayment.getOrderId()), multipayment, Multipayment.class);
     }
 
     public Multipayment get(String multipaymentId) {
-        return client.get("/v2/multipayments/" + multipaymentId, Multipayment.class);
+        return client.get(String.format("/v2/multipayments/%s", multipaymentId), Multipayment.class);
     }
+
+    public Multipayment capture(String multipaymentId) {
+        return client.post(String.format("/v2/multipayments/%s/capture", multipaymentId), null, Multipayment.class);
+    }
+
+    public Multipayment cancelPreAuthorized(String multipaymentId) {
+        return client.post(String.format("/v2/multipayments/%s/void", multipaymentId), null, Multipayment.class);
+    }
+
 }
