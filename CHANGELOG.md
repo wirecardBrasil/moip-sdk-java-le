@@ -1,3 +1,15 @@
+<a name="v3.3.0"></a>
+# [](https://github.com/moip/moip-sdk-java/compare/v3.2.0...v3.3.0) (2017-10-10)
+
+
+### Features
+
+* **Multipayment:** Added method 'cancelPreAuthorized' to cancel pre authorized payments ([be2fc6c](https://github.com/moip/moip-sdk-java/commit/be2fc6c))
+* **Multipayment:** Added method 'capture' ([0a634c3](https://github.com/moip/moip-sdk-java/commit/0a634c3))
+* **Order:** added method to get an order list ([8602c59](https://github.com/moip/moip-sdk-java/commit/8602c59))
+
+
+
 <a name="v3.2.0"></a>
 # [](https://github.com/moip/moip-sdk-java/compare/v3.1.0...v3.2.0) (2017-09-28)
 
@@ -16,7 +28,7 @@
 
 ### Features
 
-* Create structure to HATEOAS links in Payment and fix toString methods to some Link Resources ([cf6c46f](https://github.com/caiogaspar/moip-sdk-java/commit/cf6c46f))
+* Create structure to HATEOAS links in Payment and fix toString methods to some Link Resources ([cf6c46f](https://github.com/moip/moip-sdk-java/commit/cf6c46f))
 
 
 <a name="v3.0.0"></a>
