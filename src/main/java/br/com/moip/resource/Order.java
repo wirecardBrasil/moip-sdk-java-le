@@ -9,6 +9,7 @@ public class Order {
 
     private String id;
     private Amount amount;
+    private OrderStatus status;
     private String ownId;
     private final List<Item> items;
     private Customer customer;
@@ -46,6 +47,14 @@ public class Order {
 
     public OrderLinks getLinks() {
         return _links;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
     }
 
     public Order(){
