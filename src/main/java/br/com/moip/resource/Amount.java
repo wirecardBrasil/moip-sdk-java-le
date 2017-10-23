@@ -32,6 +32,11 @@ public class Amount {
     public String toString() {
         return new StringBuilder("Amount{")
                 .append("total=").append(total)
+                .append(", fees=").append(fees)
+                .append(", refunds=").append(refunds)
+                .append(", liquid=").append(liquid)
+                .append(", currency='").append(currency)
+                .append('\'')
                 .append('}').toString();
     }
 }
