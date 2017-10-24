@@ -72,4 +72,9 @@ public class BankAccountAPITest {
         assertEquals("BKA-WX44D0AEV2NH", createdBankAccounts.get(3).getId());
     }
 
+    @Play("bankaccounts/delete")
+    @Test
+    public void shouldDeleteBankAccount() {
+    	assertTrue(api.delete("MPA-E0BAC6D15696"));
+    }
 }
