@@ -73,6 +73,14 @@ public class Client {
         return doRequest("POST", path, object, type, contentType);
     }
 
+    public <T> T put(final String path, final Object object, final Class<T> type) {
+        return doRequest("PUT", path, object, type, ContentType.APPLICATION_JSON);
+    }
+
+    public <T> T put(final String path, final Object object, final Class<T> type, ContentType contentType) {
+        return doRequest("PUT", path, object, type, contentType);
+    }
+
     public <T> T get(String path, Class<T> type) {
         return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON);
     }

@@ -72,6 +72,28 @@ public class BankAccountAPITest {
         assertEquals("BKA-WX44D0AEV2NH", createdBankAccounts.get(3).getId());
     }
 
+    @Play("bankaccounts/update")
+    @Test
+    public void shouldUpdateBankAccount() {
+    	BankAccount createdBankAccount = api.update("MPA-E0BAC6D15696", 
+			new BankAccountRequest()
+			.bankNumber("237")
+            .agencyNumber("12345")
+            .agencyCheckNumber("8")
+            .accountNumber("12345678")
+            .accountCheckNumber("8")
+            .checking()
+            .holder(
+        		new HolderRequest()
+                .fullname("Demo Moip")
+                .taxDocument(
+            		TaxDocumentRequest.cpf("62213453322")
+                )
+            )
+		);
+    	assertTrue(createdBankAccount.getId().startsWith("MPA-"));
+    }
+    
     @Play("bankaccounts/delete")
     @Test
     public void shouldDeleteBankAccount() {

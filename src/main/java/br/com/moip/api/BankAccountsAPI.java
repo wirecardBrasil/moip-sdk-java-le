@@ -30,6 +30,10 @@ public class BankAccountsAPI {
         return Arrays.asList(bankAccounts);
     }
     
+    public BankAccount update(final String id, final BankAccountRequest bankAccountRequest) {
+    	return client.put(String.format("/v2/bankaccounts/%s", id), bankAccountRequest, BankAccount.class);
+    }
+    
     public Boolean delete(final String id) {
     	try {
 	    	client.delete(String.format("/v2/bankaccounts/%s", id), BankAccount.class);
