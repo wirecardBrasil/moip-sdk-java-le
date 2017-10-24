@@ -59,6 +59,12 @@
     - [Criação](#criação-6)
     - [Consulta](#consulta-7)
     - [Verifica se usuário já possui Conta Moip](#verifica-se-usuário-já-possui-conta-moip)
+  - [Contas Bancárias](#contas-bancarias)
+    - [Criação](#criacao-8)
+    - [Consulta](#consulta-8)
+    - [Exclusão](#deletar-8)
+    - [Atualização](#atualiza-8)
+    - [Listagem](#listar-8)  
   - [Custódia](#custódia)
     - [Pagamento com custódia](#pagamento-com-custódia)
     - [Liberação de custódia](#liberação-de-custódia)
@@ -628,6 +634,56 @@ System.out.println(account);
 ### Verifica se usuário já possui Conta Moip
 ```java
 api.account().checkAccountExists("123.456.798-91");
+```
+
+## Contas Bancárias
+### Criação
+```java
+BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
+    new BankAccountRequest()
+        .bankNumber("237")
+        .agencyNumber("12346")
+        .agencyCheckNumber("0")
+        .accountNumber("12345679")
+        .accountCheckNumber("7")
+        .checking()
+        .holder(new HolderRequest()
+                .fullname("Vagner")
+                .taxDocument(TaxDocumentRequest.cpf("22222222222")
+                )
+        )
+);
+```
+### Consulta
+```java
+BankAccount createdBankAccount = api.get("MPA-E0BAC6D15696");
+```
+### Exclusão
+```java
+api.delete("MPA-E0BAC6D15696")
+```
+### Atualização
+```java
+BankAccount createdBankAccount = api.update("MPA-E0BAC6D15696", 
+	new BankAccountRequest()
+    	.bankNumber("237")
+        .agencyNumber("12345")
+        .agencyCheckNumber("8")
+        .accountNumber("12345678")
+        .accountCheckNumber("8")
+        .checking()
+        .holder(
+    		new HolderRequest()
+            .fullname("Demo Moip")
+            .taxDocument(
+        		TaxDocumentRequest.cpf("62213453322")
+            )
+        )
+);
+```
+### Listagem
+```java
+List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
 ```
 
 ## Custódia
