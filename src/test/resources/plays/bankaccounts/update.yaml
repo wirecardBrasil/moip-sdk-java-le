@@ -2,7 +2,7 @@
 interactions:
 -
   request:
-    uri: /v2/bankaccounts/MPA-E0BAC6D15696
+    uri: /v2/bankaccounts/BKA-E0BAC6D15696
     headers:
       "Content-Type": application/json
       Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
@@ -12,4 +12,4 @@ interactions:
     headers:
       "Content-Type": application/json
     body: |
-        { "id": "MPA-E0BAC6D15696","agencyNumber": 12345,"holder": {"taxDocument": {"number": "622.134.533-22","type": "CPF"},"fullname": "Demo Moip"},"accountNumber": 12345678,"status": "NOT_VERIFIED","createdAt": "2015-10-29T15:50:27.746-02:00","accountCheckNumber": "8","_links": {"self": {"href": "https://sandbox.moip.com.br/v2/accounts/MPA-8307EF11B83E/bankaccounts"}},"bankName": "BANCO BRADESCO S.A.","type": "CHECKING","agencyCheckNumber": "8","bankNumber": "237"}
+        { "id": "BKA-E0BAC6D15696","agencyNumber": 12345,"holder": {"taxDocument": {"number": "622.134.533-22","type": "CPF"},"fullname": "Demo Moip"},"accountNumber": 12345678,"status": "NOT_VERIFIED","createdAt": "2015-10-29T15:50:27.746-02:00","accountCheckNumber": "8","_links": {"self": {"href": "https://sandbox.moip.com.br/v2/accounts/MPA-8307EF11B83E/bankaccounts"}},"bankName": "BANCO BRADESCO S.A.","type": "CHECKING","agencyCheckNumber": "8","bankNumber": "237"}
