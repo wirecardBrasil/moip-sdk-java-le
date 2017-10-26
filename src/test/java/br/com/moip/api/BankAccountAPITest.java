@@ -36,19 +36,19 @@ public class BankAccountAPITest {
     @Test
     public void shouldCreateBankAccount() {
 
-        BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
-                new BankAccountRequest()
-                        .bankNumber("237")
-                        .agencyNumber("12346")
-                        .agencyCheckNumber("0")
-                        .accountNumber("12345679")
-                        .accountCheckNumber("7")
-                        .checking()
-                        .holder(new HolderRequest()
-                                .fullname("Vagner")
-                                .taxDocument(TaxDocumentRequest.cpf("22222222222")
-                                )
-                        )
+        BankAccount createdBankAccount = api.create("BKA-E0BAC6D15696",
+    		new BankAccountRequest()
+            	.bankNumber("237")
+                .agencyNumber("12346")
+                .agencyCheckNumber("0")
+                .accountNumber("12345679")
+                .accountCheckNumber("7")
+                .checking()
+                .holder(new HolderRequest()
+            		.fullname("Vagner")
+                    .taxDocument(TaxDocumentRequest.cpf("22222222222")
+                )
+            )
         );
         assertTrue(createdBankAccount.getId().startsWith("BKA-"));
     }
@@ -64,7 +64,7 @@ public class BankAccountAPITest {
     @Play("bankaccounts/getlist")
     @Test
     public void shouldGetAccountList() {
-        List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
+        List<BankAccount> createdBankAccounts = api.getList("BKA-E0BAC6D15696");
         assertEquals(4, createdBankAccounts.size());
         assertEquals("BKA-P9O93Z6PKUTI", createdBankAccounts.get(0).getId());
         assertEquals("BKA-W2WWYEI9GKG1", createdBankAccounts.get(1).getId());
@@ -75,7 +75,7 @@ public class BankAccountAPITest {
     @Play("bankaccounts/update")
     @Test
     public void shouldUpdateBankAccount() {
-    	BankAccount createdBankAccount = api.update("MPA-E0BAC6D15696", 
+    	BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696", 
 			new BankAccountRequest()
 			.bankNumber("237")
             .agencyNumber("12345")
@@ -91,12 +91,12 @@ public class BankAccountAPITest {
                 )
             )
 		);
-    	assertTrue(createdBankAccount.getId().startsWith("MPA-"));
+    	assertTrue(createdBankAccount.getId().startsWith("BKA-"));
     }
     
     @Play("bankaccounts/delete")
     @Test
     public void shouldDeleteBankAccount() {
-    	assertTrue(api.delete("MPA-E0BAC6D15696"));
+    	assertTrue(api.delete("BKA-E0BAC6D15696"));
     }
 }
