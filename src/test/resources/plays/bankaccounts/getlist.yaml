@@ -2,7 +2,7 @@
 interactions:
 -
   request:
-    uri: /v2/accounts/MPA-E0BAC6D15696/bankaccounts
+    uri: /v2/accounts/BKA-E0BAC6D15696/bankaccounts
     headers:
       "Content-Type": application/json
       Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
