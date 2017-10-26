@@ -36,7 +36,7 @@ public class BankAccountAPITest {
     @Test
     public void shouldCreateBankAccount() {
 
-        BankAccount createdBankAccount = api.create("BKA-E0BAC6D15696",
+        BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
     		new BankAccountRequest()
             	.bankNumber("237")
                 .agencyNumber("12346")
