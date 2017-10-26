@@ -639,7 +639,7 @@ api.account().checkAccountExists("123.456.798-91");
 ## Contas Bancárias
 ### Criação
 ```java
-BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
+BankAccount createdBankAccount = api.create("BKA-E0BAC6D15696",
     new BankAccountRequest()
         .bankNumber("237")
         .agencyNumber("12346")
@@ -656,15 +656,15 @@ BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
 ```
 ### Consulta
 ```java
-BankAccount createdBankAccount = api.get("MPA-E0BAC6D15696");
+BankAccount createdBankAccount = api.get("BKA-E0BAC6D15696");
 ```
 ### Exclusão
 ```java
-api.delete("MPA-E0BAC6D15696")
+api.delete("BKA-E0BAC6D15696")
 ```
 ### Atualização
 ```java
-BankAccount createdBankAccount = api.update("MPA-E0BAC6D15696", 
+BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696", 
 	new BankAccountRequest()
     	.bankNumber("237")
         .agencyNumber("12345")
@@ -683,7 +683,7 @@ BankAccount createdBankAccount = api.update("MPA-E0BAC6D15696",
 ```
 ### Listagem
 ```java
-List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
+List<BankAccount> createdBankAccounts = api.getList("BKA-E0BAC6D15696");
 ```
 
 ## Custódia
