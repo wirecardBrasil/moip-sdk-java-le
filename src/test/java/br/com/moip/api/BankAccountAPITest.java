@@ -37,7 +37,7 @@ public class BankAccountAPITest {
     public void shouldCreateBankAccount() {
 
         BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
-    		new BankAccountRequest()
+            new BankAccountRequest()
             	.bankNumber("237")
                 .agencyNumber("12346")
                 .agencyCheckNumber("0")
@@ -58,7 +58,6 @@ public class BankAccountAPITest {
     public void shouldGetOneAccount() {
         BankAccount createdBankAccount = api.get("BKA-P9O93Z6PKUTI");
         assertEquals("BKA-P9O93Z6PKUTI", createdBankAccount.getId());
-
     }
 
     @Play("bankaccounts/getlist")
@@ -75,21 +74,21 @@ public class BankAccountAPITest {
     @Play("bankaccounts/update")
     @Test
     public void shouldUpdateBankAccount() {
-    	BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696", 
-			new BankAccountRequest()
-			.bankNumber("237")
-            .agencyNumber("12345")
-            .agencyCheckNumber("8")
-            .accountNumber("12345678")
-            .accountCheckNumber("8")
-            .checking()
-            .holder(
-        		new HolderRequest()
-                .fullname("Demo Moip")
-                .taxDocument(
-            		TaxDocumentRequest.cpf("62213453322")
+    	BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696",
+            new BankAccountRequest()
+                .bankNumber("237")
+                .agencyNumber("12345")
+                .agencyCheckNumber("8")
+                .accountNumber("12345678")
+                .accountCheckNumber("8")
+                .checking()
+                .holder(
+                    new HolderRequest()
+                    .fullname("Demo Moip")
+                    .taxDocument(
+                        TaxDocumentRequest.cpf("62213453322")
+                    )
                 )
-            )
 		);
     	assertTrue(createdBankAccount.getId().startsWith("BKA-"));
     }

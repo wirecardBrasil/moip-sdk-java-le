@@ -639,7 +639,7 @@ api.account().checkAccountExists("123.456.798-91");
 ## Contas Bancárias
 ### Criação
 ```java
-BankAccount createdBankAccount = api.create("BKA-E0BAC6D15696",
+BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
     new BankAccountRequest()
         .bankNumber("237")
         .agencyNumber("12346")
@@ -648,9 +648,8 @@ BankAccount createdBankAccount = api.create("BKA-E0BAC6D15696",
         .accountCheckNumber("7")
         .checking()
         .holder(new HolderRequest()
-                .fullname("Vagner")
-                .taxDocument(TaxDocumentRequest.cpf("22222222222")
-                )
+            .fullname("Vagner")
+            .taxDocument(TaxDocumentRequest.cpf("22222222222"))
         )
 );
 ```
@@ -660,7 +659,7 @@ BankAccount createdBankAccount = api.get("BKA-E0BAC6D15696");
 ```
 ### Exclusão
 ```java
-api.delete("BKA-E0BAC6D15696")
+api.delete("BKA-E0BAC6D15696");
 ```
 ### Atualização
 ```java
@@ -676,11 +675,12 @@ BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696",
     		new HolderRequest()
             .fullname("Demo Moip")
             .taxDocument(
-        		TaxDocumentRequest.cpf("62213453322")
+        	    TaxDocumentRequest.cpf("62213453322")
             )
         )
 );
 ```
+
 ### Listagem
 ```java
 List<BankAccount> createdBankAccounts = api.getList("BKA-E0BAC6D15696");

@@ -38,9 +38,9 @@ public class BankAccountsAPI {
     	try {
             client.delete(String.format("/v2/bankaccounts/%s", id), BankAccount.class);
 	    	
-	    	return true;
+            return true;
     	} catch (ValidationException e) {
-    		if (e.getResponseCode() != 404) {
+    	    if (e.getResponseCode() != 404) {
                 throw new ValidationException(e.getResponseCode(), e.getResponseStatus(), e.getError());
             }
     	}
