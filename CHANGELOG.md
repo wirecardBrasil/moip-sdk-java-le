@@ -1,3 +1,16 @@
+<a name="v3.4.0"></a>
+# [](https://github.com/moip/moip-sdk-java/compare/v3.3.0...v3.4.0) (2017-11-08)
+
+
+### Features
+
+* **Order:** adding OrderStatus to Order object ([71a42d8](https://github.com/moip/moip-sdk-java/commit/71a42d8))
+* **CreditCardRequest:** Add id property, getter and setter ([bb59c12](https://github.com/moip/moip-sdk-java/commit/bb59c12))
+* **Amount:** Added fees, refunds, liquid, currency properties and getters for them ([e90fce0](https://github.com/moip/moip-sdk-java/commit/e90fce0))
+* **BankAccount** Add method to delete a bank account. ([113ff51](https://github.com/moip/moip-sdk-java/commit/113ff51))
+* **BankAccount** Add method to update a bank account. ([b99fd12](https://github.com/moip/moip-sdk-java/commit/b99fd12))
+
+
 <a name="v3.3.0"></a>
 # [](https://github.com/moip/moip-sdk-java/compare/v3.2.0...v3.3.0) (2017-10-10)
 
