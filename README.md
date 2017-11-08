@@ -683,7 +683,7 @@ BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696",
 
 ### Listagem
 ```java
-List<BankAccount> createdBankAccounts = api.getList("BKA-E0BAC6D15696");
+List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
 ```
 
 ## Custódia
