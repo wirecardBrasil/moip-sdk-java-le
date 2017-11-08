@@ -37,18 +37,18 @@ public class BankAccountAPITest {
     public void shouldCreateBankAccount() {
 
         BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
-                new BankAccountRequest()
-                        .bankNumber("237")
-                        .agencyNumber("12346")
-                        .agencyCheckNumber("0")
-                        .accountNumber("12345679")
-                        .accountCheckNumber("7")
-                        .checking()
-                        .holder(new HolderRequest()
-                                .fullname("Vagner")
-                                .taxDocument(TaxDocumentRequest.cpf("22222222222")
-                                )
-                        )
+            new BankAccountRequest()
+            	.bankNumber("237")
+                .agencyNumber("12346")
+                .agencyCheckNumber("0")
+                .accountNumber("12345679")
+                .accountCheckNumber("7")
+                .checking()
+                .holder(new HolderRequest()
+            		.fullname("Vagner")
+                    .taxDocument(TaxDocumentRequest.cpf("22222222222")
+                )
+            )
         );
         assertTrue(createdBankAccount.getId().startsWith("BKA-"));
     }
@@ -58,7 +58,6 @@ public class BankAccountAPITest {
     public void shouldGetOneAccount() {
         BankAccount createdBankAccount = api.get("BKA-P9O93Z6PKUTI");
         assertEquals("BKA-P9O93Z6PKUTI", createdBankAccount.getId());
-
     }
 
     @Play("bankaccounts/getlist")
@@ -72,4 +71,31 @@ public class BankAccountAPITest {
         assertEquals("BKA-WX44D0AEV2NH", createdBankAccounts.get(3).getId());
     }
 
+    @Play("bankaccounts/update")
+    @Test
+    public void shouldUpdateBankAccount() {
+    	BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696",
+            new BankAccountRequest()
+                .bankNumber("237")
+                .agencyNumber("12345")
+                .agencyCheckNumber("8")
+                .accountNumber("12345678")
+                .accountCheckNumber("8")
+                .checking()
+                .holder(
+                    new HolderRequest()
+                    .fullname("Demo Moip")
+                    .taxDocument(
+                        TaxDocumentRequest.cpf("62213453322")
+                    )
+                )
+		);
+    	assertTrue(createdBankAccount.getId().startsWith("BKA-"));
+    }
+    
+    @Play("bankaccounts/delete")
+    @Test
+    public void shouldDeleteBankAccount() {
+    	assertTrue(api.delete("BKA-E0BAC6D15696"));
+    }
 }

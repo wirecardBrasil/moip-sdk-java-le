@@ -11,6 +11,7 @@ import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.request.CheckoutPreferencesRequest;
 import br.com.moip.request.InstallmentRequest;
 import br.com.moip.resource.Order;
+import br.com.moip.resource.OrderStatus;
 import br.com.moip.response.OrderListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
@@ -48,6 +49,7 @@ public class OrderAPITest {
         Order order = api.get("ORD-HCOWQ2QJKTAT");
 
         assertEquals("ORD-HCOWQ2QJKTAT", order.getId());
+        assertEquals(OrderStatus.CREATED, order.getStatus());
     }
 
     @Play("orders/create")
