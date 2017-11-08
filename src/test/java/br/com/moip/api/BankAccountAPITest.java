@@ -63,7 +63,7 @@ public class BankAccountAPITest {
     @Play("bankaccounts/getlist")
     @Test
     public void shouldGetAccountList() {
-        List<BankAccount> createdBankAccounts = api.getList("BKA-E0BAC6D15696");
+        List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
         assertEquals(4, createdBankAccounts.size());
         assertEquals("BKA-P9O93Z6PKUTI", createdBankAccounts.get(0).getId());
         assertEquals("BKA-W2WWYEI9GKG1", createdBankAccounts.get(1).getId());
