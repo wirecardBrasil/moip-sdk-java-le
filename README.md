@@ -747,7 +747,7 @@ Connect connect = api.connect().authorize(new ConnectRequest()
     .clientSecret("e2bd3951b87e469eb0f2c2b781a753d5")
     .code("8870af1372ada7a18fdff4fa4ca1a60f4d542272")
     .redirectUri("http://localhost/moip-sdk/callback")
-    .grantType(GrantType.authorization_code)
+    .grantType(GrantType.AUTHORIZATION_CODE)
 );
 System.out.println(connect);
 ```
