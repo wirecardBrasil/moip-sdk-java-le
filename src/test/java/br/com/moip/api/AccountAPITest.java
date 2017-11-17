@@ -16,9 +16,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.Assert.*;
 
 public class AccountAPITest {
 
@@ -101,6 +100,8 @@ public class AccountAPITest {
             )
         );
 
+        assertNotNull(account.getId());
+        assertNotNull(account.getAccessToken());
         assertEquals("dev.moip@labs8489.moip.com.br", account.getEmail().getAddress());
         assertEquals("https://dev.moip.com.br", account.getSite());
         assertEquals(Account.Type.MERCHANT, account.getType());
@@ -113,6 +114,7 @@ public class AccountAPITest {
         assertEquals("434322344", account.getPerson().getIdentityDocument().getNumber());
         assertEquals("965213244", account.getPerson().getPhone().getNumber());
         assertEquals("975142244", account.getPerson().getAlternativePhones().get(0).getNumber());
+        assertNotNull(account.get_links());
     }
 
     @Play("accounts/create_with_company")
@@ -178,6 +180,8 @@ public class AccountAPITest {
             )
         );
 
+        assertNotNull(account.getId());
+        assertNotNull(account.getAccessToken());
         assertEquals("dev.moip@labs52453.moip.com.br", account.getEmail().getAddress());
         assertEquals("4530", account.getCompany().getAddress().getStreetNumber());
         assertEquals("953.394.633-46", account.getPerson().getTaxDocument().getNumber());
@@ -187,5 +191,6 @@ public class AccountAPITest {
         assertEquals("2000-01-01", account.getCompany().getOpeningDate().getFormatedDate());
         assertEquals("975142244", account.getCompany().getPhone().getNumber());
         assertEquals("35", account.getBusinessSegment().getId());
+        assertNotNull(account.get_links());
     }
 }

@@ -1,0 +1,13 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/fundinginstruments/CRC-NMNW6VIY2L0T
+    headers:
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: DELETE
+  response:
+    status: 200
+    headers:
+      "Content-Type": application/json
+    body: |

@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/accounts/MPA-E0BAC6D15696/bankaccounts
+    headers:
+      "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: POST
+  response:
+    status: 200
+    headers:
+      "Content-Type": application/json
+    body: |
+      {"id":"BKA-P9O93Z6PKUTI","agencyNumber":"12345","holder":{"taxDocument":{"number":"768.264.562-81","type":"CPF"},"fullname":"Teste labs"},"accountNumber":"12345678","status":"NOT_VERIFIED","createdAt":"2016-02-03T12:06:10.000-02:00","accountCheckNumber":"7","_links":{"self":{"href":"https://sandbox.moip.com.br//accounts/BKA-P9O93Z6PKUTI/bankaccounts"}},"bankName":"BANCO BRADESCO S.A.","type":"CHECKING","agencyCheckNumber":"0","bankNumber":"237"}

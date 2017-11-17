@@ -1,0 +1,40 @@
+!play
+interactions:
+-
+  request:
+    uri: /200
+    headers:
+      "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: GET
+  response:
+    status: 200
+    headers:
+    body: |
+        {}
+-
+  request:
+    uri: /400
+    method: GET
+  response:
+    status: 400
+    headers:
+    body: |
+        {
+          "errors": [
+            {
+              "code": "ORD-001",
+              "path": "ownId",
+              "description": "É necessario informar seu identificador próprio"
+            }
+          ]
+        }
+-
+  request:
+    uri: /500
+    method: GET
+  response:
+    status: 500
+    headers:
+    body: |
+        {}

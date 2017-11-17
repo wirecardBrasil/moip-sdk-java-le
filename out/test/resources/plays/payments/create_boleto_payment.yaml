@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/orders/ORD-GOHHIF4Z6PLV/payments
+    headers:
+      "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: POST
+  response:
+    status: 200
+    headers:
+      "Content-Type": application/json
+    body: |
+      {"id":"PAY-0UQ9BTLOXCRM","status":"WAITING","amount":{"refunds":0,"fees":329,"liquid":9671,"total":10000,"currency":"BRL"},"installmentCount":1,"fundingInstrument":{"boleto":{"lineCode":"23793.39126 60000.049464 56001.747908 8 84350000010000","expirationDate":"2020-11-10","instructionLines":{"second":"Segunda linha","third":"Terceira linha","first":"Primeira linha"}},"method":"BOLETO"},"fees":[{"type":"TRANSACTION","amount":329}],"events":[{"createdAt":"2015-12-23T15:51:45-0200","type":"PAYMENT.CREATED"},{"createdAt":"2015-12-23T15:51:45-0200","type":"PAYMENT.WAITING"}],"_links":{"order":{"title":"ORD-GOHHIF4Z6PLV","href":"https://sandbox.moip.com.br/v2/orders/ORD-GOHHIF4Z6PLV"},"payBoleto":{"redirectHref":"https://checkout-sandbox.moip.com.br/boleto/PAY-0UQ9BTLOXCRM","printHref":"https://checkout-sandbox.moip.com.br/boleto/PAY-0UQ9BTLOXCRM/print"},"self":{"href":"https://sandbox.moip.com.br/v2/payments/PAY-0UQ9BTLOXCRM"}},"createdAt":"2015-12-23T15:51:45-0200","updatedAt":"2015-12-23T15:51:45-0200"}
