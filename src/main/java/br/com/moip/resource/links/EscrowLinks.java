@@ -41,9 +41,9 @@ public class EscrowLinks {
     @Override
     public String toString() {
         return new StringBuilder("EscrowLinks{")
-                .append("self='").append(self)
-                .append("order='").append(order)
-                .append("payment='").append(payment)
-                .append('}').toString();
+            .append("self='").append(self)
+            .append(", order='").append(order)
+            .append(", payment='").append(payment)
+            .append('}').toString();
     }
 }

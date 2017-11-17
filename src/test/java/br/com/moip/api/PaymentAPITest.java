@@ -132,6 +132,9 @@ public class PaymentAPITest {
         assertEquals("https://moip.com.br/", createdPayment.getFundingInstrument().getOnlineBankDebit().getReturnUri());
         assertEquals(FundingInstrument.Method.ONLINE_BANK_DEBIT, createdPayment.getFundingInstrument().getMethod());
         assertTrue(createdPayment.getId().startsWith("PAY-FZJSASNSUOB7"));
+        assertEquals("https://aws-sand-gapi-01c.moip.in/v2/payments/PAY-FZJSASNSUOB7", createdPayment.getLinks().self());
+        assertEquals("https://aws-sand-gapi-01c.moip.in/v2/orders/ORD-0DE8DP0K3E4Q", createdPayment.getLinks().orderLink());
+        assertEquals("https://checkout-sandbox.moip.com.br/debit/itau/PAY-FZJSASNSUOB7", createdPayment.getLinks().payOnlineBankDebitLink());
     }
 
     @Play("payments/create_boleto_payment")
@@ -160,6 +163,8 @@ public class PaymentAPITest {
         assertEquals("Segunda linha", createdPayment.getFundingInstrument().getBoleto().getInstructionLines().getSecond());
         assertEquals("Terceira linha", createdPayment.getFundingInstrument().getBoleto().getInstructionLines().getThird());
         assertEquals(FundingInstrument.Method.BOLETO, createdPayment.getFundingInstrument().getMethod());
+        assertEquals("https://checkout-sandbox.moip.com.br/boleto/PAY-0UQ9BTLOXCRM", createdPayment.getLinks().payBoletoLink());
+        assertEquals("https://checkout-sandbox.moip.com.br/boleto/PAY-0UQ9BTLOXCRM/print", createdPayment.getLinks().payBoletoPrintLink());
     }
 
     @Play("payments/create_mpos_credit_payment")
