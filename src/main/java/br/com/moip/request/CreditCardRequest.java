@@ -2,6 +2,7 @@ package br.com.moip.request;
 
 public class CreditCardRequest {
 
+    private String id;
     private String hash;
     private String number;
     private String expirationMonth;
@@ -9,6 +10,16 @@ public class CreditCardRequest {
     private Integer cvc;
     private Boolean store;
     private HolderRequest holder;
+
+    public String getId() {
+        return id;
+    }
+
+    public CreditCardRequest id(final String id) {
+        this.id = id;
+
+        return this;
+    }
 
     public String getHash() {
         return hash;

@@ -61,6 +61,24 @@ public class Person {
         return taxDocument;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Person{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", taxDocument=").append(taxDocument);
+        sb.append(", identityDocument=").append(identityDocument);
+        sb.append(", birthDate=").append(birthDate);
+        sb.append(", nationality='").append(nationality).append('\'');
+        sb.append(", birthPlace='").append(birthPlace).append('\'');
+        sb.append(", parentsName=").append(parentsName);
+        sb.append(", phone=").append(phone);
+        sb.append(", alternativePhones=").append(alternativePhones);
+        sb.append(", address=").append(address);
+        sb.append('}');
+        return sb.toString();
+    }
+
     public class ParentsName {
         private String mother;
         private String father;
@@ -83,21 +101,4 @@ public class Person {
         }
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("Person{");
-        sb.append("name='").append(name).append('\'');
-        sb.append(", lastName='").append(lastName).append('\'');
-        sb.append(", taxDocument=").append(taxDocument);
-        sb.append(", identityDocument=").append(identityDocument);
-        sb.append(", birthDate=").append(birthDate);
-        sb.append(", nationality='").append(nationality).append('\'');
-        sb.append(", birthPlace='").append(birthPlace).append('\'');
-        sb.append(", parentsName=").append(parentsName);
-        sb.append(", phone=").append(phone);
-        sb.append(", alternativePhones=").append(alternativePhones);
-        sb.append(", address=").append(address);
-        sb.append('}');
-        return sb.toString();
-    }
 }

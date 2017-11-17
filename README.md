@@ -18,38 +18,53 @@
   - [Pedidos](#pedidos)
     - [Criação](#criação)
     - [Consulta](#consulta)
+      - [Pedido Específico](#pedido-específico)
+      - [Todos os Pedidos](#todos-os-pedidos)
+        - [Sem Filtro](#sem-filtro)
+        - [Com Filtros](#com-filtros)
+        - [Com Paginação](#com-paginação)
+        - [Consulta Valor Específico](#consulta-valor-específico)
   - [Pagamentos](#pagamentos)
     - [Criação](#criação-1)
       - [Cartão de Crédito](#cartão-de-crédito)
       - [Boleto](#boleto)
+    - [Consulta](#consulta-1)
     - [Capturar pagamento pré-autorizado](#capturar-pagamento-pré-autorizado)
     - [Cancelar pagamento pré-autorizado](#cancelar-pagamento-pré-autorizado)
   - [Clientes](#clientes)
     - [Criação](#criação-2)
-    - [Consulta](#consulta-1)
+    - [Consulta](#consulta-2)
     - [Adicionar cartão de crédito](#adicionar-cartão-de-crédito)
     - [Deletar cartão de crédito](#deletar-cartão-de-crédito)
   - [Preferências de Notificação](#preferências-de-notificação)
     -  [Criação](#criação-3)
-    -  [Consulta](#consulta-2)
+    -  [Consulta](#consulta-3)
     -  [Exclusão](#exclusão)
     -  [Listagem](#listagem)
   - [Reembolsos](#reembolsos)
     - [Pedido](#pedido)
     - [Pagamento](#pagamento)
-    - [Consulta](#consulta-3)
+    - [Consulta](#consulta-4)
   - [Multipedidos](#multipedidos)
     - [Criação](#criação-4)
-    - [Consulta](#consulta-4)
+    - [Consulta](#consulta-5)
   - [Multipagamentos](#multipagamentos)
     - [Criação](#criação-5)
       - [Cartão de Crédito](#cartão-de-crédito-1)
       - [Boleto Bancário](#boleto-bancário)
-    - [Consulta](#consulta-5)
+    - [Consulta](#consulta-6)
+    - [Capturar multipagamento pré-autorizado](#capturar-multipagamento-pré-autorizado)
+    - [Cancelar multipagamento pré-autorizado](#cancelar-multipagamento-pré-autorizado)
   - [Conta Moip](#conta-moip)
     - [Criação](#criação-6)
-    - [Consulta](#consulta-6)
+    - [Consulta](#consulta-7)
     - [Verifica se usuário já possui Conta Moip](#verifica-se-usuário-já-possui-conta-moip)
+  - [Contas Bancárias](#contas-bancárias)
+    - [Criação](#criação-7)
+    - [Consulta](#consulta-8)
+    - [Exclusão](#exclusão-1)
+    - [Atualização](#atualização)
+    - [Listagem](#listagem-1)  
   - [Custódia](#custódia)
     - [Pagamento com custódia](#pagamento-com-custódia)
     - [Liberação de custódia](#liberação-de-custódia)
@@ -69,7 +84,7 @@ Adicionar no seu pom.xml:
 <dependency>
     <groupId>br.com.moip</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>2.1.2</version>
+    <version>3.4.0</version>
 </dependency>
 
 ```
@@ -123,10 +138,44 @@ Order createdOrder = api.order().create(new OrderRequest()
 ```
 
 ### Consulta
+#### Pedido Específico
 ```java
 String orderId = "ORD-HPMZSOM611M2";
 Order order = api.order().get(orderId);
 System.out.println(order.toString());
+```
+
+#### Todos os Pedidos
+##### Sem Filtro
+```java
+OrderListResponse orders = api.order().list();
+```
+
+##### Com Filtros
+```java
+Filters filters = new Filters()
+            .between("amount", "1000", "10000")
+            .in("status", status);
+OrderListResponse orders = api.order().list(filters);
+```
+
+##### Com Paginação
+```java
+OrderListResponse orders = api.order().list(new Pagination(10,0));
+```
+
+##### Consulta Valor Específico
+```java
+OrderListResponse orders = api.order().list("josé silva");
+```
+
+> Também é possível usar paginação, filtros e consulta de valor específico juntos
+
+```java
+Filters filters = new Filters()
+            .between("amount", "1000", "10000")
+            .in("status", status);
+OrderListResponse orders = api.order().list(new Pagination(10,0), filters, "josé silva");
 ```
 
 ## Pagamentos
@@ -168,6 +217,22 @@ Payment createdPayment = api.payment().create(new PaymentRequest()
     )
   )
 );
+```
+
+> Para capturar links do boleto:
+
+```java
+// Link do Boleto
+createdPayment.getLinks().payBoletoLink();
+
+// Link para impressão do boleto
+createdPayment.getLinks().payBoletoPrintLink();
+```
+
+### Consulta
+```java
+Payment payment = api.payment().get(PAYMENT_ID);
+System.out.println(payment.toString());
 ```
 
 ### Capturar pagamento pré-autorizado
@@ -484,6 +549,18 @@ Multipayment multipayment = api.multipayment().get("MPY-OUGA0AHH2BOF");
 System.out.println(multipayment);
 ```
 
+### Capturar multipagamento pré-autorizado
+```java
+Multipayment capturedMultipayment = api.multipayment().capture("MPY-UGZLJMVJ37LX");
+System.out.println(capturedMultipayment);
+```
+
+### Cancelar multipagamento pré-autorizado
+```java
+Multipayment cancelledMultipayment = api.multipayment().cancelPreAuthorized("MPY-YDNM3U17OSDD");
+System.out.println(cancelledMultipayment);
+```
+
 ## Conta Moip
 ### Criação
 ```java
@@ -557,6 +634,56 @@ System.out.println(account);
 ### Verifica se usuário já possui Conta Moip
 ```java
 api.account().checkAccountExists("123.456.798-91");
+```
+
+## Contas Bancárias
+### Criação
+```java
+BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
+    new BankAccountRequest()
+        .bankNumber("237")
+        .agencyNumber("12346")
+        .agencyCheckNumber("0")
+        .accountNumber("12345679")
+        .accountCheckNumber("7")
+        .checking()
+        .holder(new HolderRequest()
+            .fullname("Vagner")
+            .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+        )
+);
+```
+### Consulta
+```java
+BankAccount createdBankAccount = api.get("BKA-E0BAC6D15696");
+```
+### Exclusão
+```java
+api.delete("BKA-E0BAC6D15696");
+```
+### Atualização
+```java
+BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696", 
+	new BankAccountRequest()
+    	.bankNumber("237")
+        .agencyNumber("12345")
+        .agencyCheckNumber("8")
+        .accountNumber("12345678")
+        .accountCheckNumber("8")
+        .checking()
+        .holder(
+    		new HolderRequest()
+            .fullname("Demo Moip")
+            .taxDocument(
+        	    TaxDocumentRequest.cpf("62213453322")
+            )
+        )
+);
+```
+
+### Listagem
+```java
+List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
 ```
 
 ## Custódia

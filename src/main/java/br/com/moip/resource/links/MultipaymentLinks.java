@@ -14,8 +14,8 @@ public class MultipaymentLinks {
     @Override
     public String toString() {
         return new StringBuilder("MultipaymentLinks{")
-                .append("self='").append(self)
-                .append("multiorder='").append(multiorder)
+                .append("self=").append(self)
+                .append(", multiorder=").append(multiorder)
                 .append('}').toString();
     }
 }

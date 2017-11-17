@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 group = 'br.com.moip'
 archivesBaseName = "java-sdk"
-version = '2.1.2-SNAPSHOT'
+version = '3.4.0'
 
 description = "Moip v2 SDK"
 
@@ -19,6 +19,7 @@ dependencies {
     compile group: "org.slf4j", name: "slf4j-api", version: "1.7.12"
     compile group: "com.google.code.gson", name: "gson", version: "2.4"
     compile group: "org.apache.httpcomponents", name: "httpclient", version: "4.5.3"
+    compile group: "org.apache.commons", name: "commons-lang3", version: "3.6"
 
     testCompile group: "org.slf4j", name: "slf4j-simple", version: "1.7.12"
     testCompile group: "com.github.rodrigosaito", name: "mockwebserver-player", version: "1.1.0"
