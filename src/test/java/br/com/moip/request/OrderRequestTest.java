@@ -91,7 +91,7 @@ public class OrderRequestTest extends RequestTest {
                 		.currency("BRL")
                 		.subtotals(new SubtotalsRequest()
                 			.shipping(8050)
-            				.addiction(1050)
+            				.addition(1050)
             				.discount(2055)
                 		))
                 .addItem("Nome do produto", 1, "Mais info...", 10000)

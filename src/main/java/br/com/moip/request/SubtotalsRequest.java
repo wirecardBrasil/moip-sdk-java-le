@@ -3,7 +3,7 @@ package br.com.moip.request;
 public class SubtotalsRequest {
 	
 	private Integer shipping;
-	private Integer addiction;
+	private Integer addition;
 	private Integer discount;
 	
 	public Integer getShipping() {
@@ -16,12 +16,12 @@ public class SubtotalsRequest {
 		return this;
 	}
 	
-	public Integer getAddiction() {
-		return addiction;
+	public Integer getaddition() {
+		return addition;
 	}
 	
-	public SubtotalsRequest addiction(Integer addiction) {
-		this.addiction = addiction;
+	public SubtotalsRequest addition(Integer addition) {
+		this.addition = addition;
 		
 		return this;
 	}
@@ -40,7 +40,7 @@ public class SubtotalsRequest {
     public String toString() {
         return new StringBuilder("SubtotalsRequest{")
                 .append(", shipping=").append(shipping)
-                .append(", addiction=").append(addiction)
+                .append(", addition=").append(addition)
                 .append(", discount=").append(discount)
                 .append('}').toString();
     }
