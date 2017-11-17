@@ -16,7 +16,7 @@ public class SubtotalsRequest {
 		return this;
 	}
 	
-	public Integer getaddition() {
+	public Integer getAddition() {
 		return addition;
 	}
 	
