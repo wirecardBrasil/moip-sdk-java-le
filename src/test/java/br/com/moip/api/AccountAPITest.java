@@ -105,7 +105,9 @@ public class AccountAPITest {
         );
 
         assertNotNull(account.getId());
+        assertEquals("MPA-1E43D791C52A", account.getId());
         assertNotNull(account.getAccessToken());
+        assertEquals("ce2d7ad2b2dc4ed2afe3c72109916459_v2", account.getAccessToken());
         assertEquals("dev.moip@labs8489.moip.com.br", account.getEmail().getAddress());
         assertEquals("https://dev.moip.com.br", account.getSite());
         assertEquals(Account.Type.MERCHANT, account.getType());
@@ -186,7 +188,9 @@ public class AccountAPITest {
         );
 
         assertNotNull(account.getId());
+        assertEquals("MPA-1918EC6A72AC", account.getId());
         assertNotNull(account.getAccessToken());
+        assertEquals("8b48366a69f24c0b9ba73ddab5ca8096_v2", account.getAccessToken());
         assertEquals("dev.moip@labs52453.moip.com.br", account.getEmail().getAddress());
         assertEquals("4530", account.getCompany().getAddress().getStreetNumber());
         assertEquals("953.394.633-46", account.getPerson().getTaxDocument().getNumber());
