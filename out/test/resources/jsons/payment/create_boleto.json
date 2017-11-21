@@ -1,1 +1,0 @@
-{"orderId":"ORD-GOHHIF4Z6PLV","installmentCount":1,"fundingInstrument":{"method":"BOLETO","boleto":{"expirationDate":"2020-11-10","instructionLines":{"first":"Primeira linha","second":"Segunda linha","third":"Terceira linha"},"logoUri":"http://logo.com"},"suppressBoleto":false,"suppressCreditCard":false}}

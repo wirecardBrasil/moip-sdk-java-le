@@ -1,1 +1,0 @@
-{"method":"CREDIT_CARD","creditCard":{"number":"4012001037141112","expirationMonth":"05","expirationYear":"18","cvc":123,"holder":{"fullname":"Jose Portador da Silva","birthdate":"1988-10-10","phone":{"areaCode":"11","number":"55667788"},"taxDocument":{"type":"CPF","number":"22222222222"}}},"suppressBoleto":false,"suppressCreditCard":false}
