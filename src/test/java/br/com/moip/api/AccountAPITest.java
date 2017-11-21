@@ -114,7 +114,7 @@ public class AccountAPITest {
         assertEquals("434322344", account.getPerson().getIdentityDocument().getNumber());
         assertEquals("965213244", account.getPerson().getPhone().getNumber());
         assertEquals("975142244", account.getPerson().getAlternativePhones().get(0).getNumber());
-        assertNotNull(account.get_links());
+        assertNotNull(account.getLinks());
     }
 
     @Play("accounts/create_with_company")
@@ -191,6 +191,6 @@ public class AccountAPITest {
         assertEquals("2000-01-01", account.getCompany().getOpeningDate().getFormatedDate());
         assertEquals("975142244", account.getCompany().getPhone().getNumber());
         assertEquals("35", account.getBusinessSegment().getId());
-        assertNotNull(account.get_links());
+        assertNotNull(account.getLinks());
     }
 }

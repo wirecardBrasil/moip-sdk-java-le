@@ -99,9 +99,9 @@ public class Account {
         this.site = site;
     }
 
-    public AccountLinks get_links() { return _links; }
+    public AccountLinks getLinks() { return _links; }
 
-    public void set_links(AccountLinks links) { this._links = links; }
+    public void setLinks(AccountLinks links) { this._links = links; }
 
     public class AccountLinks {
 
