@@ -119,6 +119,7 @@ public class AccountAPITest {
         assertEquals("965213244", account.getPerson().getPhone().getNumber());
         assertEquals("975142244", account.getPerson().getAlternativePhones().get(0).getNumber());
         assertNotNull(account.getLinks());
+        assertEquals("https://desenvolvedor.moip.com.br/sandbox/AskForNewPassword.do?method=confirm\u0026email=dev.moip%40labs8489.moip.com.br\u0026code=99f009eb1990a96b1d338975211e4109", account.getLinks().getSetPassword().getHref());
     }
 
     @Play("accounts/create_with_company")
@@ -196,5 +197,6 @@ public class AccountAPITest {
         assertEquals("975142244", account.getCompany().getPhone().getNumber());
         assertEquals("35", account.getBusinessSegment().getId());
         assertNotNull(account.getLinks());
+        assertEquals("https://desenvolvedor.moip.com.br/sandbox/AskForNewPassword.do?method=confirm\u0026email=dev.moip%40labs52453.moip.com.br\u0026code=eba4c7ecec76e2af2dac10e81072c17d", account.getLinks().getSetPassword().getHref());
     }
 }
