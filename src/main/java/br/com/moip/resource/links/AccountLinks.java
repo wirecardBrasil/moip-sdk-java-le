@@ -5,13 +5,9 @@ public class AccountLinks {
     private Href self;
     private Href setPassword;
 
-    public Href getSelf() { return self; }
+    public String getSelf() { return self.getHref(); }
 
-    public void setSelf(Href self) { this.self = self; }
-
-    public Href getSetPassword() { return setPassword; }
-
-    public void setSetPassword(Href setPassword) { this.setPassword = setPassword; }
+    public String getSetPassword() { return setPassword.getHref(); }
 
     @Override
     public String toString() {
