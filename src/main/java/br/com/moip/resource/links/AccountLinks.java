@@ -1,6 +1,4 @@
-package br.com.moip.resource;
-
-import br.com.moip.resource.links.Href;
+package br.com.moip.resource.links;
 
 public class AccountLinks {
 

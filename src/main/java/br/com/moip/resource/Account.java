@@ -1,5 +1,7 @@
 package br.com.moip.resource;
 
+import br.com.moip.resource.links.AccountLinks;
+
 public class Account {
 
     private String id;
