@@ -7,20 +7,20 @@ public class Checkout {
     private RedirectHref payBoleto;
     private RedirectHref payOnlineBankDebitItau;
 
-    public RedirectHref getPayCheckout() {
-        return payCheckout;
+    public String getPayCheckout() {
+        return payCheckout.getRedirectHref();
     }
 
-    public RedirectHref getPayCreditCard() {
-        return payCreditCard;
+    public String getPayCreditCard() {
+        return payCreditCard.getRedirectHref();
     }
 
-    public RedirectHref getPayBoleto() {
-        return payBoleto;
+    public String getPayBoleto() {
+        return payBoleto.getRedirectHref();
     }
 
-    public RedirectHref getPayOnlineBankDebitItau() {
-        return payOnlineBankDebitItau;
+    public String getPayOnlineBankDebitItau() {
+        return payOnlineBankDebitItau.getRedirectHref();
     }
 
     @Override

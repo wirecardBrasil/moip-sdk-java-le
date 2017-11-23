@@ -45,9 +45,13 @@ public class Order {
         return checkoutPreferences;
     }
 
+    public void setCheckoutPreferences(CheckoutPreferences checkoutPreferences) { this.checkoutPreferences = checkoutPreferences; }
+
     public OrderLinks getLinks() {
         return _links;
     }
+
+    public void setLinks(OrderLinks _links) { this._links = _links; }
 
     public OrderStatus getStatus() {
         return status;
@@ -76,8 +80,10 @@ public class Order {
                 .append(", amount=").append(amount)
                 .append(", ownId='").append(ownId).append('\'')
                 .append(", items=").append(items)
+                .append(", checkoutPreferences=").append(checkoutPreferences)
                 .append(", customer=").append(customer)
                 .append(", receivers=").append(receivers)
+                .append(", _links=").append(_links)
                 .append('}').toString();
     }
 
