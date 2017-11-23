@@ -13,6 +13,22 @@ public class OrderLinks {
         return checkout;
     }
 
+    public String payCheckout() {
+        return checkout.getPayCheckout().getRedirectHref();
+    }
+
+    public String payCreditCard() {
+        return checkout.getPayCreditCard().getRedirectHref();
+    }
+
+    public String payBoleto() {
+        return checkout.getPayBoleto().getRedirectHref();
+    }
+
+    public String payOnlineBankDebitItau() {
+        return checkout.getPayOnlineBankDebitItau().getRedirectHref();
+    }
+
     @Override
     public String toString() {
         return new StringBuilder("OrderLinks{")
