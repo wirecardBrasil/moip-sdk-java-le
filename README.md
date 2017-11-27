@@ -659,11 +659,11 @@ BankAccount createdBankAccount = api.bankAccount().get("BKA-E0BAC6D15696");
 ```
 ### Exclusão
 ```java
-api.delete("BKA-E0BAC6D15696");
+api.bankAccount().delete("BKA-E0BAC6D15696");
 ```
 ### Atualização
 ```java
-BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696", 
+BankAccount createdBankAccount = api.bankAccount().update("BKA-E0BAC6D15696",
 	new BankAccountRequest()
     	.bankNumber("237")
         .agencyNumber("12345")
@@ -683,7 +683,7 @@ BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696",
 
 ### Listagem
 ```java
-List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
+List<BankAccount> createdBankAccounts = api.bankAccount().getList("MPA-E0BAC6D15696");
 ```
 
 ## Custódia
