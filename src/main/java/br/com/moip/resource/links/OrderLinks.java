@@ -13,9 +13,7 @@ public class OrderLinks {
         return checkout;
     }
 
-    public String payCheckout() {
-        return checkout.getPayCheckout().getRedirectHref();
-    }
+    public String payCheckout() { return checkout.getPayCheckout().getRedirectHref(); }
 
     public String payCreditCard() {
         return checkout.getPayCreditCard().getRedirectHref();

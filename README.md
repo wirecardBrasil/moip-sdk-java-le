@@ -639,7 +639,7 @@ api.account().checkAccountExists("123.456.798-91");
 ## Contas Bancárias
 ### Criação
 ```java
-BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
+BankAccount createdBankAccount = api.bankAccount().create("MPA-E0BAC6D15696",
     new BankAccountRequest()
         .bankNumber("237")
         .agencyNumber("12346")
@@ -655,7 +655,7 @@ BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
 ```
 ### Consulta
 ```java
-BankAccount createdBankAccount = api.get("BKA-E0BAC6D15696");
+BankAccount createdBankAccount = api.bankAccount().get("BKA-E0BAC6D15696");
 ```
 ### Exclusão
 ```java
