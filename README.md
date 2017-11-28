@@ -721,6 +721,11 @@ TransferListResponse transferListResponse = api.list();
 System.out.println(transferListResponse);
 ```
 
+### Reverter transferência
+```java
+Transfer revertTransfer = api.reverse("TRA-B0W5FD5FCADG");
+```
+
 ## Custódia
 ### Pagamento com custódia
 ```java

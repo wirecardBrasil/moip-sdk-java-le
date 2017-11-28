@@ -9,7 +9,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 public class TransferRequestTest extends RequestTest{
 
     @Test
-    public void testCreateTransfer() throws JSONException{
+    public void testCreateTransfer() throws JSONException {
         TransferRequest transfer = new TransferRequest()
             .amount(500)
             .transferInstrument(new TransferInstrumentRequest()

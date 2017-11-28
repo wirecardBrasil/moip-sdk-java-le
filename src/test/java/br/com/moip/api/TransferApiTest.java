@@ -34,7 +34,7 @@ public class TransferApiTest {
 
     @Play("transfers/create")
     @Test
-    public void shouldCreateATransfer(){
+    public void shouldCreateATransfer() {
         Transfer transfer = api.create(transferRequest);
 
         assertEquals("TRA-28HRLYNLMUFH", transfer.getId());
@@ -76,5 +76,21 @@ public class TransferApiTest {
         assertEquals("TRA-BVVSKE5K26GG", transferListResponse.getTransfers().get(1).getId());
         assertEquals(TransferStatus.COMPLETED, transferListResponse.getTransfers().get(1).getStatus());
         assertEquals(Transfer.Role.RECEIVER, transferListResponse.getTransfers().get(1).getRole());
+    }
+
+    @Play("transfers/reverse")
+    @Test
+    public void shouldReverseATransfer() {
+        Transfer revertTransfer = api.reverse("TRA-B0W5FD5FCADG");
+        assertEquals(0, revertTransfer.getFee());
+        assertEquals(1000, revertTransfer.getAmount());
+        assertEquals("TRA-B0W5FD5FCADG", revertTransfer.getId());
+        assertEquals("MPA-AE2OAL41CBB1", revertTransfer.getTransferInstrument().getMoipAccount().getId());
+        assertEquals("iori@labs.moip.com.br", revertTransfer.getTransferInstrument().getMoipAccount().getLogin());
+        assertEquals("iori@labs.moip.com.br", revertTransfer.getTransferInstrument().getMoipAccount().getEmail());
+        assertEquals("Iori Yagami", revertTransfer.getTransferInstrument().getMoipAccount().getFullname());
+        assertEquals(TransferInstrument.Method.MOIP_ACCOUNT, revertTransfer.getTransferInstrument().getMethod());
+        assertEquals(TransferStatus.REVERSED, revertTransfer.getStatus());
+        assertEquals("https://sandbox.moip.com.br/v2/transfers/TRA-B0W5FD5FCADG", revertTransfer.getLinks().getSelf());
     }
 }
