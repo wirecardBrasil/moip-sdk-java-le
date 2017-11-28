@@ -1,5 +1,7 @@
 package br.com.moip.resource;
 
+import br.com.moip.resource.links.TransferLinks;
+
 import java.util.Date;
 
 public class Transfer {
@@ -12,6 +14,7 @@ public class Transfer {
     private Date updatedAt;
     private Role role;
     private TransferInstrument transferInstrument;
+    private TransferLinks _links;
 
     public String getId() {
         return id;
@@ -82,6 +85,9 @@ public class Transfer {
         PAYER
     }
 
+    public TransferLinks getLinks() { return _links; }
+    public void setLinks(TransferLinks _links) { this._links = _links; }
+
     @Override
     public String toString() {
 
@@ -93,6 +99,7 @@ public class Transfer {
                 .append(", createdAt=").append(createdAt)
                 .append(", updatedAt=").append(updatedAt)
                 .append(", transferInstrument=").append(transferInstrument)
+                .append(", _links=").append(_links)
                 .append('}').toString();
     }
 }

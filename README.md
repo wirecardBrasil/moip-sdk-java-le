@@ -686,6 +686,41 @@ BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696",
 List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
 ```
 
+## Transferência
+### Criar transferência
+```java
+TransferRequest transfer = new TransferRequest()
+    .amount(500)
+    .transferInstrument(new TransferInstrumentRequest()
+        .bankAccount(new BankAccountRequest()
+            .bankNumber("001")
+            .agencyNumber("1111")
+            .agencyCheckNumber("2")
+            .accountNumber("9999")
+            .accountCheckNumber("8")
+            .checking()
+            .holder(new HolderRequest()
+                .fullname("Nome do Portador")
+                .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+            )
+        )
+    );
+```
+
+### Consultar transferência
+```java
+Transfer createdTransfer = api.get("TRA-28HRLYNLMUFH");
+
+System.out.println(createdTransfer);
+```
+
+### Listar transferências
+```java
+TransferListResponse transferListResponse = api.list();
+
+System.out.println(transferListResponse);
+```
+
 ## Custódia
 ### Pagamento com custódia
 ```java
