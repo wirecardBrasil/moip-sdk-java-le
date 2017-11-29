@@ -56,8 +56,8 @@ public class OrderAPITest {
     @Test
     public void testCreate() {
         Order createdOrder = api.create(new OrderRequest()
-                .ownId("order_own_id")
-                .addItem("Nome do produto", 1, "Mais info...", 100)
+                .ownId("meu_id_order")
+                .addItem("Descrição do pedido", 1, "Mais info...", 100)
                 .customer(new CustomerRequest()
                                 .ownId("customer_own_id")
                                 .fullname("Jose da Silva")
@@ -65,44 +65,49 @@ public class OrderAPITest {
                 )
         );
 
-        assertEquals("https://sandbox.moip.com.br/v2/orders/ORD-HCOWQ2QJKTAT", createdOrder.getLinks().self());
-        assertEquals("https://checkout-sandbox.moip.com.br/boleto/ORD-HCOWQ2QJKTAT", createdOrder.getLinks().payBoleto());
-        assertEquals("https://checkout-sandbox.moip.com.br/creditcard/ORD-HCOWQ2QJKTAT", createdOrder.getLinks().payCreditCard());
-        assertEquals("https://checkout-sandbox.moip.com.br/debit/itau/ORD-HCOWQ2QJKTAT", createdOrder.getLinks().payOnlineBankDebitItau());
-        assertEquals("ORD-HCOWQ2QJKTAT", createdOrder.getId());
+        assertEquals("https://sandbox.moip.com.br/v2/orders/ORD-XVLUNGP6ORXH", createdOrder.getLinks().getSelf());
+        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH", createdOrder.getLinks().getCheckout().getPayCheckoutHref());
+        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=boleto", createdOrder.getLinks().getCheckout().getPayBoletoHref());
+        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=credit-card", createdOrder.getLinks().getCheckout().getPayCreditCardHref());
+        assertEquals("https://checkout-sandbox.moip.com.br/debit/itau/ORD-XVLUNGP6ORXH", createdOrder.getLinks().getCheckout().getPayOnlineBankDebitItauHref());
+        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH", createdOrder.getLinks().payCheckout());
+        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=boleto", createdOrder.getLinks().payBoleto());
+        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=credit-card", createdOrder.getLinks().payCreditCard());
+        assertEquals("https://checkout-sandbox.moip.com.br/debit/itau/ORD-XVLUNGP6ORXH", createdOrder.getLinks().payOnlineBankDebitItau());
+        assertEquals("ORD-XVLUNGP6ORXH", createdOrder.getId());
     }
 
     @Play("orders/create_with_receivers")
     @Test
     public void testCreateWithReceivers() {
         Order createdOrder = api.create(new OrderRequest()
-                .ownId("order_own_id")
-                .addItem("Nome do produto", 1, "Mais info...", 10000)
+                .ownId("meu_id_order")
+                .addItem("Camiseta estampada branca", 1, "Descrição do pedido", 11000)
                 .customer(new CustomerRequest()
-                        .ownId("customer_own_id")
-                        .fullname("Jose da Silva")
-                        .email("sandbox_v2_1401147277@email.com")
+                        .ownId("identificador_cliente123")
+                        .fullname("Rafael Pereira")
+                        .email("afael@email.com")
                 )
                 .addReceiver(new ReceiverRequest()
-                        .secondary("MPA-123123123",
-                                new AmountRequest().fixed(100)))
+                        .secondary("MPA-321321321321",
+                                new AmountRequest().fixed(2000)))
         );
 
-        assertEquals("ORD-77O7YGFH4H62", createdOrder.getId());
+        assertEquals("ORD-PQ8KF1W1PQ4F", createdOrder.getId());
 
         assertEquals(2, createdOrder.getReceivers().size());
 
-        assertEquals(9900, createdOrder.getReceivers().get(0).getAmount().getTotal().intValue());
-        assertEquals("MPA-CULBBYHD11", createdOrder.getReceivers().get(0).getMoipAccount().getId());
-        assertEquals("Moip SandBox", createdOrder.getReceivers().get(0).getMoipAccount().getFullname());
-        assertEquals("integracao@labs.moip.com.br", createdOrder.getReceivers().get(0).getMoipAccount().getLogin());
+        assertEquals(9000, createdOrder.getReceivers().get(0).getAmount().getTotal().intValue());
+        assertEquals("MPA-123123123123", createdOrder.getReceivers().get(0).getMoipAccount().getId());
+        assertEquals("Teste Moip", createdOrder.getReceivers().get(0).getMoipAccount().getFullname());
+        assertEquals("teste@moip.com.br", createdOrder.getReceivers().get(0).getMoipAccount().getLogin());
         assertTrue(createdOrder.getReceivers().get(0).isPrimary());
         assertTrue(createdOrder.getReceivers().get(0).getFeePayor());
 
-        assertEquals(100, createdOrder.getReceivers().get(1).getAmount().getTotal().intValue());
-        assertEquals("MPA-123123123", createdOrder.getReceivers().get(1).getMoipAccount().getId());
-        assertEquals("Vagner Fiuza Vieira", createdOrder.getReceivers().get(1).getMoipAccount().getFullname());
-        assertEquals("vagninho99", createdOrder.getReceivers().get(1).getMoipAccount().getLogin());
+        assertEquals(2000, createdOrder.getReceivers().get(1).getAmount().getTotal().intValue());
+        assertEquals("MPA-321321321321", createdOrder.getReceivers().get(1).getMoipAccount().getId());
+        assertEquals("Segundo Teste Moip", createdOrder.getReceivers().get(1).getMoipAccount().getFullname());
+        assertEquals("teste2@moip.com.br", createdOrder.getReceivers().get(1).getMoipAccount().getLogin());
         assertTrue(createdOrder.getReceivers().get(1).isSecondary());
         assertFalse(createdOrder.getReceivers().get(1).getFeePayor());
     }
@@ -145,16 +150,16 @@ public class OrderAPITest {
     public void testCreateWithFullCustomer() {
         Order createdOrder = api.create(new OrderRequest()
                 .ownId(UUID.randomUUID().toString())
-                .addItem("Nome do produto", 1, "Mais info...", 10000)
+                .addItem("Câmera fotográfica", 1, "Câmera fotográfica, modelo CM54296, cor preta", 100000)
                 .customer(new CustomerRequest()
-                        .ownId(UUID.randomUUID().toString())
-                        .fullname("Jose da Silva")
-                        .email("sandbox_v2_1401147277@email.com")
-                        .birthdate(new ApiDateRequest().date(new GregorianCalendar(1989, Calendar.OCTOBER, 13).getTime()))
+                        .ownId("identificador_cliente")
+                        .fullname("Rafael Pereira")
+                        .email("rafael@email.com")
+                        .birthdate(new ApiDateRequest().date(new GregorianCalendar(1969, Calendar.DECEMBER, 31).getTime()))
                         .taxDocument(TaxDocumentRequest.cpf("12312312300"))
                         .phone(new PhoneRequest()
                                 .setAreaCode("11")
-                                .setNumber("999999999"))
+                                .setNumber("55443322"))
                         .shippingAddressRequest(new ShippingAddressRequest()
                                                     .street("Rua dos Bobos")
                                                     .streetNumber("10")
@@ -168,9 +173,9 @@ public class OrderAPITest {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        assertEquals("1989-10-13", simpleDateFormat.format(createdOrder.getCustomer().getBirthDate()));
-        assertEquals("12312312300", createdOrder.getCustomer().getTaxDocument().getNumber());
-        assertEquals("999999999", createdOrder.getCustomer().getPhone().getNumber());
+        assertEquals("1969-12-31", simpleDateFormat.format(createdOrder.getCustomer().getBirthDate()));
+        assertEquals("22222222222", createdOrder.getCustomer().getTaxDocument().getNumber());
+        assertEquals("55443322", createdOrder.getCustomer().getPhone().getNumber());
         assertEquals("Rua dos Bobos", createdOrder.getCustomer().getShippingAddress().getStreet());
         assertEquals("10", createdOrder.getCustomer().getShippingAddress().getStreetNumber());
         assertEquals("11111111", createdOrder.getCustomer().getShippingAddress().getZipCode());

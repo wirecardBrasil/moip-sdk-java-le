@@ -639,7 +639,7 @@ api.account().checkAccountExists("123.456.798-91");
 ## Contas Bancárias
 ### Criação
 ```java
-BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
+BankAccount createdBankAccount = api.bankAccount().create("MPA-E0BAC6D15696",
     new BankAccountRequest()
         .bankNumber("237")
         .agencyNumber("12346")
@@ -655,15 +655,15 @@ BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
 ```
 ### Consulta
 ```java
-BankAccount createdBankAccount = api.get("BKA-E0BAC6D15696");
+BankAccount createdBankAccount = api.bankAccount().get("BKA-E0BAC6D15696");
 ```
 ### Exclusão
 ```java
-api.delete("BKA-E0BAC6D15696");
+api.bankAccount().delete("BKA-E0BAC6D15696");
 ```
 ### Atualização
 ```java
-BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696", 
+BankAccount createdBankAccount = api.bankAccount().update("BKA-E0BAC6D15696",
 	new BankAccountRequest()
     	.bankNumber("237")
         .agencyNumber("12345")
@@ -683,7 +683,7 @@ BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696",
 
 ### Listagem
 ```java
-List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
+List<BankAccount> createdBankAccounts = api.bankAccount().getList("MPA-E0BAC6D15696");
 ```
 
 ## Custódia
@@ -747,7 +747,7 @@ Connect connect = api.connect().authorize(new ConnectRequest()
     .clientSecret("e2bd3951b87e469eb0f2c2b781a753d5")
     .code("8870af1372ada7a18fdff4fa4ca1a60f4d542272")
     .redirectUri("http://localhost/moip-sdk/callback")
-    .grantType(GrantType.authorization_code)
+    .grantType(GrantType.AUTHORIZATION_CODE)
 );
 System.out.println(connect);
 ```
