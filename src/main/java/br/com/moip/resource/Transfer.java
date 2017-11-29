@@ -90,6 +90,17 @@ public class Transfer {
 
     @Override
     public String toString() {
+        if(status == TransferStatus.REVERSED)
+            return new StringBuilder("Transfer{")
+                    .append("id=").append(id)
+                    .append(", amount=").append(amount)
+                    .append(", fee=").append(fee)
+                    .append(", status=").append(status)
+                    .append(", createdAt=").append(createdAt)
+                    .append(", updatedAt=").append(updatedAt)
+                    .append(", transferInstrument=").append(transferInstrument)
+                    .append(", _links=").append(_links)
+                    .append('}').toString();
 
         return new StringBuilder("Transfer{")
                 .append("id=").append(id)
@@ -99,7 +110,8 @@ public class Transfer {
                 .append(", createdAt=").append(createdAt)
                 .append(", updatedAt=").append(updatedAt)
                 .append(", transferInstrument=").append(transferInstrument)
-                .append(", _links=").append(_links)
-                .append('}').toString();
+                .append(", _links=Links{self=Href{href=").append(_links.getSelf())
+                .append("}").append("}")
+                .append("}").toString();
     }
 }

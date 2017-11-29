@@ -688,9 +688,10 @@ List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
 
 ## Transferência
 ### Criar transferência
+#### Por conta bancária
 ```java
-TransferRequest transfer = new TransferRequest()
-    .amount(500)
+Transfer transfer = api.transfer().create(new TransferRequest()
+    .amount(1000)
     .transferInstrument(new TransferInstrumentRequest()
         .bankAccount(new BankAccountRequest()
             .bankNumber("001")
@@ -703,27 +704,40 @@ TransferRequest transfer = new TransferRequest()
                 .fullname("Nome do Portador")
                 .taxDocument(TaxDocumentRequest.cpf("22222222222"))
             )
+
         )
-    );
+    )
+);
+```
+
+
+#### Por conta Moip
+```java
+Transfer transfer = api.transfer().create(new TransferRequest()
+    .amount(1000)
+    .transferInstrument(new TransferInstrumentRequest()
+        .moipAccount(new MoipAccountRequest("MPA-5D5053C0B4A4"))
+    )
+);
 ```
 
 ### Consultar transferência
 ```java
-Transfer createdTransfer = api.get("TRA-28HRLYNLMUFH");
+Transfer createdTransfer = api.transfer().get("TRA-28HRLYNLMUFH");
 
 System.out.println(createdTransfer);
 ```
 
 ### Listar transferências
 ```java
-TransferListResponse transferListResponse = api.list();
+TransferListResponse transferListResponse = api.transfer().list();
 
 System.out.println(transferListResponse);
 ```
 
 ### Reverter transferência
 ```java
-Transfer revertTransfer = api.reverse("TRA-B0W5FD5FCADG");
+Transfer revertTransfer = api.transfer().reverse("TRA-B0W5FD5FCADG");
 ```
 
 ## Custódia

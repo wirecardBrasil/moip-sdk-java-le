@@ -2,7 +2,6 @@ package br.com.moip.api;
 
 import br.com.moip.Client;
 import br.com.moip.request.TransferRequest;
-import br.com.moip.request.TransferRequestTest;
 import br.com.moip.resource.*;
 import br.com.moip.response.TransferListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
@@ -10,9 +9,7 @@ import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
-import sun.net.ftp.FtpClient;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class TransferApiTest {

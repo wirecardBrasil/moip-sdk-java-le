@@ -43,7 +43,7 @@ public class MoipAccount {
     public String toString() {
         return new StringBuilder("MoipAccount{")
                 .append("id='").append(id).append('\'')
-                .append("email='").append(email).append('\'')
+                .append(", email='").append(email).append('\'')
                 .append(", fullname='").append(fullname).append('\'')
                 .append(", login='").append(login).append('\'')
                 .append('}').toString();
