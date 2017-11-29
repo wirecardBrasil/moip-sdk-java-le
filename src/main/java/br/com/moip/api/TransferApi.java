@@ -17,7 +17,7 @@ public class TransferApi {
 
     public Transfer create(final TransferRequest transfer) { return client.post(TRANSFER_URL, transfer, Transfer.class); }
 
-    public Transfer reverse(final String id) { return client.post(TRANSFER_URL + "/" + id + "/" + "reverse", Transfer.class); }
+    public Transfer reverse(final String id) { return client.post(TRANSFER_URL + "/" + id + "/reverse", Transfer.class); }
 
     public Transfer get(final String id) {
         return client.get(TRANSFER_URL + "/" + id, Transfer.class);
