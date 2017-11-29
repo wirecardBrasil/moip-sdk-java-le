@@ -64,7 +64,14 @@
     - [Consulta](#consulta-8)
     - [Exclusão](#exclusão-1)
     - [Atualização](#atualização)
-    - [Listagem](#listagem-1)  
+    - [Listagem](#listagem-1)
+  - [Transferência](#transferência)
+    - [Criação](#criação-8)
+      -[Conta Bancária](#conta-bancária)
+      -[Conta Moip](#conta-moip-1)
+    - [Consulta](#consulta-9)
+    - [Listagem](#listagem-2)
+    - [Reversão](#reversão)
   - [Custódia](#custódia)
     - [Pagamento com custódia](#pagamento-com-custódia)
     - [Liberação de custódia](#liberação-de-custódia)
@@ -687,8 +694,8 @@ List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
 ```
 
 ## Transferência
-### Criar transferência
-#### Por conta bancária
+### Criação
+#### Conta Bancária
 ```java
 Transfer transfer = api.transfer().create(new TransferRequest()
     .amount(1000)
@@ -711,7 +718,7 @@ Transfer transfer = api.transfer().create(new TransferRequest()
 ```
 
 
-#### Por conta Moip
+#### Conta Moip
 ```java
 Transfer transfer = api.transfer().create(new TransferRequest()
     .amount(1000)
@@ -721,21 +728,21 @@ Transfer transfer = api.transfer().create(new TransferRequest()
 );
 ```
 
-### Consultar transferência
+### Consulta
 ```java
 Transfer createdTransfer = api.transfer().get("TRA-28HRLYNLMUFH");
 
 System.out.println(createdTransfer);
 ```
 
-### Listar transferências
+### Listagem
 ```java
 TransferListResponse transferListResponse = api.transfer().list();
 
 System.out.println(transferListResponse);
 ```
 
-### Reverter transferência
+### Reversão
 ```java
 Transfer revertTransfer = api.transfer().reverse("TRA-B0W5FD5FCADG");
 ```
