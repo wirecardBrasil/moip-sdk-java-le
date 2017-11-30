@@ -67,7 +67,7 @@ public class OrderAPITest {
 
         assertEquals("https://sandbox.moip.com.br/v2/orders/ORD-XVLUNGP6ORXH", createdOrder.getLinks().getSelf());
         assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH", createdOrder.getLinks().getCheckout().getPayCheckoutHref());
-        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=boleto", createdOrder.getLinks().getCheckout().getPayBoletoHref());
+        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=boleto", createdOrder.getLinks().getCheckout().getPayBoletoLink());
         assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=credit-card", createdOrder.getLinks().getCheckout().getPayCreditCardHref());
         assertEquals("https://checkout-sandbox.moip.com.br/debit/itau/ORD-XVLUNGP6ORXH", createdOrder.getLinks().getCheckout().getPayOnlineBankDebitItauHref());
         assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH", createdOrder.getLinks().payCheckout());
