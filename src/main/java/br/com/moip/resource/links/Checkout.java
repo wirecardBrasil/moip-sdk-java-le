@@ -4,7 +4,7 @@ public class Checkout {
 
     private RedirectHref payCheckout;
     private RedirectHref payCreditCard;
-    private RedirectHref payBoleto;
+    private PayBoleto payBoleto;
     private RedirectHref payOnlineBankDebitItau;
 
     public String getPayCheckoutHref() {
@@ -15,9 +15,11 @@ public class Checkout {
         return payCreditCard.getRedirectHref();
     }
 
-    public String getPayBoletoHref() {
+    public String getPayBoletoLink() {
         return payBoleto.getRedirectHref();
     }
+
+    public String getPayBoletoPrintLink() { return payBoleto.getPrintHref(); }
 
     public String getPayOnlineBankDebitItauHref() {
         return payOnlineBankDebitItau.getRedirectHref();
@@ -27,7 +29,7 @@ public class Checkout {
 
     public RedirectHref getPayCreditCard() { return payCreditCard; }
 
-    public RedirectHref getPayBoleto() { return payBoleto; }
+    public PayBoleto getPayBoleto() { return payBoleto; }
 
     public RedirectHref getPayOnlineBankDebitItau() { return payOnlineBankDebitItau; }
 

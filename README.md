@@ -219,7 +219,7 @@ Payment createdPayment = api.payment().create(new PaymentRequest()
 );
 ```
 
-> Para capturar links do boleto:
+> Para capturar os links do boleto:
 
 ```java
 // Link do Boleto
@@ -541,6 +541,16 @@ Multipayment multipayment = api.multipayment().create(new PaymentRequest()
             )
         )
     );
+```
+
+> Para capturar os links do boleto:
+
+```java
+// Link do Boleto
+multipayment.getLinks().checkout().getPayBoletoLink();
+
+// Link para impressão do boleto
+multipayment.getLinks().checkout().getPayBoletoPrintLink();
 ```
 
 ### Consulta
