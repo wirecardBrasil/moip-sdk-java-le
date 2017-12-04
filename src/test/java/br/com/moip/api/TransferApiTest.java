@@ -1,7 +1,9 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
-import br.com.moip.request.TransferRequest;
+import br.com.moip.exception.UnexpectedException;
+import br.com.moip.exception.ValidationException;
+import br.com.moip.request.*;
 
 import br.com.moip.resource.Transfer;
 import br.com.moip.resource.TransferInstrument;
@@ -9,6 +11,7 @@ import br.com.moip.resource.TransferStatus;
 import br.com.moip.response.TransferListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
+import javassist.tools.web.BadHttpRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -52,11 +55,28 @@ public class TransferApiTest {
         assertEquals("001", transfer.getTransferInstrument().getBankAccount().getBankNumber());
         assertEquals(TransferStatus.REQUESTED, transfer.getStatus());
         assertEquals("https://sandbox.moip.com.br/v2/transfers/TRA-28HRLYNLMUFH", transfer.getLinks().getSelf());
-        assertNotEquals("TRA-28HRLYNLMUFI", transfer.getId());
-        assertNotEquals(5000, transfer.getAmount());
-        assertNotEquals("BKA-I268MOXX85BG", transfer.getTransferInstrument().getBankAccount().getId());
-        assertNotEquals("133.575.852-51", transfer.getTransferInstrument().getBankAccount().getHolder().getTaxDocument().getNumber());
     }
+    @Play("transfers/validation_exception")
+    @Test(expected = ValidationException.class)
+    public void shouldFailOnCreateATransfer() {
+        Transfer transferTest = api.create(new TransferRequest()
+                .amount(500)
+                .transferInstrument(new TransferInstrumentRequest()
+                        .bankAccount(new BankAccountRequest()
+                                .bankNumber("001")
+                                .agencyNumber("1111")
+                                .agencyCheckNumber("2")
+                                .accountNumber("9999")
+                                .accountCheckNumber("8")
+                                .holder(new HolderRequest()
+                                        .fullname("Fulano Sem Nome")
+                                        .taxDocument(TaxDocumentRequest.cpf(null))
+                                )
+                        )
+                )
+        );
+    }
+
 
     @Play("transfers/get")
     @Test

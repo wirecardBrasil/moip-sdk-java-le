@@ -25,16 +25,12 @@ public class TransferInstrumentRequest {
     }
 
     @Override
-    public String toString(){
-        StringBuilder stringBuilder = new StringBuilder("TransferInstrumentRequest{")
-            .append("method=").append(method);
-        if(method == Method.BANK_ACCOUNT)
-            stringBuilder.append(", bankAccount=").append(bankAccount);
-
-        else
-            stringBuilder.append(", moipAccount=").append(moipAccount);
-        stringBuilder.append("}");
-
-        return stringBuilder.toString();
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("TransferInstrument{");
+        sb.append("method=").append(method);
+        sb.append(", bankAccount=").append(bankAccount);
+        sb.append(", moipAccount=").append(moipAccount);
+        sb.append('}');
+        return sb.toString();
     }
 }

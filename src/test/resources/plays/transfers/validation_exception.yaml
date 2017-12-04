@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/transfers
+    headers:
+      Content-Type: application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: POST
+  response:
+    status: 404
+    headers:
+      "Content-Type": application/json
+    body: |
+      { "ERROR" : "Ops... You are trying to access an invalid URL" }
