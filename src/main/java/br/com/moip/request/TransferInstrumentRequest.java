@@ -26,15 +26,15 @@ public class TransferInstrumentRequest {
 
     @Override
     public String toString(){
+        StringBuilder stringBuilder = new StringBuilder("TransferInstrumentRequest{")
+            .append("method=").append(method);
         if(method == Method.BANK_ACCOUNT)
-                return new StringBuilder("TransferInstrumentRequest{")
-                        .append("method=").append(method)
-                        .append(", bankAccount=").append(bankAccount)
-                        .append("}").toString();
+            stringBuilder.append(", bankAccount=").append(bankAccount);
 
-        else return  new StringBuilder("TransferInstrumentRequest{")
-                .append("method=").append(method)
-                .append(", moipAccount=").append(moipAccount)
-                .append("}").toString();
+        else
+            stringBuilder.append(", moipAccount=").append(moipAccount);
+        stringBuilder.append("}");
+
+        return stringBuilder.toString();
     }
 }
