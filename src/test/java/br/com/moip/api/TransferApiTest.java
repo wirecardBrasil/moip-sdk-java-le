@@ -14,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class TransferApiTest {
 
@@ -51,7 +52,10 @@ public class TransferApiTest {
         assertEquals("001", transfer.getTransferInstrument().getBankAccount().getBankNumber());
         assertEquals(TransferStatus.REQUESTED, transfer.getStatus());
         assertEquals("https://sandbox.moip.com.br/v2/transfers/TRA-28HRLYNLMUFH", transfer.getLinks().getSelf());
-
+        assertNotEquals("TRA-28HRLYNLMUFI", transfer.getId());
+        assertNotEquals(5000, transfer.getAmount());
+        assertNotEquals("BKA-I268MOXX85BG", transfer.getTransferInstrument().getBankAccount().getId());
+        assertNotEquals("133.575.852-51", transfer.getTransferInstrument().getBankAccount().getHolder().getTaxDocument().getNumber());
     }
 
     @Play("transfers/get")
