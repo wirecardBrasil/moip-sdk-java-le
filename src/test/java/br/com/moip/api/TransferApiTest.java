@@ -1,17 +1,18 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
-import br.com.moip.exception.UnexpectedException;
 import br.com.moip.exception.ValidationException;
-import br.com.moip.request.*;
-
+import br.com.moip.request.TaxDocumentRequest;
+import br.com.moip.request.BankAccountRequest;
+import br.com.moip.request.HolderRequest;
+import br.com.moip.request.TransferInstrumentRequest;
+import br.com.moip.request.TransferRequest;
 import br.com.moip.resource.Transfer;
 import br.com.moip.resource.TransferInstrument;
 import br.com.moip.resource.TransferStatus;
 import br.com.moip.response.TransferListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
-import javassist.tools.web.BadHttpRequest;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
