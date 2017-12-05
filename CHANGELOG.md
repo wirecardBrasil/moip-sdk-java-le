@@ -1,3 +1,23 @@
+<a name="v3.5.0"></a>
+# [](https://github.com/moip/moip-sdk-java/compare/v3.4.0...v3.5.0) (2017-12-05)
+
+
+### Features
+
+* **Account:** added return accessToken and setPassword ([a078943](https://github.com/moip/moip-sdk-java/commits/a078943))
+* **Account:** created AccountLinks class and added some account creation tests ([1e5632b](https://github.com/moip/moip-sdk-java/commits/1e5632b))
+* **Order:** return checkout preferences and checkout links ([26e96de](https://github.com/moip/moip-sdk-java/commits/26e96de))
+* **Order:** create alternatives methods to get the checkout links and add some tests ([d9b17ce](https://github.com/moip/moip-sdk-java/commits/a078943))
+* **Transfer:** adds create and revert a transfer ([1f9357a](https://github.com/moip/moip-sdk-java/commits/1f9357a))
+* **Transfer:** adds MoipAccountRequest, fix some parameters and fix Transfer examples ([5f274c5](https://github.com/moip/moip-sdk-java/commits/5f274c5))
+* **Multipayment** adds Checkout instance to MultipaymentLinks ([dad95a2](https://github.com/moip/moip-sdk-java/commits/dad95a2))
+
+### Refactor
+
+* **Order:** fixed parameter `addiction` to `addition` ([42a08c3](https://github.com/moip/moip-sdk-java/commits/42a08c3))
+* **Account:** refactor AccountAPITest import ([58a4608](https://github.com/moip/moip-sdk-java/commits/58a4608))
+* **Transfer:** fix TransferApiTest's imports ([6cc7c69](https://github.com/moip/moip-sdk-java/commits/6cc7c69))
+
 <a name="v3.4.0"></a>
 # [](https://github.com/moip/moip-sdk-java/compare/v3.3.0...v3.4.0) (2017-11-08)
 
