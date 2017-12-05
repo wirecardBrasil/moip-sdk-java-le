@@ -15,8 +15,7 @@
 ### Refactor
 
 * **Order:** fixed parameter `addiction` to `addition` ([42a08c3](https://github.com/moip/moip-sdk-java/commits/42a08c3))
-* **Account:** refactor AccountAPITest import ([58a4608](https://github.com/moip/moip-sdk-java/commits/58a4608))
-* **Transfer:** fix TransferApiTest's imports ([6cc7c69](https://github.com/moip/moip-sdk-java/commits/6cc7c69))
+
 
 <a name="v3.4.0"></a>
 # [](https://github.com/moip/moip-sdk-java/compare/v3.3.0...v3.4.0) (2017-11-08)
