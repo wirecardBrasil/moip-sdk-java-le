@@ -1,4 +1,4 @@
-<a name="v3.5.0"></a>
+<a name="v4.0.0"></a>
 # [](https://github.com/moip/moip-sdk-java/compare/v3.4.0...v3.5.0) (2017-12-05)
 
 
