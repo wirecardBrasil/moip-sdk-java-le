@@ -53,15 +53,3 @@ public class ReceiverRequest {
         return feePayor;
     }
 }
-
-class MoipAccountRequest {
-    private final String id;
-
-    public MoipAccountRequest(String moipAccount) {
-        this.id = moipAccount;
-    }
-
-    public String getId() {
-        return id;
-    }
-}

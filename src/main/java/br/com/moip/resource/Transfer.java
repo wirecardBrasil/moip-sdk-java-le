@@ -1,5 +1,7 @@
 package br.com.moip.resource;
 
+import br.com.moip.resource.links.TransferLinks;
+
 import java.util.Date;
 
 public class Transfer {
@@ -12,6 +14,7 @@ public class Transfer {
     private Date updatedAt;
     private Role role;
     private TransferInstrument transferInstrument;
+    private TransferLinks _links;
 
     public String getId() {
         return id;
@@ -82,17 +85,22 @@ public class Transfer {
         PAYER
     }
 
+    public TransferLinks getLinks() { return _links; }
+    public void setLinks(TransferLinks _links) { this._links = _links; }
+
     @Override
     public String toString() {
-
-        return new StringBuilder("Transfer{")
-                .append("id=").append(id)
-                .append(", amount=").append(amount)
-                .append(", fee=").append(fee)
-                .append(", status=").append(status)
-                .append(", createdAt=").append(createdAt)
-                .append(", updatedAt=").append(updatedAt)
-                .append(", transferInstrument=").append(transferInstrument)
-                .append('}').toString();
+        final StringBuilder sb = new StringBuilder("Transfer{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", amount=").append(amount);
+        sb.append(", fee=").append(fee);
+        sb.append(", status=").append(status);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", role=").append(role);
+        sb.append(", transferInstrument=").append(transferInstrument);
+        sb.append(", _links=").append(_links);
+        sb.append('}');
+        return sb.toString();
     }
 }

@@ -64,7 +64,14 @@
     - [Consulta](#consulta-8)
     - [Exclusão](#exclusão-1)
     - [Atualização](#atualização)
-    - [Listagem](#listagem-1)  
+    - [Listagem](#listagem-1)
+  - [Transferência](#transferência)
+    - [Criação](#criação-8)
+      -[Conta Bancária](#conta-bancária)
+      -[Conta Moip](#conta-moip-1)
+    - [Consulta](#consulta-9)
+    - [Listagem](#listagem-2)
+    - [Reversão](#reversão)
   - [Custódia](#custódia)
     - [Pagamento com custódia](#pagamento-com-custódia)
     - [Liberação de custódia](#liberação-de-custódia)
@@ -694,6 +701,60 @@ BankAccount createdBankAccount = api.bankAccount().update("BKA-E0BAC6D15696",
 ### Listagem
 ```java
 List<BankAccount> createdBankAccounts = api.bankAccount().getList("MPA-E0BAC6D15696");
+```
+
+## Transferência
+### Criação
+#### Conta Bancária
+```java
+Transfer transfer = api.transfer().create(new TransferRequest()
+    .amount(1000)
+    .transferInstrument(new TransferInstrumentRequest()
+        .bankAccount(new BankAccountRequest()
+            .bankNumber("001")
+            .agencyNumber("1111")
+            .agencyCheckNumber("2")
+            .accountNumber("9999")
+            .accountCheckNumber("8")
+            .checking()
+            .holder(new HolderRequest()
+                .fullname("Nome do Portador")
+                .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+            )
+
+        )
+    )
+);
+```
+
+
+#### Conta Moip
+```java
+Transfer transfer = api.transfer().create(new TransferRequest()
+    .amount(1000)
+    .transferInstrument(new TransferInstrumentRequest()
+        .moipAccount(new MoipAccountRequest("MPA-5D5053C0B4A4"))
+    )
+);
+```
+
+### Consulta
+```java
+Transfer createdTransfer = api.transfer().get("TRA-28HRLYNLMUFH");
+
+System.out.println(createdTransfer);
+```
+
+### Listagem
+```java
+TransferListResponse transferListResponse = api.transfer().list();
+
+System.out.println(transferListResponse);
+```
+
+### Reversão
+```java
+Transfer revertTransfer = api.transfer().reverse("TRA-B0W5FD5FCADG");
 ```
 
 ## Custódia
