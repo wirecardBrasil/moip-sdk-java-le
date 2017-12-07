@@ -42,10 +42,11 @@ public class TaxDocumentRequest {
 
     @Override
     public String toString() {
-        return "TaxDocument{" +
-                "type='" + type + '\'' +
-                ", number='" + number + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("TaxDocument{");
+        sb.append("type=").append(type);
+        sb.append(", number='").append(number).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
     private enum Type {

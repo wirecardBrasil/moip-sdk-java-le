@@ -46,24 +46,26 @@ public class MultipaymentAPITest {
             .installmentCount(1)
             .fundingInstrument(new FundingInstrumentRequest()
                 .boleto(new BoletoRequest()
-                    .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2017, Calendar.SEPTEMBER, 30).getTime()))
+                    .expirationDate(new ApiDateRequest().date(new GregorianCalendar(2017, Calendar.NOVEMBER, 14).getTime()))
                     .instructionLines(new InstructionLinesRequest()
-                        .first("Primeira linha se instrução")
-                        .second("Segunda linha se instrução")
-                        .third("Terceira linha se instrução")
+                        .first("Primeira linha de instrução")
+                        .second("Segunda linha de instrução")
+                        .third("Terceira linha de instrução")
                     )
-                    .logoUri("http://")
+                    .logoUri("https://cdn.moip.com.br/wp-content/uploads/2016/05/02163352/logo-moip.png")
                 )
             )
         );
 
-        assertEquals("MPY-VVVF0YDCY15H", multipayment.getId());
+        assertEquals("MPY-JMLVYS8CAQ4V", multipayment.getId());
         assertEquals(PaymentStatus.WAITING, multipayment.getStatus());
         assertEquals(FundingInstrument.Method.BOLETO, multipayment.getFundingInstrument().getMethod());
-        assertEquals("2017-09-30", multipayment.getFundingInstrument().getBoleto().getExpirationDate().getFormatedDate());
-        assertEquals("Primeira linha se instrução", multipayment.getFundingInstrument().getBoleto().getInstructionLines().getFirst());
-        assertEquals("Segunda linha se instrução", multipayment.getFundingInstrument().getBoleto().getInstructionLines().getSecond());
-        assertEquals("Terceira linha se instrução", multipayment.getFundingInstrument().getBoleto().getInstructionLines().getThird());
+        assertEquals("2017-12-14", multipayment.getFundingInstrument().getBoleto().getExpirationDate().getFormatedDate());
+        assertEquals("Primeira linha de instrução", multipayment.getFundingInstrument().getBoleto().getInstructionLines().getFirst());
+        assertEquals("Segunda linha de instrução", multipayment.getFundingInstrument().getBoleto().getInstructionLines().getSecond());
+        assertEquals("Terceira linha de instrução", multipayment.getFundingInstrument().getBoleto().getInstructionLines().getThird());
+        assertEquals("https://checkout-sandbox.moip.com.br/boleto/MPY-JMLVYS8CAQ4V/print", multipayment.getLinks().checkout().getPayBoletoPrintLink());
+        assertEquals("https://checkout-sandbox.moip.com.br/boleto/MPY-JMLVYS8CAQ4V", multipayment.getLinks().checkout().getPayBoletoLink());
     }
 
     @Play("multipayment/create_cc")

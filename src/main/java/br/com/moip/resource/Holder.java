@@ -46,4 +46,14 @@ public class Holder {
 
         return this;
     }
+
+    @Override
+    public String toString() {
+        return new StringBuilder("Holder{")
+                .append("fullname=").append(fullname)
+                .append(", birthdate=").append(birthdate)
+                .append(", phone=").append(phone)
+                .append(", taxDocument").append(taxDocument)
+                .append("}").toString();
+    }
 }

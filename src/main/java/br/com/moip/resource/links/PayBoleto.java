@@ -9,9 +9,13 @@ public class PayBoleto {
         return printHref;
     }
 
+    public void setPrintHref(String printHref) { this.printHref = printHref; }
+
     public String getRedirectHref() {
         return redirectHref;
     }
+
+    public void setRedirectHref(String redirectHref) { this.redirectHref = redirectHref; }
 
     @Override
     public String toString() {

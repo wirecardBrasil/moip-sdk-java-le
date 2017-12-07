@@ -5,13 +5,15 @@ public class OrderLinks {
     private Href self;
     private Checkout checkout;
 
-    public String self() {
+    public String getSelf() {
         return self.getHref();
     }
 
-    public String payCheckout() {
-        return checkout.getPayCheckout().getRedirectHref();
+    public Checkout getCheckout() {
+        return checkout;
     }
+
+    public String payCheckout() { return checkout.getPayCheckout().getRedirectHref(); }
 
     public String payCreditCard() {
         return checkout.getPayCreditCard().getRedirectHref();
@@ -23,13 +25,6 @@ public class OrderLinks {
 
     public String payOnlineBankDebitItau() {
         return checkout.getPayOnlineBankDebitItau().getRedirectHref();
-    }
-
-    public Href getLink() {
-        return self;
-    }
-    public Checkout getCheckout() {
-        return checkout;
     }
 
     @Override

@@ -64,7 +64,14 @@
     - [Consulta](#consulta-8)
     - [Exclusão](#exclusão-1)
     - [Atualização](#atualização)
-    - [Listagem](#listagem-1)  
+    - [Listagem](#listagem-1)
+  - [Transferência](#transferência)
+    - [Criação](#criação-8)
+      -[Conta Bancária](#conta-bancária)
+      -[Conta Moip](#conta-moip-1)
+    - [Consulta](#consulta-9)
+    - [Listagem](#listagem-2)
+    - [Reversão](#reversão)
   - [Custódia](#custódia)
     - [Pagamento com custódia](#pagamento-com-custódia)
     - [Liberação de custódia](#liberação-de-custódia)
@@ -84,7 +91,7 @@ Adicionar no seu pom.xml:
 <dependency>
     <groupId>br.com.moip</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>3.4.0</version>
+    <version>4.0.0</version>
 </dependency>
 
 ```
@@ -219,7 +226,7 @@ Payment createdPayment = api.payment().create(new PaymentRequest()
 );
 ```
 
-> Para capturar links do boleto:
+> Para capturar os links do boleto:
 
 ```java
 // Link do Boleto
@@ -543,6 +550,16 @@ Multipayment multipayment = api.multipayment().create(new PaymentRequest()
     );
 ```
 
+> Para capturar os links do boleto:
+
+```java
+// Link do Boleto
+multipayment.getLinks().checkout().getPayBoletoLink();
+
+// Link para impressão do boleto
+multipayment.getLinks().checkout().getPayBoletoPrintLink();
+```
+
 ### Consulta
 ```java
 Multipayment multipayment = api.multipayment().get("MPY-OUGA0AHH2BOF");
@@ -639,7 +656,7 @@ api.account().checkAccountExists("123.456.798-91");
 ## Contas Bancárias
 ### Criação
 ```java
-BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
+BankAccount createdBankAccount = api.bankAccount().create("MPA-E0BAC6D15696",
     new BankAccountRequest()
         .bankNumber("237")
         .agencyNumber("12346")
@@ -655,15 +672,15 @@ BankAccount createdBankAccount = api.create("MPA-E0BAC6D15696",
 ```
 ### Consulta
 ```java
-BankAccount createdBankAccount = api.get("BKA-E0BAC6D15696");
+BankAccount createdBankAccount = api.bankAccount().get("BKA-E0BAC6D15696");
 ```
 ### Exclusão
 ```java
-api.delete("BKA-E0BAC6D15696");
+api.bankAccount().delete("BKA-E0BAC6D15696");
 ```
 ### Atualização
 ```java
-BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696", 
+BankAccount createdBankAccount = api.bankAccount().update("BKA-E0BAC6D15696",
 	new BankAccountRequest()
     	.bankNumber("237")
         .agencyNumber("12345")
@@ -683,7 +700,61 @@ BankAccount createdBankAccount = api.update("BKA-E0BAC6D15696",
 
 ### Listagem
 ```java
-List<BankAccount> createdBankAccounts = api.getList("MPA-E0BAC6D15696");
+List<BankAccount> createdBankAccounts = api.bankAccount().getList("MPA-E0BAC6D15696");
+```
+
+## Transferência
+### Criação
+#### Conta Bancária
+```java
+Transfer transfer = api.transfer().create(new TransferRequest()
+    .amount(1000)
+    .transferInstrument(new TransferInstrumentRequest()
+        .bankAccount(new BankAccountRequest()
+            .bankNumber("001")
+            .agencyNumber("1111")
+            .agencyCheckNumber("2")
+            .accountNumber("9999")
+            .accountCheckNumber("8")
+            .checking()
+            .holder(new HolderRequest()
+                .fullname("Nome do Portador")
+                .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+            )
+
+        )
+    )
+);
+```
+
+
+#### Conta Moip
+```java
+Transfer transfer = api.transfer().create(new TransferRequest()
+    .amount(1000)
+    .transferInstrument(new TransferInstrumentRequest()
+        .moipAccount(new MoipAccountRequest("MPA-5D5053C0B4A4"))
+    )
+);
+```
+
+### Consulta
+```java
+Transfer createdTransfer = api.transfer().get("TRA-28HRLYNLMUFH");
+
+System.out.println(createdTransfer);
+```
+
+### Listagem
+```java
+TransferListResponse transferListResponse = api.transfer().list();
+
+System.out.println(transferListResponse);
+```
+
+### Reversão
+```java
+Transfer revertTransfer = api.transfer().reverse("TRA-B0W5FD5FCADG");
 ```
 
 ## Custódia
@@ -747,7 +818,7 @@ Connect connect = api.connect().authorize(new ConnectRequest()
     .clientSecret("e2bd3951b87e469eb0f2c2b781a753d5")
     .code("8870af1372ada7a18fdff4fa4ca1a60f4d542272")
     .redirectUri("http://localhost/moip-sdk/callback")
-    .grantType(GrantType.authorization_code)
+    .grantType(GrantType.AUTHORIZATION_CODE)
 );
 System.out.println(connect);
 ```
