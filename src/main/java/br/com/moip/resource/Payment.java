@@ -68,8 +68,27 @@ public class Payment {
         this.delayCapture = delayCapture;
     }
 
-    public List<Escrow>getEscrows() {
+    public void setEscrows(List<Escrow> escrows) { this.escrows = escrows; }
+
+    public List<Escrow> getEscrows() {
         return escrows;
+    }
+
+    private boolean hasEscrow() {
+
+        return (escrows != null && !escrows.isEmpty());
+    }
+
+    public Escrow getEscrow() {
+        if(!hasEscrow()) return null;
+
+        return escrows.get(0);
+    }
+
+    public String getEscrowId() {
+        if(!hasEscrow()) return null;
+
+        return getEscrow().getId();
     }
 
     public PaymentLinks getLinks() {

@@ -227,6 +227,7 @@ public class PaymentAPITest {
         assertEquals(EscrowStatus.HOLD_PENDING, createdPayment.getEscrows().get(0).getStatus());
         assertEquals((Integer)7300, createdPayment.getAmount().getTotal());
         assertEquals(PaymentStatus.IN_ANALYSIS, createdPayment.getStatus());
+        assertEquals("ECW-S0QEDXJM7TXT", createdPayment.getEscrowId());
     }
 
     @Play("payments/get")

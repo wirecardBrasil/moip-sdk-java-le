@@ -138,4 +138,35 @@ public class MultipaymentAPITest {
         assertEquals(PaymentStatus.CANCELLED, cancelledPayment.getStatus());
     }
 
+    @Play("multipayment/create_escrow")
+    @Test
+    public void testCreateWithEscrow() {
+        Multipayment createWithEscrow = api.create(new PaymentRequest()
+            .orderId("MOR-T1F8O64DLS4X")
+            .installmentCount(1)
+            .escrow(new PaymentRequest.EscrowRequest("Teste de Descrição"))
+            .delayCapture(false)
+            .fundingInstrument(new FundingInstrumentRequest()
+                .creditCard(new CreditCardRequest()
+                    .number("4012001037141112")
+                    .cvc(123)
+                    .expirationMonth("05")
+                    .expirationYear("18")
+                    .holder(new HolderRequest()
+                        .fullname("Jose Portador da Silva")
+                        .birthdate("1988-10-10")
+                        .phone(new PhoneRequest()
+                            .setAreaCode("11")
+                            .setNumber("55667788")
+                        )
+                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                    )
+                )
+            )
+        );
+
+        assertEquals("MPY-TUZUG6A4AHLF", createWithEscrow.getId());
+        assertEquals("ECW-RI6HTOU2M4DY", createWithEscrow.getPayments().get(0).getEscrowId());
+    }
+
 }
