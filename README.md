@@ -65,12 +65,17 @@
     - [Exclusão](#exclusão-1)
     - [Atualização](#atualização)
     - [Listagem](#listagem-1)
+  - [Lançamento](#lançamento)
+    - [Consulta](#consulta-9)
+    - [Listagem](#listagem-2)
+      - [Sem filtros de busca](#sem-filtros-de-busca)
+      - [Com filtros de busca](#com-filtros-de-busca)
   - [Transferência](#transferência)
     - [Criação](#criação-8)
       -[Conta Bancária](#conta-bancária)
       -[Conta Moip](#conta-moip-1)
-    - [Consulta](#consulta-9)
-    - [Listagem](#listagem-2)
+    - [Consulta](#consulta-10)
+    - [Listagem](#listagem-3)
     - [Reversão](#reversão)
   - [Custódia](#custódia)
     - [Pagamento com custódia](#pagamento-com-custódia)
@@ -702,6 +707,35 @@ BankAccount createdBankAccount = api.bankAccount().update("BKA-E0BAC6D15696",
 ```java
 List<BankAccount> createdBankAccounts = api.bankAccount().getList("MPA-E0BAC6D15696");
 ```
+
+## Lançamento
+O Lançamento é um crédito ou débito no extrato ou no saldo futuro da conta de um recebedor. Ele é gerado quando um pagamento é autorizado, um reembolso é realizado ou em qualquer outra situação em que ocorram movimentações de valores na conta Moip de um lojista.
+### Consulta
+```java
+Entry entry = api.get("ENTRY_ID");
+```
+
+### Listagem
+#### Sem filtros de busca
+```java
+EntriesListResponse entriesListResponse = api.list();
+```
+
+#### Com filtros de busca
+```java
+Pagination pagination = new Pagination();
+        pagination.setLimit(10);
+        pagination.setOffset(10);
+
+        Filters filters = new Filters();
+        filters.between("liquidAmount","5000", "50000");
+
+        String q = "SETTLED";
+
+        EntriesListResponse entriesListResponse = api.list(pagination,filters,q);
+```
+
+> É possível utilizar um ou mais filtros de busca. Para maiores informações, confira nossa [referência API](https://dev.moip.com.br/v2/reference#filtros-de-busca).
 
 ## Transferência
 ### Criação
