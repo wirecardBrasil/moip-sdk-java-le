@@ -8,6 +8,7 @@ public class PaymentRequest {
     private GeolocationRequest geolocation;
     private Boolean delayCapture;
     private EscrowRequest escrow;
+    private String statementDescriptor;
 
     public PaymentRequest orderId(final String orderId) {
         this.orderId = orderId;
@@ -38,6 +39,11 @@ public class PaymentRequest {
         this.escrow = escrow;
         return this;
     }
+    
+	public PaymentRequest statementDescriptor(String statementDescriptor) {
+		this.statementDescriptor = statementDescriptor;
+ 		return this;
+ 	}    
 
     public String getOrderId() {
         return orderId;
@@ -58,6 +64,10 @@ public class PaymentRequest {
     public Boolean getDelayCapture() {
         return delayCapture;
     }
+    
+	public String getStatementDescriptor() {
+ 		return statementDescriptor;
+	}    
 
     @Override
     public String toString() {
@@ -68,6 +78,7 @@ public class PaymentRequest {
         sb.append(", geolocation=").append(geolocation);
         sb.append(", delayCapture=").append(delayCapture);
         sb.append(", escrow=").append(escrow);
+        sb.append(", statementDescriptor=").append(statementDescriptor);
         sb.append('}');
         return sb.toString();
     }
