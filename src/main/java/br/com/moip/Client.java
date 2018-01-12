@@ -58,11 +58,19 @@ public class Client {
     private final String endpoint;
     private final Authentication authentication;
     private final Gson gson;
+    private int connectTimeout;
+    private int readTimeout;
 
     public Client(final String endpoint, final Authentication authentication) {
         this.endpoint = endpoint;
         this.authentication = authentication;
         this.gson = GsonFactory.gson();
+    }
+    
+    public Client(final String endpoint, final Authentication authentication, int connectTimeout, int readTimeout) {
+        this(endpoint, authentication);
+        this.connectTimeout = connectTimeout;
+        this.readTimeout = readTimeout;
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type) {
@@ -96,7 +104,8 @@ public class Client {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
             conn.setRequestProperty("Content-type", contentType.getMimeType());
-
+    		conn.setConnectTimeout(connectTimeout);
+    		conn.setReadTimeout(readTimeout);
             conn.setRequestMethod(method);
 
             // Disable TLS 1.0
@@ -171,7 +180,7 @@ public class Client {
         }
     }
 
-    private void logHeaders(Set<Map.Entry<String, List<String>>> entries) {
+	private void logHeaders(Set<Map.Entry<String, List<String>>> entries) {
         for (Map.Entry<String, List<String>> header : entries) {
             if (header.getKey() != null) {
                 LOGGER.debug("{}: {}", header.getKey(), header.getValue());
