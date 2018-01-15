@@ -6,6 +6,7 @@ public class MoipAccount {
     private String fullname;
     private String login;
     private String email;
+    private String account;
 
     public String getId() {
         return id;
@@ -38,6 +39,8 @@ public class MoipAccount {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getAccount() { return account; }
 
     @Override
     public String toString() {
