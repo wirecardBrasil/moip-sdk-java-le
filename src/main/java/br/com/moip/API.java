@@ -1,19 +1,6 @@
 package br.com.moip;
 
-import br.com.moip.api.AccountAPI;
-import br.com.moip.api.InvoiceAPI;
-import br.com.moip.api.OrderAPI;
-import br.com.moip.api.PaymentAPI;
-import br.com.moip.api.CustomerAPI;
-import br.com.moip.api.ConnectAPI;
-import br.com.moip.api.NotificationPreferencesAPI;
-import br.com.moip.api.RefundAPI;
-import br.com.moip.api.MultiorderAPI;
-import br.com.moip.api.MultipaymentAPI;
-import br.com.moip.api.BankAccountsAPI;
-import br.com.moip.api.EscrowAPI;
-import br.com.moip.api.TransferApi;
-import br.com.moip.api.EntryAPI;
+import br.com.moip.api.*;
 
 public class API {
 
@@ -80,4 +67,6 @@ public class API {
     }
 
     public EntryAPI entry() { return new EntryAPI(client); }
+
+    public BalancesAPI balance() { return new BalancesAPI(client); }
 }
