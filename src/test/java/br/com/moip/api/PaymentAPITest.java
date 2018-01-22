@@ -76,6 +76,7 @@ public class PaymentAPITest {
         );
         assertFalse(createdPayment.getDelayCapture());
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
+        assertEquals("sualoja.com", createdPayment.getStatementDescriptor());
     }
 
     @Play("payments/create")
@@ -85,6 +86,7 @@ public class PaymentAPITest {
             new PaymentRequest()
                 .orderId("ORD-HPMZSOM611M2")
                 .installmentCount(1)
+                .statementDescriptor("sualoja.com")
                 .delayCapture(false)
                 .fundingInstrument(
                     new FundingInstrumentRequest()
@@ -109,6 +111,7 @@ public class PaymentAPITest {
                 )
         );
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
+        assertEquals("sualoja.com", createdPayment.getStatementDescriptor());
     }
 
     @Play("payments/create_online_bank_debit_payment")
@@ -240,6 +243,7 @@ public class PaymentAPITest {
         assertEquals(payment.getAmount().getTotal(), (Integer)7300);
         assertEquals(payment.getFundingInstrument().getMethod(), FundingInstrument.Method.CREDIT_CARD);
         assertEquals(payment.getInstallmentCount(), 1);
+        assertEquals(payment.getStatementDescriptor(), "sualoja.com");
     }
 
     @Play("payments/capture")

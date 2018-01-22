@@ -74,6 +74,7 @@ public class MultipaymentAPITest {
         Multipayment multipayment = api.create(new PaymentRequest()
             .orderId("MOR-BMJN4E5LSG6N")
             .installmentCount(1)
+            .statementDescriptor("Minha Loja")
             .delayCapture(false)
             .fundingInstrument(
                 new FundingInstrumentRequest()
@@ -105,6 +106,8 @@ public class MultipaymentAPITest {
         assertEquals((Integer)4000, multipayment.getPayments().get(1).getAmount().getTotal());
         assertEquals("https://sandbox.moip.com.br/v2/multiorders/MOR-BMJN4E5LSG6N", multipayment.getLinks().multiorderLink());
         assertEquals("VISA", multipayment.getPayments().get(0).getFundingInstrument().getCreditCard().getBrand());
+        assertEquals("Minha Loja", multipayment.getPayments().get(0).getStatementDescriptor());
+        assertEquals("Minha Loja", multipayment.getPayments().get(1).getStatementDescriptor());
     }
 
     @Play("multipayment/get")
@@ -117,6 +120,8 @@ public class MultipaymentAPITest {
         assertEquals((Integer)8000, multipayment.getAmount().getTotal());
         assertEquals(1, multipayment.getInstallmentCount());
         assertNotNull(multipayment.getPayments());
+        assertEquals("Minha Loja", multipayment.getPayments().get(0).getStatementDescriptor());
+        assertEquals("Minha Loja", multipayment.getPayments().get(1).getStatementDescriptor());
     }
 
     @Play("multipayment/capture")
