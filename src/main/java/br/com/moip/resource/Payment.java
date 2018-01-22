@@ -10,6 +10,7 @@ public class Payment {
     private PaymentStatus status;
     private Amount amount;
     private int installmentCount;
+    private String statementDescriptor;
     private final FundingInstrument fundingInstrument = new FundingInstrument();
     private Geolocation geolocation;
     private Boolean delayCapture;
@@ -47,6 +48,10 @@ public class Payment {
     public void setInstallmentCount(int installmentCount) {
         this.installmentCount = installmentCount;
     }
+
+    public String getStatementDescriptor() { return statementDescriptor; }
+
+    public void setStatementDescriptor(String statementDescriptor) { this.statementDescriptor = statementDescriptor; }
 
     public FundingInstrument getFundingInstrument() {
         return fundingInstrument;
@@ -102,6 +107,7 @@ public class Payment {
         sb.append(", status=").append(status);
         sb.append(", amount=").append(amount);
         sb.append(", installmentCount=").append(installmentCount);
+        sb.append(", statementDescriptor=").append(statementDescriptor);
         sb.append(", fundingInstrument=").append(fundingInstrument);
         sb.append(", geolocation=").append(geolocation);
         sb.append(", delayCapture=").append(delayCapture);

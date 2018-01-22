@@ -4,6 +4,7 @@ public class PaymentRequest {
 
     private String orderId;
     private int installmentCount;
+    private String statementDescriptor;
     private FundingInstrumentRequest fundingInstrument = new FundingInstrumentRequest();
     private GeolocationRequest geolocation;
     private Boolean delayCapture;
@@ -16,6 +17,11 @@ public class PaymentRequest {
 
     public PaymentRequest installmentCount(final int installmentCount) {
         this.installmentCount = installmentCount;
+        return this;
+    }
+
+    public PaymentRequest statementDescriptor(final String statementDescriptor) {
+        this.statementDescriptor = statementDescriptor;
         return this;
     }
 
@@ -64,6 +70,7 @@ public class PaymentRequest {
         final StringBuilder sb = new StringBuilder("PaymentRequest{");
         sb.append("orderId='").append(orderId).append('\'');
         sb.append(", installmentCount=").append(installmentCount);
+        sb.append(", statementDescriptor=").append(statementDescriptor);
         sb.append(", fundingInstrument=").append(fundingInstrument);
         sb.append(", geolocation=").append(geolocation);
         sb.append(", delayCapture=").append(delayCapture);
