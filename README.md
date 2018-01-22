@@ -65,8 +65,10 @@
     - [Exclusão](#exclusão-1)
     - [Atualização](#atualização)
     - [Listagem](#listagem-1)
-  - [Lançamento](#lançamento)
+  - [Saldo Moip](#saldo-moip)
     - [Consulta](#consulta-9)
+  - [Lançamento](#lançamento)
+    - [Consulta](#consulta-10)
     - [Listagem](#listagem-2)
       - [Sem filtros de busca](#sem-filtros-de-busca)
       - [Com filtros de busca](#com-filtros-de-busca)
@@ -74,7 +76,7 @@
     - [Criação](#criação-8)
       -[Conta Bancária](#conta-bancária)
       -[Conta Moip](#conta-moip-1)
-    - [Consulta](#consulta-10)
+    - [Consulta](#consulta-11)
     - [Listagem](#listagem-3)
     - [Reversão](#reversão)
   - [Custódia](#custódia)
@@ -707,6 +709,21 @@ BankAccount createdBankAccount = api.bankAccount().update("BKA-E0BAC6D15696",
 ```java
 List<BankAccount> createdBankAccounts = api.bankAccount().getList("MPA-E0BAC6D15696");
 ```
+
+## Saldo Moip
+O Saldo é a composição de valores atuais disponíveis, indisponíveis (bloqueados) e futuros de uma determinada **Conta Moip**.
+
+> Esta API está na versão 2.1, contendo o _header_ **Accept**, com o valor `application/json;version=2.1`.
+### Consulta
+```java
+Balances balances = api.get();
+```
+
+Para consultar um saldo específico (indisponível, futuro e disponível):
+
+* **indisponíveis** - `balances.getUnavailable();`
+* **futuros** - `balances.getFuture();`
+* **disponíveis** - `balances.getCurrent();`
 
 ## Lançamento
 O Lançamento é um crédito ou débito no extrato ou no saldo futuro da conta de um recebedor. Ele é gerado quando um pagamento é autorizado, um reembolso é realizado ou em qualquer outra situação em que ocorram movimentações de valores na conta Moip de um lojista.

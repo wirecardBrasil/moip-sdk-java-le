@@ -1,0 +1,16 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/balances
+    headers:
+      "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+      Accept: application/json;version=2.1
+    method: GET
+  response:
+    status: 200
+    headers:
+      "Content-Type": application/json
+    body: |
+      {"unavailable":[{"amount":43902,"currency":"BRL"}],"future":[{"amount":11323,"currency":"BRL"}],"current":[{"amount":567094,"currency":"BRL"}]}
