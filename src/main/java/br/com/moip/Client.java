@@ -41,7 +41,6 @@ public class Client {
     public static final String CONNECT_PRODUCTION = "https://connect.moip.com.br";
     public static final String CONNECT_SANDBOX = "https://connect-sandbox.moip.com.br";
     private static String USER_AGENT;
-    private static final String ACCEPT = "application/json;version=";
 
     static {
         try {
@@ -65,35 +64,44 @@ public class Client {
         this.gson = GsonFactory.gson();
     }
 
+    private String accept() {
+        return "application/json";
+    }
+
+    public String accept(String version) {
+        String value = "application/json";
+        switch (version) {
+            case "2.1": return value + ";version=" + version;
+        }
+        return value;
+    }
+
     public <T> T post(final String path, final Class<T> type) {
-        return doRequest("POST", path, null, type, ContentType.APPLICATION_JSON, null);
+        return doRequest("POST", path, null, type, ContentType.APPLICATION_JSON, accept());
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type) {
-        return doRequest("POST", path, object, type, ContentType.APPLICATION_JSON, null);
+        return doRequest("POST", path, object, type, ContentType.APPLICATION_JSON, accept());
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type, ContentType contentType) {
-        return doRequest("POST", path, object, type, contentType, null);
+        return doRequest("POST", path, object, type, contentType, accept());
     }
 
     public <T> T put(final String path, final Object object, final Class<T> type) {
-        return doRequest("PUT", path, object, type, ContentType.APPLICATION_JSON, null);
+        return doRequest("PUT", path, object, type, ContentType.APPLICATION_JSON, accept());
     }
 
     public <T> T get(String path, Class<T> type) {
-        return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON, null);
+        return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON, accept());
     }
 
     public <T> T get(String path, Class<T> type, String version) {
-        switch (version) {
-            case "2.1": return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON, ACCEPT + version);
-        }
-        return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON, null);
+        return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON, accept(version));
     }
 
     public <T> T delete(String path, Class<T> type) {
-        return doRequest("DELETE", path, null, type, ContentType.APPLICATION_JSON, null);
+        return doRequest("DELETE", path, null, type, ContentType.APPLICATION_JSON, accept());
     }
 
     private <T> T doRequest(final String method, final String path, final Object object, final Class<T> type, final ContentType contentType, final String accept) {
@@ -103,7 +111,7 @@ public class Client {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
             conn.setRequestProperty("Content-type", contentType.getMimeType());
-            if(accept != null) conn.setRequestProperty("Accept", accept);
+            conn.setRequestProperty("Accept", accept);
 
             conn.setRequestMethod(method);
 
