@@ -30,7 +30,7 @@ public class RefundAPI {
     }
 
     public RefundsListResponse list(String id) {
-        if (id.charAt(0) == 'P') return client.get(String.format("/v2/payments/%s/refunds", id), RefundsListResponse.class);
+        if (id.startsWith("PAY-")) return client.get(String.format("/v2/payments/%s/refunds", id), RefundsListResponse.class);
 
         return client.get(String.format("/v2/orders/%s/refunds", id), RefundsListResponse.class);
     }
