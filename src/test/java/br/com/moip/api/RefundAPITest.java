@@ -8,6 +8,7 @@ import br.com.moip.request.RefundingInstrumentRequest;
 import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.resource.Refund;
 import br.com.moip.resource.RefundingInstrument;
+import br.com.moip.response.RefundsListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
 import org.junit.Before;
@@ -244,5 +245,29 @@ public class RefundAPITest {
         assertEquals("1234", refund.getRefundingInstrument().getBankAccount().getAccountNumber());
         assertEquals("https://sandbox.moip.com.br/v2/orders/ORD-XOZB2LRQ9BZ3", refund.getLinks().orderLink());
         assertEquals("https://sandbox.moip.com.br/v2/payments/PAY-E4Q0N9TK0BFW", refund.getLinks().paymentLink());
+    }
+
+    @Play("refunds/list_order")
+    @Test
+    public void testShouldListOrderRefunds() {
+        RefundsListResponse refunds = api.list("ORD-AMSJ0PHBOWSW");
+
+        assertEquals("REF-OBUEAQSUW7WF", refunds.getRefunds().get(0).getId());
+        assertEquals("REFUND.REQUESTED", refunds.getRefunds().get(0).getEvents().get(1).getType());
+        assertEquals("MASTERCARD", refunds.getRefunds().get(0).getRefundingInstrument().getCreditCard().getBrand());
+        assertEquals(RefundingInstrument.Method.CREDIT_CARD, refunds.getRefunds().get(0).getRefundingInstrument().getMethod());
+        assertEquals("ORD-AMSJ0PHBOWSW", refunds.getRefunds().get(0).getLinks().orderTitle());
+    }
+
+    @Play("refunds/list_payment")
+    @Test
+    public void testShouldListPaymentRefunds() {
+        RefundsListResponse refunds = api.list("PAY-97QYOMHMMAWM");
+
+        assertEquals("REF-OBUEAQSUW7WF", refunds.getRefunds().get(0).getId());
+        assertEquals((Integer)23000, refunds.getRefunds().get(0).getAmount().getTotal());
+        assertEquals(Refund.Type.FULL, refunds.getRefunds().get(0).getType());
+        assertEquals(true, refunds.getRefunds().get(0).getRefundingInstrument().getCreditCard().getStore());
+        assertEquals("PAY-97QYOMHMMAWM", refunds.getRefunds().get(0).getLinks().paymentTitle());
     }
 }
