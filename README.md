@@ -42,9 +42,10 @@
     -  [Exclusão](#exclusão)
     -  [Listagem](#listagem)
   - [Reembolsos](#reembolsos)
-    - [Pedido](#pedido)
-    - [Pagamento](#pagamento)
-    - [Consulta](#consulta-4)
+    - [Reembolsar pedido](#reembolsar-pedido)
+    - [Reembolsar pagamento](#reembolsar-pagamento)
+    - [Consultar reembolso](#consultar-reembolso)
+    - [Listar reembolsos](#listar-reembolsos)
   - [Multipedidos](#multipedidos)
     - [Criação](#criação-4)
     - [Consulta](#consulta-5)
@@ -355,12 +356,18 @@ api.notification().delete("NPR-NR0GR85KHL10"));
 NotificationPreferenceListResponse notificationList = api.notification().list();
 ```
 
-### Reembolsos
+## Reembolsos
+O **Reembolso** é a devolução de um pagamento para o pagador. Por meio desta API é possível realizar reembolsos, consultar os detalhes de um determinado reembolso e listar os reembolsos de um pedido ou pagamento.
 
-> Para fazer reembolsos totais basta remover o método ```amount```.
+> **Importante!**
+> * O reembolso só pode ser realizado para conta bancária do mesmo titular do pagamento;
+> * pagamentos feitos por cartão de crédito podem ser reembolsados somente via cartão de crédito;
+> * o pagamento só pode ser reembolsado no cartão de crédito no período inferior a 180 dias após autorização pagamento;
+> * para realizar reembolsos totais basta remover o método ```amount```.
 
-### Pedido
-#### Cartão de Crédito
+### Reembolsar pedido
+#### Via cartão de crédito
+O reembolso de pedidos pagos por cartão de crédito serão feitos diretamente no mesmo cartão do cliente/comprador.
 ```java
 Refund refund = api.refund().order(
     new RefundRequest("ORD-89SOQ6FMPJPX")
@@ -369,7 +376,7 @@ Refund refund = api.refund().order(
 );
 ```
 
-#### Conta Bancária
+#### Via conta bancária
 ```java
 Refund refund = api.refund().order(
     new RefundRequest("ORD-GS1FSQ3SO9SY")
@@ -392,8 +399,9 @@ Refund refund = api.refund().order(
 );
 ```
 
-### Pagamento
-#### Cartão de Crédito
+### Reembolsar pagamento
+#### Via cartão de crédito
+O reembolso de pagamentos realizados por cartão de crédito serão feitos diretamente no mesmo cartão do cliente/comprador.
 
 ```java
 Refund refund = api.refund().payment(
@@ -403,7 +411,7 @@ Refund refund = api.refund().payment(
 );
 ```
 
-#### Conta Bancária
+#### Via conta bancária
 ```java
 Refund refund = api.refund().payment(
     new RefundRequest("PAY-E4Q0N9TK0BFW")
@@ -426,10 +434,28 @@ Refund refund = api.refund().payment(
 );
 ```
 
-### Consulta
+### Consultar reembolso
 ```java
 Refund refund = api.refund().get("REF-JR4WALM894UJ");
 System.out.println(refund);
+```
+
+### Listar reembolsos
+Parâmetros aceitos:
+
+|    Descrição    |    Exemplo    |
+|      :---:      |     :---:     |
+| ID do pedido    | ORD-XXXXXXXX  |
+| ID do pagamento | PAY-XXXXXXXX  |
+
+#### Reembolsos do pedido
+```java
+RefundsListResponse refunds = api.list("ORD-AMSJ0PHBOWSW");
+```
+
+#### Reembolsos do pagamento
+```java
+RefundsListResponse refunds = api.list("PAY-97QYOMHMMAWM");
 ```
 
 ## Multipedidos
