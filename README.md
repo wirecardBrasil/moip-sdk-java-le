@@ -99,7 +99,7 @@ Adicionar no seu pom.xml:
 <dependency>
     <groupId>br.com.moip</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>4.0.0</version>
+    <version>4.1.0</version>
 </dependency>
 
 ```
