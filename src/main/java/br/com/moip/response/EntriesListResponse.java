@@ -1,8 +1,6 @@
 package br.com.moip.response;
 
 import br.com.moip.resource.Entry;
-import br.com.moip.resource.Links;
-import br.com.moip.resource.invoice.Summary;
 
 import java.util.ArrayList;
 import java.util.List;
