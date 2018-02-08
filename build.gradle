@@ -87,6 +87,16 @@ uploadArchives {
                         name 'Rodrigo Saito'
                         email 'rodrigo.saito@moip.com.br'
                     }
+                    developer {
+                        id 'jair.bressani'
+                        name 'Jair Bressani Junior'
+                        email 'jair.bressani@moip.com.br'
+                    }
+                    developer {
+                        id 'matheus.nakaya'
+                        name 'Matheus Nakaya'
+                        email 'matheus.nakaya@moip.com.br'
+                    }
                 }
             }
         }
