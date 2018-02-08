@@ -88,6 +88,11 @@ uploadArchives {
                         email 'rodrigo.saito@moip.com.br'
                     }
                     developer {
+                        id 'caio.gaspar'
+                        name 'Caio Gaspar'
+                        email 'caio.gaspar@moip.com.br'
+                    }
+                    developer {
                         id 'jair.bressani'
                         name 'Jair Bressani Junior'
                         email 'jair.bressani@moip.com.br'
