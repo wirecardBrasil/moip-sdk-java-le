@@ -767,15 +767,15 @@ EntriesListResponse entriesListResponse = api.list();
 #### Com filtros de busca
 ```java
 Pagination pagination = new Pagination();
-        pagination.setLimit(10);
-        pagination.setOffset(10);
+    pagination.setLimit(10);
+    pagination.setOffset(10);
 
-        Filters filters = new Filters();
-        filters.between("liquidAmount", "5000", "50000");
+    Filters filters = new Filters();
+    filters.between("liquidAmount", "5000", "50000");
 
-        String q = "SETTLED";
+    String q = "SETTLED";
 
-        EntriesListResponse entriesListResponse = api.list(pagination, filters, q);
+    EntriesListResponse entriesListResponse = api.list(pagination, filters, q);
 ```
 
 > É possível utilizar um ou mais filtros de busca. Para maiores informações, confira nossa [referência API](https://dev.moip.com.br/v2/reference#filtros-de-busca).
