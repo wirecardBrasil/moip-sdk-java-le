@@ -64,56 +64,44 @@ public class Client {
         this.gson = GsonFactory.gson();
     }
 
-    private String accept() {
-        return "application/json";
-    }
-
-    public String accept(String version) {
-        String value = "application/json";
-        switch (version) {
-            case "2.1": return value + ";version=" + version;
-        }
-        return value;
-    }
-
     public <T> T post(final String path, final Class<T> type) {
-        return doRequest("POST", path, null, type, ContentType.APPLICATION_JSON, accept());
+        return doRequest(new RequestMaker("POST", path, null, type, ContentType.APPLICATION_JSON));
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type) {
-        return doRequest("POST", path, object, type, ContentType.APPLICATION_JSON, accept());
+        return doRequest(new RequestMaker("POST", path, object, type, ContentType.APPLICATION_JSON));
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type, ContentType contentType) {
-        return doRequest("POST", path, object, type, contentType, accept());
+        return doRequest(new RequestMaker("POST", path, object, type, contentType));
     }
 
     public <T> T put(final String path, final Object object, final Class<T> type) {
-        return doRequest("PUT", path, object, type, ContentType.APPLICATION_JSON, accept());
+        return doRequest(new RequestMaker("PUT", path, object, type, ContentType.APPLICATION_JSON));
     }
 
     public <T> T get(String path, Class<T> type) {
-        return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON, accept());
+        return doRequest(new RequestMaker("GET", path, null, type, ContentType.APPLICATION_JSON));
     }
 
-    public <T> T get(String path, Class<T> type, String version) {
-        return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON, accept(version));
+    public <T> T get(String path, Class<T> type, String acceptVersion) {
+        return doRequest(new RequestMaker("GET", path, null, type, ContentType.APPLICATION_JSON, acceptVersion));
     }
 
     public <T> T delete(String path, Class<T> type) {
-        return doRequest("DELETE", path, null, type, ContentType.APPLICATION_JSON, accept());
+        return doRequest(new RequestMaker("DELETE", path, null, type, ContentType.APPLICATION_JSON));
     }
 
-    private <T> T doRequest(final String method, final String path, final Object object, final Class<T> type, final ContentType contentType, final String accept) {
+    private <T> T doRequest(final RequestMaker requestMaker) {
         try {
-            URL url = new URL(endpoint + path);
+            URL url = new URL(endpoint + requestMaker.path);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
-            conn.setRequestProperty("Content-type", contentType.getMimeType());
-            conn.setRequestProperty("Accept", accept);
+            conn.setRequestProperty("Content-type", requestMaker.contentType.getMimeType());
+            conn.setRequestProperty("Accept", requestMaker.accept);
 
-            conn.setRequestMethod(method);
+            conn.setRequestMethod(requestMaker.method);
 
             // Disable TLS 1.0
             if (conn instanceof HttpsURLConnection) {
@@ -124,12 +112,12 @@ public class Client {
                 authentication.authenticate(conn);
             }
 
-            LOGGER.debug("---> {} {}", method, conn.getURL().toString());
+            LOGGER.debug("---> {} {}", requestMaker.method, conn.getURL().toString());
             logHeaders(conn.getRequestProperties().entrySet());
 
-            if (object != null) {
+            if (requestMaker.object != null) {
                 conn.setDoOutput(true);
-                String body = getBody(object, contentType);
+                String body = getBody(requestMaker.object, requestMaker.contentType);
 
                 LOGGER.debug("");
                 LOGGER.debug("{}", body);
@@ -181,7 +169,7 @@ public class Client {
             LOGGER.debug("{}", responseBody.toString());
             LOGGER.debug("<-- END HTTP ({}-byte body)", conn.getContentLength());
 
-            return gson.fromJson(responseBody.toString(), type);
+            return gson.fromJson(responseBody.toString(), requestMaker.<T>getType());
         } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
         }
@@ -222,6 +210,51 @@ public class Client {
 
     public String getEndpoint() {
         return endpoint;
+    }
+
+    private class RequestMaker {
+
+        private String method;
+        private String path;
+        private Object object;
+        private Class type;
+        private ContentType contentType;
+        private String accept;
+
+        public RequestMaker(String method, String path, Object object, Class type, ContentType contentType) {
+            this.method = method;
+            this.path = path;
+            this.object = object;
+            this.type = type;
+            this.contentType = contentType;
+        }
+
+        public RequestMaker(String method, String path, Object object, Class type, ContentType contentType, String acceptVersion) {
+            this.method = method;
+            this.path = path;
+            this.object = object;
+            this.type = type;
+            this.contentType = contentType;
+            this.accept = accept(acceptVersion);
+        }
+
+        public String accept(String version) {
+            String value = "application/json";
+            if(version == "2.1") value += ";version=" + version;
+            return value;
+        }
+
+        public String getMethod() { return method; }
+
+        public String getPath() { return path; }
+
+        public Object getObject() { return object; }
+
+        public <T> Class<T> getType() { return type; }
+
+        public ContentType getContentType() { return contentType; }
+
+        public String getAccept() { return accept; }
     }
 
 }
