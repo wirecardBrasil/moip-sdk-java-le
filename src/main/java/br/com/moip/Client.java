@@ -65,43 +65,43 @@ public class Client {
     }
 
     public <T> T post(final String path, final Class<T> type) {
-        return doRequest(new RequestMaker("POST", path, null, type, ContentType.APPLICATION_JSON));
+        return doRequest(new RequestProps("POST", path, null, type, ContentType.APPLICATION_JSON));
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type) {
-        return doRequest(new RequestMaker("POST", path, object, type, ContentType.APPLICATION_JSON));
+        return doRequest(new RequestProps("POST", path, object, type, ContentType.APPLICATION_JSON));
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type, ContentType contentType) {
-        return doRequest(new RequestMaker("POST", path, object, type, contentType));
+        return doRequest(new RequestProps("POST", path, object, type, contentType));
     }
 
     public <T> T put(final String path, final Object object, final Class<T> type) {
-        return doRequest(new RequestMaker("PUT", path, object, type, ContentType.APPLICATION_JSON));
+        return doRequest(new RequestProps("PUT", path, object, type, ContentType.APPLICATION_JSON));
     }
 
     public <T> T get(String path, Class<T> type) {
-        return doRequest(new RequestMaker("GET", path, null, type, ContentType.APPLICATION_JSON));
+        return doRequest(new RequestProps("GET", path, null, type, ContentType.APPLICATION_JSON));
     }
 
     public <T> T get(String path, Class<T> type, String acceptVersion) {
-        return doRequest(new RequestMaker("GET", path, null, type, ContentType.APPLICATION_JSON, acceptVersion));
+        return doRequest(new RequestProps("GET", path, null, type, ContentType.APPLICATION_JSON, acceptVersion));
     }
 
     public <T> T delete(String path, Class<T> type) {
-        return doRequest(new RequestMaker("DELETE", path, null, type, ContentType.APPLICATION_JSON));
+        return doRequest(new RequestProps("DELETE", path, null, type, ContentType.APPLICATION_JSON));
     }
 
-    private <T> T doRequest(final RequestMaker requestMaker) {
+    private <T> T doRequest(final RequestProps requestProps) {
         try {
-            URL url = new URL(endpoint + requestMaker.path);
+            URL url = new URL(endpoint + requestProps.path);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
-            conn.setRequestProperty("Content-type", requestMaker.contentType.getMimeType());
-            conn.setRequestProperty("Accept", requestMaker.accept);
+            conn.setRequestProperty("Content-type", requestProps.contentType.getMimeType());
+            conn.setRequestProperty("Accept", requestProps.accept);
 
-            conn.setRequestMethod(requestMaker.method);
+            conn.setRequestMethod(requestProps.method);
 
             // Disable TLS 1.0
             if (conn instanceof HttpsURLConnection) {
@@ -112,12 +112,12 @@ public class Client {
                 authentication.authenticate(conn);
             }
 
-            LOGGER.debug("---> {} {}", requestMaker.method, conn.getURL().toString());
+            LOGGER.debug("---> {} {}", requestProps.method, conn.getURL().toString());
             logHeaders(conn.getRequestProperties().entrySet());
 
-            if (requestMaker.object != null) {
+            if (requestProps.object != null) {
                 conn.setDoOutput(true);
-                String body = getBody(requestMaker.object, requestMaker.contentType);
+                String body = getBody(requestProps.object, requestProps.contentType);
 
                 LOGGER.debug("");
                 LOGGER.debug("{}", body);
@@ -169,7 +169,7 @@ public class Client {
             LOGGER.debug("{}", responseBody.toString());
             LOGGER.debug("<-- END HTTP ({}-byte body)", conn.getContentLength());
 
-            return gson.fromJson(responseBody.toString(), requestMaker.<T>getType());
+            return gson.fromJson(responseBody.toString(), requestProps.<T>getType());
         } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
         }
@@ -212,7 +212,7 @@ public class Client {
         return endpoint;
     }
 
-    private class RequestMaker {
+    private class RequestProps {
 
         private String method;
         private String path;
@@ -221,7 +221,7 @@ public class Client {
         private ContentType contentType;
         private String accept;
 
-        public RequestMaker(String method, String path, Object object, Class type, ContentType contentType) {
+        public RequestProps(String method, String path, Object object, Class type, ContentType contentType) {
             this.method = method;
             this.path = path;
             this.object = object;
@@ -229,7 +229,7 @@ public class Client {
             this.contentType = contentType;
         }
 
-        public RequestMaker(String method, String path, Object object, Class type, ContentType contentType, String acceptVersion) {
+        public RequestProps(String method, String path, Object object, Class type, ContentType contentType, String acceptVersion) {
             this.method = method;
             this.path = path;
             this.object = object;
