@@ -32,7 +32,8 @@ public class Address {
 
     @Override
     public String toString() {
-        return new StringBuilder('{')
+        return new StringBuilder()
+                .append('{')
                 .append("streetNumber='").append(streetNumber).append('\'')
                 .append(", street='").append(street).append('\'')
                 .append(", city='").append(city).append('\'')
