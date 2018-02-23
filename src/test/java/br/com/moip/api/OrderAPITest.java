@@ -24,10 +24,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class OrderAPITest {
 
@@ -56,7 +53,7 @@ public class OrderAPITest {
     @Test
     public void testCreate() {
         Order createdOrder = api.create(new OrderRequest()
-                .ownId("meu_id_order")
+                .ownId("the_order.001")
                 .addItem("Descrição do pedido", 1, "Mais info...", 100)
                 .customer(new CustomerRequest()
                                 .ownId("customer_own_id")
@@ -65,16 +62,97 @@ public class OrderAPITest {
                 )
         );
 
-        assertEquals("https://sandbox.moip.com.br/v2/orders/ORD-XVLUNGP6ORXH", createdOrder.getLinks().getSelf());
-        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH", createdOrder.getLinks().getCheckout().getPayCheckoutHref());
-        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=boleto", createdOrder.getLinks().getCheckout().getPayBoletoLink());
-        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=credit-card", createdOrder.getLinks().getCheckout().getPayCreditCardHref());
-        assertEquals("https://checkout-sandbox.moip.com.br/debit/itau/ORD-XVLUNGP6ORXH", createdOrder.getLinks().getCheckout().getPayOnlineBankDebitItauHref());
-        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH", createdOrder.getLinks().payCheckout());
-        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=boleto", createdOrder.getLinks().payBoleto());
-        assertEquals("https://checkout-new-sandbox.moip.com.br?token=900cdb9f-32f0-4ce2-81eb-f8748631b24b&id=ORD-XVLUNGP6ORXH&payment-method=credit-card", createdOrder.getLinks().payCreditCard());
-        assertEquals("https://checkout-sandbox.moip.com.br/debit/itau/ORD-XVLUNGP6ORXH", createdOrder.getLinks().payOnlineBankDebitItau());
-        assertEquals("ORD-XVLUNGP6ORXH", createdOrder.getId());
+        assertEquals("ORD-ZTX7EKT9QPAY", createdOrder.getId());
+        assertEquals("the_order.001", createdOrder.getOwnId());
+        assertEquals(OrderStatus.CREATED, createdOrder.getStatus());
+        assertEquals("V2", createdOrder.getPlatform());
+        assertEquals("2018-02-22T15:33:38.493-03", createdOrder.getCreatedAt());
+        assertEquals("2018-02-22T15:33:38.493-03", createdOrder.getUpdatedAt());
+        assertEquals(0, createdOrder.getAmount().getPaid().intValue());
+        assertEquals(11000, createdOrder.getAmount().getTotal().intValue());
+        assertEquals(0, createdOrder.getAmount().getFees().intValue());
+        assertEquals(0, createdOrder.getAmount().getRefunds().intValue());
+        assertEquals(0, createdOrder.getAmount().getLiquid().intValue());
+        assertEquals(0, createdOrder.getAmount().getOtherReceivers().intValue());
+        assertEquals("BRL", createdOrder.getAmount().getCurrency());
+        assertEquals(1500, createdOrder.getAmount().getSubtotals().getShipping().intValue());
+        assertEquals(0, createdOrder.getAmount().getSubtotals().getAddition().intValue());
+        assertEquals(0, createdOrder.getAmount().getSubtotals().getDiscount().intValue());
+        assertEquals(9500, createdOrder.getAmount().getSubtotals().getItems().intValue());
+        assertEquals("Descrição do pedido", createdOrder.getItems().get(0).getProduct());
+        assertEquals(9500, createdOrder.getItems().get(0).getPrice().intValue());
+        assertEquals(1, createdOrder.getItems().get(0).getQuantity().intValue());
+        assertEquals("Camiseta estampada branca", createdOrder.getItems().get(0).getDetail());
+        assertEquals("CLOTHING", createdOrder.getItems().get(0).getCategory());
+        assertEquals("123", createdOrder.getAddresses().get(0).getStreetNumber());
+        assertEquals("Rua de teste do SHIPPING", createdOrder.getAddresses().get(0).getStreet());
+        assertEquals("Sao Paulo", createdOrder.getAddresses().get(0).getCity());
+        assertEquals("8", createdOrder.getAddresses().get(0).getComplement());
+        assertEquals("Bairro do SHIPPING", createdOrder.getAddresses().get(0).getDistrict());
+        assertEquals("01234567", createdOrder.getAddresses().get(0).getZipCode());
+        assertEquals("SP", createdOrder.getAddresses().get(0).getState());
+        assertEquals("SHIPPING", createdOrder.getAddresses().get(0).getType());
+        assertEquals("BRA", createdOrder.getAddresses().get(0).getCountry());
+        assertEquals("CUS-O4C7B9LPNXN8", createdOrder.getCustomer().getId());
+        assertEquals("59fb3111bc694", createdOrder.getCustomer().getOwnId());
+        assertEquals("Fulano de Tal", createdOrder.getCustomer().getFullname());
+        assertEquals("1988-12-30", createdOrder.getCustomer().getBirthDate());
+        assertEquals("fulano@email.com", createdOrder.getCustomer().getEmail());
+        assertEquals("CRC-4DVSLWYHBSPA", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getId());
+        assertEquals("MASTERCARD", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getBrand());
+        assertEquals("555566", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getFirst6());
+        assertEquals("8884", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getLast4());
+        assertTrue(createdOrder.getCustomer().getFundingInstrument().getCreditCard().getStore());
+        assertEquals("CREDIT_CARD", createdOrder.getCustomer().getFundingInstrument().getMethod());
+        assertEquals("11", createdOrder.getCustomer().getPhone().getAreaCode());
+        assertEquals("66778899", createdOrder.getCustomer().getPhone().getNumber());
+        assertEquals("123", createdOrder.getCustomer().getAddresses().get(0).getStreetNumber());
+        assertEquals("Rua de teste do SHIPPING", createdOrder.getCustomer().getAddresses().get(0).getStreet());
+        assertEquals("Sao Paulo", createdOrder.getCustomer().getAddresses().get(0).getCity());
+        assertEquals("8", createdOrder.getCustomer().getAddresses().get(0).getComplement());
+        assertEquals("Bairro do SHIPPING", createdOrder.getCustomer().getAddresses().get(0).getDistrict());
+        assertEquals("01234567", createdOrder.getCustomer().getAddresses().get(0).getZipCode());
+        assertEquals("SP", createdOrder.getCustomer().getAddresses().get(0).getState());
+        assertEquals("SHIPPING", createdOrder.getCustomer().getAddresses().get(0).getType());
+        assertEquals("BRA", createdOrder.getCustomer().getAddresses().get(0).getCountry());
+        assertEquals("01234567", createdOrder.getCustomer().getShippingAddress().getZipCode());
+        assertEquals("Rua de teste do SHIPPING", createdOrder.getCustomer().getShippingAddress().getStreet());
+        assertEquals("123", createdOrder.getCustomer().getShippingAddress().getStreetNumber());
+        assertEquals("8", createdOrder.getCustomer().getShippingAddress().getComplement());
+        assertEquals("Sao Paulo", createdOrder.getCustomer().getShippingAddress().getCity());
+        assertEquals("Bairro do SHIPPING", createdOrder.getCustomer().getShippingAddress().getDistrict());
+        assertEquals("SP", createdOrder.getCustomer().getShippingAddress().getState());
+        assertEquals("BRA", createdOrder.getCustomer().getShippingAddress().getCountry());
+        assertEquals("MPA-20EBD39642B3", createdOrder.getCustomer().getMoipAccountId());
+        assertEquals("https://sandbox.moip.com.br/v2/customers/CUS-O4C7B9LPNXN8", createdOrder.getCustomer().getLinks().getSelfHref());
+        assertEquals("https://hostedaccount-sandbox.moip.com.br?token=27241594-d5aa-406a-ba6d-776caaafc860&id=CUS-O4C7B9LPNXN8&mpa=MPA-5D5053C0B4A4", createdOrder.getCustomer().getLinks().getHostedAccountHref());
+        assertEquals("CRC-4DVSLWYHBSPA", createdOrder.getCustomer().getFundingInstruments().get(0).getCreditCard().getId());
+        assertEquals("MASTERCARD", createdOrder.getCustomer().getFundingInstruments().get(0).getCreditCard().getBrand());
+        assertEquals("555566", createdOrder.getCustomer().getFundingInstruments().get(0).getCreditCard().getFirst6());
+        assertEquals("8884", createdOrder.getCustomer().getFundingInstruments().get(0).getCreditCard().getLast4());
+        assertTrue(createdOrder.getCustomer().getFundingInstruments().get(0).getCreditCard().getStore());
+        assertEquals("CREDIT_CARD", createdOrder.getCustomer().getFundingInstruments().get(0).getMethod());
+        assertNull(createdOrder.getPayments());
+        assertNull(createdOrder.getEscrows());
+        assertNull(createdOrder.getRefunds());
+        assertNull(createdOrder.getEntries());
+        assertEquals("ORDER.CREATED", createdOrder.getEvents().get(0).getType());
+        assertEquals("2018-02-22T15:33:38.493-03", createdOrder.getEvents().get(0).getCreatedAt());
+        assertNull(createdOrder.getEvents().get(0).getDescription());
+        assertEquals("MPA-5D5053C0B4A4", createdOrder.getReceivers().get(0).getMoipAccount().getId());
+        assertEquals("matheus.nakaya@moip.com.br", createdOrder.getReceivers().get(0).getMoipAccount().getEmail());
+        assertEquals("Matheus Nakaya", createdOrder.getReceivers().get(0).getMoipAccount().getFullname());
+        assertEquals("PRIMARY", createdOrder.getReceivers().get(0).getType());
+        assertEquals(0, createdOrder.getReceivers().get(0).getAmount().getTotal().intValue());
+        assertEquals("BRL", createdOrder.getReceivers().get(0).getAmount().getCurrency());
+        assertEquals(0, createdOrder.getReceivers().get(0).getAmount().getFees().intValue());
+        assertEquals(0, createdOrder.getReceivers().get(0).getAmount().getRefunds().intValue());
+        assertTrue(createdOrder.getReceivers().get(0).getFeePayor());
+        assertEquals("https://sandbox.moip.com.br/v2/orders/ORD-ZTX7EKT9QPAY", createdOrder.getLinks().getSelf());
+        assertEquals("https://checkout-new-sandbox.moip.com.br?token=9cfe4ce9-88e2-4dae-9316-da0f4733f88c&id=ORD-ZTX7EKT9QPAY", createdOrder.getLinks().payCheckout());
+        assertEquals("https://checkout-new-sandbox.moip.com.br?token=9cfe4ce9-88e2-4dae-9316-da0f4733f88c&id=ORD-ZTX7EKT9QPAY&payment-method=credit-card", createdOrder.getLinks().payCreditCard());
+        assertEquals("https://checkout-new-sandbox.moip.com.br?token=9cfe4ce9-88e2-4dae-9316-da0f4733f88c&id=ORD-ZTX7EKT9QPAY&payment-method=boleto", createdOrder.getLinks().payBoleto());
+        assertEquals("https://checkout-sandbox.moip.com.br/debit/itau/ORD-ZTX7EKT9QPAY", createdOrder.getLinks().payOnlineBankDebitItau());
     }
 
     @Play("orders/create_with_receivers")
