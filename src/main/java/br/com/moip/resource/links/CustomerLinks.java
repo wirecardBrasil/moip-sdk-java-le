@@ -2,20 +2,20 @@ package br.com.moip.resource.links;
 
 public class CustomerLinks {
 
-    private Self selfHref;
+    private Self self;
 
-    private HostedAccount hostedAccountHref;
+    private HostedAccount hostedAccount;
 
-    public String getSelfHref() { return selfHref.href; }
+    public String getSelfHref() { return self.getHref(); }
 
-    public String getHostedAccountHref() { return hostedAccountHref.redirectHref; }
+    public String getHostedAccountHref() { return hostedAccount.getRedirectHref(); }
 
     @Override
     public String toString() {
         return new StringBuilder()
                 .append('{')
-                .append("self={href='").append(selfHref).append("\'}")
-                .append(", hostedAccount={redirectHref='").append(hostedAccountHref).append("\'}")
+                .append("self={href='").append(self).append("\'}")
+                .append(", hostedAccount={redirectHref='").append(hostedAccount).append("\'}")
                 .append('}').toString();
     }
 

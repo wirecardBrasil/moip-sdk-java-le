@@ -10,8 +10,10 @@ import br.com.moip.request.ShippingAddressRequest;
 import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.request.CheckoutPreferencesRequest;
 import br.com.moip.request.InstallmentRequest;
+import br.com.moip.resource.FundingInstrument;
 import br.com.moip.resource.Order;
 import br.com.moip.resource.OrderStatus;
+import br.com.moip.resource.Receiver;
 import br.com.moip.response.OrderListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
@@ -62,6 +64,8 @@ public class OrderAPITest {
                 )
         );
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
         assertEquals("ORD-ZTX7EKT9QPAY", createdOrder.getId());
         assertEquals("the_order.001", createdOrder.getOwnId());
         assertEquals(OrderStatus.CREATED, createdOrder.getStatus());
@@ -96,14 +100,14 @@ public class OrderAPITest {
         assertEquals("CUS-O4C7B9LPNXN8", createdOrder.getCustomer().getId());
         assertEquals("59fb3111bc694", createdOrder.getCustomer().getOwnId());
         assertEquals("Fulano de Tal", createdOrder.getCustomer().getFullname());
-        assertEquals("1988-12-30", createdOrder.getCustomer().getBirthDate());
+        assertEquals("1988-12-30", simpleDateFormat.format(createdOrder.getCustomer().getBirthDate()));
         assertEquals("fulano@email.com", createdOrder.getCustomer().getEmail());
         assertEquals("CRC-4DVSLWYHBSPA", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getId());
         assertEquals("MASTERCARD", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getBrand());
         assertEquals("555566", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getFirst6());
         assertEquals("8884", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getLast4());
         assertTrue(createdOrder.getCustomer().getFundingInstrument().getCreditCard().getStore());
-        assertEquals("CREDIT_CARD", createdOrder.getCustomer().getFundingInstrument().getMethod());
+        assertEquals(FundingInstrument.Method.CREDIT_CARD, createdOrder.getCustomer().getFundingInstrument().getMethod());
         assertEquals("11", createdOrder.getCustomer().getPhone().getAreaCode());
         assertEquals("66778899", createdOrder.getCustomer().getPhone().getNumber());
         assertEquals("123", createdOrder.getCustomer().getAddresses().get(0).getStreetNumber());
@@ -131,18 +135,14 @@ public class OrderAPITest {
         assertEquals("555566", createdOrder.getCustomer().getFundingInstruments().get(0).getCreditCard().getFirst6());
         assertEquals("8884", createdOrder.getCustomer().getFundingInstruments().get(0).getCreditCard().getLast4());
         assertTrue(createdOrder.getCustomer().getFundingInstruments().get(0).getCreditCard().getStore());
-        assertEquals("CREDIT_CARD", createdOrder.getCustomer().getFundingInstruments().get(0).getMethod());
-        assertNull(createdOrder.getPayments());
-        assertNull(createdOrder.getEscrows());
-        assertNull(createdOrder.getRefunds());
-        assertNull(createdOrder.getEntries());
+        assertEquals(FundingInstrument.Method.CREDIT_CARD, createdOrder.getCustomer().getFundingInstruments().get(0).getMethod());
         assertEquals("ORDER.CREATED", createdOrder.getEvents().get(0).getType());
         assertEquals("2018-02-22T15:33:38.493-03", createdOrder.getEvents().get(0).getCreatedAt());
-        assertNull(createdOrder.getEvents().get(0).getDescription());
+        assertEquals("", createdOrder.getEvents().get(0).getDescription());
         assertEquals("MPA-5D5053C0B4A4", createdOrder.getReceivers().get(0).getMoipAccount().getId());
-        assertEquals("matheus.nakaya@moip.com.br", createdOrder.getReceivers().get(0).getMoipAccount().getEmail());
+        assertEquals("matheus.nakaya@moip.com.br", createdOrder.getReceivers().get(0).getMoipAccount().getLogin());
         assertEquals("Matheus Nakaya", createdOrder.getReceivers().get(0).getMoipAccount().getFullname());
-        assertEquals("PRIMARY", createdOrder.getReceivers().get(0).getType());
+        assertEquals(Receiver.Type.PRIMARY, createdOrder.getReceivers().get(0).getType());
         assertEquals(0, createdOrder.getReceivers().get(0).getAmount().getTotal().intValue());
         assertEquals("BRL", createdOrder.getReceivers().get(0).getAmount().getCurrency());
         assertEquals(0, createdOrder.getReceivers().get(0).getAmount().getFees().intValue());
