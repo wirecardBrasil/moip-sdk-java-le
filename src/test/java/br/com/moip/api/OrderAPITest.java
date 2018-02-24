@@ -102,7 +102,6 @@ public class OrderAPITest {
         assertEquals("59fb3111bc694", createdOrder.getCustomer().getOwnId());
         assertEquals("Fulano de Tal", createdOrder.getCustomer().getFullname());
         assertEquals("1988-12-30", simpleDateFormat.format(createdOrder.getCustomer().getBirthDate()));
-        assertEquals("1988-12-30", createdOrder.getCustomer().getBirthDate());
         assertEquals("fulano@email.com", createdOrder.getCustomer().getEmail());
         assertEquals("CRC-4DVSLWYHBSPA", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getId());
         assertEquals("MASTERCARD", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getBrand());
@@ -110,7 +109,6 @@ public class OrderAPITest {
         assertEquals("8884", createdOrder.getCustomer().getFundingInstrument().getCreditCard().getLast4());
         assertTrue(createdOrder.getCustomer().getFundingInstrument().getCreditCard().getStore());
         assertEquals(FundingInstrument.Method.CREDIT_CARD, createdOrder.getCustomer().getFundingInstrument().getMethod());
-        assertEquals("CREDIT_CARD", createdOrder.getCustomer().getFundingInstrument().getMethod());
         assertEquals("11", createdOrder.getCustomer().getPhone().getAreaCode());
         assertEquals("66778899", createdOrder.getCustomer().getPhone().getNumber());
         assertEquals("123", createdOrder.getCustomer().getAddresses().get(0).getStreetNumber());
@@ -146,18 +144,6 @@ public class OrderAPITest {
         assertEquals("matheus.nakaya@moip.com.br", createdOrder.getReceivers().get(0).getMoipAccount().getLogin());
         assertEquals("Matheus Nakaya", createdOrder.getReceivers().get(0).getMoipAccount().getFullname());
         assertEquals(Receiver.Type.PRIMARY, createdOrder.getReceivers().get(0).getType());
-        assertEquals("CREDIT_CARD", createdOrder.getCustomer().getFundingInstruments().get(0).getMethod());
-        assertNull(createdOrder.getPayments());
-        assertNull(createdOrder.getEscrows());
-        assertNull(createdOrder.getRefunds());
-        assertNull(createdOrder.getEntries());
-        assertEquals("ORDER.CREATED", createdOrder.getEvents().get(0).getType());
-        assertEquals("2018-02-22T15:33:38.493-03", createdOrder.getEvents().get(0).getCreatedAt());
-        assertNull(createdOrder.getEvents().get(0).getDescription());
-        assertEquals("MPA-5D5053C0B4A4", createdOrder.getReceivers().get(0).getMoipAccount().getId());
-        assertEquals("matheus.nakaya@moip.com.br", createdOrder.getReceivers().get(0).getMoipAccount().getEmail());
-        assertEquals("Matheus Nakaya", createdOrder.getReceivers().get(0).getMoipAccount().getFullname());
-        assertEquals("PRIMARY", createdOrder.getReceivers().get(0).getType());
         assertEquals(0, createdOrder.getReceivers().get(0).getAmount().getTotal().intValue());
         assertEquals("BRL", createdOrder.getReceivers().get(0).getAmount().getCurrency());
         assertEquals(0, createdOrder.getReceivers().get(0).getAmount().getFees().intValue());
