@@ -13,16 +13,18 @@
 
 * **Client**:
   * adds a new get with new header ([41edb85](https://github.com/moip/moip-sdk-java/commits/41edb85))
-  * adjust Accept values ([3fe45c7](https://github.com/moip/moip-sdk-java/commits/3fe45c7))  
+  * adjust Accept values ([3fe45c7](https://github.com/moip/moip-sdk-java/commits/3fe45c7))
 * **API**: fix imports ([817eae6](https://github.com/moip/moip-sdk-java/commits/817eae6))
 * **Payment**: adds statementDescriptor ([15ff550](https://github.com/moip/moip-sdk-java/commits/15ff550))
 * **RefundAPI**: change condition of `list()` method ([55ff9d0](https://github.com/moip/moip-sdk-java/commits/55ff9d0))
+* **Order**: add missing response elements ([b8ba4bc](https://github.com/moip/moip-sdk-java/commits/b8ba4bc))
 
 ### Tests
 
 * **Balances**: adds tests to balances ([4c8e251](https://github.com/moip/moip-sdk-java/commits/4c8e251))
 * **Payment**/**Multipayment**: add tests to statement descriptor ([03d8f4f](https://github.com/moip/moip-sdk-java/commits/03d8f4f))
 * **Refund**: adds tests to list refunds ([080fd10](https://github.com/moip/moip-sdk-java/commits/080fd10))
+* **Order**: adds tests to cover all response attributes ([c47071f](https://github.com/moip/moip-sdk-java/commits/c47071f))
 
 
 <a name="v4.0.0"></a>
