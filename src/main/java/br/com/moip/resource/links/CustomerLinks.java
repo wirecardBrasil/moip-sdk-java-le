@@ -2,7 +2,7 @@ package br.com.moip.resource.links;
 
 public class CustomerLinks {
 
-    private Self self;
+    private Href self;
 
     private HostedAccount hostedAccount;
 
@@ -17,13 +17,6 @@ public class CustomerLinks {
                 .append("self={href='").append(self).append("\'}")
                 .append(", hostedAccount={redirectHref='").append(hostedAccount).append("\'}")
                 .append('}').toString();
-    }
-
-    private class Self {
-
-        private String href;
-
-        public String getHref() { return href; }
     }
 
     private class HostedAccount {
