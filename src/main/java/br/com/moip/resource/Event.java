@@ -1,14 +1,12 @@
 package br.com.moip.resource;
 
-import java.util.Date;
-
 public class Event {
 
-    private Date createdAt;
+    private String createdAt;
     private String type;
     private String description;
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
