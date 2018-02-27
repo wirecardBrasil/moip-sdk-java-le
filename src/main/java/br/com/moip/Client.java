@@ -65,31 +65,38 @@ public class Client {
     }
 
     public <T> T post(final String path, final Class<T> type) {
-        return doRequest(new RequestProps("POST", path, null, type, ContentType.APPLICATION_JSON));
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("POST").path(path).type(type).contentType(ContentType.APPLICATION_JSON);
+        return doRequest(props);
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type) {
-        return doRequest(new RequestProps("POST", path, object, type, ContentType.APPLICATION_JSON));
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("POST").path(path).object(object).type(type).contentType(ContentType.APPLICATION_JSON);
+        return doRequest(props);
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type, ContentType contentType) {
-        return doRequest(new RequestProps("POST", path, object, type, contentType));
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("POST").path(path).object(object).type(type).contentType(contentType);
+        return doRequest(props);
     }
 
     public <T> T put(final String path, final Object object, final Class<T> type) {
-        return doRequest(new RequestProps("PUT", path, object, type, ContentType.APPLICATION_JSON));
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("PUT").path(path).object(object).type(type).contentType(ContentType.APPLICATION_JSON);
+        return doRequest(props);
     }
 
     public <T> T get(String path, Class<T> type) {
-        return doRequest(new RequestProps("GET", path, null, type, ContentType.APPLICATION_JSON));
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("GET").path(path).type(type).contentType(ContentType.APPLICATION_JSON);
+        return doRequest(props);
     }
 
     public <T> T get(String path, Class<T> type, String acceptVersion) {
-        return doRequest(new RequestProps("GET", path, null, type, ContentType.APPLICATION_JSON, acceptVersion));
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("GET").path(path).type(type).contentType(ContentType.APPLICATION_JSON).accept(acceptVersion);
+        return doRequest(props);
     }
 
     public <T> T delete(String path, Class<T> type) {
-        return doRequest(new RequestProps("DELETE", path, null, type, ContentType.APPLICATION_JSON));
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("DELETE").path(path).object(null).type(type).contentType(ContentType.APPLICATION_JSON);
+        return doRequest(props);
     }
 
     private <T> T doRequest(final RequestProps requestProps) {
@@ -212,37 +219,16 @@ public class Client {
         return endpoint;
     }
 
-    private class RequestProps {
+    private static class RequestProps {
 
-        private String method;
-        private String path;
-        private Object object;
-        private Class type;
-        private ContentType contentType;
-        private String accept;
+        protected String method;
+        protected String path;
+        protected Object object;
+        protected Class type;
+        protected ContentType contentType;
+        protected String accept;
 
-        public RequestProps(String method, String path, Object object, Class type, ContentType contentType) {
-            this.method = method;
-            this.path = path;
-            this.object = object;
-            this.type = type;
-            this.contentType = contentType;
-        }
-
-        public RequestProps(String method, String path, Object object, Class type, ContentType contentType, String acceptVersion) {
-            this.method = method;
-            this.path = path;
-            this.object = object;
-            this.type = type;
-            this.contentType = contentType;
-            this.accept = accept(acceptVersion);
-        }
-
-        public String accept(String version) {
-            String value = "application/json";
-            if(version == "2.1") value += ";version=" + version;
-            return value;
-        }
+        public RequestProps() {}
 
         public String getMethod() { return method; }
 
@@ -255,6 +241,49 @@ public class Client {
         public ContentType getContentType() { return contentType; }
 
         public String getAccept() { return accept; }
+    }
+
+    private static class RequestPropsBuilder extends RequestProps {
+
+        public static RequestPropsBuilder requestPropsBuilder() {
+            return new RequestPropsBuilder();
+        }
+
+        public RequestPropsBuilder method(String method) {
+            this.method = method;
+            return this;
+        }
+
+        public RequestPropsBuilder path(String path) {
+            this.path = path;
+            return this;
+        }
+
+        public RequestPropsBuilder object(Object object) {
+            this.object = object;
+            return this;
+        }
+
+        public RequestPropsBuilder type(Class type) {
+            this.type = type;
+            return this;
+        }
+
+        public RequestPropsBuilder contentType(ContentType contentType) {
+            this.contentType = contentType;
+            return this;
+        }
+
+        public RequestPropsBuilder accept(String acceptVersion) {
+            this.accept = acceptBuilder(acceptVersion);
+            return this;
+        }
+
+        public String acceptBuilder(String version) {
+            String value = "application/json";
+            if(version == "2.1") value += ";version=" + version;
+            return value;
+        }
     }
 
 }
