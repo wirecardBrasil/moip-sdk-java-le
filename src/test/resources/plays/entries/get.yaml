@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/entries/ENT-BH4NJAVN65FB
+    headers:
+      "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: GET
+  response:
+    status: 200
+    headers:
+      "Content-Type": application/json
+    body: |
+      {"external_id":"ENT-BH4NJAVN65FB","reschedule":[],"scheduledFor":"2017-08-25T09:53:08.000Z","status":"SETTLED","moipAccount":{"account":"MPA-B4DEE9F7589B"},"fees":[{"amount":179,"type":"TRANSACTION"}],"type":"CREDIT_CARD","grossAmount":2000,"moipAccountId":0,"updatedAt":"2017-08-24T21:20:08.000Z","id":36523041,"installment":{"amount":1,"number":1},"references":[{"value":"seu_identificador_proprio","type":"OWN_ID"},{"value":"ORD-6GRJQKSVAEYU","type":"ORDER"},{"value":"PAY-O8VM93XJICID","type":"PAYMENT"},{"value":"ENT-BH4NJAVN65FB","type":"SELF"}],"eventId":"PAY-O8VM93XJICID","createdAt":"2017-08-11T06:53:09.000Z","description":"Cartao de credito - Pedido PAY-O8VM93XJICID","blocked":false,"settledAt":"2017-08-24T21:20:08.000Z","liquidAmount":1821}

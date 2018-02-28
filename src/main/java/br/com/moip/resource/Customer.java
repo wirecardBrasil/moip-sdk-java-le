@@ -1,5 +1,8 @@
 package br.com.moip.resource;
 
+import br.com.moip.resource.links.CustomerLinks;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,10 +14,17 @@ public class Customer {
     private TaxDocument taxDocument;
     private Phone phone;
     private Date birthDate;
+    private List<Address> addresses = new ArrayList<>();
     private ShippingAddress shippingAddress;
     private String id;
     private FundingInstrument fundingInstrument;
+    private MoipAccount moipAccount;
+    private CustomerLinks _links;
     private List<FundingInstrument> fundingInstruments;
+
+    public String getId() {
+        return id;
+    }
 
     public String getOwnId() {
         return ownId;
@@ -46,6 +56,8 @@ public class Customer {
         return phone;
     }
 
+    public List<Address> getAddresses() { return addresses; }
+
     public ShippingAddress getShippingAddress() {
         return shippingAddress;
     }
@@ -54,6 +66,10 @@ public class Customer {
         return fundingInstrument;
     }
 
+    public String getMoipAccountId() { return moipAccount.getId(); }
+
+    public CustomerLinks getLinks() { return _links; }
+
     public List<FundingInstrument> getFundingInstruments() {
         return fundingInstruments;
     }
@@ -61,18 +77,20 @@ public class Customer {
     @Override
     public String toString() {
         return "Customer{" +
-                "ownId='" + ownId + '\'' +
+                "id='" + id + '\'' +
+                ", ownId='" + ownId + '\'' +
                 ", fullname='" + fullname + '\'' +
                 ", email='" + email + '\'' +
                 ", taxDocument=" + taxDocument +
                 ", phone=" + phone +
                 ", birthDate=" + birthDate +
+                ", addresses=[" + addresses + ']' +
                 ", shippingAddress=" + shippingAddress +
+                ", fundingInstrument=" + fundingInstrument +
+                ", moipAccount={" + moipAccount +
+                ", _links=" + _links +
+                ", fundingInstruments=[" + fundingInstruments + ']' +
                 '}';
-    }
-
-    public String getId() {
-        return id;
     }
 
 }

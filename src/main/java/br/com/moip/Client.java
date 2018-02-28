@@ -54,7 +54,6 @@ public class Client {
         }
     }
 
-
     private final String endpoint;
     private final Authentication authentication;
     private final Gson gson;
@@ -65,39 +64,51 @@ public class Client {
         this.gson = GsonFactory.gson();
     }
 
+    public <T> T post(final String path, final Class<T> type) {
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("POST").path(path).type(type).contentType(ContentType.APPLICATION_JSON);
+        return doRequest(props);
+    }
+
     public <T> T post(final String path, final Object object, final Class<T> type) {
-        return doRequest("POST", path, object, type, ContentType.APPLICATION_JSON);
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("POST").path(path).object(object).type(type).contentType(ContentType.APPLICATION_JSON);
+        return doRequest(props);
     }
 
     public <T> T post(final String path, final Object object, final Class<T> type, ContentType contentType) {
-        return doRequest("POST", path, object, type, contentType);
-    }
-
-    public <T> T post(final String path, final Class<T> type) {
-        return doRequest("POST", path, null, type, ContentType.APPLICATION_JSON);
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("POST").path(path).object(object).type(type).contentType(contentType);
+        return doRequest(props);
     }
 
     public <T> T put(final String path, final Object object, final Class<T> type) {
-        return doRequest("PUT", path, object, type, ContentType.APPLICATION_JSON);
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("PUT").path(path).object(object).type(type).contentType(ContentType.APPLICATION_JSON);
+        return doRequest(props);
     }
 
     public <T> T get(String path, Class<T> type) {
-        return doRequest("GET", path, null, type, ContentType.APPLICATION_JSON);
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("GET").path(path).type(type).contentType(ContentType.APPLICATION_JSON);
+        return doRequest(props);
+    }
+
+    public <T> T get(String path, Class<T> type, String acceptVersion) {
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("GET").path(path).type(type).contentType(ContentType.APPLICATION_JSON).accept(acceptVersion);
+        return doRequest(props);
     }
 
     public <T> T delete(String path, Class<T> type) {
-        return doRequest("DELETE", path, null, type, ContentType.APPLICATION_JSON);
+        RequestProps props = RequestPropsBuilder.requestPropsBuilder().method("DELETE").path(path).object(null).type(type).contentType(ContentType.APPLICATION_JSON);
+        return doRequest(props);
     }
 
-    private <T> T doRequest(final String method, final String path, final Object object, final Class<T> type, final ContentType contentType) {
+    private <T> T doRequest(final RequestProps requestProps) {
         try {
-            URL url = new URL(endpoint + path);
+            URL url = new URL(endpoint + requestProps.path);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
-            conn.setRequestProperty("Content-type", contentType.getMimeType());
+            conn.setRequestProperty("Content-type", requestProps.contentType.getMimeType());
+            conn.setRequestProperty("Accept", requestProps.accept);
 
-            conn.setRequestMethod(method);
+            conn.setRequestMethod(requestProps.method);
 
             // Disable TLS 1.0
             if (conn instanceof HttpsURLConnection) {
@@ -108,12 +119,12 @@ public class Client {
                 authentication.authenticate(conn);
             }
 
-            LOGGER.debug("---> {} {}", method, conn.getURL().toString());
+            LOGGER.debug("---> {} {}", requestProps.method, conn.getURL().toString());
             logHeaders(conn.getRequestProperties().entrySet());
 
-            if (object != null) {
+            if (requestProps.object != null) {
                 conn.setDoOutput(true);
-                String body = getBody(object, contentType);
+                String body = getBody(requestProps.object, requestProps.contentType);
 
                 LOGGER.debug("");
                 LOGGER.debug("{}", body);
@@ -165,7 +176,7 @@ public class Client {
             LOGGER.debug("{}", responseBody.toString());
             LOGGER.debug("<-- END HTTP ({}-byte body)", conn.getContentLength());
 
-            return gson.fromJson(responseBody.toString(), type);
+            return gson.fromJson(responseBody.toString(), requestProps.<T>getType());
         } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
         }
@@ -206,6 +217,73 @@ public class Client {
 
     public String getEndpoint() {
         return endpoint;
+    }
+
+    private static class RequestProps {
+
+        protected String method;
+        protected String path;
+        protected Object object;
+        protected Class type;
+        protected ContentType contentType;
+        protected String accept;
+
+        public RequestProps() {}
+
+        public String getMethod() { return method; }
+
+        public String getPath() { return path; }
+
+        public Object getObject() { return object; }
+
+        public <T> Class<T> getType() { return type; }
+
+        public ContentType getContentType() { return contentType; }
+
+        public String getAccept() { return accept; }
+    }
+
+    private static class RequestPropsBuilder extends RequestProps {
+
+        public static RequestPropsBuilder requestPropsBuilder() {
+            return new RequestPropsBuilder();
+        }
+
+        public RequestPropsBuilder method(String method) {
+            this.method = method;
+            return this;
+        }
+
+        public RequestPropsBuilder path(String path) {
+            this.path = path;
+            return this;
+        }
+
+        public RequestPropsBuilder object(Object object) {
+            this.object = object;
+            return this;
+        }
+
+        public RequestPropsBuilder type(Class type) {
+            this.type = type;
+            return this;
+        }
+
+        public RequestPropsBuilder contentType(ContentType contentType) {
+            this.contentType = contentType;
+            return this;
+        }
+
+        public RequestPropsBuilder accept(String acceptVersion) {
+            this.accept = acceptBuilder(acceptVersion);
+            return this;
+        }
+
+        public String acceptBuilder(String version) {
+            String value = "application/json";
+            if(version == "2.1") value += ";version=" + version;
+            return value;
+        }
     }
 
 }

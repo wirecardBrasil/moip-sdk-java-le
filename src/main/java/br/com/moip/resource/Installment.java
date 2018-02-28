@@ -7,6 +7,8 @@ public class Installment {
     private int[] quantity;
     private int addition;
     private int discount;
+    private int amount;
+    private int number;
 
     public int[] getQuantity() {
         return quantity;
@@ -19,6 +21,10 @@ public class Installment {
     public int getDiscount() {
         return discount;
     }
+
+    public int getAmount() { return amount; }
+
+    public int getNumber() { return number; }
 
     @Override
     public String toString() {

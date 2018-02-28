@@ -10,6 +10,7 @@ public class Payment {
     private PaymentStatus status;
     private Amount amount;
     private int installmentCount;
+    private String statementDescriptor;
     private final FundingInstrument fundingInstrument = new FundingInstrument();
     private Geolocation geolocation;
     private Boolean delayCapture;
@@ -48,6 +49,10 @@ public class Payment {
         this.installmentCount = installmentCount;
     }
 
+    public String getStatementDescriptor() { return statementDescriptor; }
+
+    public void setStatementDescriptor(String statementDescriptor) { this.statementDescriptor = statementDescriptor; }
+
     public FundingInstrument getFundingInstrument() {
         return fundingInstrument;
     }
@@ -68,8 +73,27 @@ public class Payment {
         this.delayCapture = delayCapture;
     }
 
-    public List<Escrow>getEscrows() {
+    public void setEscrows(List<Escrow> escrows) { this.escrows = escrows; }
+
+    public List<Escrow> getEscrows() {
         return escrows;
+    }
+
+    private boolean hasEscrow() {
+
+        return (escrows != null && !escrows.isEmpty());
+    }
+
+    public Escrow getEscrow() {
+        if(!hasEscrow()) return null;
+
+        return escrows.get(0);
+    }
+
+    public String getEscrowId() {
+        if(!hasEscrow()) return null;
+
+        return getEscrow().getId();
     }
 
     public PaymentLinks getLinks() {
@@ -83,6 +107,7 @@ public class Payment {
         sb.append(", status=").append(status);
         sb.append(", amount=").append(amount);
         sb.append(", installmentCount=").append(installmentCount);
+        sb.append(", statementDescriptor=").append(statementDescriptor);
         sb.append(", fundingInstrument=").append(fundingInstrument);
         sb.append(", geolocation=").append(geolocation);
         sb.append(", delayCapture=").append(delayCapture);

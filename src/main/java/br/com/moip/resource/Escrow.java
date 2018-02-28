@@ -41,4 +41,18 @@ public class Escrow {
     public EscrowLinks getLinks() {
         return _links;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Escrows{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", status=").append(status);
+        sb.append(", description=").append(description);
+        sb.append(", amount=").append(amount);
+        sb.append(", createdAt=").append(createdAt);
+        sb.append(", updatedAt=").append(updatedAt);
+        sb.append(", _links=").append(_links);
+        sb.append('}');
+        return sb.toString();
+    }
 }

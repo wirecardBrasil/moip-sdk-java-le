@@ -42,9 +42,10 @@
     -  [Exclusão](#exclusão)
     -  [Listagem](#listagem)
   - [Reembolsos](#reembolsos)
-    - [Pedido](#pedido)
-    - [Pagamento](#pagamento)
-    - [Consulta](#consulta-4)
+    - [Reembolsar pedido](#reembolsar-pedido)
+    - [Reembolsar pagamento](#reembolsar-pagamento)
+    - [Consultar reembolso](#consultar-reembolso)
+    - [Listar reembolsos](#listar-reembolsos)
   - [Multipedidos](#multipedidos)
     - [Criação](#criação-4)
     - [Consulta](#consulta-5)
@@ -65,12 +66,19 @@
     - [Exclusão](#exclusão-1)
     - [Atualização](#atualização)
     - [Listagem](#listagem-1)
+  - [Saldo Moip](#saldo-moip)
+    - [Consulta](#consulta-9)
+  - [Lançamento](#lançamento)
+    - [Consulta](#consulta-10)
+    - [Listagem](#listagem-2)
+      - [Sem filtros de busca](#sem-filtros-de-busca)
+      - [Com filtros de busca](#com-filtros-de-busca)
   - [Transferência](#transferência)
     - [Criação](#criação-8)
       -[Conta Bancária](#conta-bancária)
       -[Conta Moip](#conta-moip-1)
-    - [Consulta](#consulta-9)
-    - [Listagem](#listagem-2)
+    - [Consulta](#consulta-11)
+    - [Listagem](#listagem-3)
     - [Reversão](#reversão)
   - [Custódia](#custódia)
     - [Pagamento com custódia](#pagamento-com-custódia)
@@ -91,7 +99,7 @@ Adicionar no seu pom.xml:
 <dependency>
     <groupId>br.com.moip</groupId>
     <artifactId>java-sdk</artifactId>
-    <version>4.0.0</version>
+    <version>4.1.0</version>
 </dependency>
 
 ```
@@ -348,12 +356,18 @@ api.notification().delete("NPR-NR0GR85KHL10"));
 NotificationPreferenceListResponse notificationList = api.notification().list();
 ```
 
-### Reembolsos
+## Reembolsos
+O **Reembolso** é a devolução de um pagamento para o pagador. Por meio desta API é possível realizar reembolsos, consultar os detalhes de um determinado reembolso e listar os reembolsos de um pedido ou pagamento.
 
-> Para fazer reembolsos totais basta remover o método ```amount```.
+> **Importante!**
+> * O reembolso só pode ser realizado para conta bancária do mesmo titular do pagamento;
+> * pagamentos feitos por cartão de crédito podem ser reembolsados somente via cartão de crédito;
+> * o pagamento só pode ser reembolsado no cartão de crédito no período inferior a 180 dias após autorização pagamento;
+> * para realizar reembolsos totais basta remover o método ```amount```.
 
-### Pedido
-#### Cartão de Crédito
+### Reembolsar pedido
+#### Via cartão de crédito
+O reembolso de pedidos pagos por cartão de crédito serão feitos diretamente no mesmo cartão do cliente/comprador.
 ```java
 Refund refund = api.refund().order(
     new RefundRequest("ORD-89SOQ6FMPJPX")
@@ -362,7 +376,7 @@ Refund refund = api.refund().order(
 );
 ```
 
-#### Conta Bancária
+#### Via conta bancária
 ```java
 Refund refund = api.refund().order(
     new RefundRequest("ORD-GS1FSQ3SO9SY")
@@ -385,8 +399,9 @@ Refund refund = api.refund().order(
 );
 ```
 
-### Pagamento
-#### Cartão de Crédito
+### Reembolsar pagamento
+#### Via cartão de crédito
+O reembolso de pagamentos realizados por cartão de crédito serão feitos diretamente no mesmo cartão do cliente/comprador.
 
 ```java
 Refund refund = api.refund().payment(
@@ -396,7 +411,7 @@ Refund refund = api.refund().payment(
 );
 ```
 
-#### Conta Bancária
+#### Via conta bancária
 ```java
 Refund refund = api.refund().payment(
     new RefundRequest("PAY-E4Q0N9TK0BFW")
@@ -419,10 +434,28 @@ Refund refund = api.refund().payment(
 );
 ```
 
-### Consulta
+### Consultar reembolso
 ```java
 Refund refund = api.refund().get("REF-JR4WALM894UJ");
 System.out.println(refund);
+```
+
+### Listar reembolsos
+Parâmetros aceitos:
+
+|    Descrição    |    Exemplo    |
+|      :---:      |     :---:     |
+| ID do pedido    | ORD-XXXXXXXX  |
+| ID do pagamento | PAY-XXXXXXXX  |
+
+#### Reembolsos do pedido
+```java
+RefundsListResponse refunds = api.list("ORD-AMSJ0PHBOWSW");
+```
+
+#### Reembolsos do pagamento
+```java
+RefundsListResponse refunds = api.list("PAY-97QYOMHMMAWM");
 ```
 
 ## Multipedidos
@@ -702,6 +735,50 @@ BankAccount createdBankAccount = api.bankAccount().update("BKA-E0BAC6D15696",
 ```java
 List<BankAccount> createdBankAccounts = api.bankAccount().getList("MPA-E0BAC6D15696");
 ```
+
+## Saldo Moip
+O Saldo é a composição de valores atuais disponíveis, indisponíveis (bloqueados) e futuros de uma determinada **Conta Moip**.
+
+> Esta API está na versão 2.1, contendo o _header_ **Accept**, com o valor `application/json;version=2.1`.
+### Consulta
+```java
+Balances balances = api.get();
+```
+
+Para consultar um saldo específico (indisponível, futuro e disponível):
+
+* **indisponíveis** - `balances.getUnavailable();`
+* **futuros** - `balances.getFuture();`
+* **disponíveis** - `balances.getCurrent();`
+
+## Lançamento
+O Lançamento é um crédito ou débito no extrato ou no saldo futuro da conta de um recebedor. Ele é gerado quando um pagamento é autorizado, um reembolso é realizado ou em qualquer outra situação em que ocorram movimentações de valores na conta Moip de um lojista.
+### Consulta
+```java
+Entry entry = api.get("ENTRY_ID");
+```
+
+### Listagem
+#### Sem filtros de busca
+```java
+EntriesListResponse entriesListResponse = api.list();
+```
+
+#### Com filtros de busca
+```java
+Pagination pagination = new Pagination();
+    pagination.setLimit(10);
+    pagination.setOffset(10);
+
+    Filters filters = new Filters();
+    filters.between("liquidAmount", "5000", "50000");
+
+    String q = "SETTLED";
+
+    EntriesListResponse entriesListResponse = api.list(pagination, filters, q);
+```
+
+> É possível utilizar um ou mais filtros de busca. Para maiores informações, confira nossa [referência API](https://dev.moip.com.br/v2/reference#filtros-de-busca).
 
 ## Transferência
 ### Criação

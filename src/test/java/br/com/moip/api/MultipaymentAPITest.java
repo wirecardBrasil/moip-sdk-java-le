@@ -74,6 +74,7 @@ public class MultipaymentAPITest {
         Multipayment multipayment = api.create(new PaymentRequest()
             .orderId("MOR-BMJN4E5LSG6N")
             .installmentCount(1)
+            .statementDescriptor("Minha Loja")
             .delayCapture(false)
             .fundingInstrument(
                 new FundingInstrumentRequest()
@@ -105,6 +106,8 @@ public class MultipaymentAPITest {
         assertEquals((Integer)4000, multipayment.getPayments().get(1).getAmount().getTotal());
         assertEquals("https://sandbox.moip.com.br/v2/multiorders/MOR-BMJN4E5LSG6N", multipayment.getLinks().multiorderLink());
         assertEquals("VISA", multipayment.getPayments().get(0).getFundingInstrument().getCreditCard().getBrand());
+        assertEquals("Minha Loja", multipayment.getPayments().get(0).getStatementDescriptor());
+        assertEquals("Minha Loja", multipayment.getPayments().get(1).getStatementDescriptor());
     }
 
     @Play("multipayment/get")
@@ -117,6 +120,8 @@ public class MultipaymentAPITest {
         assertEquals((Integer)8000, multipayment.getAmount().getTotal());
         assertEquals(1, multipayment.getInstallmentCount());
         assertNotNull(multipayment.getPayments());
+        assertEquals("Minha Loja", multipayment.getPayments().get(0).getStatementDescriptor());
+        assertEquals("Minha Loja", multipayment.getPayments().get(1).getStatementDescriptor());
     }
 
     @Play("multipayment/capture")
@@ -136,6 +141,37 @@ public class MultipaymentAPITest {
 
         assertEquals("MPY-YDNM3U17OSDD", cancelledPayment.getId());
         assertEquals(PaymentStatus.CANCELLED, cancelledPayment.getStatus());
+    }
+
+    @Play("multipayment/create_escrow")
+    @Test
+    public void testCreateWithEscrow() {
+        Multipayment createWithEscrow = api.create(new PaymentRequest()
+            .orderId("MOR-T1F8O64DLS4X")
+            .installmentCount(1)
+            .escrow(new PaymentRequest.EscrowRequest("Teste de Descrição"))
+            .delayCapture(false)
+            .fundingInstrument(new FundingInstrumentRequest()
+                .creditCard(new CreditCardRequest()
+                    .number("4012001037141112")
+                    .cvc(123)
+                    .expirationMonth("05")
+                    .expirationYear("18")
+                    .holder(new HolderRequest()
+                        .fullname("Jose Portador da Silva")
+                        .birthdate("1988-10-10")
+                        .phone(new PhoneRequest()
+                            .setAreaCode("11")
+                            .setNumber("55667788")
+                        )
+                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                    )
+                )
+            )
+        );
+
+        assertEquals("MPY-TUZUG6A4AHLF", createWithEscrow.getId());
+        assertEquals("ECW-RI6HTOU2M4DY", createWithEscrow.getPayments().get(0).getEscrowId());
     }
 
 }
