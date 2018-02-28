@@ -1,3 +1,32 @@
+<a name="v4.1.0"></a>
+# [](https://github.com/moip/moip-sdk-java/compare/v4.0.0...v4.1.0) (2018-01-06)
+
+
+### Features
+
+* **Payment**: adds `getEscrowId()` and `getEscrow()` methods ([e51d6cc](https://github.com/moip/moip-sdk-java/commits/e51d6cc))
+* **Entry**: adds entry feature and your own resources ([8cdb098](https://github.com/moip/moip-sdk-java/commits/8cdb098))
+* **Balances**: adds feature to get Moip Account's Balances ([ff6f41b](https://github.com/moip/moip-sdk-java/commits/ff6f41b))
+* **Refund**: adds list order refunds and payment refunds ([b3a0844](https://github.com/moip/moip-sdk-java/commits/b3a0844))
+
+### Refactor
+
+* **Client**:
+  * adds a new get with new header ([41edb85](https://github.com/moip/moip-sdk-java/commits/41edb85))
+  * adjust Accept values ([3fe45c7](https://github.com/moip/moip-sdk-java/commits/3fe45c7))
+* **API**: fix imports ([817eae6](https://github.com/moip/moip-sdk-java/commits/817eae6))
+* **Payment**: adds statementDescriptor ([15ff550](https://github.com/moip/moip-sdk-java/commits/15ff550))
+* **RefundAPI**: change condition of `list()` method ([55ff9d0](https://github.com/moip/moip-sdk-java/commits/55ff9d0))
+* **Order**: add missing response elements ([b8ba4bc](https://github.com/moip/moip-sdk-java/commits/b8ba4bc))
+
+### Tests
+
+* **Balances**: adds tests to balances ([4c8e251](https://github.com/moip/moip-sdk-java/commits/4c8e251))
+* **Payment**/**Multipayment**: add tests to statement descriptor ([03d8f4f](https://github.com/moip/moip-sdk-java/commits/03d8f4f))
+* **Refund**: adds tests to list refunds ([080fd10](https://github.com/moip/moip-sdk-java/commits/080fd10))
+* **Order**: adds tests to cover all response attributes ([c47071f](https://github.com/moip/moip-sdk-java/commits/c47071f))
+
+
 <a name="v4.0.0"></a>
 # [](https://github.com/moip/moip-sdk-java/compare/v3.4.0...v3.5.0) (2017-12-05)
 

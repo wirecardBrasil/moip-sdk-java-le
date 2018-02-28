@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 group = 'br.com.moip'
 archivesBaseName = "java-sdk"
-version = '4.0.0'
+version = '4.1.0'
 
 description = "Moip v2 SDK"
 
@@ -86,6 +86,21 @@ uploadArchives {
                         id 'rodrigo.saito'
                         name 'Rodrigo Saito'
                         email 'rodrigo.saito@moip.com.br'
+                    }
+                    developer {
+                        id 'caio.gaspar'
+                        name 'Caio Gaspar'
+                        email 'caio.gaspar@moip.com.br'
+                    }
+                    developer {
+                        id 'jair.bressani'
+                        name 'Jair Bressani Junior'
+                        email 'jair.bressani@moip.com.br'
+                    }
+                    developer {
+                        id 'matheus.nakaya'
+                        name 'Matheus Nakaya'
+                        email 'matheus.nakaya@moip.com.br'
                     }
                 }
             }
