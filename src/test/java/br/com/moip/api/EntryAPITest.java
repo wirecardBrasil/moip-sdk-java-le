@@ -33,7 +33,7 @@ public class EntryAPITest {
 
         assertEquals("ENT-BH4NJAVN65FB", entry.getExternalId());
         assertEquals("2017-08-25T09:53:08.000Z", entry.getScheduledFor());
-        assertEquals("SETTLED", entry.getStatus());
+        assertEquals(Entry.Status.SETTLED, entry.getStatus());
         assertEquals("MPA-B4DEE9F7589B", entry.getMoipAccount().getAccount());
         assertEquals("MPA-B4DEE9F7589B", entry.getAccountMoipAccount());
         assertEquals(179, entry.getFees().get(0).getAmount());
@@ -103,7 +103,7 @@ public class EntryAPITest {
         EntriesListResponse entriesListResponse = api.list(pagination,filters,q);
 
         assertEquals("ENT-QL45ISIGQCG1", entriesListResponse.get(0).getExternalId());
-        assertEquals("SETTLED", entriesListResponse.get(1).getStatus());
+        assertEquals(Entry.Status.SETTLED, entriesListResponse.get(1).getStatus());
         assertEquals(179, entriesListResponse.get(2).getFees().get(0).getAmount());
         assertEquals("PAY-1RPZO7YWZROC", entriesListResponse.get(3).getReferences().get(2).getValue());
     }

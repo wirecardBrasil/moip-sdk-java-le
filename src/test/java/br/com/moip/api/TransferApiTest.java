@@ -2,14 +2,8 @@ package br.com.moip.api;
 
 import br.com.moip.Client;
 import br.com.moip.exception.ValidationException;
-import br.com.moip.request.TaxDocumentRequest;
-import br.com.moip.request.BankAccountRequest;
-import br.com.moip.request.HolderRequest;
-import br.com.moip.request.TransferInstrumentRequest;
-import br.com.moip.request.TransferRequest;
-import br.com.moip.resource.Transfer;
-import br.com.moip.resource.TransferInstrument;
-import br.com.moip.resource.TransferStatus;
+import br.com.moip.request.*;
+import br.com.moip.resource.*;
 import br.com.moip.response.TransferListResponse;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
@@ -57,6 +51,49 @@ public class TransferApiTest {
         assertEquals(TransferStatus.REQUESTED, transfer.getStatus());
         assertEquals("https://sandbox.moip.com.br/v2/transfers/TRA-28HRLYNLMUFH", transfer.getLinks().getSelf());
     }
+
+    @Play("transfers/create_with_bank_account_id")
+    @Test
+    public void shouldCreateATransferWithBankAccountId() {
+        Transfer transfer = api.create(transferRequest);
+
+        assertEquals(200, transfer.getFee());
+        assertEquals(500, transfer.getAmount());
+        assertEquals("TRA-R04VZMAXH53X", transfer.getId());
+        assertEquals(TransferInstrument.Method.BANK_ACCOUNT, transfer.getTransferInstrument().getMethod());
+        assertEquals("BKA-QQS207YFQ466", transfer.getTransferInstrument().getBankAccount().getId());
+        assertEquals("1111", transfer.getTransferInstrument().getBankAccount().getAgencyNumber());
+        assertEquals("430.409.248-00", transfer.getTransferInstrument().getBankAccount().getHolder().getTaxDocument().getNumber());
+        assertEquals(TaxDocument.Type.CPF, transfer.getTransferInstrument().getBankAccount().getHolder().getTaxDocument().getType());
+        assertEquals("Matheus Barbosa Nakaya", transfer.getTransferInstrument().getBankAccount().getHolder().getFullname());
+        assertEquals("9999", transfer.getTransferInstrument().getBankAccount().getAccountNumber());
+        assertEquals("8", transfer.getTransferInstrument().getBankAccount().getAccountCheckNumber());
+        assertEquals("BANCO DO BRASIL S.A.", transfer.getTransferInstrument().getBankAccount().getBankName());
+        assertEquals(BankAccount.Type.CHECKING, transfer.getTransferInstrument().getBankAccount().getType());
+        assertEquals("2", transfer.getTransferInstrument().getBankAccount().getAgencyCheckNumber());
+        assertEquals("001", transfer.getTransferInstrument().getBankAccount().getBankNumber());
+        assertEquals(TransferStatus.REQUESTED, transfer.getStatus());
+        assertEquals("Requested", transfer.getEvents().get(0).getDescription());
+        assertEquals("TRANSFER.REQUESTED", transfer.getEvents().get(0).getType());
+        assertEquals("ENT-TSBYJTJT5P8L", transfer.getEntries().get(0).getExternalId());
+        assertEquals(Entry.Status.SETTLED, transfer.getEntries().get(0).getStatus());
+        assertEquals("MPA-5D5053C0B4A4", transfer.getEntries().get(0).getMoipAccount().getAccount());
+        assertEquals("TRANSFER_TO_BANK_ACCOUNT", transfer.getEntries().get(0).getType());
+        assertEquals(-500, transfer.getEntries().get(0).getGrossAmount());
+        assertEquals(260863, transfer.getEntries().get(0).getMoipAccountId());
+        assertEquals(36714066, transfer.getEntries().get(0).getId());
+        assertEquals(1, transfer.getEntries().get(0).getInstallment().getAmount());
+        assertEquals(1, transfer.getEntries().get(0). getInstallment().getNumber());
+        assertEquals("APP-QGAGZRIX1CUF", transfer.getEntries().get(0).getReferences().get(0).getValue());
+        assertEquals("CHANNEL", transfer.getEntries().get(0).getReferences().get(0).getType());
+        assertEquals("TRA-R04VZMAXH53X", transfer.getEntries().get(0).getEventId());
+        assertEquals("Transferencia para conta bancaria - TRA-R04VZMAXH53X", transfer.getEntries().get(0).getDescription());
+        assertEquals(false, transfer.getEntries().get(0).getBlocked());
+        assertEquals(-500, transfer.getEntries().get(0).getLiquidAmount());
+        assertEquals(Transfer.Role.PAYER, transfer.getRole());
+        assertEquals("https://sandbox.moip.com.br/v2/transfers/TRA-R04VZMAXH53X", transfer.getLinks().getSelf());
+    }
+
     @Play("transfers/validation_exception")
     @Test(expected = ValidationException.class)
     public void shouldFailOnCreateATransfer() {

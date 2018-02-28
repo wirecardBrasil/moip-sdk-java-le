@@ -2,6 +2,7 @@ package br.com.moip.request;
 
 public class BankAccountRequest {
 
+    private String id;
     private String bankNumber;
     private String agencyNumber;
     private String agencyCheckNumber;
@@ -9,6 +10,10 @@ public class BankAccountRequest {
     private String accountCheckNumber;
     private Type type;
     private HolderRequest holder;
+
+    public void id(String id) {
+        this.id = id;
+    }
 
     public String getBankNumber() {
         return bankNumber;

@@ -3,6 +3,7 @@ package br.com.moip.resource;
 import br.com.moip.resource.links.TransferLinks;
 
 import java.util.Date;
+import java.util.List;
 
 public class Transfer {
 
@@ -14,6 +15,8 @@ public class Transfer {
     private Date updatedAt;
     private Role role;
     private TransferInstrument transferInstrument;
+    private List<Event> events;
+    private List<Entry> entries;
     private TransferLinks _links;
 
     public String getId() {
@@ -84,6 +87,10 @@ public class Transfer {
         RECEIVER,
         PAYER
     }
+
+    public List<Event> getEvents() { return events; }
+
+    public List<Entry> getEntries() { return entries; }
 
     public TransferLinks getLinks() { return _links; }
     public void setLinks(TransferLinks _links) { this._links = _links; }

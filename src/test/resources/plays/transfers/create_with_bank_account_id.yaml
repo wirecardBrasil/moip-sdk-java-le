@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /v2/transfers
+    headers:
+      Content-Type: application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: POST
+  response:
+    status: 201
+    headers:
+      "Content-Type": application/json
+    body: |
+      {"fee":200,"amount":500,"updatedAt":"2018-02-28T12:07:32.839Z","id":"TRA-R04VZMAXH53X","transferInstrument":{"method":"BANK_ACCOUNT","bankAccount":{"id":"BKA-QQS207YFQ466","agencyNumber":"1111","holder":{"taxDocument":{"number":"430.409.248-00","type":"CPF"},"fullname":"Matheus Barbosa Nakaya"},"accountNumber":"9999","accountCheckNumber":"8","bankName":"BANCO DO BRASIL S.A.","type":"CHECKING","agencyCheckNumber":"2","bankNumber":"001"}},"status":"REQUESTED","events":[{"createdAt":"2018-02-28T12:07:33.000Z","description":"Requested","type":"TRANSFER.REQUESTED"}],"createdAt":"2018-02-28T12:07:32.839Z","entries":[{"external_id":"ENT-TSBYJTJT5P8L","reschedule":[],"scheduledFor":"2018-02-28T12:07:32.000Z","status":"SETTLED","moipAccount":{"account":"MPA-5D5053C0B4A4"},"fees":[],"type":"TRANSFER_TO_BANK_ACCOUNT","grossAmount":-500,"moipAccountId":260863,"updatedAt":"2018-02-28T12:07:33.072Z","id":36714066,"installment":{"amount":1,"number":1},"references":[{"value":"APP-QGAGZRIX1CUF","type":"CHANNEL"}],"eventId":"TRA-R04VZMAXH53X","createdAt":"2018-02-28T12:07:33.050Z","description":"Transferencia para conta bancaria - TRA-R04VZMAXH53X","blocked":false,"settledAt":"2018-02-28T12:07:33.072Z","liquidAmount":-500}],"role":"PAYER","_links":{"self":{"href":"https://sandbox.moip.com.br/v2/transfers/TRA-R04VZMAXH53X"}}}
