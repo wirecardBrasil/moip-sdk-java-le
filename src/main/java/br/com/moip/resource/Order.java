@@ -3,6 +3,7 @@ package br.com.moip.resource;
 import br.com.moip.resource.links.OrderLinks;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Order {
@@ -11,7 +12,7 @@ public class Order {
     private String ownId;
     private OrderStatus status;
     private String platform;
-    private String createdAt, updatedAt;
+    private Date createdAt, updatedAt;
     private Amount amount;
     private final List<Item> items;
     private final List<Address> addresses = new ArrayList<>();
@@ -51,9 +52,9 @@ public class Order {
 
     public String getPlatform() { return platform; }
 
-    public String getCreatedAt() { return createdAt; }
+    public Date getCreatedAt() { return createdAt; }
 
-    public String getUpdatedAt() { return updatedAt; }
+    public Date getUpdatedAt() { return updatedAt; }
 
     public Amount getAmount() {
         return amount;

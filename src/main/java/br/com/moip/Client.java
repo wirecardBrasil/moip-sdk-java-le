@@ -106,7 +106,7 @@ public class Client {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
             conn.setRequestProperty("Content-type", requestProps.contentType.getMimeType());
-            conn.setRequestProperty("Accept", requestProps.accept);
+            if (requestProps.accept != null) conn.setRequestProperty("Accept", requestProps.accept);
 
             conn.setRequestMethod(requestProps.method);
 
@@ -229,6 +229,14 @@ public class Client {
         protected String accept;
 
         public RequestProps() {}
+
+        public RequestProps(String method, String path, Object object, Class type, ContentType contentType) {
+            this.method = method;
+            this.path = path;
+            this.object = object;
+            this.type = type;
+            this.contentType = contentType;
+        }
 
         public String getMethod() { return method; }
 
