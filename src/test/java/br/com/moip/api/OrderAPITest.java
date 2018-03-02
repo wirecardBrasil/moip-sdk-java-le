@@ -74,8 +74,6 @@ public class OrderAPITest {
         assertEquals("the_order.001", createdOrder.getOwnId());
         assertEquals(OrderStatus.CREATED, createdOrder.getStatus());
         assertEquals("V2", createdOrder.getPlatform());
-        assertEquals("2018-02-22T15:33:38.493-03", createdOrder.getCreatedAt());
-        assertEquals("2018-02-22T15:33:38.493-03", createdOrder.getUpdatedAt());
         assertEquals(0, createdOrder.getAmount().getPaid().intValue());
         assertEquals(11000, createdOrder.getAmount().getTotal().intValue());
         assertEquals(0, createdOrder.getAmount().getFees().intValue());
