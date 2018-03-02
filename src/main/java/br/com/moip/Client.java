@@ -230,14 +230,6 @@ public class Client {
 
         public RequestProps() {}
 
-        public RequestProps(String method, String path, Object object, Class type, ContentType contentType) {
-            this.method = method;
-            this.path = path;
-            this.object = object;
-            this.type = type;
-            this.contentType = contentType;
-        }
-
         public String getMethod() { return method; }
 
         public String getPath() { return path; }
