@@ -106,7 +106,7 @@ public class Client {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
             conn.setRequestProperty("Content-type", requestProps.contentType.getMimeType());
-            conn.setRequestProperty("Accept", requestProps.accept);
+            if (requestProps.accept != null) conn.setRequestProperty("Accept", requestProps.accept);
 
             conn.setRequestMethod(requestProps.method);
 
