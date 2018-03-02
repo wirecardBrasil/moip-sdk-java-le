@@ -1,5 +1,14 @@
 <a name="v4.1.0"></a>
-# [](https://github.com/moip/moip-sdk-java/compare/v4.0.0...v4.1.0) (2018-01-06)
+# [](https://github.com/moip/moip-sdk-java/compare/v4.1.0...v4.1.1) (2018-03-02)
+
+
+### Bug Fixes
+
+* **Client**: fix a bug in method `doRequest()` ([]())
+
+
+<a name="v4.1.0"></a>
+# [](https://github.com/moip/moip-sdk-java/compare/v4.0.0...v4.1.0) (2018-02-27)
 
 
 ### Features
