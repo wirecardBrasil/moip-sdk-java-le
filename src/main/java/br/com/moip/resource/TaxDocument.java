@@ -21,7 +21,7 @@ public class TaxDocument {
                 '}';
     }
 
-    private enum Type {
+    public enum Type {
         CPF, CNPJ
     }
 }

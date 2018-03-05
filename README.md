@@ -804,6 +804,17 @@ Transfer transfer = api.transfer().create(new TransferRequest()
 );
 ```
 
+> Criação de transferência, utilizando uma conta bancária previamente cadastrada:
+```
+Transfer transfer = api.transfer().create(new TransferRequest()
+    .amount(1000)
+    .transferInstrument(new TransferInstrumentRequest()
+        .bankAccount(new BankAccountRequest()
+            .id("BKA-BAX80VILKC5M")
+        )
+    )
+);
+```
 
 #### Conta Moip
 ```java
