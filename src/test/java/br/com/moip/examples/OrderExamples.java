@@ -25,10 +25,22 @@ import java.util.List;
 
 public class OrderExamples {
 
+    /**
+     * The Order is the representation of a product or a provided service.
+     *
+     * Read more about orders on:
+     * https://dev.moip.com.br/v2/reference#pedidos-ec
+     */
+
     // API instance
     API api = new Setup().buildSetup();
 
-    // OKAY
+    /*
+     * This method create an order to a created customer, using the customer's Moip ID.
+     * TIP: You can add how many items you want.
+     *
+     * The receivers are the Moip accounts involved in the transaction.
+     */
     public void createOrder() {
 
         Order createdOrder = api.order().create(new OrderRequest()
@@ -45,7 +57,7 @@ public class OrderExamples {
             .addItem("Nome do produto 2", 2, "Mais info...", 200)
             .addItem("Nome do produto 3", 3, "Mais info...", 300)
             .customer(new CustomerRequest()
-                .id("CUS-DO69X9CD0JO0")
+                .id("CUS-DO69X9CD0JO0")     // Customer's Moip ID
             )
             .addReceiver(new ReceiverRequest()
                 .secondary("MPA-E3C8493A06AE", new AmountRequest().percentual(85), false)
@@ -53,7 +65,7 @@ public class OrderExamples {
         );
     }
 
-    // OKAY
+    // Another way is create an order and customer on the same request.
     public void createOrderAndCustomer() {
 
         Order createdOrder = api.order().create(new OrderRequest()
@@ -95,7 +107,10 @@ public class OrderExamples {
         );
     }
 
-    // OKAY
+    /*
+     * This methods shows you how to add checkout preferences to the order at your creation.
+     * TIP: read more about checkout preferences on https://dev.moip.com.br/v2.0/reference#criar-pedido-checkout-moip.
+     */
     public void createOrderWithCheckoutPreferences() {
 
         List<InstallmentRequest> installmentRequestList = new ArrayList<InstallmentRequest>();
@@ -115,7 +130,7 @@ public class OrderExamples {
                 )
             )
             .addItem("Descrição do pedido", 1, "Camiseta estampada branca", 9500)
-            .customer(new CustomerRequest().id("CUS-DO69X9CD0JO0"))
+            .customer(new CustomerRequest().id("CUS-DO69X9CD0JO0"))     // Customer's Moip ID
             .checkoutPreferences(new CheckoutPreferencesRequest()
                 .setRedirectUrls(new CheckoutPreferencesRequest
                     .RedirectUrlsRequest("http://www.lojaexemplo.com.br/compraFeita", "http://www.lojaexemplo.com.br/error"))
@@ -128,19 +143,19 @@ public class OrderExamples {
         );
     }
 
-    // OKAY
+    // This method allows you to gets an order by your Moip ID.
     public void getOrder() {
 
         Order order = api.order().get("ORD-CD6IC1H4P599");
     }
 
-    // OKAY
+    // This method allows you to list all the created orders.
     public void listOrder() {
 
         OrderListResponse orders = api.order().list();
     }
 
-    // OKAY
+    // You can use some filters to perform your search.
     public void listOrderWithSearchParams() {
 
         Filters filters = new Filters()

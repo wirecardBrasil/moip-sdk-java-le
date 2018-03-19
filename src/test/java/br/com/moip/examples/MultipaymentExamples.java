@@ -23,10 +23,30 @@ import java.util.GregorianCalendar;
 
 public class MultipaymentExamples {
 
+    /**
+     * The multipayment is a collection of payments associated with a multiorder.
+     * It's used in the implementation of the shopping cart/multiorder,
+     * when it is necessary charge for different sellers with only one checkout.
+     * When a multipayment is created Moip creates a payment for each order
+     * of a multiorder and does the auto-charge.
+     *
+     * IMPORTANT: In cases of multipayment with credit card,
+     * multiple authorizations are generated, one for each payment,
+     * dividing the charges of a customer, to facilitate the management
+     * of the Marketplace or Platform.
+     *
+     * Read more about multipayments on:
+     * https://dev.moip.com.br/v2/reference#multipagamentos-1
+     */
+
     // API instance
     API api = new Setup().buildSetup();
 
-    // OKAY
+    /*
+     * To create an multipayment with credit card hash it's necessary to encrypt the credit card data.
+     * TIP: To encrypt the credit card date you can use our solution (http://moip.github.io/moip-sdk-js/).
+     *      Read more on https://github.com/moip/moip-sdk-js.
+     */
     public void createMultipaymentWithCreditCardHash() {
 
         String hash = "HhL0kbhfid+jwgj5l6Kt9EPdetDxQN8s7uKUHDYxDC/XoULjzik44rSda3EcWuOcL17Eb8JjWc1JI7gsuwg9P0rJv1mJQx+d3Dv1puQYz1iRjEWWhnB1bw0gTvnnC/05KbWN5M8oTiugmhVK02Rt2gpbcTtpS7VWyacfgesBJFavYYMljYg8p2YGHXkXrMuQiOCeemKLk420d0OTMBba27jDVVJ663HZDrObnjFXJH/4B5irkj+HO5genV+V4PYoLcOESG4nrI3oFAsMGsLLcdJo0NNvkEmJpn0e9GzureKKFYisYU+BEd9EMr/odS0VMvOYRV65HbPTspIkjl2+3Q==";
@@ -52,7 +72,11 @@ public class MultipaymentExamples {
         );
     }
 
-    // OKAY
+    /*
+     * This method allows you to create an multipayment with boleto.
+     * TIP: We already run with the new registered boleto's rules. Check the bellow link for more information.
+     * https://dev.moip.com.br/v2.0/docs/boleto#section-boletos-registrados
+     */
     public void createMultipaymentWithBoleto() {
 
         Multipayment multipayment = api.multipayment().create(new PaymentRequest()
@@ -74,7 +98,7 @@ public class MultipaymentExamples {
         );
     }
 
-    // OKAY
+    // This method allows you to create an payment with online bank debit.
     public void createMultipaymentWithOnlineBankDebit() {
 
         Multipayment multipayment = api.multipayment().create(new PaymentRequest()
@@ -90,7 +114,11 @@ public class MultipaymentExamples {
     }
 
 
-    // OKAY
+    /*
+     * This method allows you to create an multipayment with escrow.
+     * Read more about escrow on https://dev.moip.com.br/v2.0/docs/cust%C3%B3dia.
+     * TIP: The escrow can be release only for payments created with OAuth authentication.
+     */
     public void createMultipaymentWithEscrow() {
 
         String hash = "HhL0kbhfid+jwgj5l6Kt9EPdetDxQN8s7uKUHDYxDC/XoULjzik44rSda3EcWuOcL17Eb8JjWc1JI7gsuwg9P0rJv1mJQx+d3Dv1puQYz1iRjEWWhnB1bw0gTvnnC/05KbWN5M8oTiugmhVK02Rt2gpbcTtpS7VWyacfgesBJFavYYMljYg8p2YGHXkXrMuQiOCeemKLk420d0OTMBba27jDVVJ663HZDrObnjFXJH/4B5irkj+HO5genV+V4PYoLcOESG4nrI3oFAsMGsLLcdJo0NNvkEmJpn0e9GzureKKFYisYU+BEd9EMr/odS0VMvOYRV65HbPTspIkjl2+3Q==";
@@ -116,13 +144,16 @@ public class MultipaymentExamples {
         );
     }
 
-    // OKAY
+    // This method allows you to release an payment with escrow by escrow's Moip ID.
     public void releaseEscrow() {
 
         Escrow escrow = api.escrow().release("ECW-9I2WBALJGA8P");
     }
 
-    // OKAY
+    /*
+     * This method allows you to create an multipayment with delay capture.
+     * Read more about delay capture on https://dev.moip.com.br/v2.0/docs/pagamento-pr%C3%A9-autorizado-1.
+     */
     public void createMultipaymentWithDelayCapture() {
 
         String hash = "HhL0kbhfid+jwgj5l6Kt9EPdetDxQN8s7uKUHDYxDC/XoULjzik44rSda3EcWuOcL17Eb8JjWc1JI7gsuwg9P0rJv1mJQx+d3Dv1puQYz1iRjEWWhnB1bw0gTvnnC/05KbWN5M8oTiugmhVK02Rt2gpbcTtpS7VWyacfgesBJFavYYMljYg8p2YGHXkXrMuQiOCeemKLk420d0OTMBba27jDVVJ663HZDrObnjFXJH/4B5irkj+HO5genV+V4PYoLcOESG4nrI3oFAsMGsLLcdJo0NNvkEmJpn0e9GzureKKFYisYU+BEd9EMr/odS0VMvOYRV65HbPTspIkjl2+3Q==";
@@ -148,19 +179,19 @@ public class MultipaymentExamples {
         );
     }
 
-    // OKAY
+    // This method allows yout to capture an pre-authorized multipayment.
     public void capturePreAuthorizedMultipayment() {
 
         Multipayment capturedMultipayment = api.multipayment().capture("MPY-PZWPJ1SGUGDK");
     }
 
-    // OKAY
+    // This method allows you to cancel an pre-authorized multipayment.
     public void cancelPreAuthorizedMultipayment() {
 
         Multipayment cancelledPayment = api.multipayment().cancelPreAuthorized("MPY-7GUXTEGLG0ZT");
     }
 
-    // OKAY
+    // This method allows you to get a multipayment.
     public void getMultipayment() {
 
         Multipayment multipayment = api.multipayment().get("MPY-7GUXTEGLG0ZT");

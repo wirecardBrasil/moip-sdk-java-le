@@ -19,9 +19,24 @@ import java.util.GregorianCalendar;
 
 public class AccountExamples extends RequestTest {
 
+    /**
+     * To give an amazing on-boarding, you as marketplace should think
+     * "what experience I want to give for my sellers".
+     * Thinking that, the Moip create two types of account, each one with a
+     * different way to administer your business.
+     *
+     * Read more about Moip accounts on:
+     * https://dev.moip.com.br/v2.0/docs/conta-classica-e-conta-transparente
+     */
+
     // API instance
     API api = new Setup().buildSetup();
 
+    /*
+     * This method allows you to create a classical Moip account.
+     * For more about classical Moip accounts, check the following link:
+     * https://dev.moip.com.br/v2.0/reference#classical-account-on-boarding
+     */
     public void createClassicalAccount() {
 
         Account account = api.account().create(new AccountRequest()
@@ -61,7 +76,11 @@ public class AccountExamples extends RequestTest {
         );
     }
 
-    @Test
+    /*
+     * This method create a transparent Moip account.
+     * For more about transparent Moip account rules and conditions, check the fallowing link:
+     * https://dev.moip.com.br/v2/reference#transparent-account-on-boarding
+     */
     public void createTransparentAccount() {
 
         Account account = api.account().create(new AccountRequest()
@@ -101,8 +120,11 @@ public class AccountExamples extends RequestTest {
         );
     }
 
-    @Test
-    public void createTransparentAccountWithCompany() {
+    /*
+     * This method allows you to create a Moip account registering the company data.
+     * TIP: both a classical account and a transparent account can register the company data.
+     */
+    public void createMoipAccountWithCompany() {
 
         Account account = api.account().create(new AccountRequest()
             .email("dev.moip@labs52453.moip.com.br")
@@ -165,13 +187,13 @@ public class AccountExamples extends RequestTest {
         );
     }
 
-    @Test
+    // This method allows you to get a Moip account.
     public void gGetAccount() {
 
         Account account = api.account().get("MPA-CULBBYHD11");
     }
 
-    @Test
+    // This method allows you to check if someone already has a Moip account, by CPF or CNPJ.
     public void checkAccountExists() {
 
         api.account().checkAccountExists("255.328.259-12");

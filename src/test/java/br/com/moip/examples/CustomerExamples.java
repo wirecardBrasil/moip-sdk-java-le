@@ -19,7 +19,10 @@ import java.util.Date;
 public class CustomerExamples extends RequestTest {
 
     /**
-     * 
+     * The Customer is a service's user or a buyer of a virtual store.
+     *
+     * Read more about customers on:
+     * https://dev.moip.com.br/v2/reference#clientes-ec
      */
 
     // API instance
@@ -117,13 +120,13 @@ public class CustomerExamples extends RequestTest {
         );
     }
 
-    // This method deletes a credit card from customer's funding instruments.
+    // This method allows you to delete a credit card from customer's funding instruments.
     public void deleteCreditCard() {
 
         api.customer().deleteCreditCard("CRC-P4QWBIO6YR59");  // Credit card ID
     }
 
-    // This method gets a customer by your Moip ID.
+    // This method allows you to get a customer by your Moip ID.
     public void getCustomer() {
 
         Customer customer = api.customer().get("CUS-5P13683GQKXS");

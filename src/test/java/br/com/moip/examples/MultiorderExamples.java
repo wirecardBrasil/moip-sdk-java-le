@@ -22,9 +22,27 @@ import java.util.GregorianCalendar;
 
 public class MultiorderExamples {
 
+    /**
+     * The multiorder is a collection of orders.
+     * It's used to allow transactions with different sellers in the same shopping cart.
+     * When a multiorder is created with a single customer interaction,
+     * Moip generates multiple charges and associates each of them
+     * with the appropriate seller, simplifying the management of Marketplaces.
+     *
+     * IMPORTANT: By definition, it's not possible refund a multiorder entirely at once,
+     * but you can refund order by order.
+     *
+     * Read more about multiorders on:
+     * https://dev.moip.com.br/v2.0/docs/multipedidos
+     * https://dev.moip.com.br/v2/reference#4-multipedidos
+     */
+
     API api = new Setup().buildSetup();     // API instance
 
-    // OKAY
+    /*
+     * This method allows you to create an multiorder.
+     * You can set the receivers to each order on multiorder.
+     */
     public void createMultiorder() {
 
         Multiorder multiorder = api.multiorder().create(new MultiorderRequest()
@@ -102,7 +120,7 @@ public class MultiorderExamples {
         );
     }
 
-    // OKAY
+    // This method allows you to get a multiorder.
     public void getMultiorder() {
 
         Multiorder multiorder = api.multiorder().get("MOR-BUPA74EUD3KM");

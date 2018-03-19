@@ -9,10 +9,24 @@ import org.junit.Test;
 
 public class NotificationPreferencesExamples {
 
+    /**
+     * Webhooks are the notifications sent by Moip to your system
+     * every time your transaction has its status changed. So,
+     * through webhooks, is possible to synchronize your application
+     * with Moip.
+     *
+     * Read more about notification preferences on:
+     * https://dev.moip.com.br/v2/reference#1-notifica%C3%A7%C3%B5es-mp
+     * https://dev.moip.com.br/v2.0/docs/webhook
+     */
+
     // API instance
     API api = new Setup().buildSetup();
 
-    // OKAY
+    /*
+     * To receive webhooks you should create a notification preference.
+     * TIP: at this moment, you can register one or more URLs to receive webhooks.
+     */
     public void createNotificationPreference() {
 
         NotificationPreference notificationPreference = api.notification().create(new NotificationPreferenceRequest()
@@ -23,19 +37,19 @@ public class NotificationPreferencesExamples {
         );
     }
 
-    // OKAY
+    // This method allows you to get a notification preference.
     public void getNotificationPreference() {
 
         NotificationPreference notificationPreference = api.notification().get("NPR-Y1LED31XHNU8");
     }
 
-    // OKAY
+    // This methods list all created notification preferences.
     public void listNotificationPreference() {
 
         NotificationPreferenceListResponse notificationList = api.notification().list();
     }
 
-    // OKAY
+    // This method allows you to delete a notification preference.
     public void deleteNotificationPreference() {
 
         api.notification().delete("NPR-Y1LED31XHNU8");

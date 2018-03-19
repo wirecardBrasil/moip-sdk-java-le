@@ -12,13 +12,26 @@ import java.util.List;
 
 public class BankAccountExamples {
 
+    /**
+     * The Moip bank account is the bank address of a Moip Account.
+     * This API allows you to create (save), get, list,
+     * update and delete a bank account.
+     *
+     * Read more about bank account on:
+     * https://dev.moip.com.br/v2/reference#contas-banc%C3%A1rias-1
+     */
+
     // API instance
     API api = new Setup().buildSetup();
 
-    // OKAY
+    /*
+     * This method allows you to save an bank account.
+     * After save the bank account, the API will return an ID (BKA-XXXXXXXXX)
+     * to use this bank account on futures requests.
+     */
     public void createBankAccount() {
 
-        BankAccount createdBankAccount = api.bankAccount().create("MPA-CULBBYHD11",
+        BankAccount createBankAccount = api.bankAccount().create("MPA-CULBBYHD11",
             new BankAccountRequest()
                 .bankNumber("237")
                 .agencyNumber("12346")
@@ -33,19 +46,19 @@ public class BankAccountExamples {
         );
     }
 
-    // OKAY
+    // This method allows you to get a bank account.
     public void getBankAccount() {
 
         BankAccount getCreatedBankAccount = api.bankAccount().get("BKA-JS57AWG1G94U");
     }
 
-    // OKAY
+    // This method list all saved bank account.
     public void listBankAccounts() {
 
         List<BankAccount> bankAccountsList = api.bankAccount().getList("MPA-CULBBYHD11");
     }
 
-    // OKAY
+    // This method allows you to update an saved bank account.
     public void updateBankAccount() {
 
         BankAccount createdBankAccount = api.bankAccount().update("BKA-JS57AWG1G94U",
@@ -63,7 +76,7 @@ public class BankAccountExamples {
         );
     }
 
-    // OKAY
+    // This method allows you to delete an saved bank account.
     public void deleteBankAccount() {
 
         api.bankAccount().delete("BKA-JS57AWG1G94U");

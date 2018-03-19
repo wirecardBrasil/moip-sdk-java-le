@@ -10,22 +10,34 @@ import org.junit.Test;
 
 public class EntryExamples {
 
+    /**
+     * The Moip entry is a credit or debit in the statement
+     * or in the future balance of a receiver account.
+     * It's generated when a payment is authorized, a refund is requested
+     * or any other situation in which the values movement occurs
+     * in the seller's Moip account.
+     *
+     * This API uses [application/json;version=2.1].
+     * For more information, check the fallowing link:
+     * https://dev.moip.com.br/v2/reference#lan%C3%A7amentos-1
+     */
+
     // API instance
     API api = new Setup().buildSetup();
 
-    // OKAY
+    // This method allows you to get a entry.
     public void getEntry() {
 
         Entry entry = api.entry().get("ENT-2JHP5A593QSW");
     }
 
-    // OKAY
+    // This method list all open entries.
     public void listEntries() {
 
         EntriesListResponse entriesListResponse = api.entry().list();
     }
 
-    // OKAY
+    // To improve your search, you can add some parameters to filter your request.
     public void listEntriesWithSearchParams() {
 
         Pagination pagination = new Pagination();
