@@ -11,8 +11,19 @@
 <details>
     <summary>Index</summary>
 
-    * [](#)
-    * [](#)
+* [Simple flow](#simple-flow)
+  * [Setup](#setup)
+    * [Setting the authentication](#setting-the-authentication)
+    * [Client](#client)
+    * [Instantiate API](#instantiate-api)
+  * [Create customer](#create-customer)
+  * [Create order](#create-order)
+  * [Create Payment](#create-payment)
+  * [Other examples](#other-examples)
+* [Exceptions treatment](#exceptions-treatment)
+* [Moip documentation](#moip-documentation)
+* [Getting help](#getting-help)
+* [Contributing](#contributing)
 
 </details>
 
@@ -222,4 +233,4 @@ Read more about the **Moip APIs** in [API reference](https://dev.moip.com.br/v2.
 We offer many ways to contact us, so if you have a question, do not hesitate, talk to us what you need. For questions about API or business rules, contact us by [support](https://dev.moip.com.br/v2.0/) or [[slack](#Slack)](https://slackin-cqtchmfquq.now.sh/). But, if you have a question or suggestion about the SDK, feel free to open an **issue** or **pull request**.
 
 ## Contributing
-Do you have an enhancement suggest or find something to fix? Go ahead, help us and let your mark on Moip, open **pull requests** and **issues** against this project. If you want to do it, before, please read the `Contributing.md` to be sure everyone fallows the same structure and planning of the project. Remember, we :heart: contributions. :rocket:
+Do you have an enhancement suggest or find something to fix? Go ahead, help us and let your mark on Moip, open **pull requests** and **issues** against this project. If you want to do it, before, please read the `CONTRIBUTING.md` to be sure everyone follows the same structure and planning of the project. Remember, we :heart: contributions. :rocket:
