@@ -63,10 +63,10 @@ Add the fallowing dependency to `pom.xml` in the project:
 This step by step will exemplify the integration flow with simple usage examples.
 
 ### 1. Setup
-Before make requests to Moip API it's necessary create a **setup**, defining the environment and the authentication that's will be used.
+Before making requests to Moip API it's necessary make a **setup**, defining the environment and the authentication that will be used.
 
 #### 1.1 Setting the authentication
-Are two ways to authenticate the request, some endpoints require a "highest authorization level", it will depend on the endpoint and type of request.
+There are two ways to authenticate the request, some endpoints require a "highest authorization level", it will depend on the endpoint and type of request.
 
 #### By BasicAuth
 The following set will generate a hash `Base64` with your Moip account **token** and **key** to authenticate.
@@ -74,7 +74,7 @@ The following set will generate a hash `Base64` with your Moip account **token**
 Authentication auth = new BasicAuth("TOKEN", "SECRET");
 ```
 
-> :bulb: If you don't know how to get your **token** and **key**, click [here](https://conta-sandbox.moip.com.br/configurations/api_credentials) (you must be logged).
+> :bulb: If you don't know how to get your **token** and **key**, click [here](https://conta-sandbox.moip.com.br/configurations/api_credentials) (you must be logged in).
 
 #### By OAuth
 The following set will create an OAuth authentication object.
@@ -86,7 +86,7 @@ Authentication auth = new OAuth("TOKEN_OAUTH");
 ```
 
 #### 1.2 Client
-After define your authentication, you have to set the **client** specifying the environment where you want to run your application. To set the client, choose the environment and pass the authentication (previously settled) as argument.
+After defining your authentication method, you have to set the **client** specifying the environment where you want to run your application. To set the client, choose the environment and pass the authentication (previously settled) as argument.
 
 ##### Sandbox
 The test environment. You can use this to simulate all of your business scenarios.
@@ -102,6 +102,8 @@ Client client = new Client(Client.SANDBOX, auth);
 Client client = new Client(Client.PRODUCTION, auth);
 ```
 
+> :bulb: Before going to production, you need to request homologation of your application [here](https://dev.moip.com.br/page/homologacao-api-v2).
+
 #### 1.3 Instantiate API
 To complete the setup, you have to create an API instance, passing the client (previously settled) as argument.
 
@@ -112,7 +114,7 @@ API api = new API(client);
 > :white_check_mark: Check the [setup functional example](https://github.com/moip/moip-sdk-java/tree/master/src/test/java/br/com/moip/examples/setup/Setup.java).
 
 ### 2. Create customer
-With the setup created, you can make request to Moip API. To start the basic e-commerce flow you need to create a customer. After all, it's he who will order your products or services.
+With the setup created, you can make requests to Moip API. To start the basic e-commerce flow you need to create a customer. After all, it's whom will order your products or services.
 
 ```java
 Customer customer = api.customer().create(new CustomerRequest()
@@ -134,7 +136,7 @@ Customer customer = api.customer().create(new CustomerRequest()
     )
 );
 ```
-> [:white_check_mark:](https://github.com/moip/moip-sdk-java/tree/master/src/test/java/br/com/moip/examples/CustomerExamples.java) _Click in the icon for more customer functional examples._
+> [:white_check_mark:](https://github.com/moip/moip-sdk-java/tree/master/src/test/java/br/com/moip/examples/CustomerExamples.java) _Click on the icon for more customer functional examples._
 > Read more about customer on [API reference](https://dev.moip.com.br/v2.0/reference#clientes-ec).
 
 ###  3. Create order
@@ -162,11 +164,11 @@ Order createdOrder = api.order().create(new OrderRequest()
     )
 );
 ```
-> [:white_check_mark:](https://github.com/moip/moip-sdk-java/tree/master/src/test/java/br/com/moip/examples/OrderExamples.java) _Click in the icon for more order functional examples._
+> [:white_check_mark:](https://github.com/moip/moip-sdk-java/tree/master/src/test/java/br/com/moip/examples/OrderExamples.java) _Click on the icon for more order functional examples._
 > Read more about order on [API reference](https://dev.moip.com.br/v2.0/reference#pedidos-ec).
 
 ### 4. Create Payment
-Alright! Did you have all you need? So, lets pay this order. :moneybag:
+Alright! Do you have all you need? So, lets pay this order. :moneybag:
 
 ```java
 Payment createdPayment = api.payment().create(new PaymentRequest()
@@ -192,11 +194,11 @@ Payment createdPayment = api.payment().create(new PaymentRequest()
     )
 );
 ```
-> [:white_check_mark:](https://github.com/moip/moip-sdk-java/tree/master/src/test/java/br/com/moip/examples/PaymentExamples.java) _Click in the icon for more payment functional examples._
+> [:white_check_mark:](https://github.com/moip/moip-sdk-java/tree/master/src/test/java/br/com/moip/examples/PaymentExamples.java) _Click on the icon for more payment functional examples._
 > Read more about payment on [API reference](https://dev.moip.com.br/v2.0/reference#pagamentos-ec).
 
 ### Other examples
-If you want to see another functional examples, check this folder. [:file_folder:](https://github.com/moip/moip-sdk-java/tree/master/src/test/java/br/com/moip/examples/)
+If you want to see other functional examples, check this folder. [:file_folder:](https://github.com/moip/moip-sdk-java/tree/master/src/test/java/br/com/moip/examples/)
 
 ## Exceptions treatment
 | errors | cause | status |
@@ -224,13 +226,13 @@ try {
 ## Moip documentation
 
 ### Docs
-To stay update about the **Moip Products**, check the [documentation](https://dev.moip.com.br/v2.0/docs).
+To stay up to date about the **Moip Products**, check the [documentation](https://dev.moip.com.br/v2.0/docs).
 
 ### References
 Read more about the **Moip APIs** in [API reference](https://dev.moip.com.br/v2.0/reference).
 
 ## Getting help
-We offer many ways to contact us, so if you have a question, do not hesitate, talk to us what you need. For questions about API or business rules, contact us by [support](https://dev.moip.com.br/v2.0/) or [[slack](#Slack)](https://slackin-cqtchmfquq.now.sh/). But, if you have a question or suggestion about the SDK, feel free to open an **issue** or **pull request**.
+We offer many ways to contact us, so if you have a question, do not hesitate, talk to us whatever you need. For questions about API or business rules, contact us by [support](https://dev.moip.com.br/v2.0/) or [slack](https://slackin-cqtchmfquq.now.sh/):slack:. But, if you have a question or suggestion about the SDK, feel free to open an **issue** or **pull request**.
 
 ## Contributing
-Do you have an enhancement suggest or find something to fix? Go ahead, help us and let your mark on Moip, open **pull requests** and **issues** against this project. If you want to do it, before, please read the `CONTRIBUTING.md` to be sure everyone follows the same structure and planning of the project. Remember, we :heart: contributions. :rocket:
+Do you have an enhancement suggest or found something to fix? Go ahead, help us and let your mark on Moip, open **pull requests** and **issues** against this project. If you want to do it, please read the `CONTRIBUTING.md` to be sure everyone follows the same structure and planning of the project. Remember, we :heart: contributions. :rocket:
