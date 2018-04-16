@@ -182,16 +182,20 @@ public class Client {
                 ErrorBuilder error = new ErrorBuilder();
                 try {
 
-                    // Checks if build a JSON format is required.
-                    if (responseBody.toString().equals(RESPONSE_BODY_400)) {
+                    boolean responseBodyIs400 = responseBody.toString().equals(RESPONSE_BODY_400);
+
+                    boolean responseBodyIs404 = responseBody.toString().equals(RESPONSE_BODY_404);
+
+                    if (responseBodyIs400) {
                         error.code("").path("").description("The CPF number is invalid").build();
                         errors.setError(error);
                     }
-                    else if (responseBody.toString().equals(RESPONSE_BODY_404)) {
+                    if (responseBodyIs404) {
                         error.code("").path("").description("The CPF is not linked to a Moip Account").build();
                         errors.setError(error);
+                    }
 
-                    } else {
+                    if (!responseBodyIs400 && !responseBodyIs404) {
                         errors = gson.fromJson(responseBody.toString(), Errors.class);
                     }
                 } catch (Exception e) {
