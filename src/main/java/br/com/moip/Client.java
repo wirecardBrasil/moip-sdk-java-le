@@ -5,6 +5,8 @@ import br.com.moip.exception.MoipException;
 import br.com.moip.exception.UnauthorizedException;
 import br.com.moip.exception.UnexpectedException;
 import br.com.moip.exception.ValidationException;
+import br.com.moip.resource.Error;
+import br.com.moip.resource.ErrorBuilder;
 import br.com.moip.resource.Errors;
 import br.com.moip.ssl.SSLSupport;
 import br.com.moip.util.GsonFactory;
@@ -41,6 +43,8 @@ public class Client {
     public static final String CONNECT_PRODUCTION = "https://connect.moip.com.br";
     public static final String CONNECT_SANDBOX = "https://connect-sandbox.moip.com.br";
     private static String USER_AGENT;
+    private final String RESPONSE_BODY_400 = "400";
+    private final String RESPONSE_BODY_404 = "404";
 
     static {
         try {
@@ -145,6 +149,23 @@ public class Client {
             logHeaders(conn.getHeaderFields().entrySet());
 
             StringBuilder responseBody = new StringBuilder();
+
+            responseBody = responseBodyTreatment(responseBody, responseCode, conn);
+
+            LOGGER.debug("");
+            LOGGER.debug("{}", responseBody.toString());
+            LOGGER.debug("<-- END HTTP ({}-byte body)", conn.getContentLength());
+
+            return gson.fromJson(responseBody.toString(), requestProps.<T>getType());
+        } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
+            throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
+        }
+    }
+
+    private StringBuilder responseBodyTreatment(StringBuilder responseBody, int responseCode, HttpURLConnection conn) {
+
+        try {
+
             if (responseCode >= 200 && responseCode < 299) {
                 responseBody = readBody(conn.getInputStream());
             }
@@ -154,13 +175,25 @@ public class Client {
             }
 
             if (responseCode >= 400 && responseCode < 499) {
-
                 responseBody = readBody(conn.getErrorStream());
                 LOGGER.debug("API ERROR {}", responseBody.toString());
 
                 Errors errors = new Errors();
+                ErrorBuilder error = new ErrorBuilder();
                 try {
-                    errors = gson.fromJson(responseBody.toString(), Errors.class);
+
+                    // Checks if build a JSON format is required.
+                    if (responseBody.toString().equals(RESPONSE_BODY_400)) {
+                        error.code("").path("").description("The CPF number is invalid").build();
+                        errors.setError(error);
+                    }
+                    else if (responseBody.toString().equals(RESPONSE_BODY_404)) {
+                        error.code("").path("").description("The CPF is not linked to a Moip Account").build();
+                        errors.setError(error);
+
+                    } else {
+                        errors = gson.fromJson(responseBody.toString(), Errors.class);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -172,14 +205,11 @@ public class Client {
                 throw new UnexpectedException();
             }
 
-            LOGGER.debug("");
-            LOGGER.debug("{}", responseBody.toString());
-            LOGGER.debug("<-- END HTTP ({}-byte body)", conn.getContentLength());
-
-            return gson.fromJson(responseBody.toString(), requestProps.<T>getType());
-        } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
+        } catch (IOException e) {
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
         }
+
+        return responseBody;
     }
 
     private void logHeaders(Set<Map.Entry<String, List<String>>> entries) {

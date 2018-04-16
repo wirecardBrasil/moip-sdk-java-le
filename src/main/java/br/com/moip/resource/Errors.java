@@ -10,4 +10,6 @@ public class Errors {
     public List<Error> getErrors() {
         return errors;
     }
+
+    public void setError(ErrorBuilder error) { this.errors.add(error); }
 }

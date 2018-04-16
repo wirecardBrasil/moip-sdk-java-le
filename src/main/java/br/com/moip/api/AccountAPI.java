@@ -25,13 +25,21 @@ public class AccountAPI {
         return client.post("/v2/accounts", account, Account.class);
     }
 
+    /*
+     * Method to check an account existence.
+     *
+     * StatusCode   ResponseBody    Method's response
+     * @200         200             true                Exist
+     * @400         400             false               Invalid
+     * @404         404             false               Does Not Exist
+     */
     public Boolean checkAccountExists(String taxDocument) {
         try {
             client.get("/v2/accounts/exists?tax_document=" + taxDocument, String.class);
 
             return true;
         } catch (ValidationException e) {
-            if (e.getResponseCode() != 404) {
+            if ((e.getResponseCode() != 404) && (e.getResponseCode() != 400)) {
                 throw new ValidationException(e.getResponseCode(), e.getResponseStatus(), e.getError());
             }
         }
