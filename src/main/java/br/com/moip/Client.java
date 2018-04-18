@@ -129,7 +129,6 @@ public class Client {
                 conn.setDoOutput(true);
                 String body = getBody(requestProps.object, requestProps.contentType);
 
-                LOGGER.debug("");
                 LOGGER.debug("{}", body);
 
                 DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
@@ -151,7 +150,6 @@ public class Client {
 
             responseBody = responseBodyTreatment(responseBody, responseCode, conn);
 
-            LOGGER.debug("");
             LOGGER.debug("{}", responseBody.toString());
             LOGGER.debug("<-- END HTTP ({}-byte body)", conn.getContentLength());
 
