@@ -5,7 +5,6 @@ import br.com.moip.exception.MoipException;
 import br.com.moip.exception.UnauthorizedException;
 import br.com.moip.exception.UnexpectedException;
 import br.com.moip.exception.ValidationException;
-import br.com.moip.resource.ErrorBuilder;
 import br.com.moip.resource.Errors;
 import br.com.moip.ssl.SSLSupport;
 import br.com.moip.util.GsonFactory;
@@ -176,26 +175,12 @@ public class Client {
                 LOGGER.debug("API ERROR {}", responseBody.toString());
 
                 Errors errors = new Errors();
-                ErrorBuilder error = new ErrorBuilder();
+
                 try {
 
-                    boolean responseBodyIs400 = responseBody.toString().equals(RESPONSE_BODY_400);
-                    boolean responseBodyIs404 = responseBody.toString().equals(RESPONSE_BODY_404);
+                    errors = gson.fromJson(responseBody.toString(), Errors.class);
 
-                    if (responseBodyIs400) {
-                        error.code("").path("").description("The CPF number is invalid").build();
-                        errors.setError(error);
-                    }
-                    if (responseBodyIs404) {
-                        error.code("").path("").description("The CPF is not linked to a Moip Account").build();
-                        errors.setError(error);
-                    }
-                    if (!responseBodyIs400 && !responseBodyIs404) {
-                        errors = gson.fromJson(responseBody.toString(), Errors.class);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                } catch (Exception e) {}
 
                 throw new ValidationException(responseCode, conn.getResponseMessage(), errors);
             }

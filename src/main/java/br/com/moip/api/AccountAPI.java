@@ -38,13 +38,6 @@ public class AccountAPI {
             client.get("/v2/accounts/exists?tax_document=" + taxDocument, String.class);
 
             return true;
-        } catch (ValidationException e) {
-            if ((e.getResponseCode() != 404) && (e.getResponseCode() != 400)) {
-                throw new ValidationException(e.getResponseCode(), e.getResponseStatus(), e.getError());
-            }
-        }
-        return false;
+        } catch (ValidationException e) { return false; }
     }
-
-
 }
