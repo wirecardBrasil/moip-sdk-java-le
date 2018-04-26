@@ -180,7 +180,10 @@ public class Client {
 
                     errors = gson.fromJson(responseBody.toString(), Errors.class);
 
-                } catch (Exception e) {}
+                } catch (Exception e) {
+
+                    LOGGER.debug("There was not possible cast the JSON to object");
+                }
 
                 throw new ValidationException(responseCode, conn.getResponseMessage(), errors);
             }
