@@ -1,18 +1,7 @@
 package br.com.moip.api;
 
 import br.com.moip.Client;
-import br.com.moip.request.ApiDateRequest;
-import br.com.moip.request.BoletoRequest;
-import br.com.moip.request.CreditCardRequest;
-import br.com.moip.request.FundingInstrumentRequest;
-import br.com.moip.request.GeolocationRequest;
-import br.com.moip.request.HolderRequest;
-import br.com.moip.request.InstructionLinesRequest;
-import br.com.moip.request.MposRequest;
-import br.com.moip.request.PaymentRequest;
-import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.TaxDocumentRequest;
-import br.com.moip.request.OnlineBankDebitRequest;
+import br.com.moip.request.*;
 import br.com.moip.resource.EscrowStatus;
 import br.com.moip.resource.FundingInstrument;
 import br.com.moip.resource.Payment;
@@ -70,6 +59,15 @@ public class PaymentAPITest {
                                                 .setNumber("55667788")
                                         )
                                         .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                        .billingAddress(new AddressRequest()
+                                                .street("Rua 123")
+                                                .streetNumber("321")
+                                                .complement("Subsolo")
+                                                .district("O Bairro")
+                                                .city("A Cidade")
+                                                .state("AC")
+                                                .country("BRA")
+                                                .zipCode("07863100"))
                                 )
                         )
                 )

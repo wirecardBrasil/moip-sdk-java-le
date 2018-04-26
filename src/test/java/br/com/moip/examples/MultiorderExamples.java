@@ -8,14 +8,11 @@ import br.com.moip.request.CustomerRequest;
 import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.ShippingAddressRequest;
 import br.com.moip.request.ReceiverRequest;
 import br.com.moip.request.AmountRequest;
 import br.com.moip.resource.Multiorder;
 import br.com.moip.API;
 import br.com.moip.examples.setup.Setup;
-
-import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

@@ -15,7 +15,7 @@ public class PersonRequest {
     private ParentsNameRequest parentsName;
     private PhoneRequest phone;
     private List<PhoneRequest> alternativePhones = new ArrayList<PhoneRequest>();
-    private ShippingAddressRequest address;
+    private AddressRequest address;
 
 
     public PersonRequest name(String name) {
@@ -78,7 +78,7 @@ public class PersonRequest {
         return this;
     }
 
-    public PersonRequest address(ShippingAddressRequest address) {
+    public PersonRequest address(AddressRequest address) {
         this.address = address;
 
         return this;

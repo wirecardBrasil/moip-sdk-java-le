@@ -6,7 +6,6 @@ import br.com.moip.request.CustomerRequest;
 import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.ShippingAddressRequest;
 import br.com.moip.request.FundingInstrumentRequest;
 import br.com.moip.request.CreditCardRequest;
 import br.com.moip.request.HolderRequest;

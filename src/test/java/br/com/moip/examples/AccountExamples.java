@@ -3,7 +3,6 @@ package br.com.moip.examples;
 import br.com.moip.API;
 import br.com.moip.examples.setup.Setup;
 import br.com.moip.request.TaxDocumentRequest;
-import br.com.moip.request.ShippingAddressRequest;
 import br.com.moip.request.PhoneRequest;
 import br.com.moip.request.IdentityDocumentRequest;
 import br.com.moip.request.CompanyRequest;
@@ -12,7 +11,6 @@ import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.PersonRequest;
 import br.com.moip.request.RequestTest;
 import br.com.moip.resource.Account;
-import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

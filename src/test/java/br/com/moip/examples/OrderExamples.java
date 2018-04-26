@@ -13,7 +13,6 @@ import br.com.moip.request.AmountRequest;
 import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.ShippingAddressRequest;
 import br.com.moip.request.InstallmentRequest;
 import br.com.moip.request.CheckoutPreferencesRequest;
 import br.com.moip.resource.Order;
