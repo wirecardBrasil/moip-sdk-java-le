@@ -1,16 +1,7 @@
 package br.com.moip.examples;
 
 import br.com.moip.API;
-import br.com.moip.request.PaymentRequest;
-import br.com.moip.request.FundingInstrumentRequest;
-import br.com.moip.request.CreditCardRequest;
-import br.com.moip.request.HolderRequest;
-import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.TaxDocumentRequest;
-import br.com.moip.request.BoletoRequest;
-import br.com.moip.request.ApiDateRequest;
-import br.com.moip.request.InstructionLinesRequest;
-import br.com.moip.request.OnlineBankDebitRequest;
+import br.com.moip.request.*;
 import br.com.moip.examples.setup.Setup;
 import br.com.moip.resource.Escrow;
 import br.com.moip.resource.Payment;
@@ -52,11 +43,21 @@ public class PaymentExamples {
                     .holder(new HolderRequest()
                         .fullname("Jose Portador da Silva")
                         .birthdate("1988-10-10")
-                            .phone(new PhoneRequest()
+                        .phone(new PhoneRequest()
                             .setAreaCode("11")
                             .setNumber("55667788")
                         )
                         .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                        .billingAddress(new AddressRequest()
+                            .street("Rua 123")
+                            .streetNumber("321")
+                            .complement("AP X")
+                            .district("O Bairro")
+                            .city("A Cidade")
+                            .state("AC")
+                            .country("BRA")
+                            .zipCode("07863100")
+                         )
                     )
                     .store(true)
                 )
@@ -88,8 +89,37 @@ public class PaymentExamples {
                             .setAreaCode("11")
                             .setNumber("55667788"))
                         .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                        .billingAddress(new AddressRequest()
+                            .street("Rua 123")
+                            .streetNumber("321")
+                            .complement("AP X")
+                            .district("O Bairro")
+                            .city("A Cidade")
+                            .state("AC")
+                            .country("BRA")
+                            .zipCode("07863100")
+                        )
                     )
                     .store(true)
+                )
+            )
+        );
+    }
+
+    /*
+     * This method allows you to create a payment with credit card,
+     * using a previously saved card. You only need to send the credit card ID
+     * and the cvc.
+     */
+    public void createPaymentWithCreditCardId() {
+
+        Payment createdPayment = api.payment().create(new PaymentRequest()
+            .orderId("ORD-XF29LOEE180J")        // Order's Moip ID
+            .installmentCount(1)
+            .fundingInstrument(new FundingInstrumentRequest()
+                .creditCard(new CreditCardRequest()
+                    .id("CRC-BOBNHLF50ZW0")
+                    .cvc(123)
                 )
             )
         );
