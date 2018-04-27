@@ -62,7 +62,7 @@ public class PaymentAPITest {
                                         .billingAddress(new AddressRequest()
                                                 .street("Rua 123")
                                                 .streetNumber("321")
-                                                .complement("Subsolo")
+                                                .complement("AP X")
                                                 .district("O Bairro")
                                                 .city("A Cidade")
                                                 .state("AC")
@@ -75,6 +75,14 @@ public class PaymentAPITest {
         assertFalse(createdPayment.getDelayCapture());
         assertTrue(createdPayment.getId().startsWith("PAY-KY4QPKGHZAC4"));
         assertEquals("sualoja.com", createdPayment.getStatementDescriptor());
+        assertEquals("Rua 123", createdPayment.getFundingInstrument().getCreditCard().getHolder().getBillingAddress().getStreet());
+        assertEquals("321", createdPayment.getFundingInstrument().getCreditCard().getHolder().getBillingAddress().getStreetNumber());
+        assertEquals("AP X", createdPayment.getFundingInstrument().getCreditCard().getHolder().getBillingAddress().getComplement());
+        assertEquals("O Bairro", createdPayment.getFundingInstrument().getCreditCard().getHolder().getBillingAddress().getDistrict());
+        assertEquals("A Cidade", createdPayment.getFundingInstrument().getCreditCard().getHolder().getBillingAddress().getCity());
+        assertEquals("AC", createdPayment.getFundingInstrument().getCreditCard().getHolder().getBillingAddress().getState());
+        assertEquals("BRA", createdPayment.getFundingInstrument().getCreditCard().getHolder().getBillingAddress().getCountry());
+        assertEquals("07863100", createdPayment.getFundingInstrument().getCreditCard().getHolder().getBillingAddress().getZipCode());
     }
 
     @Play("payments/create")

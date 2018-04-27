@@ -13,6 +13,7 @@ import br.com.moip.request.AmountRequest;
 import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.request.PhoneRequest;
+import br.com.moip.request.AddressRequest;
 import br.com.moip.request.InstallmentRequest;
 import br.com.moip.request.CheckoutPreferencesRequest;
 import br.com.moip.resource.Order;
@@ -89,7 +90,7 @@ public class OrderExamples {
                 .phone(new PhoneRequest()
                     .setAreaCode("11")
                     .setNumber("55443322"))
-                .shippingAddressRequest(new ShippingAddressRequest()
+                .shippingAddressRequest(new AddressRequest()
                     .street("Avenida Faria Lima")
                     .streetNumber("3064")
                     .complement("12 andar")

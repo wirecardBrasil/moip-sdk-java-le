@@ -2,14 +2,15 @@ package br.com.moip.examples;
 
 import br.com.moip.API;
 import br.com.moip.examples.setup.Setup;
+import br.com.moip.request.RequestTest;
+import br.com.moip.request.AccountRequest;
+import br.com.moip.request.PersonRequest;
+import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.TaxDocumentRequest;
+import br.com.moip.request.AddressRequest;
 import br.com.moip.request.PhoneRequest;
 import br.com.moip.request.IdentityDocumentRequest;
 import br.com.moip.request.CompanyRequest;
-import br.com.moip.request.AccountRequest;
-import br.com.moip.request.ApiDateRequest;
-import br.com.moip.request.PersonRequest;
-import br.com.moip.request.RequestTest;
 import br.com.moip.resource.Account;
 
 import java.util.Calendar;
@@ -50,7 +51,7 @@ public class AccountExamples extends RequestTest {
                 .nationality("BRA")
                 .birthPlace("Santos")
                 .taxDocument(TaxDocumentRequest.cpf("953.394.633-46"))
-                .address(new ShippingAddressRequest()
+                .address(new AddressRequest()
                     .street("Av. Brigadeiro Faria Lima")
                     .streetNumber("434")
                     .district("Itaim")
@@ -94,7 +95,7 @@ public class AccountExamples extends RequestTest {
                 .nationality("BRA")
                 .birthPlace("Santos")
                 .taxDocument(TaxDocumentRequest.cpf("953.394.633-46"))
-                .address(new ShippingAddressRequest()
+                .address(new AddressRequest()
                     .street("Av. Brigadeiro Faria Lima")
                     .streetNumber("434")
                     .district("Itaim")
@@ -137,7 +138,7 @@ public class AccountExamples extends RequestTest {
                 .nationality("BRA")
                 .birthPlace("Santos")
                 .taxDocument(TaxDocumentRequest.cpf("953.394.633-46"))
-                .address(new ShippingAddressRequest()
+                .address(new AddressRequest()
                     .street("Av. Brigadeiro Faria Lima")
                     .streetNumber("434")
                     .district("Itaim")
@@ -161,7 +162,7 @@ public class AccountExamples extends RequestTest {
             .company(new CompanyRequest()
                 .name("Teste LTDA")
                 .businessName("Teste")
-                .address(new ShippingAddressRequest()
+                .address(new AddressRequest()
                     .street("Av. Brigadeiro Faria Lima")
                     .streetNumber("4530")
                     .district("Itaim")
