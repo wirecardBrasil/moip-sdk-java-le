@@ -179,7 +179,11 @@ public class PaymentExamples {
      */
     public void createPaymentWithDelayCapture() {
 
-        String hash = "CCbe2TVHIsINX+v+bVPP0KSKWfXs6AtrJlHznaSdTgmvNFOvsalZ7pFgoddc3fH7vEdpxCa55ed1DoNIzWWUo3+7KLQgV0Gi/ux0RShBiNzB0wiFf+OBef9x7b3IgcdulZqdNGn84AvGInJ9r6a2iZ8kY0xQ1xONOod5rVkuGDvNgVVOIB7Zs5In9j3f4TENRU7aqx63srT3UPP+wsQBMNJ4wQturogjZBhDIQqEm2sC9Zzx+E8zP/aZ+YBF9O+nfeofF4S2E9bs4A9neWCivntqwENX0O755NamWX/up2MbyHu8N+cm493RrbUT76jibB0RyyT9nkKpSOuJIGU8vA==";
+        String hash = "CCbe2TVHIsINX+v+bVPP0KSKWfXs6AtrJlHznaSdTgmvNFOvsalZ7pFgoddc3fH7vEdpxCa55ed1DoNIz" +
+                      "WWUo3+7KLQgV0Gi/ux0RShBiNzB0wiFf+OBef9x7b3IgcdulZqdNGn84AvGInJ9r6a2iZ8kY0xQ1xONOod5" +
+                      "rVkuGDvNgVVOIB7Zs5In9j3f4TENRU7aqx63srT3UPP+wsQBMNJ4wQturogjZBhDIQqEm2sC9Zzx+E8zP/aZ" +
+                      "+YBF9O+nfeofF4S2E9bs4A9neWCivntqwENX0O755NamWX/up2MbyHu8N+cm493RrbUT76jibB0RyyT9nkKpSOu" +
+                      "JIGU8vA==";
 
         Payment payment = api.payment().create(new PaymentRequest()
             .orderId("ORD-Z7GID1ZO7LKQ")        // Order's Moip ID
