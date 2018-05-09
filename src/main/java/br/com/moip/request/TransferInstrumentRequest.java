@@ -21,7 +21,7 @@ public class TransferInstrumentRequest {
     }
 
     public enum Method{
-        BANK_ACCOUNT, MOIP_ACCOUNT;
+        BANK_ACCOUNT, MOIP_ACCOUNT
     }
 
     @Override

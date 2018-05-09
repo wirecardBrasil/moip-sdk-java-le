@@ -1,3 +1,27 @@
+<a name="v4.2.0"></a>
+# [](https://github.com/moip/moip-sdk-java/compare/v4.1.1...v4.2.0) (2018-05-02)
+
+
+### Bug Fixes
+
+* **Client**: apply fixes to JSON translation ([bf40270]())
+
+### Refactor
+
+* **Account**: fix account treatment ([4d50db3]())
+
+### Docs
+
+* **Readme**
+  * Adding slack link ([2ff4443]())
+  * complete and translate the documentation ([d3b63b5]())
+
+* **Examples**
+  * adds request examples for all SDK features ([95e6a0a]())
+
+* **Contributing**: adds CONTRIBUTING.md ([c2b2de5]())
+
+
 <a name="v4.1.1"></a>
 # [](https://github.com/moip/moip-sdk-java/compare/v4.1.0...v4.1.1) (2018-03-02)
 

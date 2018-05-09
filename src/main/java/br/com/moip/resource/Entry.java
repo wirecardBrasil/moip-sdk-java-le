@@ -7,7 +7,7 @@ public class Entry {
     private String external_id;
     private List<Reschedule> reschedule;
     private String scheduledFor;
-    private String status;
+    private Status status;
     private MoipAccount moipAccount;
     private List<Fees> fees;
     private String type;
@@ -30,7 +30,7 @@ public class Entry {
 
     public String getScheduledFor() { return scheduledFor; }
 
-    public String getStatus() { return status; }
+    public Status getStatus() { return status; }
 
     public MoipAccount getMoipAccount() { return moipAccount; }
 
@@ -82,6 +82,10 @@ public class Entry {
                     .append(", type=").append(type)
                     .append('}').toString();
         }
+    }
+
+    public enum Status {
+        SCHEDULED, SETTLED
     }
 
     @Override

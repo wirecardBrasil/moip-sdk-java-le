@@ -73,7 +73,7 @@ public class BankAccount {
         return getType().equals(Type.SAVING);
     }
 
-    private enum Type {
+    public enum Type {
         CHECKING, SAVING;
     }
 

@@ -41,6 +41,8 @@ public class Client {
     public static final String CONNECT_PRODUCTION = "https://connect.moip.com.br";
     public static final String CONNECT_SANDBOX = "https://connect-sandbox.moip.com.br";
     private static String USER_AGENT;
+    private final String RESPONSE_BODY_400 = "400";
+    private final String RESPONSE_BODY_404 = "404";
 
     static {
         try {
@@ -126,7 +128,6 @@ public class Client {
                 conn.setDoOutput(true);
                 String body = getBody(requestProps.object, requestProps.contentType);
 
-                LOGGER.debug("");
                 LOGGER.debug("{}", body);
 
                 DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
@@ -145,6 +146,22 @@ public class Client {
             logHeaders(conn.getHeaderFields().entrySet());
 
             StringBuilder responseBody = new StringBuilder();
+
+            responseBody = responseBodyTreatment(responseBody, responseCode, conn);
+
+            LOGGER.debug("{}", responseBody.toString());
+            LOGGER.debug("<-- END HTTP ({}-byte body)", conn.getContentLength());
+
+            return gson.fromJson(responseBody.toString(), requestProps.<T>getType());
+        } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
+            throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
+        }
+    }
+
+    private StringBuilder responseBodyTreatment(StringBuilder responseBody, int responseCode, HttpURLConnection conn) {
+
+        try {
+
             if (responseCode >= 200 && responseCode < 299) {
                 responseBody = readBody(conn.getInputStream());
             }
@@ -154,15 +171,18 @@ public class Client {
             }
 
             if (responseCode >= 400 && responseCode < 499) {
-
                 responseBody = readBody(conn.getErrorStream());
                 LOGGER.debug("API ERROR {}", responseBody.toString());
 
                 Errors errors = new Errors();
+
                 try {
+
                     errors = gson.fromJson(responseBody.toString(), Errors.class);
+
                 } catch (Exception e) {
-                    e.printStackTrace();
+
+                    LOGGER.debug("There was not possible cast the JSON to object");
                 }
 
                 throw new ValidationException(responseCode, conn.getResponseMessage(), errors);
@@ -172,14 +192,11 @@ public class Client {
                 throw new UnexpectedException();
             }
 
-            LOGGER.debug("");
-            LOGGER.debug("{}", responseBody.toString());
-            LOGGER.debug("<-- END HTTP ({}-byte body)", conn.getContentLength());
-
-            return gson.fromJson(responseBody.toString(), requestProps.<T>getType());
-        } catch (IOException | KeyManagementException | NoSuchAlgorithmException e) {
+        } catch (IOException e) {
             throw new MoipException("Error occurred connecting to Moip API: " + e.getMessage(), e);
         }
+
+        return responseBody;
     }
 
     private void logHeaders(Set<Map.Entry<String, List<String>>> entries) {
