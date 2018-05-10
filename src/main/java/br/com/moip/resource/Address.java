@@ -9,24 +9,21 @@ public class Address {
     private String district;
     private String zipCode;
     private String state;
-    private String type;
     private String country;
-
-    public String getStreetNumber() { return streetNumber; }
 
     public String getStreet() { return street; }
 
-    public String getCity() { return city; }
+    public String getStreetNumber() { return streetNumber; }
 
     public String getComplement() { return complement; }
 
     public String getDistrict() { return district; }
 
-    public String getZipCode() { return zipCode; }
+    public String getCity() { return city; }
 
     public String getState() { return state; }
 
-    public String getType() { return type; }
+    public String getZipCode() { return zipCode; }
 
     public String getCountry() { return country; }
 
@@ -41,7 +38,6 @@ public class Address {
                 .append(", district='").append(district).append('\'')
                 .append(", zipCode='").append(zipCode).append('\'')
                 .append(", state='").append(state).append('\'')
-                .append(", type='").append(type).append('\'')
                 .append(", country='").append(country).append('\'')
                 .append('}').toString();
     }

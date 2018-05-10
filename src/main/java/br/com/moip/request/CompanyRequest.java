@@ -7,7 +7,7 @@ public class CompanyRequest {
     private TaxDocumentRequest taxDocument;
     private ApiDateRequest openingDate;
     private PhoneRequest phone;
-    private ShippingAddressRequest address;
+    private AddressRequest address;
     private MainActivityRequest mainActivity;
 
     public CompanyRequest name(String name) {
@@ -40,7 +40,7 @@ public class CompanyRequest {
         return this;
     }
 
-    public CompanyRequest address(ShippingAddressRequest address) {
+    public CompanyRequest address(AddressRequest address) {
         this.address = address;
 
         return this;

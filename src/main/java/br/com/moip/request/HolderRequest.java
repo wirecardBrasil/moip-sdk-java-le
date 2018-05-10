@@ -6,6 +6,7 @@ public class HolderRequest {
     private String birthdate;
     private PhoneRequest phone;
     private TaxDocumentRequest taxDocument;
+    private AddressRequest billingAddressRequest;
 
     public String getFullname() {
         return fullname;
@@ -43,6 +44,14 @@ public class HolderRequest {
 
     public HolderRequest taxDocument(final TaxDocumentRequest taxDocument) {
         this.taxDocument = taxDocument;
+
+        return this;
+    }
+
+    public AddressRequest getBillingAddress() { return billingAddressRequest; }
+
+    public HolderRequest billingAddress(AddressRequest billingAddressRequest) {
+        this.billingAddressRequest = billingAddressRequest;
 
         return this;
     }
