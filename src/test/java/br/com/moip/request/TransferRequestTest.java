@@ -32,4 +32,30 @@ public class TransferRequestTest extends RequestTest{
 
         JSONAssert.assertEquals(expectedJSON.toString(), json, true);
     }
+
+    @Test
+    public void testCreateTransferWithDescription() throws JSONException {
+        TransferRequest transfer = new TransferRequest()
+                .amount(500)
+                .description("This is a description for a transfer.")
+                .transferInstrument(new TransferInstrumentRequest()
+                        .bankAccount(new BankAccountRequest()
+                                .bankNumber("001")
+                                .agencyNumber("1111")
+                                .agencyCheckNumber("2")
+                                .accountNumber("9999")
+                                .accountCheckNumber("8")
+                                .checking()
+                                .holder(new HolderRequest()
+                                        .fullname("Nome do Portador")
+                                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                                )
+                        )
+                );
+
+        String json = new GsonFactory().gson().toJson(transfer);
+        JsonObject expectedJSON = getJsonFileAsJsonObject("transfer/createWithDescription.json");
+
+        JSONAssert.assertEquals(expectedJSON.toString(), json, true);
+    }
 }

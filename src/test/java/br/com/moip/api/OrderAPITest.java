@@ -1,15 +1,6 @@
 package br.com.moip.api;
 
-import br.com.moip.request.AmountRequest;
-import br.com.moip.request.ApiDateRequest;
-import br.com.moip.request.CustomerRequest;
-import br.com.moip.request.OrderRequest;
-import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.ReceiverRequest;
-import br.com.moip.request.ShippingAddressRequest;
-import br.com.moip.request.TaxDocumentRequest;
-import br.com.moip.request.CheckoutPreferencesRequest;
-import br.com.moip.request.InstallmentRequest;
+import br.com.moip.request.*;
 import br.com.moip.resource.FundingInstrument;
 import br.com.moip.resource.Order;
 import br.com.moip.resource.OrderStatus;
@@ -23,7 +14,6 @@ import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
@@ -100,7 +90,6 @@ public class OrderAPITest {
         assertEquals("Bairro do SHIPPING", createdOrder.getAddresses().get(0).getDistrict());
         assertEquals("01234567", createdOrder.getAddresses().get(0).getZipCode());
         assertEquals("SP", createdOrder.getAddresses().get(0).getState());
-        assertEquals("SHIPPING", createdOrder.getAddresses().get(0).getType());
         assertEquals("BRA", createdOrder.getAddresses().get(0).getCountry());
         assertEquals("CUS-O4C7B9LPNXN8", createdOrder.getCustomer().getId());
         assertEquals("59fb3111bc694", createdOrder.getCustomer().getOwnId());
@@ -122,7 +111,6 @@ public class OrderAPITest {
         assertEquals("Bairro do SHIPPING", createdOrder.getCustomer().getAddresses().get(0).getDistrict());
         assertEquals("01234567", createdOrder.getCustomer().getAddresses().get(0).getZipCode());
         assertEquals("SP", createdOrder.getCustomer().getAddresses().get(0).getState());
-        assertEquals("SHIPPING", createdOrder.getCustomer().getAddresses().get(0).getType());
         assertEquals("BRA", createdOrder.getCustomer().getAddresses().get(0).getCountry());
         assertEquals("01234567", createdOrder.getCustomer().getShippingAddress().getZipCode());
         assertEquals("Rua de teste do SHIPPING", createdOrder.getCustomer().getShippingAddress().getStreet());
@@ -243,7 +231,7 @@ public class OrderAPITest {
                         .phone(new PhoneRequest()
                                 .setAreaCode("11")
                                 .setNumber("55443322"))
-                        .shippingAddressRequest(new ShippingAddressRequest()
+                        .shippingAddressRequest(new AddressRequest()
                                                     .street("Rua dos Bobos")
                                                     .streetNumber("10")
                                                     .zipCode("11111111")

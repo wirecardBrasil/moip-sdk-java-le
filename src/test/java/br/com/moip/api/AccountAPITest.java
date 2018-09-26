@@ -1,13 +1,6 @@
 package br.com.moip.api;
 
-import br.com.moip.request.AccountRequest;
-import br.com.moip.request.ApiDateRequest;
-import br.com.moip.request.CompanyRequest;
-import br.com.moip.request.IdentityDocumentRequest;
-import br.com.moip.request.PersonRequest;
-import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.ShippingAddressRequest;
-import br.com.moip.request.TaxDocumentRequest;
+import br.com.moip.request.*;
 import br.com.moip.resource.Account;
 import com.rodrigosaito.mockwebserver.player.Play;
 import com.rodrigosaito.mockwebserver.player.Player;
@@ -76,7 +69,7 @@ public class AccountAPITest {
                 .nationality("BRA")
                 .birthPlace("Santos")
                 .taxDocument(TaxDocumentRequest.cpf("232.233.768-44"))
-                .address(new ShippingAddressRequest()
+                .address(new AddressRequest()
                     .street("Av. Brigadeiro Faria Lima")
                     .streetNumber("2927")
                     .district("Itaim")
@@ -141,7 +134,7 @@ public class AccountAPITest {
                     .nationality("BRA")
                     .birthPlace("Santos")
                     .taxDocument(TaxDocumentRequest.cpf("953.394.633-46"))
-                    .address(new ShippingAddressRequest()
+                    .address(new AddressRequest()
                         .street("Av. Brigadeiro Faria Lima")
                         .streetNumber("434")
                         .district("Itaim")
@@ -165,7 +158,7 @@ public class AccountAPITest {
             .company(new CompanyRequest()
                 .name("Teste LTDA")
                 .businessName("Teste")
-                .address(new ShippingAddressRequest()
+                .address(new AddressRequest()
                     .street("Av. Brigadeiro Faria Lima")
                     .streetNumber("4530")
                     .district("Itaim")

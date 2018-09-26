@@ -2,15 +2,15 @@ package br.com.moip.examples;
 
 import br.com.moip.API;
 import br.com.moip.examples.setup.Setup;
+import br.com.moip.request.RequestTest;
 import br.com.moip.request.CustomerRequest;
 import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.TaxDocumentRequest;
 import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.ShippingAddressRequest;
+import br.com.moip.request.AddressRequest;
 import br.com.moip.request.FundingInstrumentRequest;
 import br.com.moip.request.CreditCardRequest;
 import br.com.moip.request.HolderRequest;
-import br.com.moip.request.RequestTest;
 import br.com.moip.resource.Customer;
 import br.com.moip.resource.FundingInstrument;
 
@@ -42,7 +42,7 @@ public class CustomerExamples extends RequestTest {
             .birthdate(new ApiDateRequest().date(new Date()))
             .taxDocument(TaxDocumentRequest.cpf("22222222222"))
             .phone(new PhoneRequest().setAreaCode("11").setNumber("55443322"))
-            .shippingAddressRequest(new ShippingAddressRequest()
+            .shippingAddressRequest(new AddressRequest()
                 .street("Avenida Faria Lima")
                 .streetNumber("3064")
                 .complement("12 andar")
@@ -73,6 +73,16 @@ public class CustomerExamples extends RequestTest {
                             .setNumber("55667788")
                         )
                         .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                        .billingAddress(new AddressRequest()
+                            .street("Rua 123")
+                            .streetNumber("321")
+                            .complement("AP X")
+                            .district("O Bairro")
+                            .city("A Cidade")
+                            .state("AC")
+                            .country("BRA")
+                            .zipCode("07863100")
+                        )
                     )
                 )
             )
@@ -90,7 +100,7 @@ public class CustomerExamples extends RequestTest {
             .birthdate(new ApiDateRequest().date(new Date()))
             .taxDocument(TaxDocumentRequest.cpf("22222222222"))
             .phone(new PhoneRequest().setAreaCode("11").setNumber("55443322"))
-            .shippingAddressRequest(new ShippingAddressRequest().street("Avenida Faria Lima")
+            .shippingAddressRequest(new AddressRequest().street("Avenida Faria Lima")
                 .streetNumber("3064")
                 .complement("12 andar")
                 .city("São Paulo")
@@ -112,7 +122,16 @@ public class CustomerExamples extends RequestTest {
                             .setAreaCode("11")
                             .setNumber("55667788")
                         )
-                        .taxDocument(TaxDocumentRequest.cpf("22222222222")
+                        .taxDocument(TaxDocumentRequest.cpf("22222222222"))
+                        .billingAddress(new AddressRequest()
+                            .street("Rua 123")
+                            .streetNumber("321")
+                            .complement("AP X")
+                            .district("O Bairro")
+                            .city("A Cidade")
+                            .state("AC")
+                            .country("BRA")
+                            .zipCode("07863100")
                         )
                     )
                 )

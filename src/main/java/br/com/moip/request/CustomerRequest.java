@@ -8,7 +8,7 @@ public class CustomerRequest {
     private String email;
     private ApiDateRequest birthDate;
     private TaxDocumentRequest taxDocument;
-    private ShippingAddressRequest shippingAddress;
+    private AddressRequest shippingAddress;
     private PhoneRequest phone;
     private FundingInstrumentRequest fundingInstrument;
 
@@ -66,7 +66,7 @@ public class CustomerRequest {
         return this;
     }
 
-    public CustomerRequest shippingAddressRequest(ShippingAddressRequest shippingAddressRequest) {
+    public CustomerRequest shippingAddressRequest(AddressRequest shippingAddressRequest) {
         this.shippingAddress = shippingAddressRequest;
 
         return this;
@@ -76,7 +76,7 @@ public class CustomerRequest {
         return taxDocument;
     }
 
-    public ShippingAddressRequest getShippingAddress() {
+    public AddressRequest getShippingAddress() {
         return shippingAddress;
     }
 

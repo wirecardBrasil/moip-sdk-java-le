@@ -1,17 +1,6 @@
 package br.com.moip.api;
 
-import br.com.moip.Client;
-import br.com.moip.request.AmountRequest;
-import br.com.moip.request.ApiDateRequest;
-import br.com.moip.request.CustomerRequest;
-import br.com.moip.request.MultiorderRequest;
-import br.com.moip.request.OrderAmountRequest;
-import br.com.moip.request.OrderRequest;
-import br.com.moip.request.PhoneRequest;
-import br.com.moip.request.ReceiverRequest;
-import br.com.moip.request.ShippingAddressRequest;
-import br.com.moip.request.SubtotalsRequest;
-import br.com.moip.request.TaxDocumentRequest;
+import br.com.moip.request.*;
 
 import br.com.moip.resource.Multiorder;
 import br.com.moip.resource.OrderStatus;
@@ -62,7 +51,7 @@ public class MultiorderAPITest {
                         .countryCode("55")
                         .setAreaCode("11")
                         .setNumber("66778899"))
-                    .shippingAddressRequest(new ShippingAddressRequest()
+                    .shippingAddressRequest(new AddressRequest()
                         .street("Avenida Faria Lima")
                         .streetNumber("2927")
                         .zipCode("01234000")
@@ -93,7 +82,7 @@ public class MultiorderAPITest {
                         .countryCode("55")
                         .setAreaCode("11")
                         .setNumber("66778899"))
-                    .shippingAddressRequest(new ShippingAddressRequest()
+                    .shippingAddressRequest(new AddressRequest()
                         .street("Avenida Faria Lima")
                         .streetNumber("2927")
                         .zipCode("01234000")
