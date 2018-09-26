@@ -6,6 +6,7 @@ public class Holder {
     private String birthdate;
     private Phone phone;
     private TaxDocument taxDocument;
+    private Address billingAddress;
 
     public String getFullname() {
         return fullname;
@@ -47,6 +48,14 @@ public class Holder {
         return this;
     }
 
+    public Address getBillingAddress() { return billingAddress; }
+
+    public Holder setBillingAddress(final Address billingAddress) {
+        this.billingAddress = billingAddress;
+
+        return this;
+    }
+
     @Override
     public String toString() {
         return new StringBuilder("Holder{")
@@ -54,6 +63,7 @@ public class Holder {
                 .append(", birthdate=").append(birthdate)
                 .append(", phone=").append(phone)
                 .append(", taxDocument").append(taxDocument)
+                .append(", billingAddress=").append(billingAddress)
                 .append("}").toString();
     }
 }

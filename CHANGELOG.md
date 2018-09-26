@@ -4,22 +4,22 @@
 
 ### Bug Fixes
 
-* **Client**: apply fixes to JSON translation ([bf40270]())
+* **Client**: apply fixes to JSON translation ([bf40270](https://github.com/moip/moip-sdk-java/commits/bf40270))
 
 ### Refactor
 
-* **Account**: fix account treatment ([4d50db3]())
+* **Account**: fix account treatment ([4d50db3](https://github.com/moip/moip-sdk-java/commits/4d50db3))
 
 ### Docs
 
 * **Readme**
   * Adding slack link ([2ff4443]())
-  * complete and translate the documentation ([d3b63b5]())
+  * complete and translate the documentation ([d3b63b5](https://github.com/moip/moip-sdk-java/commits/d3b63b5))
 
 * **Examples**
-  * adds request examples for all SDK features ([95e6a0a]())
+  * adds request examples for all SDK features ([95e6a0a](https://github.com/moip/moip-sdk-java/commits/95e6a0a))
 
-* **Contributing**: adds CONTRIBUTING.md ([c2b2de5]())
+* **Contributing**: adds CONTRIBUTING.md ([c2b2de5](https://github.com/moip/moip-sdk-java/commits/c2b2de5))
 
 
 <a name="v4.1.1"></a>
