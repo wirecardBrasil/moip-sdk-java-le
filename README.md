@@ -37,7 +37,7 @@ Java `v1.7ˆ` ![java-cup](https://user-images.githubusercontent.com/32847427/377
 
 ![Maven-central](https://img.shields.io/maven-central/v/br.com.moip/java-sdk.svg)
 
-Add the fallowing dependency to `build.gradle` in the project:
+Add the following dependency to `build.gradle` in the project:
 
 ```gradle
 compile group: 'br.com.moip', name: 'java-sdk', version: 'x.y.z'
@@ -47,7 +47,7 @@ compile group: 'br.com.moip', name: 'java-sdk', version: 'x.y.z'
 
 ![Maven-central](https://img.shields.io/maven-central/v/br.com.moip/java-sdk.svg)
 
-Add the fallowing dependency to `pom.xml` in the project:
+Add the following dependency to `pom.xml` in the project:
 
 ```xml
 <dependency>
