@@ -1,6 +1,9 @@
 package br.com.moip.request;
 
+import br.com.moip.resource.TaxDocument;
+
 public class ReceiverRequest {
+    private TaxDocument taxDocument;
     private ReceiverTypeRequest type;
     private MoipAccountRequest moipAccount;
     private AmountRequest amount;
@@ -18,6 +21,12 @@ public class ReceiverRequest {
         return this;
     }
 
+    public ReceiverRequest primary(final TaxDocument document, final AmountRequest amountRequest, boolean feePayor) {
+        defaultAttributes(ReceiverTypeRequest.PRIMARY, document, amountRequest, feePayor);
+
+        return this;
+    }
+
     public ReceiverRequest secondary(final String moipAccount, final AmountRequest amountRequest) {
         defaultAttributes(ReceiverTypeRequest.SECONDARY, moipAccount, amountRequest, false);
 
@@ -30,11 +39,30 @@ public class ReceiverRequest {
         return this;
     }
 
+    public ReceiverRequest secondary(final TaxDocument document, final AmountRequest amountRequest, boolean feePayor) {
+        defaultAttributes(ReceiverTypeRequest.SECONDARY, document, amountRequest, feePayor);
+
+        return this;
+    }
+
+
     private void defaultAttributes(ReceiverTypeRequest receiverTypeRequest, String moipAccount, AmountRequest amountRequest, boolean feePayor) {
         this.type = receiverTypeRequest;
         this.moipAccount = new MoipAccountRequest(moipAccount);
         this.amount = amountRequest;
         this.feePayor = feePayor;
+    }
+
+    private void defaultAttributes(ReceiverTypeRequest receiverTypeRequest, TaxDocument document, AmountRequest amountRequest, boolean feePayor) {
+        this.type = receiverTypeRequest;
+        this.amount = amountRequest;
+        this.feePayor = feePayor;
+        this.taxDocument = document;
+    }
+
+
+    public TaxDocument getTaxDocument() {
+        return taxDocument;
     }
 
     public ReceiverTypeRequest getType() {
