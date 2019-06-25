@@ -1,7 +1,6 @@
 package br.com.moip.request;
 
 public class ReceiverRequest {
-    private TaxDocumentRequest taxDocument;
     private ReceiverTypeRequest type;
     private MoipAccountRequest moipAccount;
     private AmountRequest amount;
@@ -55,12 +54,7 @@ public class ReceiverRequest {
         this.type = receiverTypeRequest;
         this.amount = amountRequest;
         this.feePayor = feePayor;
-        this.taxDocument = document;
-    }
-
-
-    public TaxDocumentRequest getTaxDocument() {
-        return taxDocument;
+        this.moipAccount = new MoipAccountRequest(document);
     }
 
     public ReceiverTypeRequest getType() {
