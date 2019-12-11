@@ -11,6 +11,8 @@ public class CreditCard {
     private String brand;
     private String first6;
     private String last4;
+    private String expirationMonth;
+    private String expirationYear;
 
     public String getId() {
         return id;
@@ -34,6 +36,14 @@ public class CreditCard {
 
     public String getLast4() {
         return last4;
+    }
+
+    public String getExpirationMonth(){
+        return expirationMonth;
+    }
+
+    public String getExpirationYear(){
+        return expirationYear;
     }
 
     @Override
