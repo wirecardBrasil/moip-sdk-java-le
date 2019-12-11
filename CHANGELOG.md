@@ -1,3 +1,11 @@
+<a name="v4.3.0"></a>
+# [](https://github.com/moip/moip-sdk-java/compare/v4.2.0...v4.3.0) (2019-12-11)
+
+
+### Features
+* **CreditCard**: adds `getExpirationMonth()` and `getExpirationYear()` methods ([ed1b0a3](https://github.com/moip/moip-sdk-java/commits/ed1b0a3226f3f3766b81a074b8ae75e31b7c184e))
+
+
 <a name="v4.2.0"></a>
 # [](https://github.com/moip/moip-sdk-java/compare/v4.1.1...v4.2.0) (2018-05-02)
 
