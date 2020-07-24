@@ -3,6 +3,7 @@ package br.com.moip.request;
 public class TransferRequest {
 
     private Integer amount;
+    private String description;
     private TransferInstrumentRequest transferInstrument;
 
     public TransferRequest amount(Integer amount){
@@ -11,7 +12,17 @@ public class TransferRequest {
         return this;
     }
 
+    public TransferRequest description(String description){
+        this.description = description;
+
+        return this;
+    }
+
     public Integer getAmount() { return amount; }
+
+    public String getDescription() {
+        return description;
+    }
 
     public TransferRequest transferInstrument(TransferInstrumentRequest transferInstrument){
         this.transferInstrument = transferInstrument;
