@@ -4,6 +4,7 @@ public class FundingInstrumentRequest {
 
     private Method method;
     private CreditCardRequest creditCard;
+    private DebitCardRequest debitCard;
     private BoletoRequest boleto;
     private MposRequest mpos;
     private OnlineBankDebitRequest onlineBankDebit;
@@ -16,21 +17,27 @@ public class FundingInstrumentRequest {
         return this;
     }
 
+    public FundingInstrumentRequest debitCard(final DebitCardRequest debitCard) {
+        this.debitCard = debitCard;
+        this.method = Method.DEBIT_CARD;
+        return this;
+    }
+
     public FundingInstrumentRequest boleto(final BoletoRequest boletoRequest) {
         this.boleto = boletoRequest;
         this.method = Method.BOLETO;
         return this;
     }
 
-    public FundingInstrumentRequest mposDebitCard(final MposRequest mposRequest) {
+    public FundingInstrumentRequest mposDebitCard(final MposRequest mposRequest, final DebitCardRequest debitCard) {
         this.mpos = mposRequest;
-        this.method = Method.DEBIT_CARD;
+        this.debitCard(debitCard);
         return this;
     }
 
-    public FundingInstrumentRequest mposCreditCard(final MposRequest mposRequest) {
+    public FundingInstrumentRequest mposCreditCard(final MposRequest mposRequest, final CreditCardRequest creditCard) {
         this.mpos = mposRequest;
-        this.method = Method.CREDIT_CARD;
+        this.creditCard(creditCard);
         return this;
     }
 
@@ -68,6 +75,10 @@ public class FundingInstrumentRequest {
 
     public BoletoRequest getBoleto() {
         return boleto;
+    }
+
+    public DebitCardRequest getDebitCard() {
+        return debitCard;
     }
 
     public MposRequest getMpos() {

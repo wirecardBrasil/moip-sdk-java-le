@@ -9,6 +9,30 @@ public class PaymentRequest {
     private GeolocationRequest geolocation;
     private Boolean delayCapture;
     private EscrowRequest escrow;
+    private Recurring recurring;
+
+    public Recurring getRecurring() {
+        return this.recurring;
+    }
+
+    public void setRecurring(Recurring recurring) {
+        this.recurring = recurring;
+    }
+
+    public PaymentRequest isRecurring(boolean isRecurring) {
+        this.recurring = new Recurring();
+        this.recurring.setRecurring(isRecurring);
+        return this;
+    }
+
+    public PaymentRequest occurrence(int occurrence) {
+        if (this.recurring == null) {
+            this.recurring = new Recurring();
+        }
+
+        this.recurring.setOccurrence(occurrence);
+        return this;
+    }
 
     public PaymentRequest orderId(final String orderId) {
         this.orderId = orderId;

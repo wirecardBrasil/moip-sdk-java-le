@@ -4,6 +4,7 @@ import br.com.moip.Client;
 import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.BoletoRequest;
 import br.com.moip.request.CreditCardRequest;
+import br.com.moip.request.DebitCardRequest;
 import br.com.moip.request.FundingInstrumentRequest;
 import br.com.moip.request.GeolocationRequest;
 import br.com.moip.request.HolderRequest;
@@ -59,6 +60,8 @@ public class PaymentAPITest {
                     new FundingInstrumentRequest()
                         .creditCard(
                             new CreditCardRequest()
+                                .first6("123456")
+                                .last4("1234")
                                 .hash(CC_HASH)
                                 .holder(
                                     new HolderRequest()
@@ -93,6 +96,8 @@ public class PaymentAPITest {
                         .creditCard(
                             new CreditCardRequest()
                                 .number("4012001037141112")
+                                .first6("401200")
+                                .last4("1112")
                                 .cvc(123)
                                 .expirationMonth("05")
                                 .expirationYear("18")
@@ -170,7 +175,7 @@ public class PaymentAPITest {
         assertEquals("https://checkout-sandbox.moip.com.br/boleto/PAY-0UQ9BTLOXCRM/print", createdPayment.getLinks().payBoletoPrintLink());
     }
 
-    @Play("payments/create_mpos_credit_payment")
+    @Play("payments/create_mpos_payment")
     @Test
     public void testCreateMposCreditRequest() {
         Payment createdPayment = api.create(
@@ -183,7 +188,38 @@ public class PaymentAPITest {
                 )
                 .fundingInstrument(new FundingInstrumentRequest()
                     .mposCreditCard(new MposRequest()
-                        .PinpadId("D180")
+                                        .PinpadId("D180"),
+                                    new CreditCardRequest()
+                                        .first6("123456")
+                                        .last4("1234")
+                    )
+                )
+        );
+
+        assertEquals(createdPayment.getId(), "PAY-1TUOVJ3D18NM");
+        assertEquals(createdPayment.getStatus(), PaymentStatus.WAITING);
+        assertEquals(createdPayment.getFundingInstrument().getMpos().getPinpadId(), "D180-64000786");
+        assertEquals(createdPayment.getGeolocation().getLatitude(), -33.867, 0);
+        assertEquals(createdPayment.getGeolocation().getLongitude(), 151.206,0);
+    }
+
+    @Play("payments/create_mpos_payment")
+    @Test
+    public void testCreateMposDebitRequest() {
+        Payment createdPayment = api.create(
+            new PaymentRequest()
+                .orderId("ORD-GOHHIF4Z6PLV")
+                .installmentCount(1)
+                .geolocation(new GeolocationRequest()
+                    .latitude(-33.867)
+                    .longitude(151.206)
+                )
+                .fundingInstrument(new FundingInstrumentRequest()
+                    .mposDebitCard(new MposRequest()
+                                        .PinpadId("D180"),
+                                    new DebitCardRequest()
+                                        .first6("123456")
+                                        .last4("1234")
                     )
                 )
         );
@@ -207,6 +243,8 @@ public class PaymentAPITest {
                     .creditCard(
                         new CreditCardRequest()
                             .number("4012001037141112")
+                            .first6("401200")
+                            .last4("1112")
                             .cvc(123)
                             .expirationMonth("05")
                             .expirationYear("18")

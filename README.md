@@ -58,6 +58,35 @@ Add the fallowing dependency to `pom.xml` in the project:
 
 ```
 
+## How to build
+
+Is necessary to configure your ```gradle.settings``` with these informations:
+
+```properties
+artifactory_username=developer
+artifactory_password=AP5xrUuUbJEha1sZCWpJqDABhwA
+ossrhUsername= moip
+ossrhPassword=rtg32oue@MOIP!
+
+signing.keyId=FEBFADD1
+signing.password=ittafer
+signing.secretKeyRingFile=secring.gpg.enc
+```
+
+After this just to run:
+```bash
+./gradlew build
+```
+
+## How to deploy
+
+Today the deploy is performed manually so you need to run:
+```bash
+./gradlew uploadArchives -PossrhUsername="${MVN_USERNAME}" -PossrhPassword="${MVN_PASSWORD}" -Psigning.keyId="${SIGNING_KEY_ID}" -Psigning.password="${SIGNING_PASSWORD}" -Psigning.secretKeyRingFile="${SIGNING_SECRET_KEY_RING_FILE}"
+``` 
+
+After to execute this command you can see the deploy into [Nexus](https://oss.sonatype.org/)
+
 ## Simple flow
 
 This step by step will exemplify the integration flow with simple usage examples.
