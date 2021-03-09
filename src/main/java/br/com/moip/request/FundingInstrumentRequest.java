@@ -17,7 +17,7 @@ public class FundingInstrumentRequest {
         return this;
     }
 
-    public FundingInstrumentRequest debitCard(final DebitCardRequest debitCard) {
+    private FundingInstrumentRequest debitCard(final DebitCardRequest debitCard) {
         this.debitCard = debitCard;
         this.method = Method.DEBIT_CARD;
         return this;
