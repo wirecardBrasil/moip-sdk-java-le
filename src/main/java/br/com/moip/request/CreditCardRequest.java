@@ -11,6 +11,16 @@ public class CreditCardRequest {
     private Boolean store;
     private HolderRequest holder;
 
+    public String getId() {
+        return id;
+    }
+
+    public CreditCardRequest id(final String id) {
+        this.id = id;
+
+        return this;
+    }
+
     public String getHash() {
         return hash;
     }
