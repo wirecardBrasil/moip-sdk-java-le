@@ -4,7 +4,6 @@ import br.com.moip.Client;
 import br.com.moip.request.ApiDateRequest;
 import br.com.moip.request.BoletoRequest;
 import br.com.moip.request.CreditCardRequest;
-import br.com.moip.request.DebitCardRequest;
 import br.com.moip.request.FundingInstrumentRequest;
 import br.com.moip.request.GeolocationRequest;
 import br.com.moip.request.HolderRequest;
@@ -60,8 +59,6 @@ public class PaymentAPITest {
                     new FundingInstrumentRequest()
                         .creditCard(
                             new CreditCardRequest()
-                                .first6("123456")
-                                .last4("1234")
                                 .hash(CC_HASH)
                                 .holder(
                                     new HolderRequest()
@@ -96,8 +93,6 @@ public class PaymentAPITest {
                         .creditCard(
                             new CreditCardRequest()
                                 .number("4012001037141112")
-                                .first6("401200")
-                                .last4("1112")
                                 .cvc(123)
                                 .expirationMonth("05")
                                 .expirationYear("18")
@@ -189,10 +184,7 @@ public class PaymentAPITest {
                 .fundingInstrument(new FundingInstrumentRequest()
                     .mposCreditCard(new MposRequest()
                                         .PinpadId("D180")
-                                        .transactionCode("code"),
-                                    new CreditCardRequest()
-                                        .first6("123456")
-                                        .last4("1234")
+                                        .transactionCode("code")
                     )
                 )
         );
@@ -218,10 +210,8 @@ public class PaymentAPITest {
                 )
                 .fundingInstrument(new FundingInstrumentRequest()
                     .mposDebitCard(new MposRequest()
-                                        .PinpadId("D180"),
-                                    new DebitCardRequest()
-                                        .first6("123456")
-                                        .last4("1234")
+                                        .PinpadId("D180")
+                                        .transactionCode("code")
                     )
                 )
         );
@@ -245,8 +235,6 @@ public class PaymentAPITest {
                     .creditCard(
                         new CreditCardRequest()
                             .number("4012001037141112")
-                            .first6("401200")
-                            .last4("1112")
                             .cvc(123)
                             .expirationMonth("05")
                             .expirationYear("18")

@@ -10,36 +10,6 @@ public class CreditCardRequest {
     private Integer cvc;
     private Boolean store;
     private HolderRequest holder;
-    private String first6;
-    private String last4;
-
-    public String getId() {
-        return id;
-    }
-
-    public CreditCardRequest id(final String id) {
-        this.id = id;
-
-        return this;
-    }
-
-    public CreditCardRequest first6(final String first6){
-        this.first6 = first6;
-        return this;
-    }
-
-    public String getFirst6() {
-        return first6;
-    }
-
-    public CreditCardRequest last4(final String last4){
-        this.last4 = last4;
-        return this;
-    }
-
-    public String getLast4() {
-        return last4;
-    }
 
     public String getHash() {
         return hash;
