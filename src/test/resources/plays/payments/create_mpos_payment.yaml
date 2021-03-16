@@ -24,7 +24,8 @@ interactions:
             "installmentCount":2,
             "fundingInstrument":{
                "mpos":{
-                  "pinpadId":"D180-64000786"
+                  "pinpadId":"D180-64000786",
+                  "transactionCode": "code"
                }
             },
             "geolocation":{
