@@ -188,7 +188,8 @@ public class PaymentAPITest {
                 )
                 .fundingInstrument(new FundingInstrumentRequest()
                     .mposCreditCard(new MposRequest()
-                                        .PinpadId("D180"),
+                                        .PinpadId("D180")
+                                        .transactionCode("code"),
                                     new CreditCardRequest()
                                         .first6("123456")
                                         .last4("1234")
@@ -196,6 +197,7 @@ public class PaymentAPITest {
                 )
         );
 
+        assertEquals(createdPayment.getFundingInstrument().getMpos().getTransactionCode(), "code");
         assertEquals(createdPayment.getId(), "PAY-1TUOVJ3D18NM");
         assertEquals(createdPayment.getStatus(), PaymentStatus.WAITING);
         assertEquals(createdPayment.getFundingInstrument().getMpos().getPinpadId(), "D180-64000786");
