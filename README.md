@@ -63,14 +63,14 @@ Add the fallowing dependency to `pom.xml` in the project:
 Is necessary to configure your ```gradle.properties``` with these informations:
 
 ```properties
-artifactory_username='developer'
-artifactory_password='AP5xrUuUbJEha1sZCWpJqDABhwA'
-ossrhUsername= 'moip'
-ossrhPassword='rtg32oue@MOIP!'
+artifactory_username=developer
+artifactory_password=AP5xrUuUbJEha1sZCWpJqDABhwA
+ossrhUsername= moip
+ossrhPassword=rtg32oue@MOIP!
 
-signing.keyId='FEBFADD1'
-signing.password='ittafer'
-signing.secretKeyRingFile='secring.gpg.enc'
+signing.keyId=FEBFADD1
+signing.password=ittafer
+signing.secretKeyRingFile=secring.gpg.enc
 ```
 
 After this just to run:
