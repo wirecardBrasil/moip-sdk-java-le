@@ -1,0 +1,15 @@
+!play
+interactions:
+-
+  request:
+    uri: /gapi/mpos/token
+    headers:
+      "Content-Type": application/json
+      Authorization: Basic MDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDEwMTAxMDE6QUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQkFCQUJBQg==
+    method: GET
+  response:
+    status: 200
+    headers:
+      "Content-Type": application/json
+    body: |
+      {"token":"meutoken"}
