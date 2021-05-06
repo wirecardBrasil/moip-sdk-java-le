@@ -4,7 +4,7 @@ apply plugin: 'signing'
 
 group = 'br.com.moip'
 archivesBaseName = "java-sdk"
-version = '4.7.2'
+version = '4.7.3'
 
 description = "Moip v2 SDK"
 
