@@ -60,7 +60,7 @@ Add the fallowing dependency to `pom.xml` in the project:
 
 ## How to build
 
-Is necessary to configure your ```gradle.settings``` with these informations:
+Is necessary to configure your ```gradle.properties``` with these informations:
 
 ```properties
 artifactory_username=developer
@@ -70,7 +70,7 @@ ossrhPassword=rtg32oue@MOIP!
 
 signing.keyId=FEBFADD1
 signing.password=ittafer
-signing.secretKeyRingFile=secring.gpg.enc
+signing.secretKeyRingFile=secring.gpg
 ```
 
 After this just to run:
