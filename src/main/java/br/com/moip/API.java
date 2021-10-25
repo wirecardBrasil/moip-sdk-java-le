@@ -51,7 +51,7 @@ public class API {
     public PlugPagTokenV2API plugPagTokenV2() { return new PlugPagTokenV2API(client); }
 
     public ConnectAPI connect() {
-        if (client.getEndpoint() == Client.PRODUCTION) {
+        if (client.getEndpoint() == Client.PRODUCTION || client.getEndpoint() == Client.PRODUCTION_WAF) {
             return new ConnectAPI(new Client(Client.CONNECT_PRODUCTION, client.getAuthentication()));
         }
 
