@@ -37,7 +37,6 @@ public class Client {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Client.class);
     public static final String PRODUCTION = "https://api.moip.com.br";
-    public static final String PRODUCTION_WAF = "https://api-waf.moip.com.br";
     public static final String SANDBOX = "https://sandbox.moip.com.br";
     public static final String CONNECT_PRODUCTION = "https://connect.moip.com.br";
     public static final String CONNECT_SANDBOX = "https://connect-sandbox.moip.com.br";
