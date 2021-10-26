@@ -108,6 +108,7 @@ public class Client {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestProperty("User-Agent", USER_AGENT);
             conn.setRequestProperty("Content-type", requestProps.contentType.getMimeType());
+
             if (requestProps.accept != null) conn.setRequestProperty("Accept", requestProps.accept);
 
             conn.setRequestMethod(requestProps.method);
@@ -124,7 +125,7 @@ public class Client {
             LOGGER.debug("---> {} {}", requestProps.method, conn.getURL().toString());
             logHeaders(conn.getRequestProperties().entrySet());
 
-            if (requestProps.object != null) {
+            if (requestProps.shouldSendBody()) {
                 conn.setDoOutput(true);
                 String body = getBody(requestProps.object, requestProps.contentType);
 
@@ -136,7 +137,7 @@ public class Client {
                 writer.close();
                 wr.flush();
                 wr.close();
-            }
+           }
 
             LOGGER.debug("---> END HTTP");
 
@@ -258,6 +259,12 @@ public class Client {
         public ContentType getContentType() { return contentType; }
 
         public String getAccept() { return accept; }
+
+        public boolean shouldSendBody(){
+            if(object != null)
+                return true;
+            return getMethod().equals("POST") || getMethod().equals("PUT") || getMethod().equals("PATCH");
+        }
     }
 
     private static class RequestPropsBuilder extends RequestProps {
